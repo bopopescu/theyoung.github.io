@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="yandex-verification" content="3ac9ae36ddebb425">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"onmobile":true},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Android에서 Keyboard 작동을 위한 요소 Input Method Manager : 클라이언트 Side의 application context에 위치 하면서 Android 전체 시스템 상 프로세스 간의 통로 역할을 한다 Input Method (IME &amp;amp; Keyboard) : 쉽게 keyboard라고 생각하면 된다. 사용자의 text를 생성하">
+<meta name="keywords" content="Android,keyboard,IME,InputMethod Framework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android keyboard show on the web">
+<meta property="og:url" content="https://theyoung.github.io/Android-Webview-Keyboard-Process-With-IME/index.html">
+<meta property="og:site_name" content="Try Again">
+<meta property="og:description" content="Android에서 Keyboard 작동을 위한 요소 Input Method Manager : 클라이언트 Side의 application context에 위치 하면서 Android 전체 시스템 상 프로세스 간의 통로 역할을 한다 Input Method (IME &amp;amp; Keyboard) : 쉽게 keyboard라고 생각하면 된다. 사용자의 text를 생성하">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://developer.android.com/resources/articles/images/inputmethod_lifecycle_image.png">
+<meta property="og:updated_time" content="2019-07-04T02:25:46.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android keyboard show on the web">
+<meta name="twitter:description" content="Android에서 Keyboard 작동을 위한 요소 Input Method Manager : 클라이언트 Side의 application context에 위치 하면서 Android 전체 시스템 상 프로세스 간의 통로 역할을 한다 Input Method (IME &amp;amp; Keyboard) : 쉽게 keyboard라고 생각하면 된다. 사용자의 text를 생성하">
+<meta name="twitter:image" content="https://developer.android.com/resources/articles/images/inputmethod_lifecycle_image.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://theyoung.github.io/Android-Webview-Keyboard-Process-With-IME/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>android keyboard show on the web | Try Again</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+
+  <div class="container page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try Again</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">anything</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-news">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-bullhorn"></i> <br>News</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/Android-Webview-Keyboard-Process-With-IME/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">android keyboard show on the web
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-24 18:37:40" itemprop="dateCreated datePublished" datetime="2019-05-24T18:37:40Z">2019-05-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/Android-Webview-Keyboard-Process-With-IME/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Android-Webview-Keyboard-Process-With-IME/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Android에서-Keyboard-작동을-위한-요소"><a href="#Android에서-Keyboard-작동을-위한-요소" class="headerlink" title="Android에서 Keyboard 작동을 위한 요소"></a>Android에서 Keyboard 작동을 위한 요소</h4><ul>
+<li>Input Method Manager : 클라이언트 Side의 application context에 위치 하면서 Android 전체 시스템 상 프로세스 간의 통로 역할을 한다</li>
+<li>Input Method (IME &amp; Keyboard) : 쉽게 keyboard라고 생각하면 된다. 사용자의 text를 생성하고 입력할 수있게 하는 역할을 한다. IME는 오직 한번에 하나만 화면에 표시 될 수있다.</li>
+<li>Client Application : IME을 사용하는 대상 application이 되며, 한번에 오직 하나의 입력 화면(소스를 보면 View라고 생각된다)과 Active 상태를 유지 할 수있다.</li>
+</ul>
+<h5 id="InputMethd-Framework-IMF-의-보안적-제한"><a href="#InputMethd-Framework-IMF-의-보안적-제한" class="headerlink" title="InputMethd Framework (IMF) 의 보안적 제한"></a>InputMethd Framework (IMF) 의 보안적 제한</h5><p>Input Method의 경우 사용자의 모든 입력을 확인 할 수있기 때문에, 보안적인 제한이 걸려있다.</p>
+<ul>
+<li>IME interface 접근 : 오직 Manifest.permission.BIND_INPUT_METHOD 권한을 통해서만 접근 가능</li>
+<li>Clinet는 Input method를 사용할때 InputMethodSession 인터페이스에서 주어진 Access를 통해서만 가능하다. 아래 코드는 InputMethodManager의 코드 일부분이다 이때 windowToken을 통해 hide 시킬 권한을 얻어오는 것을 볼 수있다 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hideSoftInputFromWindow</span><span class="params">(IBinder windowToken, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> hideSoftInputFromWindow(windowToken, flags, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Input Method는 화면이 off 되어있는 상태에서 절대로 사용될 수 없다.</li>
+<li>신규 IME를 인스톨 할경우 IME의 변환은 반듯이 사용자의 손에 의해서 만 변경 될 수있다.</li>
+</ul>
+<h4 id="IME의-Lifecycle"><a href="#IME의-Lifecycle" class="headerlink" title="IME의 Lifecycle"></a>IME의 Lifecycle</h4><p>이하 Lifecycle은 InputMethodService : <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYW5kcm9pZC5jb20vcmVmZXJlbmNlL2FuZHJvaWQvaW5wdXRtZXRob2RzZXJ2aWNlL0lucHV0TWV0aG9kU2VydmljZeqwgA==" title="https://developer.android.com/reference/android/inputmethodservice/InputMethodService가">https://developer.android.com/reference/android/inputmethodservice/InputMethodService가<i class="fa fa-external-link"></i></span> 작동하는 순서를 나타내고 있다 </p>
+<p><img src="https://developer.android.com/resources/articles/images/inputmethod_lifecycle_image.png" alt></p>
+<ul>
+<li><p>onCreateInputView() : 사용자 입력을 받기 위해 View를 init한다. (여기서 init되는 화면은 단순히 softkey 뿐만이 아닌 Draw 입력 등도 포함된다) User interface의 생성이라고 생각하면 될 듯 하다. 아래 코드는 IMS를 Override하여 어떻게 UI를 생성하는지 보여주는 예이다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">onCreateInputView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mKeyboardView != <span class="keyword">null</span>) &#123;</span><br><span class="line">        mKeyboardView.closing();</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    updateKeyboardThemeAndContextThemeWrapper(</span><br><span class="line">            mLatinIME, KeyboardTheme.getKeyboardTheme(mLatinIME <span class="comment">/* context */</span>));</span><br><span class="line">    mCurrentInputView = (InputView)LayoutInflater.from(mThemeContext).inflate(</span><br><span class="line">            R.layout.input_view, <span class="keyword">null</span>);</span><br><span class="line">    mMainKeyboardFrame = mCurrentInputView.findViewById(R.id.main_keyboard_frame);</span><br><span class="line">  </span><br><span class="line">    mKeyboardView = (MainKeyboardView) mCurrentInputView.findViewById(R.id.keyboard_view);</span><br><span class="line">    mKeyboardView.setKeyboardActionListener(mLatinIME);</span><br><span class="line">    <span class="keyword">return</span> mCurrentInputView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>onEvaluateInputViewShown() : hard keyboard 등이 달려 있는 단말의 경우 soft keyboard가 보일 필요가 없다. 이와같이 keyboard를 사용자에게 보여줄지를 확인 하는 메서드이다. (물론 softkeyboard가 열려 있다면 return 은 true가 될 것이다)<br>아래는 IMS의 code이다. false가 return 되면 사용자에게 보여주면 된다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onEvaluateInputViewShown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mSettingsObserver == <span class="keyword">null</span>) &#123;</span><br><span class="line">        Log.w(TAG, <span class="string">"onEvaluateInputViewShown: mSettingsObserver must not be null here."</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (mSettingsObserver.shouldShowImeWithHardKeyboard()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Configuration config = getResources().getConfiguration();</span><br><span class="line">    <span class="keyword">return</span> config.keyboard == Configuration.KEYBOARD_NOKEYS</span><br><span class="line">            || config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>onStartInput()  &amp; onStartInputView() : text 입력의 시작을 알리는 부분으로, 해당 메서드의 call 순서는 onStartInput이 일어나고 그다음에 onStartInputView가 Call되게 된다. 해당 Call의 순서처리에 따라서 lifecycle이 다소 달라지는데 해당 내용은 &quot;Webview에서의 Keyboard 처리&quot;에서 상세하게 다룰것이다. IMS에서는 doStartInput이 발생할 경우 onStartInput을 요청하고 이후에 InputView를 call하는 것을 확인 할 수 있다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">doStartInput</span><span class="params">(InputConnection ic, EditorInfo attribute, <span class="keyword">boolean</span> restarting)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!restarting) &#123;</span><br><span class="line">        doFinishInput();</span><br><span class="line">    &#125;</span><br><span class="line">    mInputStarted = <span class="keyword">true</span>;</span><br><span class="line">    mStartedInputConnection = ic;</span><br><span class="line">    mInputEditorInfo = attribute;</span><br><span class="line">    initialize();</span><br><span class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"CALL: onStartInput"</span>);</span><br><span class="line">    onStartInput(attribute, restarting);</span><br><span class="line">    <span class="keyword">if</span> (mWindowVisible) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mShowInputRequested) &#123;</span><br><span class="line">            <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"CALL: onStartInputView"</span>);</span><br><span class="line">            mInputViewStarted = <span class="keyword">true</span>;</span><br><span class="line">            onStartInputView(mInputEditorInfo, restarting);</span><br><span class="line">            startExtractingText(<span class="keyword">true</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mCandidatesVisibility == View.VISIBLE) &#123;</span><br><span class="line">            <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"CALL: onStartCandidatesView"</span>);</span><br><span class="line">            mCandidatesViewStarted = <span class="keyword">true</span>;</span><br><span class="line">            onStartCandidatesView(mInputEditorInfo, restarting);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>onStartInput과 onStartInputView의 차이점을 문서 상으로 확인하기는 쉽지 않다. 코드상으로 보면 onStartInput의 경우는 Local과 같은 설정, onStartInputView는 실제로 보여줄 keyboard에 대한 모든 설정을 처리 하는 것으로 보인다.</p>
+</blockquote>
+<h4 id="Webview에서의-Keyboard-처리"><a href="#Webview에서의-Keyboard-처리" class="headerlink" title="Webview에서의 Keyboard 처리"></a>Webview에서의 Keyboard 처리</h4><p>Webview를 이용한 키보드 처리는 크게 3가지로 나눌 수 있다.</p>
+<ul>
+<li>Webview에서 load된 html의 input 입력시 자동으로 IME Show</li>
+<li>Webview의 <code>public InputConnection onCreateInputConnection(EditorInfo outAttrs) {</code>을 Override 시켜서 특정 키보드 환경을 지정</li>
+<li><code>showSoftInput</code>을 활용 하는 방법</li>
+</ul>
+<h5 id="onCreateInputConnection-Override"><a href="#onCreateInputConnection-Override" class="headerlink" title="onCreateInputConnection() Override"></a>onCreateInputConnection() Override</h5><p>android.webkit.Webview 객체를 override 하면 된다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.app;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseWebView</span> <span class="keyword">extends</span> <span class="title">WebView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> InputConnection <span class="title">onCreateInputConnection</span><span class="params">(EditorInfo outAttrs)</span> </span>&#123;</span><br><span class="line">        InputConnection ic = <span class="keyword">super</span>.onCreateInputConnection(outAttrs);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> original = outAttrs.imeOptions;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> notMask = ~EditorInfo.IME_MASK_ACTION;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maskResult = original &amp; notMask;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>((outAttrs.inputType &amp; EditorInfo.TYPE_MASK_CLASS) == EditorInfo.TYPE_CLASS_NUMBER)&#123;</span><br><span class="line">            Log.d(TAG,<span class="string">"IME Options is Number"</span>);</span><br><span class="line">            outAttrs.privateImeOptions=<span class="string">"defaultInputmode=numeric;"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Log.d(TAG,<span class="string">"IME Options is English"</span>);</span><br><span class="line">            outAttrs.privateImeOptions=<span class="string">"defaultInputmode=english;"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ic;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>InputConnection ic = super.onCreateInputConnection(outAttrs);</code>이 부분은 반듯이 첫번째 code로 와야 한다. 해당 코드가 최초로 오지 않게 되면 load된 html이 어떤 input tag를 focus하고 있는지 알 수가 없게 된다. 이 코드를 통과 하고 나야 비로소 <code>EditorInfo</code>에 의미 있는 값들이 저장되게 된다.</p>
+<p>이때 개발자가 확인 가능한 값은 2가지가 있는데 <code>imeOptions</code>와 <code>inputType</code>인데</p>
+<ul>
+<li>imeOptions는 IME가 어떤 형태로 표현될지 어떤 기능을 제공할지에 대한 표현을 제공한다. 해당 값에 대한 표현 방법은 <code>EditorInfo.IME_MASK_ACTION</code>을 기준으로 Action 처리와 FLAG 처리로 분리 된다.<ul>
+<li>Action : GO, NEXT, NONE, PREVIOUS, SEARCH, SEND 등 엔터 버튼에 대한 기능을 정의하게 된다.</li>
+<li>Flag : ASCII, NAVIGATE,ACCESSORY,NO_ENTER,EXTRACT, FULLSCREEN 등 키보드의 형태를 나타낸다</li>
+</ul>
+</li>
+</ul>
+<p>상위 값들에 대한 정확한 OPTION은 다음 페이지를 참조 해야하나, 실질적으로 해당 Options을 모두 적용한 IME가 많지는 않다.</p>
+<p>일단 해당 값들에 대한 마스킹 방법은 다음과 같이 처리 하면된다.</p>
+<ul>
+<li>FLAG 값을 읽어 올 수있는 방법 (Webview를 이용해서는 해당 옵션을 얻어 올수 없었다.) 비록 html style에 ime-mode가 있다고는 하지만 이와는 관련점이 없었다</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> original = outAttrs.imeOptions;</span><br><span class="line"><span class="keyword">int</span> notMask = ~EditorInfo.IME_MASK_ACTION;</span><br><span class="line"><span class="keyword">int</span> flag = original &amp; notMask;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ime-mode는 크롬등에서 호환되지 않고, deprecated 된 기능이다</p>
+</blockquote>
+<ul>
+<li>Action 값을 읽어 올수 있는 방법 (역시 Webview에서는 의미 있는데이터를 얻어 올 수 없었다)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> action = original &amp; EditorInfo.IME_MASK_ACTION;</span><br></pre></td></tr></table></figure>
+<p>결과적으로 이시점에 개발자가 처리 할 수있는 값은 inputType이다.  해당 값은 다음과 같은 코드로 읽어 올 수있다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> inputType = outAttrs.inputType &amp; EditorInfo.TYPE_MASK_CLASS</span><br></pre></td></tr></table></figure>
+<p>MASK로 얻어올수 있는 값은 text, number, phone, datetime 정도이고 webview에서 의미 있는 값은 text와 number 정도가 될 것이다.</p>
+<p><code>TYPE_CLASS_TEXT</code>, <code>TYPE_CLASS_NUMBER</code>, <code>TYPE_CLASS_PHONE</code>, <code>TYPE_CLASS_DATETIME</code></p>
+<p>아래 코드는 inputType을 바탕으로 어떤 keyboard를 표현 하게 할지 나타내는 코드이다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if((outAttrs.inputType &amp; EditorInfo.TYPE_MASK_CLASS) == EditorInfo.TYPE_CLASS_NUMBER)     &#123;</span><br><span class="line">    Log.d(TAG,&quot;IME Options is Number&quot;);</span><br><span class="line">   ...</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    Log.d(TAG,&quot;IME Options is English&quot;);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>그러나 상위와 같은 코드는 아주 특별한 경우를 제외하고는 사용하지 않는다. 그 이유는 어떤 종류의 keyboard를 보여 줄지를 정의 하는건 IME의 <code>onStartInputView</code>내부에서 처리가 될것이기 때문이다.</p>
+<p>일반적으로 onCreateInputConnection을 사용하는 이유는 IME로 넘어 가기전에 EditorInfo를 수정하기 위해서이다. 예를 들자면 outAttrs.inputType에 EditorInfo.TYPE_CLASS_NUMBER를 주입하게 되면 해당 webview를 사용한 html은 number type의 키보드만 보게 되는 것이다.</p>
+<h5 id="InputMethodManager를-이용한-showSoftInput처리"><a href="#InputMethodManager를-이용한-showSoftInput처리" class="headerlink" title="InputMethodManager를 이용한 showSoftInput처리"></a>InputMethodManager를 이용한 showSoftInput처리</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">imm.showSoftInput(mWebView, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>InputMethodManager를 시스템 서비스에서 직점 instance를 얻어와서 특정 view (여기서는 mWebView)와 IME를 연결시키는 코드이다. 해당 코드는 Webview상 어떤 html element와 access를 해야할지 알기가 어렵기 때문에 어떤 keyboard를 강제로 뛰울 수가 없다.</p>
+<p>비록 Webview를 상속 받아서 <code>onCreateInputConnection()</code>을 재정의 한다고 하더라도 이경우에는 해당 Method를 타지 않는다. 그렇기 때문에 EditorInfo 역시 추출 할 수가 없는 상태가 된다. 이렇다 보니 무조건 default keyboard만 나타나게 되는데, 이 부분을 해결 하는 방법은 webview에 inputType을 추가 해주는 것이다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseWebView</span> <span class="keyword">extends</span> <span class="title">WebView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> inputType = EditorInfo.TYPE_NULL;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInputType</span><span class="params">(<span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">        inputType = type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getInputType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> inputType;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>그리고 해당 내용을 아래와 같이 추가해 준다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">mWebView.setInputType(InputType.TYPE_CLASS_NUMBER);</span><br><span class="line">imm.showSoftInput(mWebView, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>onStartInputView에서 inputType을 확인 한 후 number keyboard를 보여 주게 될것이다.</p>
+<p>imeOptions나 다른 파라메터들은 상위와 같이 강제 Setting을 해도 keyboard에 별다를 영향을 주지 못했다.</p>
+<h4 id="Keyboard-처리에-대한-IME-Call-Flow"><a href="#Keyboard-처리에-대한-IME-Call-Flow" class="headerlink" title="Keyboard 처리에 대한 IME Call Flow"></a>Keyboard 처리에 대한 IME Call Flow</h4><p>사실 상위 두 가지의 Call Flow가 다를 거라고 크게 생각하지 못했으나 의외로 전혀 다른 process를 타고 있었다. </p>
+<p>아래는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jra3Ivc2ltcGxlLWtleWJvYXJk" title="https://github.com/rkkr/simple-keyboard">https://github.com/rkkr/simple-keyboard<i class="fa fa-external-link"></i></span>의 소스에 Log를 붙여서 어떤 flow를 trace한 표이다.</p>
+<h5 id="html에서-input-tag를-눌러서-keyboard-표시-했을-때"><a href="#html에서-input-tag를-눌러서-keyboard-표시-했을-때" class="headerlink" title="html에서 input tag를 눌러서 keyboard 표시 했을 때"></a>html에서 input tag를 눌러서 keyboard 표시 했을 때</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">//input을 이용한 show</span><br><span class="line">05-24 09:53:41.362 13828 13828 D LatinIME: onStartInput = 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.362 13828 13828 D LatinIME: onStartInput editorInfo.inputyType 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.363 13828 13828 D LatinIME: executePendingImsCallback editorInfo.inputyType 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.363 13828 13828 D LatinIME: onStartInputInternal editorInfo inputType24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: onShowInputRequested: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.371 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.371 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.375 13828 13828 D LatinIME: onStartInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.376 13828 13828 D LatinIME: executePendingImsCallback editorInfo.inputyType 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 I LatinIME: Starting input. Cursor position = 1,1: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.396 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.411 13828 13828 D LatinIME: loadSettings: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.422 13828 13828 D LatinIME: getCurrentAutoCapsState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.422 13828 13828 D LatinIME: getCurrentRecapitalizeState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.426 13828 13828 D LatinIME: shouldShowLanguageSwitchKey: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.487 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.487 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.498 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.498 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//input hide</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: hideWindow: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: isShowingOptionDialog: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: onFinishInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: onFinishInputViewInternal: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.200 13828 13828 D LatinIME: onWindowHidden: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.202 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.202 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.230 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.230 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br></pre></td></tr></table></figure>
+<h5 id="showSoftInput을-처리-했을-때"><a href="#showSoftInput을-처리-했을-때" class="headerlink" title="showSoftInput을 처리 했을 때"></a>showSoftInput을 처리 했을 때</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">//keyboard show</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: onShowInputRequested: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.370 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.370 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.371 13828 13828 D LatinIME: onStartInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.372 13828 13828 D LatinIME: executePendingImsCallback editorInfo.inputyType 49313: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.382 13828 13828 I LatinIME: Starting input. Cursor position = 0,0: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.382 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.382 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.383 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.383 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.383 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.395 13828 13828 D LatinIME: loadSettings: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.402 13828 13828 D LatinIME: getCurrentAutoCapsState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.402 13828 13828 D LatinIME: getCurrentRecapitalizeState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.404 13828 13828 D LatinIME: shouldShowLanguageSwitchKey: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.440 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.440 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.452 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.452 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line"></span><br><span class="line">//keyboard hide</span><br><span class="line">05-24 09:52:19.722 13828 13828 D LatinIME: hideWindow: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.723 13828 13828 D LatinIME: isShowingOptionDialog: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.723 13828 13828 D LatinIME: onFinishInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.723 13828 13828 D LatinIME: onFinishInputViewInternal: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.725 13828 13828 D LatinIME: onWindowHidden: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.728 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.728 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.748 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.748 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/keyboard/" rel="tag"># keyboard</a>
+          
+            <a href="/tags/IME/" rel="tag"># IME</a>
+          
+            <a href="/tags/InputMethod-Framework/" rel="tag"># InputMethod Framework</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/grafika/" rel="next" title="Android Grafika Texture Surface">
+                <i class="fa fa-chevron-left"></i> Android Grafika Texture Surface
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/redis-config-explain/" rel="prev" title="Redis Config Explain">
+                Redis Config Explain <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon-next.png" alt="whoami">
+            
+              <p class="site-author-name" itemprop="name">whoami</p>
+              <div class="site-description motion-element" itemprop="description">my note</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZXlvdW5nL3RoZXlvdW5nLmdpdGh1Yi5pbw==" title="GitHub &rarr; https://github.com/theyoung/theyoung.github.io"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnN1cHBvcnRAdGhleW91bmcyMDAyQG5hdmVyLmNvbQ==" title="E-Mail &rarr; mailto:support@theyoung2002@naver.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android에서-Keyboard-작동을-위한-요소"><span class="nav-number">1.</span> <span class="nav-text">Android에서 Keyboard 작동을 위한 요소</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#InputMethd-Framework-IMF-의-보안적-제한"><span class="nav-number">1.1.</span> <span class="nav-text">InputMethd Framework (IMF) 의 보안적 제한</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IME의-Lifecycle"><span class="nav-number">2.</span> <span class="nav-text">IME의 Lifecycle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Webview에서의-Keyboard-처리"><span class="nav-number">3.</span> <span class="nav-text">Webview에서의 Keyboard 처리</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#onCreateInputConnection-Override"><span class="nav-number">3.1.</span> <span class="nav-text">onCreateInputConnection() Override</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#InputMethodManager를-이용한-showSoftInput처리"><span class="nav-number">3.2.</span> <span class="nav-text">InputMethodManager를 이용한 showSoftInput처리</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Keyboard-처리에-대한-IME-Call-Flow"><span class="nav-number">4.</span> <span class="nav-text">Keyboard 처리에 대한 IME Call Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#html에서-input-tag를-눌러서-keyboard-표시-했을-때"><span class="nav-number">4.1.</span> <span class="nav-text">html에서 input tag를 눌러서 keyboard 표시 했을 때</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#showSoftInput을-처리-했을-때"><span class="nav-number">4.2.</span> <span class="nav-text">showSoftInput을 처리 했을 때</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.0.1</div>
+
+
+
+  <div class="footer-custom">Theme source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">here</span><br>Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC5vcmc=">here</span></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.1"></script>
+
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://https-theyoung-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theyoung.github.io/Android-Webview-Keyboard-Process-With-IME/";
+    this.page.identifier = "Android-Webview-Keyboard-Process-With-IME/";
+    this.page.title = 'android keyboard show on the web';
+    this.language = 'en';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-theyoung-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

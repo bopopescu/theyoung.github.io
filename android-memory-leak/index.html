@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="yandex-verification" content="3ac9ae36ddebb425">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"onmobile":true},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Inner Class 누수Activity 내부에 아래와 같이 Inner Class를 정의 할 경우 잠재적으로 누수의 대상이 된다. ...    public class MainActivity extends Activity &amp;#123;    private static Innserclass inner;    private String mStr;        @O">
+<meta name="keywords" content="Android,Memory,Leak">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android memory leak 처리">
+<meta property="og:url" content="https://theyoung.github.io/android-memory-leak/index.html">
+<meta property="og:site_name" content="Try Again">
+<meta property="og:description" content="Inner Class 누수Activity 내부에 아래와 같이 Inner Class를 정의 할 경우 잠재적으로 누수의 대상이 된다. ...    public class MainActivity extends Activity &amp;#123;    private static Innserclass inner;    private String mStr;        @O">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-04T02:25:46.209Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android memory leak 처리">
+<meta name="twitter:description" content="Inner Class 누수Activity 내부에 아래와 같이 Inner Class를 정의 할 경우 잠재적으로 누수의 대상이 된다. ...    public class MainActivity extends Activity &amp;#123;    private static Innserclass inner;    private String mStr;        @O">
+
+
+
+
+
+
+  <link rel="canonical" href="https://theyoung.github.io/android-memory-leak/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>android memory leak 처리 | Try Again</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+
+  <div class="container page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try Again</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">anything</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-news">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-bullhorn"></i> <br>News</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/android-memory-leak/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">android memory leak 처리
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-02 19:24:40" itemprop="dateCreated datePublished" datetime="2019-04-02T19:24:40Z">2019-04-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/android-memory-leak/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="android-memory-leak/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Inner-Class-누수"><a href="#Inner-Class-누수" class="headerlink" title="Inner Class 누수"></a>Inner Class 누수</h4><p>Activity 내부에 아래와 같이 Inner Class를 정의 할 경우 잠재적으로 누수의 대상이 된다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Innserclass inner;</span><br><span class="line">    <span class="keyword">private</span> String mStr;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main2);</span><br><span class="line">        inner = <span class="keyword">new</span> Innserclass();</span><br><span class="line">        <span class="keyword">new</span> Thread(inner).start();</span><br><span class="line">        mStr = <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Innserclass</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Innserclass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            mStr+=<span class="string">"nono!!"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			getApplicationContext();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>첫번째 누수 사유는 static이다.</p>
+<p><code>private static Innserclass inner;</code></p>
+<p>일단 static에 memory를 assigne하게 되면 해당 instance는 모 class인 activity와는 별도로 메모리 상에 살아 남게 된다. </p>
+<p>두번째 사유는 thread 처리이다.</p>
+<p>inner class를 thread처리 함으로써 (이경우는 postdelay도 마찬가지다) UI Thread가 죽어도 살아 남을 가능 성이 있다. Destroy 시점에 반듯이 thread를 종료 처리 해줘야 한다. handler도 이 경우에 속하게 된다. </p>
+<p>세번째 사유는 InnerClass 자체에 있다. 첫번째 사유든 두번째 사유든 해당 Instance는 잠재적으로 모 Class의 Context를 접근 할 수 있게 된다. 코드상으론</p>
+<p><code>mStr+=&quot;nono!!&quot;;</code></p>
+<p>이 부분이다.</p>
+<p>해결 방법은 다음고 같다.</p>
+<h5 id="Innser-Class를-절대로-static-처리-하지-말아라"><a href="#Innser-Class를-절대로-static-처리-하지-말아라" class="headerlink" title="Innser Class를 절대로 static 처리 하지 말아라"></a>Innser Class를 절대로 static 처리 하지 말아라</h5><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-    private static Innserclass inner;</span></span><br><span class="line"><span class="addition">+    private Innserclass inner;</span></span><br></pre></td></tr></table></figure>
+<p>Destroy시점에 Activity와 같이 종료할 수있다면 상관이 없을 수는 있다. 그러나 라이프 사이클이 Activity와 같다면 Static을 쓸 이유가 없다.</p>
+<h5 id="Inner-Class는-static으로-정의-하던가-완전히-별도-파일로-제외를-시켜라"><a href="#Inner-Class는-static으로-정의-하던가-완전히-별도-파일로-제외를-시켜라" class="headerlink" title="Inner Class는 static으로 정의 하던가 완전히 별도 파일로 제외를 시켜라"></a>Inner Class는 static으로 정의 하던가 완전히 별도 파일로 제외를 시켜라</h5><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-    public class Innserclass implements Runnable &#123;</span></span><br><span class="line"><span class="addition">+	 public static class Innserclass implements Runnable &#123;</span></span><br></pre></td></tr></table></figure>
+<p>static 처리를 하게 되면 해당 클래스는 모 class와 독립된 메모리 참조 구조를 갖게 되어 독립하게 된다.</p>
+<h5 id="weekRefernece를-사용해라"><a href="#weekRefernece를-사용해라" class="headerlink" title="weekRefernece를 사용해라"></a>weekRefernece를 사용해라</h5><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="addition">+    public static class Innserclass implements Runnable &#123;</span></span><br><span class="line"><span class="addition">+        private final WeakReference&lt;MainActivity&gt; mActivity;</span></span><br><span class="line"></span><br><span class="line">        public Innserclass(MainActivity activity) &#123;</span><br><span class="line"><span class="addition">+           mActivity = new WeakReference&lt;&gt;(activity);</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line"><span class="deletion">-        	getApplicationContext();</span></span><br><span class="line"><span class="addition">+			mActivity.getApplicationContext();</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>직접적인 Reference를 주입해서는 안된다. 반듯이 weekRefernece를 이용해서 context를 공유 해야한다. thread와 같이 Main Thread의 범위 밖에서 작동이 된다면 MainActivity가 명시적으로 종료 되어도 해당 Context가 별도의 Thread에 남아있게 되어서 Memory Leak이 나게 된다.</p>
+<h4 id="Handler-누수"><a href="#Handler-누수" class="headerlink" title="Handler 누수"></a>Handler 누수</h4><p>내용상으로는 Inner class와 동일하다. weekreference를 이용해서 instance를 생성하게 해야한다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MainHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> WeakReference&lt;MainActivity&gt; mActivity;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MainHandler</span><span class="params">(MainActivity activity)</span> </span>&#123;</span><br><span class="line">        mActivity = <span class="keyword">new</span> WeakReference&lt;&gt;(activity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>기본 적인 handler의 constructor는 인수가 없음으로 강제로 넣어야만 한다.</p>
+<p>그리고 종료시에는 반듯이 다음 행위를 처리해줘야 한다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    <span class="keyword">if</span> (MainHandler != <span class="keyword">null</span>) &#123;</span><br><span class="line">        MainHandler.removeCallbacksAndMessages(<span class="keyword">null</span>);</span><br><span class="line">        MainHandler = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>혹시 남아 있을지 모르는 메시지 큐 내용을 clear해줘야 한다.</p>
+<h4 id="Webview-누수"><a href="#Webview-누수" class="headerlink" title="Webview 누수"></a>Webview 누수</h4><p>webview를 사용할때는 해당 view item이 destory가 완전히 되었고, 그에따른 메모리 반납이 이루어 졌는지 확인해야 한다. 그렇지 않다면 Native영역과 Others영역의 메모리가 지속 누적되는 현상이 발생 하게 된다. 이러한 현상은 layout상에 있는 webview를 call하게 되면 굉장히 높은 확률로 Leak이 발생하게 된다.</p>
+<p>아래는 activity_main.xml과 MainActivity 수도 코드이다</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/webviewHell"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span>    </span><br><span class="line">    </span><br><span class="line">	<span class="tag">&lt;<span class="name">WebView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/activity_main_webview"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebView mWebView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        getApplicationContext();</span><br><span class="line">        mWebView = findViewById(R.id.activity_main_webview);</span><br></pre></td></tr></table></figure>
+<p>Destory시 다음과 같은 code를 넣어 보아도 메모리 leak이 나는 것을 확인 할 수있다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.....</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    mWebView.clearHistory();</span><br><span class="line">    mWebView.destroyDrawingCache();</span><br><span class="line">    mWebView.setWebViewClient(<span class="keyword">null</span>);</span><br><span class="line">    mWebView.setWebChromeClient(<span class="keyword">null</span>);</span><br><span class="line">    mWebView.removeAllViews();</span><br><span class="line">    mWebView.clearCache(<span class="keyword">true</span>);</span><br><span class="line">    mWebView.freeMemory();</span><br><span class="line">    mWebView.removeAllViewsInLayout();</span><br><span class="line">    mWebView.setVisibility(View.GONE);</span><br><span class="line">    mWebView.destroy();</span><br><span class="line">    mWebView = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="webview는-instance-생성을-통해서-처리해라"><a href="#webview는-instance-생성을-통해서-처리해라" class="headerlink" title="webview는 instance 생성을 통해서 처리해라"></a>webview는 instance 생성을 통해서 처리해라</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">    RelativeLayout mWebviewlayout;</span><br><span class="line">	WebView mWebView;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;        </span><br><span class="line">		mWebviewlayout = (RelativeLayout) findViewById(R.id.webviewHell);</span><br><span class="line">        mWebView = <span class="keyword">new</span> WebView(getApplicationContext());</span><br><span class="line">        mWebView.setLayoutParams(<span class="keyword">new</span> LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));</span><br><span class="line">        mWebviewlayout.addView(mWebView);</span><br><span class="line">    </span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
+<h5 id="완전히-연관-리로스를-clear해라"><a href="#완전히-연관-리로스를-clear해라" class="headerlink" title="완전히 연관 리로스를 clear해라"></a>완전히 연관 리로스를 clear해라</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">super</span>.onDestroy();</span><br><span class="line">     mWebView.removeJavascriptInterface(<span class="string">"bridge"</span>);</span><br><span class="line"></span><br><span class="line">     mWebView.loadUrl(<span class="string">"about:blank"</span>);</span><br><span class="line"></span><br><span class="line">     jsInterface = <span class="keyword">null</span>;</span><br><span class="line">     mJSCallback = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">     mWebviewlayout.destroyDrawingCache();</span><br><span class="line">     mWebviewlayout.removeAllViews();</span><br><span class="line">     mWebviewlayout.removeAllViewsInLayout();</span><br><span class="line">     mWebviewlayout.setVisibility(View.GONE);</span><br><span class="line">     mWebviewlayout = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">     mWebView.clearHistory();</span><br><span class="line">     mWebView.destroyDrawingCache();</span><br><span class="line">     mWebView.setWebViewClient(<span class="keyword">null</span>);</span><br><span class="line">     mWebView.setWebChromeClient(<span class="keyword">null</span>);</span><br><span class="line">     mWebView.removeAllViews();</span><br><span class="line">     mWebView.clearCache(<span class="keyword">true</span>);</span><br><span class="line">     mWebView.freeMemory();</span><br><span class="line">     mWebView.removeAllViewsInLayout();</span><br><span class="line">     mWebView.setVisibility(View.GONE);</span><br><span class="line">     mWebView.destroy();</span><br><span class="line">     mWebView = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+<p>상위 destroy 코드는 다소 과하다 싶을 정도로 remove하고 있다. </p>
+<p>여기서 주의 깊게 봐야할 것은 </p>
+<p><code>mWebView.freeMemory();</code></p>
+<p>이것이다. freeMemory api는 deprecated되었다. 공식 문서에서는 이 기능을 대체 하는 기능으로</p>
+<p><code>mWebView.loadUrl(&quot;about:blank&quot;);</code></p>
+<p>사용을 권장한다.</p>
+<h5 id="최후에는-app-data를-전부-삭제해라"><a href="#최후에는-app-data를-전부-삭제해라" class="headerlink" title="최후에는 app data를 전부 삭제해라"></a>최후에는 app data를 전부 삭제해라</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteCache</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        File dir = context.getCacheDir();</span><br><span class="line">        deleteDir(dir);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">deleteDir</span><span class="params">(File dir)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dir != <span class="keyword">null</span> &amp;&amp; dir.isDirectory()) &#123;</span><br><span class="line">        String[] children = dir.list();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; children.length; i++) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> success = deleteDir(<span class="keyword">new</span> File(dir, children[i]));</span><br><span class="line">            <span class="keyword">if</span> (!success) &#123; <span class="keyword">return</span> <span class="keyword">false</span>; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dir.delete();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(dir!= <span class="keyword">null</span> &amp;&amp; dir.isFile()) &#123;</span><br><span class="line">        <span class="keyword">return</span> dir.delete();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>안드로이드는 apk별로 데이타를 임시 저장할 수 있는 공간이 있다.</p>
+<p>일반적으로 adb shell을 진입했을때</p>
+<p><code>/data/&lt;&lt;app package&gt;&gt;</code></p>
+<p>이하를 가르키게 된다. 해당 폴더 이내에 있는 디렉토리를 모두 다 지우는 행위임으로, 주의 깊게 사용해야 한다.</p>
+<h4 id="ImageView-사용"><a href="#ImageView-사용" class="headerlink" title="ImageView 사용"></a>ImageView 사용</h4><p>Bitmap에 대한 이미지 릭은 매우 유명하다. 허니콤(3.2)을 기준으로 이전에는 Bitmap 정보를 Native Heap영역에 담고 이를 포인팅 처리하도록 되어있었다.</p>
+<blockquote>
+<p>이미지포인터(java heap) -&gt; char[] (native heap)</p>
+</blockquote>
+<p>하지만 이는 포인터를 잊는 순간 Native영역에 해소 되지 않는 메모리 릭을 발생 시켰고 이점을 해결하기 위해 메모리 영역을 Heap 영역으로 옮겼다 . Profiler에서도 보면 비트맵 힙 영역을 별도록 볼수있게 하였다.</p>
+<p>그렇다고 Bitmap에 대한 메모리 릭이 사라지진 않았다. 무조건 Image View는 recycle 처리를 해줘야 한다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">        ImageView image = (ImageView) findViewById(R.id.loadingImage);</span><br><span class="line">        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());</span><br><span class="line">        image.setImageBitmap(myBitmap);</span><br><span class="line">    </span><br><span class="line">...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">super</span>.onDestroy();</span><br><span class="line">        image.recycle();</span><br></pre></td></tr></table></figure>
+<p>그러나 이와 같은 코드 작성을 위해서 Bitmap을 모두 class 변수로 끌어 내는건 좋지 않음으로 다음 코드를 사용해서 recycle처리 할 수 있다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">recycleBitmap</span><span class="params">(ImageView imageView)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (imageView != <span class="keyword">null</span>) &#123;</span><br><span class="line">        Drawable d = imageView.getDrawable();</span><br><span class="line">        <span class="keyword">if</span> (d != <span class="keyword">null</span> &amp;&amp; d <span class="keyword">instanceof</span> BitmapDrawable) &#123;</span><br><span class="line">            Bitmap b = ((BitmapDrawable)d).getBitmap();</span><br><span class="line">            <span class="keyword">if</span> (b != <span class="keyword">null</span>) &#123;</span><br><span class="line">                b.recycle();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        imageView.setImageResource(android.R.color.transparent);</span><br><span class="line">        imageView.setImageBitmap(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>단, 주의해야할 코드가 있다.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">        ImageView image = (ImageView) findViewById(R.id.loadingImage);</span><br><span class="line">        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());</span><br><span class="line"><span class="deletion">-        image.setImageBitmap(myBitmap);</span></span><br><span class="line"><span class="addition">+        image.setBackgroundResource(myBitmap);</span></span><br></pre></td></tr></table></figure>
+<p>setBackgroundResource의 경우는 recycle 처리가 어렵다. 해당 메서드는 ImageView가 아닌 View자체의 메서드를 사용함으로써 Drawable 객체를 반환하지 않는다.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Memory/" rel="tag"># Memory</a>
+          
+            <a href="/tags/Leak/" rel="tag"># Leak</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/android-ART-GC-Log/" rel="next" title="android_ART_GC_Log">
+                <i class="fa fa-chevron-left"></i> android_ART_GC_Log
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/android-graphic-architecture/" rel="prev" title="android graphic architecture">
+                android graphic architecture <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon-next.png" alt="whoami">
+            
+              <p class="site-author-name" itemprop="name">whoami</p>
+              <div class="site-description motion-element" itemprop="description">my note</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZXlvdW5nL3RoZXlvdW5nLmdpdGh1Yi5pbw==" title="GitHub &rarr; https://github.com/theyoung/theyoung.github.io"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnN1cHBvcnRAdGhleW91bmcyMDAyQG5hdmVyLmNvbQ==" title="E-Mail &rarr; mailto:support@theyoung2002@naver.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Inner-Class-누수"><span class="nav-number">1.</span> <span class="nav-text">Inner Class 누수</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Innser-Class를-절대로-static-처리-하지-말아라"><span class="nav-number">1.1.</span> <span class="nav-text">Innser Class를 절대로 static 처리 하지 말아라</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Inner-Class는-static으로-정의-하던가-완전히-별도-파일로-제외를-시켜라"><span class="nav-number">1.2.</span> <span class="nav-text">Inner Class는 static으로 정의 하던가 완전히 별도 파일로 제외를 시켜라</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#weekRefernece를-사용해라"><span class="nav-number">1.3.</span> <span class="nav-text">weekRefernece를 사용해라</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Handler-누수"><span class="nav-number">2.</span> <span class="nav-text">Handler 누수</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Webview-누수"><span class="nav-number">3.</span> <span class="nav-text">Webview 누수</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#webview는-instance-생성을-통해서-처리해라"><span class="nav-number">3.1.</span> <span class="nav-text">webview는 instance 생성을 통해서 처리해라</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#완전히-연관-리로스를-clear해라"><span class="nav-number">3.2.</span> <span class="nav-text">완전히 연관 리로스를 clear해라</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#최후에는-app-data를-전부-삭제해라"><span class="nav-number">3.3.</span> <span class="nav-text">최후에는 app data를 전부 삭제해라</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ImageView-사용"><span class="nav-number">4.</span> <span class="nav-text">ImageView 사용</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.0.1</div>
+
+
+
+  <div class="footer-custom">Theme source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">here</span><br>Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC5vcmc=">here</span></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.1"></script>
+
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://https-theyoung-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theyoung.github.io/android-memory-leak/";
+    this.page.identifier = "android-memory-leak/";
+    this.page.title = 'android memory leak 처리';
+    this.language = 'en';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-theyoung-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

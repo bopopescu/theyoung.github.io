@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="yandex-verification" content="3ac9ae36ddebb425">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"onmobile":true},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Redis Config Sectionredis-cli를 통해서 redis console에 진입 할 경우 info명령어를 통해서 다음 section에 대한 정보를 획득 할 수있다. info &amp;lt;&amp;lt;아래 명령어&amp;gt;&amp;gt;  server : 기본 정보 clients : client의 접속 정보 memory : 메모리 사용 관련 정보 persistenc">
+<meta name="keywords" content="Redis,Config,Sentinel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis Config Explain">
+<meta property="og:url" content="https://theyoung.github.io/redis-config-explain/index.html">
+<meta property="og:site_name" content="Try Again">
+<meta property="og:description" content="Redis Config Sectionredis-cli를 통해서 redis console에 진입 할 경우 info명령어를 통해서 다음 section에 대한 정보를 획득 할 수있다. info &amp;lt;&amp;lt;아래 명령어&amp;gt;&amp;gt;  server : 기본 정보 clients : client의 접속 정보 memory : 메모리 사용 관련 정보 persistenc">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-04T02:25:46.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis Config Explain">
+<meta name="twitter:description" content="Redis Config Sectionredis-cli를 통해서 redis console에 진입 할 경우 info명령어를 통해서 다음 section에 대한 정보를 획득 할 수있다. info &amp;lt;&amp;lt;아래 명령어&amp;gt;&amp;gt;  server : 기본 정보 clients : client의 접속 정보 memory : 메모리 사용 관련 정보 persistenc">
+
+
+
+
+
+
+  <link rel="canonical" href="https://theyoung.github.io/redis-config-explain/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Redis Config Explain | Try Again</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+
+  <div class="container page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try Again</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">anything</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-news">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-bullhorn"></i> <br>News</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/redis-config-explain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Redis Config Explain
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-05 18:50:40" itemprop="dateCreated datePublished" datetime="2019-06-05T18:50:40Z">2019-06-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/redis-config-explain/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="redis-config-explain/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Redis-Config-Section"><a href="#Redis-Config-Section" class="headerlink" title="Redis Config Section"></a>Redis Config Section</h4><p><code>redis-cli</code>를 통해서 redis console에 진입 할 경우 <code>info</code>명령어를 통해서 다음 section에 대한 정보를 획득 할 수있다.</p>
+<p><code>info &lt;&lt;아래 명령어&gt;&gt;</code></p>
+<ul>
+<li>server : 기본 정보</li>
+<li>clients : client의 접속 정보</li>
+<li>memory : 메모리 사용 관련 정보</li>
+<li>persistence : RDB와 AOF(Append Only File) 관련 정보</li>
+</ul>
+<blockquote>
+<p>AOF의 경우는 appendonly.aof 파일에 입력/수정/삭제 실행 명령 실행시 마다 기록 (조회 제외)</p>
+<p>Redis 서버 작동시 <code>FLUSHALL</code>명령을 사용한 경우 해당 파일을 이용해서 DB를 재 구축 할 수 있음</p>
+<p><span class="exturl" data-url="aHR0cDovL3JlZGlzZ2F0ZS5rci9yZWRpcy9jb25maWd1cmF0aW9uL3BlcnNpc3RlbmNlLnBocA==" title="http://redisgate.kr/redis/configuration/persistence.php">http://redisgate.kr/redis/configuration/persistence.php<i class="fa fa-external-link"></i></span></p>
+<p>RDB의 경우에는 현재 메모리에 있는 redis data를 특정 시점을 기준으로 파일로 write 한 일종의 backup 파일 또는 스냅샷으로 생각 하면 된다.</p>
+</blockquote>
+<ul>
+<li>stats : 일반 통계 정보</li>
+<li>replication : Master, Slave간에 데이터 복사에 대한 설정</li>
+<li>cpu : cpu 사용 통계</li>
+<li>commandstats : redis에 command를 처리한 통계</li>
+<li>cluster : redis cluster에 대한 설정 (master, slave 등)</li>
+<li>keyspace : database 관련 통계</li>
+</ul>
+<h4 id="server"><a href="#server" class="headerlink" title="server"></a>server</h4><h5 id="redis-version-redis-서버-버전"><a href="#redis-version-redis-서버-버전" class="headerlink" title="redis_version : redis 서버 버전"></a>redis_version : redis 서버 버전</h5><h5 id="redis-git-sha1-git-sha1"><a href="#redis-git-sha1-git-sha1" class="headerlink" title="redis_git_sha1 : git sha1 (?)"></a>redis_git_sha1 : git sha1 (?)</h5><h5 id="redis-git-dirty-git-dirty-flag"><a href="#redis-git-dirty-git-dirty-flag" class="headerlink" title="redis_git_dirty : git dirty flag (?)"></a>redis_git_dirty : git dirty flag (?)</h5><h5 id="redis-build-id"><a href="#redis-build-id" class="headerlink" title="redis_build_id"></a>redis_build_id</h5><p>소스로 부터 redis를 빌드한 id</p>
+<h5 id="redis-mode"><a href="#redis-mode" class="headerlink" title="redis_mode"></a>redis_mode</h5><p>standalone : 독립적으로 동작</p>
+<p>sentinel : sentinel에 의해 모니터링 되고 관리됨</p>
+<p>cluster : redis간 clustering 처리</p>
+<h5 id="os"><a href="#os" class="headerlink" title="os"></a>os</h5><h5 id="arch-bits"><a href="#arch-bits" class="headerlink" title="arch_bits"></a>arch_bits</h5><p>32bits or 64bits</p>
+<h5 id="multiplexing-api"><a href="#multiplexing-api" class="headerlink" title="multiplexing_api (?)"></a>multiplexing_api (?)</h5><p>evnet loop 메카니즘</p>
+<h5 id="process-id"><a href="#process-id" class="headerlink" title="process_id"></a>process_id</h5><p>서버 PID</p>
+<h5 id="tcp-port"><a href="#tcp-port" class="headerlink" title="tcp_port"></a>tcp_port</h5><p>TCP/IP 리슨포트 (6379 기본 포트)</p>
+<h5 id="uptime-in-seconds"><a href="#uptime-in-seconds" class="headerlink" title="uptime_in_seconds"></a>uptime_in_seconds</h5><p>redis server 작동 후 시간</p>
+<h5 id="uptime-in-days"><a href="#uptime-in-days" class="headerlink" title="uptime_in_days"></a>uptime_in_days</h5><p>redis server 작동 후 일자</p>
+<h5 id="lru-clock"><a href="#lru-clock" class="headerlink" title="lru_clock"></a>lru_clock</h5><p>LRU 알고리즘을 위한 시간 (매분 마다 증가함)</p>
+<p>Least Recently Used 가장 오랫동안 접근 되지 않은 키의 데이터를 삭제한다는 의미</p>
+<h5 id="excutable"><a href="#excutable" class="headerlink" title="excutable"></a>excutable</h5><p>실행 파일 위치</p>
+<h5 id="config-file"><a href="#config-file" class="headerlink" title="config_file"></a>config_file</h5><p>환경 설정 파일 위치</p>
+<h4 id="clients"><a href="#clients" class="headerlink" title="clients"></a>clients</h4><h5 id="connected-clients"><a href="#connected-clients" class="headerlink" title="connected_clients"></a>connected_clients</h5><p>현재 접속 되어 있는 clients 개수 (replicas를 통한 접근 제외)</p>
+<h5 id="client-longest-output-list"><a href="#client-longest-output-list" class="headerlink" title="client_longest_output_list"></a>client_longest_output_list</h5><p>현재 접속되어 있는 clients 중에 가장 오래 output(? 가장 오래 접속 하고 있는 의미로 보임)하고 있는 list</p>
+<h5 id="client-biggest-input-buf"><a href="#client-biggest-input-buf" class="headerlink" title="client_biggest_input_buf"></a>client_biggest_input_buf</h5><p>현재 접속되어있는 clients 중에 가장 큰 input buffer를 넣고 있는 connection</p>
+<h5 id="blocked-clients"><a href="#blocked-clients" class="headerlink" title="blocked_clients"></a>blocked_clients</h5><p>blocking call(BLPOP, BRPOP, BRPOPLPUSH)에 의해 blocked 되어있는 client 개수</p>
+<blockquote>
+<p>BLPOP(리스트의 처음), BRPOP(리스트의 마지막),BRPOPLPUSH (원본 마지막으로 대상 리스트의 첫번째로 입력) 명령어의 경우 기본적으로 blocking 모드 작동을 한다. 즉, 해당 command가 작동 중에는 다음 command는 blocking 되게 된다.</p>
+</blockquote>
+<h4 id="memory"><a href="#memory" class="headerlink" title="memory"></a>memory</h4><h5 id="used-memory"><a href="#used-memory" class="headerlink" title="used_memory"></a>used_memory</h5><p>redis가 사용중인 총 메모리양</p>
+<h5 id="used-memory-human"><a href="#used-memory-human" class="headerlink" title="used_memory_human"></a>used_memory_human</h5><p>사람이 읽을 수있는 메모리양 표시 (G로 표시한다)</p>
+<h5 id="used-memory-rss"><a href="#used-memory-rss" class="headerlink" title="used_memory_rss"></a>used_memory_rss</h5><p>OS상에서 사용중인 메모리양</p>
+<blockquote>
+<p>일반적으로 해당 솔루션에서 사용된 메모리양 + shared 메모리양의 총합으로</p>
+<p>used memory 보다 크다</p>
+</blockquote>
+<h5 id="used-memory-rss-human"><a href="#used-memory-rss-human" class="headerlink" title="used_memory_rss_human"></a>used_memory_rss_human</h5><p>사람이 읽을 수 있는 메모리양 표시 (G로 표시한다)</p>
+<h5 id="used-memory-peak"><a href="#used-memory-peak" class="headerlink" title="used_memory_peak"></a>used_memory_peak</h5><p>바이트 단위로 메모리가 peak에 있을 때 사용량</p>
+<h5 id="used-memory-peak-perc"><a href="#used-memory-peak-perc" class="headerlink" title="used_memory_peak_perc"></a>used_memory_peak_perc</h5><p>used_memory 대비 used_memory의 퍼센트 (peak이 더 높다)</p>
+<h5 id="used-memory-overhead"><a href="#used-memory-overhead" class="headerlink" title="used_memory_overhead"></a>used_memory_overhead</h5><p>모든 overheads에 대한 바이트 합</p>
+<h5 id="used-memory-startup"><a href="#used-memory-startup" class="headerlink" title="used_memory_startup"></a>used_memory_startup</h5><p>redis가 start하는 시점에 사용된 전체 메모리양</p>
+<h5 id="used-memory-dataset"><a href="#used-memory-dataset" class="headerlink" title="used_memory_dataset"></a>used_memory_dataset</h5><p>dataset의 바이트 단위 사이즈</p>
+<h5 id="maxmemory"><a href="#maxmemory" class="headerlink" title="maxmemory"></a>maxmemory</h5><p>설정된 최대 메모리</p>
+<p>32bit의 경우는 3G</p>
+<p>64bit의 경우는 0 (unlimit로 처리 되는 것으로 보임)</p>
+<h5 id="maxmemory-policy"><a href="#maxmemory-policy" class="headerlink" title="maxmemory_policy"></a>maxmemory_policy</h5><ul>
+<li>noeviction : memory의 limit에 접근하면 에러를 낸다</li>
+<li>allkeys-lru : 신규 데이터 입력시 key를 기반으로 LRU 알고리즘 적용</li>
+<li>volatile-lru : allkeys-lru와 같은 조건이나, expire set이 있는 경우만 대상으로 함</li>
+</ul>
+<blockquote>
+<p>EXPIRE (<span class="exturl" data-url="aHR0cHM6Ly9yZWRpcy5pby9jb21tYW5kcy9leHBpcmU=" title="https://redis.io/commands/expire">https://redis.io/commands/expire<i class="fa fa-external-link"></i></span>) 명령어로 지정된 key를 대상으로만 하는 것으로 보임</p>
+</blockquote>
+<ul>
+<li>allkeys-random : random으로 삭제(진짜?)</li>
+<li>volatile-random : expire set이 있는 경우만 random으로 삭제</li>
+<li>volatile-ttl : expire set의 ttl을 확인 후 최우선으로 삭제</li>
+</ul>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9yZWRpcy5pby90b3BpY3MvbHJ1LWNhY2hl" title="https://redis.io/topics/lru-cache">https://redis.io/topics/lru-cache<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h4 id="persistence"><a href="#persistence" class="headerlink" title="persistence"></a>persistence</h4><h5 id="loading"><a href="#loading" class="headerlink" title="loading"></a>loading</h5><p>dump 파일이 로딩 중인지 표시 한다 (평소에는 0이다가 로딩하게 되면 1로 변화하는 것으로 보인다)</p>
+<h5 id="rdb-changes-since-last-save"><a href="#rdb-changes-since-last-save" class="headerlink" title="rdb_changes_since_last_save"></a>rdb_changes_since_last_save</h5><p>마지막 dump 후 변경된 횟수</p>
+<h5 id="rdb-last-save-time"><a href="#rdb-last-save-time" class="headerlink" title="rdb_last_save_time"></a>rdb_last_save_time</h5><p>epoch 기준으로 마지막 성공한 저장 시점</p>
+<h5 id="aof-enabled"><a href="#aof-enabled" class="headerlink" title="aof_enabled"></a>aof_enabled</h5><p>aof 설정 여부 (0 false)</p>
+<h4 id="replication"><a href="#replication" class="headerlink" title="replication"></a>replication</h4><h5 id="role"><a href="#role" class="headerlink" title="role"></a>role</h5><p>master or slave</p>
+<h5 id="master-replid"><a href="#master-replid" class="headerlink" title="master_replid"></a>master_replid</h5><p>redis server replication ID</p>
+<h5 id="master-repl-offset"><a href="#master-repl-offset" class="headerlink" title="master_repl_offset"></a>master_repl_offset</h5><p>현재 서버의 replication offset</p>
+<h4 id="Redis-Sentinel-사용시-수시-Disconnect가-발생하는-경우"><a href="#Redis-Sentinel-사용시-수시-Disconnect가-발생하는-경우" class="headerlink" title="Redis Sentinel 사용시 수시 Disconnect가 발생하는 경우"></a>Redis Sentinel 사용시 수시 Disconnect가 발생하는 경우</h4><h5 id="sentinel-down-after-milliseconds-mymaster-3000"><a href="#sentinel-down-after-milliseconds-mymaster-3000" class="headerlink" title="sentinel down-after-milliseconds mymaster 3000"></a>sentinel down-after-milliseconds mymaster 3000</h5><p>설정을 확인한다.</p>
+<p>상위에서 마지막 부분에 있는 3000은 3초를 의미 한다. 이를 매우 작게 사용한다면 Redis간 Sync시 Disconnect를 감지하고 Master Slave 전환을 처리 하게 된다. 일반적으로 3초에서 5초 사이로 설정해 놓고 쓰면된다.</p>
+<blockquote>
+<p>Reids Sync 처리 프로세스를 실행하기 전에 Master에서 BGSAVE처리를 하게 된다. BGSAVE는 메모리 데이터를 파일로 Write하는 행동인데, 이때 Redis 소스 내부적으로 Slave와 Disconnect를 처리 한다. 이 순간의 단절 상황을 Sentinel에서 감지하게 되는 문제이다. </p>
+</blockquote>
+<h5 id="client-output-buffer-limit"><a href="#client-output-buffer-limit" class="headerlink" title="client-output-buffer-limit"></a>client-output-buffer-limit</h5><p>client-output-buffer-limit normal 0 0 0<br>client-output-buffer-limit slave 256mb 64mb 60<br>client-output-buffer-limit pubsub 32mb 8mb 60</p>
+<p>Redis와 Slave 간의 데이터 이동 양을 정하는 부분이다</p>
+<p>client-output-buffer-limit slave 256mb 64mb 60</p>
+<ul>
+<li>hard : 최대 256mb의 데이터를 송수신 할 수 있다.  넘어가면 Disconnect가 발생한다.</li>
+<li>Soft : 64mb 데이터를 60초 동안 이동 시킨다. 넘어가면 Disconnect가 발생한다. </li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+            <a href="/tags/Config/" rel="tag"># Config</a>
+          
+            <a href="/tags/Sentinel/" rel="tag"># Sentinel</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Android-Webview-Keyboard-Process-With-IME/" rel="next" title="android keyboard show on the web">
+                <i class="fa fa-chevron-left"></i> android keyboard show on the web
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Network-setup-CentOS7-on-Virtual Box/" rel="prev" title="Network setup CentOS7 on Virtual Box">
+                Network setup CentOS7 on Virtual Box <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon-next.png" alt="whoami">
+            
+              <p class="site-author-name" itemprop="name">whoami</p>
+              <div class="site-description motion-element" itemprop="description">my note</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZXlvdW5nL3RoZXlvdW5nLmdpdGh1Yi5pbw==" title="GitHub &rarr; https://github.com/theyoung/theyoung.github.io"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnN1cHBvcnRAdGhleW91bmcyMDAyQG5hdmVyLmNvbQ==" title="E-Mail &rarr; mailto:support@theyoung2002@naver.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis-Config-Section"><span class="nav-number">1.</span> <span class="nav-text">Redis Config Section</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#server"><span class="nav-number">2.</span> <span class="nav-text">server</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#redis-version-redis-서버-버전"><span class="nav-number">2.1.</span> <span class="nav-text">redis_version : redis 서버 버전</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redis-git-sha1-git-sha1"><span class="nav-number">2.2.</span> <span class="nav-text">redis_git_sha1 : git sha1 (?)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redis-git-dirty-git-dirty-flag"><span class="nav-number">2.3.</span> <span class="nav-text">redis_git_dirty : git dirty flag (?)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redis-build-id"><span class="nav-number">2.4.</span> <span class="nav-text">redis_build_id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redis-mode"><span class="nav-number">2.5.</span> <span class="nav-text">redis_mode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#os"><span class="nav-number">2.6.</span> <span class="nav-text">os</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#arch-bits"><span class="nav-number">2.7.</span> <span class="nav-text">arch_bits</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#multiplexing-api"><span class="nav-number">2.8.</span> <span class="nav-text">multiplexing_api (?)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#process-id"><span class="nav-number">2.9.</span> <span class="nav-text">process_id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tcp-port"><span class="nav-number">2.10.</span> <span class="nav-text">tcp_port</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#uptime-in-seconds"><span class="nav-number">2.11.</span> <span class="nav-text">uptime_in_seconds</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#uptime-in-days"><span class="nav-number">2.12.</span> <span class="nav-text">uptime_in_days</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#lru-clock"><span class="nav-number">2.13.</span> <span class="nav-text">lru_clock</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#excutable"><span class="nav-number">2.14.</span> <span class="nav-text">excutable</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#config-file"><span class="nav-number">2.15.</span> <span class="nav-text">config_file</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clients"><span class="nav-number">3.</span> <span class="nav-text">clients</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#connected-clients"><span class="nav-number">3.1.</span> <span class="nav-text">connected_clients</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#client-longest-output-list"><span class="nav-number">3.2.</span> <span class="nav-text">client_longest_output_list</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#client-biggest-input-buf"><span class="nav-number">3.3.</span> <span class="nav-text">client_biggest_input_buf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#blocked-clients"><span class="nav-number">3.4.</span> <span class="nav-text">blocked_clients</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#memory"><span class="nav-number">4.</span> <span class="nav-text">memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory"><span class="nav-number">4.1.</span> <span class="nav-text">used_memory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-human"><span class="nav-number">4.2.</span> <span class="nav-text">used_memory_human</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-rss"><span class="nav-number">4.3.</span> <span class="nav-text">used_memory_rss</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-rss-human"><span class="nav-number">4.4.</span> <span class="nav-text">used_memory_rss_human</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-peak"><span class="nav-number">4.5.</span> <span class="nav-text">used_memory_peak</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-peak-perc"><span class="nav-number">4.6.</span> <span class="nav-text">used_memory_peak_perc</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-overhead"><span class="nav-number">4.7.</span> <span class="nav-text">used_memory_overhead</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-startup"><span class="nav-number">4.8.</span> <span class="nav-text">used_memory_startup</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#used-memory-dataset"><span class="nav-number">4.9.</span> <span class="nav-text">used_memory_dataset</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#maxmemory"><span class="nav-number">4.10.</span> <span class="nav-text">maxmemory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#maxmemory-policy"><span class="nav-number">4.11.</span> <span class="nav-text">maxmemory_policy</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#persistence"><span class="nav-number">5.</span> <span class="nav-text">persistence</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#loading"><span class="nav-number">5.1.</span> <span class="nav-text">loading</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rdb-changes-since-last-save"><span class="nav-number">5.2.</span> <span class="nav-text">rdb_changes_since_last_save</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rdb-last-save-time"><span class="nav-number">5.3.</span> <span class="nav-text">rdb_last_save_time</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aof-enabled"><span class="nav-number">5.4.</span> <span class="nav-text">aof_enabled</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replication"><span class="nav-number">6.</span> <span class="nav-text">replication</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#role"><span class="nav-number">6.1.</span> <span class="nav-text">role</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#master-replid"><span class="nav-number">6.2.</span> <span class="nav-text">master_replid</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#master-repl-offset"><span class="nav-number">6.3.</span> <span class="nav-text">master_repl_offset</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis-Sentinel-사용시-수시-Disconnect가-발생하는-경우"><span class="nav-number">7.</span> <span class="nav-text">Redis Sentinel 사용시 수시 Disconnect가 발생하는 경우</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sentinel-down-after-milliseconds-mymaster-3000"><span class="nav-number">7.1.</span> <span class="nav-text">sentinel down-after-milliseconds mymaster 3000</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#client-output-buffer-limit"><span class="nav-number">7.2.</span> <span class="nav-text">client-output-buffer-limit</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.0.1</div>
+
+
+
+  <div class="footer-custom">Theme source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">here</span><br>Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC5vcmc=">here</span></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.1"></script>
+
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://https-theyoung-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theyoung.github.io/redis-config-explain/";
+    this.page.identifier = "redis-config-explain/";
+    this.page.title = 'Redis Config Explain';
+    this.language = 'en';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-theyoung-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

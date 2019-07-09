@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="yandex-verification" content="3ac9ae36ddebb425">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"onmobile":true},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Docker와 Docker-Compose가 Centos에 이미 설치 되어있다는 전제임 Location관련 자료 docker-compose github 위치 https://github.com/mattermost/mattermost-docker docker-compose를 이용한 deployment 설명 https://docs.mattermost.com/ins">
+<meta name="keywords" content="docker,mattermost,slack,centos7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mattermost install with docker-composer on Centos7">
+<meta property="og:url" content="https://theyoung.github.io/mattermost-docker-composer-onCentos7/index.html">
+<meta property="og:site_name" content="Try Again">
+<meta property="og:description" content="Docker와 Docker-Compose가 Centos에 이미 설치 되어있다는 전제임 Location관련 자료 docker-compose github 위치 https://github.com/mattermost/mattermost-docker docker-compose를 이용한 deployment 설명 https://docs.mattermost.com/ins">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-04T02:25:46.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mattermost install with docker-composer on Centos7">
+<meta name="twitter:description" content="Docker와 Docker-Compose가 Centos에 이미 설치 되어있다는 전제임 Location관련 자료 docker-compose github 위치 https://github.com/mattermost/mattermost-docker docker-compose를 이용한 deployment 설명 https://docs.mattermost.com/ins">
+
+
+
+
+
+
+  <link rel="canonical" href="https://theyoung.github.io/mattermost-docker-composer-onCentos7/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Mattermost install with docker-composer on Centos7 | Try Again</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+
+  <div class="container page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try Again</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">anything</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-news">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-bullhorn"></i> <br>News</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/mattermost-docker-composer-onCentos7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Mattermost install with docker-composer on Centos7
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-01 21:00:33" itemprop="dateCreated datePublished" datetime="2019-07-01T21:00:33Z">2019-07-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/mattermost-docker-composer-onCentos7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="mattermost-docker-composer-onCentos7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Docker와 Docker-Compose가 Centos에 이미 설치 되어있다는 전제임</p>
+<h4 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h4><p>관련 자료</p>
+<p>docker-compose github 위치</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hdHRlcm1vc3QvbWF0dGVybW9zdC1kb2NrZXI=" title="https://github.com/mattermost/mattermost-docker">https://github.com/mattermost/mattermost-docker<i class="fa fa-external-link"></i></span></p>
+<p>docker-compose를 이용한 deployment 설명</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1hdHRlcm1vc3QuY29tL2luc3RhbGwvcHJvZC1kb2NrZXIuaHRtbA==" title="https://docs.mattermost.com/install/prod-docker.html">https://docs.mattermost.com/install/prod-docker.html<i class="fa fa-external-link"></i></span></p>
+<h4 id="로컬-Download-및-환경-설정"><a href="#로컬-Download-및-환경-설정" class="headerlink" title="로컬 Download 및 환경 설정"></a>로컬 Download 및 환경 설정</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/mattermost/mattermost-docker.git</span><br><span class="line">cd mattermost-docker</span><br><span class="line">docker-compose build</span><br><span class="line">mkdir -pv ./volumes/app/mattermost/&#123;data,logs,config,plugins,client-plugins&#125;</span><br><span class="line">chown -R 2000:2000 ./volumes/app/mattermost/</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>상위와 같은 순서데로 하면 대부분 잘 작동 하는 것으로 보임</p>
+<p>그러나 나 같은 경우는 상위 처럼 해서 정상 작동을 하지 않아 다음과 같이 수정하였음</p>
+<h4 id="Permission-Error를-피하기-위한-수정-사항"><a href="#Permission-Error를-피하기-위한-수정-사항" class="headerlink" title="Permission Error를 피하기 위한 수정 사항"></a>Permission Error를 피하기 위한 수정 사항</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># ls</span></span><br><span class="line">LICENSE  MAINTENANCE.md  README.md  app  contrib  db  docker-compose.yml  volumes  web</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost app]<span class="comment"># ll</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x. 7 2000 2000 81  6월 28 19:43 mattermost</span><br><span class="line">[root@localhost app]<span class="comment"># pwd</span></span><br><span class="line">/root/mattermost/mattermost-docker/volumes/app</span><br><span class="line">[root@localhost app]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>상위와 같은 내용은 로컬 Download 및 환경 설정이 되었다면 동일 할 것이다.</p>
+<p>그러나 Postgres와 app이 directory prmission denied 나게 된다면 다음과 같이 수정 해줄 필요가 있다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># ls</span></span><br><span class="line">LICENSE  MAINTENANCE.md  README.md  app  contrib  db  docker-compose.yml  volumes  web</span><br><span class="line">[root@localhost mattermost-docker]<span class="comment"># vi docker-compose.yml</span></span><br><span class="line">[root@localhost mattermost-docker]<span class="comment"># pwd</span></span><br><span class="line">/root/mattermost/mattermost-docker</span><br><span class="line">[root@localhost mattermost-docker]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>여기에서 docker-compose.yml을 아래와 같이 수정 필요하다.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">version: "2"</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  db:</span><br><span class="line">    build: db</span><br><span class="line">    read_only: true</span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    volumes:</span><br><span class="line"><span class="deletion">-     - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data</span></span><br><span class="line"><span class="addition">+     - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data:z</span></span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br><span class="line">    environment:</span><br><span class="line">      - POSTGRES_USER=mmuser</span><br><span class="line">      - POSTGRES_PASSWORD=mmuser_password</span><br><span class="line">      - POSTGRES_DB=mattermost</span><br><span class="line">    # uncomment the following to enable backup</span><br><span class="line">    #  - AWS_ACCESS_KEY_ID=XXXX</span><br><span class="line">    #  - AWS_SECRET_ACCESS_KEY=XXXX</span><br><span class="line">    #  - WALE_S3_PREFIX=s3://BUCKET_NAME/PATH</span><br><span class="line">    #  - AWS_REGION=us-east-1</span><br><span class="line"></span><br><span class="line">  app:</span><br><span class="line">    build:</span><br><span class="line">      context: app</span><br><span class="line">      # uncomment following lines for team edition or change UID/GID</span><br><span class="line">      args:</span><br><span class="line"><span class="deletion">-      # - edition=team</span></span><br><span class="line"><span class="deletion">-      # - PUID=2000</span></span><br><span class="line"><span class="deletion">-      # - PGID=2000</span></span><br><span class="line"><span class="addition">+       - edition=team</span></span><br><span class="line"><span class="addition">+       - PUID=2000</span></span><br><span class="line"><span class="addition">+       - PGID=2000</span></span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    volumes:</span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/config:/mattermost/config:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/data:/mattermost/data:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/logs:/mattermost/logs:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/plugins:/mattermost/plugins:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/config:/mattermost/config:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/data:/mattermost/data:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/logs:/mattermost/logs:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/plugins:/mattermost/plugins:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:z</span></span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br><span class="line">    environment:</span><br><span class="line">      # set same as db credentials and dbname</span><br><span class="line">      - MM_USERNAME=mmuser</span><br><span class="line">      - MM_PASSWORD=mmuser_password</span><br><span class="line">      - MM_DBNAME=mattermost</span><br><span class="line">      # in case your config is not in default location</span><br><span class="line">      #- MM_CONFIG=/mattermost/config/config.json</span><br><span class="line"></span><br><span class="line">  web:</span><br><span class="line">    build: web</span><br><span class="line">    ports:</span><br><span class="line">      - "80:80"</span><br><span class="line">      - "443:443"</span><br><span class="line">    read_only: true</span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    volumes:</span><br><span class="line">      # This directory must have cert files if you want to enable SSL</span><br><span class="line">      - ./volumes/web/cert:/cert:ro</span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br></pre></td></tr></table></figure>
+<h4 id="수정을-하는-사유"><a href="#수정을-하는-사유" class="headerlink" title="수정을 하는 사유"></a>수정을 하는 사유</h4><p>솔직히 정확히는 모르겠다.</p>
+<p>그냥 짐작을 하자면 다음과 같다. </p>
+<h5 id="SELinux-동작-모드"><a href="#SELinux-동작-모드" class="headerlink" title="SELinux 동작 모드"></a>SELinux 동작 모드</h5><p>centos 공식 사이트에서 다운로드 받은 DVD iso 파일을 default로 install 하면 SELinux가 작동 하게 된다.</p>
+<p>SELinux는 Security Enhanced Linux의 의미로 Linux의 보안을 강화 하기 위한 모드이다.</p>
+<p>zero day 공격 및 buffer overflow 등 어플리케이션 취약점 방어를 위한 kernel 이라고 한다.</p>
+<p><code>sestatus</code> 명령어를 사용해서 SELinux 모드가 작동 중인지 확인 할 수있다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># sestatus</span></span><br><span class="line">SELinux status:                 enabled</span><br><span class="line">SELinuxfs mount:                /sys/fs/selinux</span><br><span class="line">SELinux root directory:         /etc/selinux</span><br><span class="line">Loaded policy name:             targeted</span><br><span class="line">Current mode:                   enforcing</span><br><span class="line">Mode from config file:          enforcing</span><br><span class="line">Policy MLS status:              enabled</span><br><span class="line">Policy deny_unknown status:     allowed</span><br><span class="line">Max kernel policy version:      31</span><br></pre></td></tr></table></figure>
+<h5 id="Docker와-selinux"><a href="#Docker와-selinux" class="headerlink" title="Docker와 selinux"></a>Docker와 selinux</h5><p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmRvY2tlci5jb20vdjE3LjA5L2VuZ2luZS9hZG1pbi92b2x1bWVzL2JpbmQtbW91bnRzLyNjb25maWd1cmUtdGhlLXNlbGludXgtbGFiZWw=" title="https://docs.docker.com/v17.09/engine/admin/volumes/bind-mounts/#configure-the-selinux-label">https://docs.docker.com/v17.09/engine/admin/volumes/bind-mounts/#configure-the-selinux-label<i class="fa fa-external-link"></i></span></p>
+<p>Docker에서는 share를 위한 파일 label을 제공 하는데 그것은 SELinux에서 관리 하는 영역이다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># ls -Z</span></span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 LICENSE</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 MAINTENANCE.md</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 README.md</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 app</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 contrib</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 db</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 docker-compose.yml</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 volumes</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 web</span><br></pre></td></tr></table></figure>
+<ul>
+<li>unconfined_u : user</li>
+<li>object_r :  role</li>
+<li>admin_home_t : type</li>
+<li>s0 : level</li>
+</ul>
+<p>상위와 같이 파일별 라벨링을 통해서 DAC 컨트롤을 처리 한다.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hY2Nlc3MucmVkaGF0LmNvbS9kb2N1bWVudGF0aW9uL2VuLXVzL3JlZF9oYXRfZW50ZXJwcmlzZV9saW51eC83L2h0bWwvc2VsaW51eF91c2Vyc19hbmRfYWRtaW5pc3RyYXRvcnNfZ3VpZGUvc2VjdC1zZWN1cml0eS1lbmhhbmNlZF9saW51eC13b3JraW5nX3dpdGhfc2VsaW51eC1zZWxpbnV4X2NvbnRleHRzX2xhYmVsaW5nX2ZpbGVz" title="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-working_with_selinux-selinux_contexts_labeling_files">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-working_with_selinux-selinux_contexts_labeling_files<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>라지만 역시 아직도 이해는 안간다...</p>
+</blockquote>
+<p>아무튼 상위와 같은 사유로 z 옵션을 통해서 컨테이너가 mount한 파일 시스템의 영역을 share 할 수있는지 여부를 설정해준다.</p>
+<ul>
+<li>z : 여러 컨테이너가 마운트한 contents를 share 할 수있다.</li>
+<li>Z : share 하지 않고 컨텐츠를 마운트한다.</li>
+</ul>
+<blockquote>
+<p>여기서 Z의 의미가 하나의 컨테이너로 마은트 하면 된다는 의미인지는 잘 모르겠다. 일단 mattermost는 z로 처리 하면 정상 작동한다.</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/mattermost/" rel="tag"># mattermost</a>
+          
+            <a href="/tags/slack/" rel="tag"># slack</a>
+          
+            <a href="/tags/centos7/" rel="tag"># centos7</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/jenkins-basic/" rel="next" title="Jenkins Basic">
+                <i class="fa fa-chevron-left"></i> Jenkins Basic
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/docker/" rel="prev" title="Docker">
+                Docker <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon-next.png" alt="whoami">
+            
+              <p class="site-author-name" itemprop="name">whoami</p>
+              <div class="site-description motion-element" itemprop="description">my note</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZXlvdW5nL3RoZXlvdW5nLmdpdGh1Yi5pbw==" title="GitHub &rarr; https://github.com/theyoung/theyoung.github.io"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnN1cHBvcnRAdGhleW91bmcyMDAyQG5hdmVyLmNvbQ==" title="E-Mail &rarr; mailto:support@theyoung2002@naver.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Location"><span class="nav-number">1.</span> <span class="nav-text">Location</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#로컬-Download-및-환경-설정"><span class="nav-number">2.</span> <span class="nav-text">로컬 Download 및 환경 설정</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Permission-Error를-피하기-위한-수정-사항"><span class="nav-number">3.</span> <span class="nav-text">Permission Error를 피하기 위한 수정 사항</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#수정을-하는-사유"><span class="nav-number">4.</span> <span class="nav-text">수정을 하는 사유</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SELinux-동작-모드"><span class="nav-number">4.1.</span> <span class="nav-text">SELinux 동작 모드</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker와-selinux"><span class="nav-number">4.2.</span> <span class="nav-text">Docker와 selinux</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.0.1</div>
+
+
+
+  <div class="footer-custom">Theme source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">here</span><br>Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC5vcmc=">here</span></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.1"></script>
+
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://https-theyoung-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theyoung.github.io/mattermost-docker-composer-onCentos7/";
+    this.page.identifier = "mattermost-docker-composer-onCentos7/";
+    this.page.title = 'Mattermost install with docker-composer on Centos7';
+    this.language = 'en';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-theyoung-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

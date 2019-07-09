@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="yandex-verification" content="3ac9ae36ddebb425">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"onmobile":true},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="yum installDependency Installvirtual box에 관련된 라이브러리를 우선 install 한다. yum -y install gcc dkms make qt libgomp patch yum -y install kernel-headers kernel-devel binutils glibc-headers glibc-devel font-for">
+<meta name="keywords" content="virtual box,vagrant,centos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtual Box And Vagrant Install on Centos">
+<meta property="og:url" content="https://theyoung.github.io/virtualbox-on-centos7/index.html">
+<meta property="og:site_name" content="Try Again">
+<meta property="og:description" content="yum installDependency Installvirtual box에 관련된 라이브러리를 우선 install 한다. yum -y install gcc dkms make qt libgomp patch yum -y install kernel-headers kernel-devel binutils glibc-headers glibc-devel font-for">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-04T02:25:46.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Virtual Box And Vagrant Install on Centos">
+<meta name="twitter:description" content="yum installDependency Installvirtual box에 관련된 라이브러리를 우선 install 한다. yum -y install gcc dkms make qt libgomp patch yum -y install kernel-headers kernel-devel binutils glibc-headers glibc-devel font-for">
+
+
+
+
+
+
+  <link rel="canonical" href="https://theyoung.github.io/virtualbox-on-centos7/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Virtual Box And Vagrant Install on Centos | Try Again</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+
+  <div class="container page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try Again</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">anything</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-news">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-bullhorn"></i> <br>News</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/virtualbox-on-centos7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Virtual Box And Vagrant Install on Centos
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-24 19:06:00" itemprop="dateCreated datePublished" datetime="2019-06-24T19:06:00Z">2019-06-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/virtualbox-on-centos7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="virtualbox-on-centos7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="yum-install"><a href="#yum-install" class="headerlink" title="yum install"></a>yum install</h4><h5 id="Dependency-Install"><a href="#Dependency-Install" class="headerlink" title="Dependency Install"></a>Dependency Install</h5><p>virtual box에 관련된 라이브러리를 우선 install 한다.</p>
+<p><code>yum -y install gcc dkms make qt libgomp patch</code></p>
+<p><code>yum -y install kernel-headers kernel-devel binutils glibc-headers glibc-devel font-forge</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ su</span><br><span class="line">암호:</span><br><span class="line">[root@localhost devops]<span class="comment"># yum -y install gcc dkms make qt libgomp patch</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">base                                                                                                                                                                                                                                                    | 3.6 kB  00:00:00</span><br><span class="line">docker-ce-stable                                                                                                                                                                                                                                        | 3.5 kB  00:00:00</span><br><span class="line">epel                                                                                                                                                                                                                                                    | 5.3 kB  00:00:00</span><br><span class="line">extras                                                                                                                                                                                                                                                  | 3.4 kB  00:00:00</span><br><span class="line">maradb                                                                                                                                                                                                                                                  | 2.9 kB  00:00:00</span><br><span class="line">updates                                                                                                                                                                                                                                                 | 3.4 kB  00:00:00</span><br><span class="line">webtatic                                                                                                                                                                                                                                                | 3.6 kB  00:00:00</span><br><span class="line">(1/2): epel/x86_64/primary_db                                                                                                                                                                                                                           | 6.1 MB  00:00:05</span><br><span class="line">(2/2): epel/x86_64/updateinfo                                                                                                                                                                                                                           | 782 kB  00:00:11</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: data.aonenetworks.kr</span><br><span class="line"> * updates: mirror.kakao.com</span><br><span class="line"> * webtatic: us-east.repo.webtatic.com</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package dkms.noarch 0:2.4.0-1.20170926git959bd74.el6 will be installed</span><br><span class="line">--&gt; Processing Dependency: elfutils-libelf-devel <span class="keyword">for</span> package: dkms-2.4.0-1.20170926git959bd74.el6.noarch</span><br><span class="line">--&gt; Processing Dependency: kernel-devel-uname-r <span class="keyword">for</span> package: dkms-2.4.0-1.20170926git959bd74.el6.noarch</span><br><span class="line">---&gt; Package gcc.x86_64 0:4.8.5-11.el7 will be updated</span><br><span class="line">--&gt; Processing Dependency: gcc = 4.8.5-11.el7 <span class="keyword">for</span> package: gcc-c++-4.8.5-11.el7.x86_64</span><br><span class="line">---&gt; Package gcc.x86_64 0:4.8.5-36.el7_6.2 will be an update</span><br><span class="line">--&gt; Processing Dependency: cpp = 4.8.5-36.el7_6.2 <span class="keyword">for</span> package: gcc-4.8.5-36.el7_6.2.x86_64</span><br><span class="line">--&gt; Processing Dependency: libgcc &gt;= 4.8.5-36.el7_6.2 <span class="keyword">for</span> package: gcc-4.8.5-36.el7_6.2.x86_64</span><br><span class="line">---&gt; Package libgomp.x86_64 0:4.8.5-11.el7 will be updated</span><br><span class="line">---&gt; Package libgomp.x86_64 0:4.8.5-36.el7_6.2 will be an update</span><br><span class="line">---&gt; Package make.x86_64 1:3.82-21.el7 will be updated</span><br><span class="line">---&gt; Package make.x86_64 1:3.82-23.el7 will be an update</span><br><span class="line">---&gt; Package patch.x86_64 0:2.7.1-10.el7_5 will be installed</span><br><span class="line">---&gt; Package qt.x86_64 1:4.8.7-2.el7 will be installed</span><br><span class="line">--&gt; Processing Dependency: qt-settings <span class="keyword">for</span> package: 1:qt-4.8.7-2.el7.x86_64</span><br><span class="line">--&gt; Processing Dependency: libcrypto.so.10(OPENSSL_1.0.2)(64bit) <span class="keyword">for</span> package: 1:qt-4.8.7-2.el7.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package cpp.x86_64 0:4.8.5-11.el7 will be updated</span><br><span class="line">---&gt; Package cpp.x86_64 0:4.8.5-36.el7_6.2 will be an update</span><br><span class="line">---&gt; Package elfutils-libelf-devel.x86_64 0:0.172-2.el7 will be installed</span><br><span class="line">--&gt; Processing Dependency: elfutils-libelf(x86-64) = 0.172-2.el7 <span class="keyword">for</span> package: elfutils-libelf-devel-0.172-2.el7.x86_64</span><br><span class="line">---&gt; Package gcc-c++.x86_64 0:4.8.5-11.el7 will be updated</span><br><span class="line">---&gt; Package gcc-c++.x86_64 0:4.8.5-36.el7_6.2 will be an update</span><br><span class="line">--&gt; Processing Dependency: libstdc++-devel = 4.8.5-36.el7_6.2 <span class="keyword">for</span> package: gcc-c++-4.8.5-36.el7_6.2.x86_64</span><br><span class="line">--&gt; Processing Dependency: libstdc++ = 4.8.5-36.el7_6.2 <span class="keyword">for</span> package: gcc-c++-4.8.5-36.el7_6.2.x86_64</span><br><span class="line">---&gt; Package kernel-debug-devel.x86_64 0:3.10.0-957.21.3.el7 will be installed</span><br><span class="line">---&gt; Package libgcc.x86_64 0:4.8.5-11.el7 will be updated</span><br><span class="line">---&gt; Package libgcc.x86_64 0:4.8.5-36.el7_6.2 will be an update</span><br><span class="line">---&gt; Package openssl-libs.x86_64 1:1.0.1e-60.el7_3.1 will be updated</span><br><span class="line">--&gt; Processing Dependency: openssl-libs(x86-64) = 1:1.0.1e-60.el7_3.1 <span class="keyword">for</span> package: 1:openssl-1.0.1e-60.el7_3.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: openssl-libs(x86-64) = 1:1.0.1e-60.el7_3.1 <span class="keyword">for</span> package: 1:openssl-devel-1.0.1e-60.el7_3.1.x86_64</span><br><span class="line">---&gt; Package openssl-libs.x86_64 1:1.0.2k-16.el7_6.1 will be an update</span><br><span class="line">---&gt; Package qt-settings.noarch 0:19-23.8.el7.centos will be installed</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package elfutils-libelf.x86_64 0:0.160-1.el7 will be updated</span><br><span class="line">--&gt; Processing Dependency: elfutils-libelf(x86-64) = 0.160-1.el7 <span class="keyword">for</span> package: elfutils-libs-0.160-1.el7.x86_64</span><br><span class="line">--&gt; Processing Dependency: elfutils-libelf(x86-64) = 0.160-1.el7 <span class="keyword">for</span> package: elfutils-0.160-1.el7.x86_64</span><br><span class="line">---&gt; Package elfutils-libelf.x86_64 0:0.172-2.el7 will be an update</span><br><span class="line">---&gt; Package libstdc++.x86_64 0:4.8.5-11.el7 will be updated</span><br><span class="line">---&gt; Package libstdc++.x86_64 0:4.8.5-36.el7_6.2 will be an update</span><br><span class="line">---&gt; Package libstdc++-devel.x86_64 0:4.8.5-11.el7 will be updated</span><br><span class="line">---&gt; Package libstdc++-devel.x86_64 0:4.8.5-36.el7_6.2 will be an update</span><br><span class="line">---&gt; Package openssl.x86_64 1:1.0.1e-60.el7_3.1 will be updated</span><br><span class="line">---&gt; Package openssl.x86_64 1:1.0.2k-16.el7_6.1 will be an update</span><br><span class="line">---&gt; Package openssl-devel.x86_64 1:1.0.1e-60.el7_3.1 will be updated</span><br><span class="line">---&gt; Package openssl-devel.x86_64 1:1.0.2k-16.el7_6.1 will be an update</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package elfutils.x86_64 0:0.160-1.el7 will be updated</span><br><span class="line">---&gt; Package elfutils.x86_64 0:0.172-2.el7 will be an update</span><br><span class="line">---&gt; Package elfutils-libs.x86_64 0:0.160-1.el7 will be updated</span><br><span class="line">---&gt; Package elfutils-libs.x86_64 0:0.172-2.el7 will be an update</span><br><span class="line">--&gt; Processing Dependency: default-yama-scope <span class="keyword">for</span> package: elfutils-libs-0.172-2.el7.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package elfutils-default-yama-scope.noarch 0:0.172-2.el7 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line"> Package                                                                    Arch                                                  Version                                                                         Repository                                              Size</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> dkms                                                                       noarch                                                2.4.0-1.20170926git959bd74.el6                                                  epel                                                    78 k</span><br><span class="line"> patch                                                                      x86_64                                                2.7.1-10.el7_5                                                                  base                                                   110 k</span><br><span class="line"> qt                                                                         x86_64                                                1:4.8.7-2.el7                                                                   base                                                   4.6 M</span><br><span class="line">Updating:</span><br><span class="line"> gcc                                                                        x86_64                                                4.8.5-36.el7_6.2                                                                updates                                                 16 M</span><br><span class="line"> libgomp                                                                    x86_64                                                4.8.5-36.el7_6.2                                                                updates                                                158 k</span><br><span class="line"> make                                                                       x86_64                                                1:3.82-23.el7                                                                   base                                                   420 k</span><br><span class="line">Installing <span class="keyword">for</span> dependencies:</span><br><span class="line"> elfutils-default-yama-scope                                                noarch                                                0.172-2.el7                                                                     base                                                    32 k</span><br><span class="line"> elfutils-libelf-devel                                                      x86_64                                                0.172-2.el7                                                                     base                                                    39 k</span><br><span class="line"> kernel-debug-devel                                                         x86_64                                                3.10.0-957.21.3.el7                                                             updates                                                 17 M</span><br><span class="line"> qt-settings                                                                noarch                                                19-23.8.el7.centos                                                              base                                                    17 k</span><br><span class="line">Updating <span class="keyword">for</span> dependencies:</span><br><span class="line"> cpp                                                                        x86_64                                                4.8.5-36.el7_6.2                                                                updates                                                5.9 M</span><br><span class="line"> elfutils                                                                   x86_64                                                0.172-2.el7                                                                     base                                                   299 k</span><br><span class="line"> elfutils-libelf                                                            x86_64                                                0.172-2.el7                                                                     base                                                   194 k</span><br><span class="line"> elfutils-libs                                                              x86_64                                                0.172-2.el7                                                                     base                                                   285 k</span><br><span class="line"> gcc-c++                                                                    x86_64                                                4.8.5-36.el7_6.2                                                                updates                                                7.2 M</span><br><span class="line"> libgcc                                                                     x86_64                                                4.8.5-36.el7_6.2                                                                updates                                                102 k</span><br><span class="line"> libstdc++                                                                  x86_64                                                4.8.5-36.el7_6.2                                                                updates                                                305 k</span><br><span class="line"> libstdc++-devel                                                            x86_64                                                4.8.5-36.el7_6.2                                                                updates                                                1.5 M</span><br><span class="line"> openssl                                                                    x86_64                                                1:1.0.2k-16.el7_6.1                                                             updates                                                493 k</span><br><span class="line"> openssl-devel                                                              x86_64                                                1:1.0.2k-16.el7_6.1                                                             updates                                                1.5 M</span><br><span class="line"> openssl-libs                                                               x86_64                                                1:1.0.2k-16.el7_6.1                                                             updates                                                1.2 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Install  3 Packages (+ 4 Dependent packages)</span><br><span class="line">Upgrade  3 Packages (+11 Dependent packages)</span><br><span class="line"></span><br><span class="line">Total size: 57 M</span><br><span class="line">Total download size: 57 M</span><br><span class="line">Downloading packages:</span><br><span class="line">No Presto metadata available <span class="keyword">for</span> base</span><br><span class="line">(1/20): elfutils-default-yama-scope-0.172-2.el7.noarch.rpm                                                                                                                                                                                              |  32 kB  00:00:00</span><br><span class="line">(2/20): elfutils-libelf-0.172-2.el7.x86_64.rpm                                                                                                                                                                                                          | 194 kB  00:00:00</span><br><span class="line">(3/20): elfutils-0.172-2.el7.x86_64.rpm                                                                                                                                                                                                                 | 299 kB  00:00:00</span><br><span class="line">(4/20): elfutils-libelf-devel-0.172-2.el7.x86_64.rpm                                                                                                                                                                                                    |  39 kB  00:00:00</span><br><span class="line">(5/20): elfutils-libs-0.172-2.el7.x86_64.rpm                                                                                                                                                                                                            | 285 kB  00:00:00</span><br><span class="line">(6/20): cpp-4.8.5-36.el7_6.2.x86_64.rpm                                                                                                                                                                                                                 | 5.9 MB  00:00:00</span><br><span class="line">warning: /var/cache/yum/x86_64/7/epel/packages/dkms-2.4.0-1.20170926git959bd74.el6.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID 0608b895: NOKEY                                                                                        ] 4.7 MB/s |  11 MB  00:00:09 ETA</span><br><span class="line">Public key <span class="keyword">for</span> dkms-2.4.0-1.20170926git959bd74.el6.noarch.rpm is not installed</span><br><span class="line">(7/20): dkms-2.4.0-1.20170926git959bd74.el6.noarch.rpm                                                                                                                                                                                                  |  78 kB  00:00:01</span><br><span class="line">(8/20): gcc-c++-4.8.5-36.el7_6.2.x86_64.rpm                                                                                                                                                                                                             | 7.2 MB  00:00:00</span><br><span class="line">(9/20): kernel-debug-devel-3.10.0-957.21.3.el7.x86_64.rpm                                                                                                                                                                                               |  17 MB  00:00:02</span><br><span class="line">(10/20): libgomp-4.8.5-36.el7_6.2.x86_64.rpm                                                                                                                                                                                                            | 158 kB  00:00:00</span><br><span class="line">(11/20): libstdc++-4.8.5-36.el7_6.2.x86_64.rpm                                                                                                                                                                                                          | 305 kB  00:00:00</span><br><span class="line">(12/20): gcc-4.8.5-36.el7_6.2.x86_64.rpm                                                                                                                                                                                                                |  16 MB  00:00:04</span><br><span class="line">(13/20): libstdc++-devel-4.8.5-36.el7_6.2.x86_64.rpm                                                                                                                                                                                                    | 1.5 MB  00:00:00</span><br><span class="line">(14/20): make-3.82-23.el7.x86_64.rpm                                                                                                                                                                                                                    | 420 kB  00:00:00</span><br><span class="line">(15/20): openssl-1.0.2k-16.el7_6.1.x86_64.rpm                                                                                                                                                                                                           | 493 kB  00:00:00</span><br><span class="line">(16/20): openssl-devel-1.0.2k-16.el7_6.1.x86_64.rpm                                                                                                                                                                                                     | 1.5 MB  00:00:00</span><br><span class="line">(17/20): patch-2.7.1-10.el7_5.x86_64.rpm                                                                                                                                                                                                                | 110 kB  00:00:00</span><br><span class="line">(18/20): openssl-libs-1.0.2k-16.el7_6.1.x86_64.rpm                                                                                                                                                                                                      | 1.2 MB  00:00:00</span><br><span class="line">(19/20): qt-settings-19-23.8.el7.centos.noarch.rpm                                                                                                                                                                                                      |  17 kB  00:00:00</span><br><span class="line">(20/20): qt-4.8.7-2.el7.x86_64.rpm                                                                                                                                                                                                                      | 4.6 MB  00:00:00</span><br><span class="line">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">Total                                                                                                                                                                                                                                           11 MB/s |  57 MB  00:00:05</span><br><span class="line">Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</span><br><span class="line">Importing GPG key 0x0608B895:</span><br><span class="line"> Userid     : <span class="string">"EPEL (6) &lt;epel@fedoraproject.org&gt;"</span></span><br><span class="line"> Fingerprint: 8c3b e96a f230 9184 da5c 0dae 3b49 df2a 0608 b895</span><br><span class="line"> Package    : epel-release-6-8.noarch (installed)</span><br><span class="line"> From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Updating   : libgcc-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                             1/35</span><br><span class="line">  Updating   : libstdc++-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                          2/35</span><br><span class="line">  Updating   : 1:openssl-libs-1.0.2k-16.el7_6.1.x86_64                                                                                                                                                                                                                    3/35</span><br><span class="line">  Updating   : elfutils-libelf-0.172-2.el7.x86_64                                                                                                                                                                                                                         4/35</span><br><span class="line">  Installing : elfutils-libelf-devel-0.172-2.el7.x86_64                                                                                                                                                                                                                   5/35</span><br><span class="line">  Updating   : libstdc++-devel-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                    6/35</span><br><span class="line">  Updating   : cpp-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                                7/35</span><br><span class="line">  Updating   : 1:make-3.82-23.el7.x86_64                                                                                                                                                                                                                                  8/35</span><br><span class="line">  Installing : elfutils-default-yama-scope-0.172-2.el7.noarch                                                                                                                                                                                                             9/35</span><br><span class="line">  Updating   : elfutils-libs-0.172-2.el7.x86_64                                                                                                                                                                                                                          10/35</span><br><span class="line">  Updating   : libgomp-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                           11/35</span><br><span class="line">  Updating   : gcc-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                               12/35</span><br><span class="line">  Installing : qt-settings-19-23.8.el7.centos.noarch                                                                                                                                                                                                                     13/35</span><br><span class="line">  Installing : kernel-debug-devel-3.10.0-957.21.3.el7.x86_64                                                                                                                                                                                                             14/35</span><br><span class="line">  Installing : dkms-2.4.0-1.20170926git959bd74.el6.noarch                                                                                                                                                                                                                15/35</span><br><span class="line">  Installing : 1:qt-4.8.7-2.el7.x86_64                                                                                                                                                                                                                                   16/35</span><br><span class="line">  Updating   : gcc-c++-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                           17/35</span><br><span class="line">  Updating   : elfutils-0.172-2.el7.x86_64                                                                                                                                                                                                                               18/35</span><br><span class="line">  Updating   : 1:openssl-1.0.2k-16.el7_6.1.x86_64                                                                                                                                                                                                                        19/35</span><br><span class="line">  Updating   : 1:openssl-devel-1.0.2k-16.el7_6.1.x86_64                                                                                                                                                                                                                  20/35</span><br><span class="line">  Installing : patch-2.7.1-10.el7_5.x86_64                                                                                                                                                                                                                               21/35</span><br><span class="line">  Cleanup    : 1:openssl-devel-1.0.1e-60.el7_3.1.x86_64                                                                                                                                                                                                                  22/35</span><br><span class="line">  Cleanup    : elfutils-0.160-1.el7.x86_64                                                                                                                                                                                                                               23/35</span><br><span class="line">  Cleanup    : gcc-c++-4.8.5-11.el7.x86_64                                                                                                                                                                                                                               24/35</span><br><span class="line">  Cleanup    : gcc-4.8.5-11.el7.x86_64                                                                                                                                                                                                                                   25/35</span><br><span class="line">  Cleanup    : 1:openssl-1.0.1e-60.el7_3.1.x86_64                                                                                                                                                                                                                        26/35</span><br><span class="line">  Cleanup    : elfutils-libs-0.160-1.el7.x86_64                                                                                                                                                                                                                          27/35</span><br><span class="line">  Cleanup    : libstdc++-devel-4.8.5-11.el7.x86_64                                                                                                                                                                                                                       28/35</span><br><span class="line">  Cleanup    : libstdc++-4.8.5-11.el7.x86_64                                                                                                                                                                                                                             29/35</span><br><span class="line">  Cleanup    : libgcc-4.8.5-11.el7.x86_64                                                                                                                                                                                                                                30/35</span><br><span class="line">  Cleanup    : elfutils-libelf-0.160-1.el7.x86_64                                                                                                                                                                                                                        31/35</span><br><span class="line">  Cleanup    : 1:openssl-libs-1.0.1e-60.el7_3.1.x86_64                                                                                                                                                                                                                   32/35</span><br><span class="line">  Cleanup    : 1:make-3.82-21.el7.x86_64                                                                                                                                                                                                                                 33/35</span><br><span class="line">  Cleanup    : cpp-4.8.5-11.el7.x86_64                                                                                                                                                                                                                                   34/35</span><br><span class="line">  Cleanup    : libgomp-4.8.5-11.el7.x86_64                                                                                                                                                                                                                               35/35</span><br><span class="line">  Verifying  : elfutils-libelf-devel-0.172-2.el7.x86_64                                                                                                                                                                                                                   1/35</span><br><span class="line">  Verifying  : kernel-debug-devel-3.10.0-957.21.3.el7.x86_64                                                                                                                                                                                                              2/35</span><br><span class="line">  Verifying  : 1:qt-4.8.7-2.el7.x86_64                                                                                                                                                                                                                                    3/35</span><br><span class="line">  Verifying  : qt-settings-19-23.8.el7.centos.noarch                                                                                                                                                                                                                      4/35</span><br><span class="line">  Verifying  : patch-2.7.1-10.el7_5.x86_64                                                                                                                                                                                                                                5/35</span><br><span class="line">  Verifying  : gcc-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                                6/35</span><br><span class="line">  Verifying  : libstdc++-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                          7/35</span><br><span class="line">  Verifying  : 1:openssl-devel-1.0.2k-16.el7_6.1.x86_64                                                                                                                                                                                                                   8/35</span><br><span class="line">  Verifying  : libgcc-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                             9/35</span><br><span class="line">  Verifying  : libgomp-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                           10/35</span><br><span class="line">  Verifying  : dkms-2.4.0-1.20170926git959bd74.el6.noarch                                                                                                                                                                                                                11/35</span><br><span class="line">  Verifying  : libstdc++-devel-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                   12/35</span><br><span class="line">  Verifying  : 1:openssl-1.0.2k-16.el7_6.1.x86_64                                                                                                                                                                                                                        13/35</span><br><span class="line">  Verifying  : elfutils-libelf-0.172-2.el7.x86_64                                                                                                                                                                                                                        14/35</span><br><span class="line">  Verifying  : elfutils-default-yama-scope-0.172-2.el7.noarch                                                                                                                                                                                                            15/35</span><br><span class="line">  Verifying  : gcc-c++-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                           16/35</span><br><span class="line">  Verifying  : 1:make-3.82-23.el7.x86_64                                                                                                                                                                                                                                 17/35</span><br><span class="line">  Verifying  : elfutils-libs-0.172-2.el7.x86_64                                                                                                                                                                                                                          18/35</span><br><span class="line">  Verifying  : cpp-4.8.5-36.el7_6.2.x86_64                                                                                                                                                                                                                               19/35</span><br><span class="line">  Verifying  : 1:openssl-libs-1.0.2k-16.el7_6.1.x86_64                                                                                                                                                                                                                   20/35</span><br><span class="line">  Verifying  : elfutils-0.172-2.el7.x86_64                                                                                                                                                                                                                               21/35</span><br><span class="line">  Verifying  : 1:openssl-1.0.1e-60.el7_3.1.x86_64                                                                                                                                                                                                                        22/35</span><br><span class="line">  Verifying  : gcc-c++-4.8.5-11.el7.x86_64                                                                                                                                                                                                                               23/35</span><br><span class="line">  Verifying  : elfutils-libs-0.160-1.el7.x86_64                                                                                                                                                                                                                          24/35</span><br><span class="line">  Verifying  : cpp-4.8.5-11.el7.x86_64                                                                                                                                                                                                                                   25/35</span><br><span class="line">  Verifying  : 1:openssl-libs-1.0.1e-60.el7_3.1.x86_64                                                                                                                                                                                                                   26/35</span><br><span class="line">  Verifying  : elfutils-libelf-0.160-1.el7.x86_64                                                                                                                                                                                                                        27/35</span><br><span class="line">  Verifying  : 1:openssl-devel-1.0.1e-60.el7_3.1.x86_64                                                                                                                                                                                                                  28/35</span><br><span class="line">  Verifying  : libgcc-4.8.5-11.el7.x86_64                                                                                                                                                                                                                                29/35</span><br><span class="line">  Verifying  : libstdc++-4.8.5-11.el7.x86_64                                                                                                                                                                                                                             30/35</span><br><span class="line">  Verifying  : 1:make-3.82-21.el7.x86_64                                                                                                                                                                                                                                 31/35</span><br><span class="line">  Verifying  : elfutils-0.160-1.el7.x86_64                                                                                                                                                                                                                               32/35</span><br><span class="line">  Verifying  : libgomp-4.8.5-11.el7.x86_64                                                                                                                                                                                                                               33/35</span><br><span class="line">  Verifying  : gcc-4.8.5-11.el7.x86_64                                                                                                                                                                                                                                   34/35</span><br><span class="line">  Verifying  : libstdc++-devel-4.8.5-11.el7.x86_64                                                                                                                                                                                                                       35/35</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  dkms.noarch 0:2.4.0-1.20170926git959bd74.el6                                                          patch.x86_64 0:2.7.1-10.el7_5                                                          qt.x86_64 1:4.8.7-2.el7</span><br><span class="line"></span><br><span class="line">Dependency Installed:</span><br><span class="line">  elfutils-default-yama-scope.noarch 0:0.172-2.el7                       elfutils-libelf-devel.x86_64 0:0.172-2.el7                       kernel-debug-devel.x86_64 0:3.10.0-957.21.3.el7                       qt-settings.noarch 0:19-23.8.el7.centos</span><br><span class="line"></span><br><span class="line">Updated:</span><br><span class="line">  gcc.x86_64 0:4.8.5-36.el7_6.2                                                             libgomp.x86_64 0:4.8.5-36.el7_6.2                                                             make.x86_64 1:3.82-23.el7</span><br><span class="line"></span><br><span class="line">Dependency Updated:</span><br><span class="line">  cpp.x86_64 0:4.8.5-36.el7_6.2              elfutils.x86_64 0:0.172-2.el7       elfutils-libelf.x86_64 0:0.172-2.el7      elfutils-libs.x86_64 0:0.172-2.el7       gcc-c++.x86_64 0:4.8.5-36.el7_6.2  libgcc.x86_64 0:4.8.5-36.el7_6.2  libstdc++.x86_64 0:4.8.5-36.el7_6.2</span><br><span class="line">  libstdc++-devel.x86_64 0:4.8.5-36.el7_6.2  openssl.x86_64 1:1.0.2k-16.el7_6.1  openssl-devel.x86_64 1:1.0.2k-16.el7_6.1  openssl-libs.x86_64 1:1.0.2k-16.el7_6.1</span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost devops]<span class="comment"># yum -y install kernel-headers kernel-devel binutils glibc-headers glibc-devel font-forge</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: data.aonenetworks.kr</span><br><span class="line"> * updates: mirror.kakao.com</span><br><span class="line"> * webtatic: us-east.repo.webtatic.com</span><br><span class="line">No package font-forge available.</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package binutils.x86_64 0:2.23.52.0.1-30.el7 will be updated</span><br><span class="line">---&gt; Package binutils.x86_64 0:2.27-34.base.el7 will be an update</span><br><span class="line">---&gt; Package glibc-devel.x86_64 0:2.17-157.el7_3.1 will be updated</span><br><span class="line">---&gt; Package glibc-devel.x86_64 0:2.17-260.el7_6.5 will be an update</span><br><span class="line">--&gt; Processing Dependency: glibc = 2.17-260.el7_6.5 <span class="keyword">for</span> package: glibc-devel-2.17-260.el7_6.5.x86_64</span><br><span class="line">---&gt; Package glibc-headers.x86_64 0:2.17-157.el7_3.1 will be updated</span><br><span class="line">---&gt; Package glibc-headers.x86_64 0:2.17-260.el7_6.5 will be an update</span><br><span class="line">---&gt; Package kernel-devel.x86_64 0:3.10.0-957.21.3.el7 will be installed</span><br><span class="line">---&gt; Package kernel-headers.x86_64 0:3.10.0-514.10.2.el7 will be updated</span><br><span class="line">---&gt; Package kernel-headers.x86_64 0:3.10.0-957.21.3.el7 will be an update</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package glibc.x86_64 0:2.17-157.el7_3.1 will be updated</span><br><span class="line">--&gt; Processing Dependency: glibc = 2.17-157.el7_3.1 <span class="keyword">for</span> package: glibc-common-2.17-157.el7_3.1.x86_64</span><br><span class="line">---&gt; Package glibc.x86_64 0:2.17-260.el7_6.5 will be an update</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package glibc-common.x86_64 0:2.17-157.el7_3.1 will be updated</span><br><span class="line">---&gt; Package glibc-common.x86_64 0:2.17-260.el7_6.5 will be an update</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line"> Package                                                             Arch                                                        Version                                                                    Repository                                                    Size</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> kernel-devel                                                        x86_64                                                      3.10.0-957.21.3.el7                                                        updates                                                       17 M</span><br><span class="line">Updating:</span><br><span class="line"> binutils                                                            x86_64                                                      2.27-34.base.el7                                                           base                                                         5.9 M</span><br><span class="line"> glibc-devel                                                         x86_64                                                      2.17-260.el7_6.5                                                           updates                                                      1.1 M</span><br><span class="line"> glibc-headers                                                       x86_64                                                      2.17-260.el7_6.5                                                           updates                                                      683 k</span><br><span class="line"> kernel-headers                                                      x86_64                                                      3.10.0-957.21.3.el7                                                        updates                                                      8.0 M</span><br><span class="line">Updating <span class="keyword">for</span> dependencies:</span><br><span class="line"> glibc                                                               x86_64                                                      2.17-260.el7_6.5                                                           updates                                                      3.7 M</span><br><span class="line"> glibc-common                                                        x86_64                                                      2.17-260.el7_6.5                                                           updates                                                       12 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Install  1 Package</span><br><span class="line">Upgrade  4 Packages (+2 Dependent packages)</span><br><span class="line"></span><br><span class="line">Total download size: 48 M</span><br><span class="line">Downloading packages:</span><br><span class="line">No Presto metadata available <span class="keyword">for</span> base</span><br><span class="line">(1/7): glibc-2.17-260.el7_6.5.x86_64.rpm                                                                                                                                                                                                                | 3.7 MB  00:00:00</span><br><span class="line">(2/7): glibc-devel-2.17-260.el7_6.5.x86_64.rpm                                                                                                                                                                                                          | 1.1 MB  00:00:00</span><br><span class="line">(3/7): binutils-2.27-34.base.el7.x86_64.rpm                                                                                                                                                                                                             | 5.9 MB  00:00:01</span><br><span class="line">(4/7): glibc-headers-2.17-260.el7_6.5.x86_64.rpm                                                                                                                                                                                                        | 683 kB  00:00:00</span><br><span class="line">(5/7): glibc-common-2.17-260.el7_6.5.x86_64.rpm                                                                                                                                                                                                         |  12 MB  00:00:02</span><br><span class="line">(6/7): kernel-headers-3.10.0-957.21.3.el7.x86_64.rpm                                                                                                                                                                                                    | 8.0 MB  00:00:01</span><br><span class="line">(7/7): kernel-devel-3.10.0-957.21.3.el7.x86_64.rpm                                                                                                                                                                                                      |  17 MB  00:00:02</span><br><span class="line">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">Total                                                                                                                                                                                                                                           11 MB/s |  48 MB  00:00:04</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Updating   : glibc-common-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                       1/13</span><br><span class="line">  Updating   : glibc-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                              2/13</span><br><span class="line">warning: /etc/nsswitch.conf created as /etc/nsswitch.conf.rpmnew</span><br><span class="line">  Updating   : kernel-headers-3.10.0-957.21.3.el7.x86_64                                                                                                                                                                                                                  3/13</span><br><span class="line">  Updating   : glibc-headers-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                      4/13</span><br><span class="line">  Updating   : glibc-devel-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                        5/13</span><br><span class="line">  Updating   : binutils-2.27-34.base.el7.x86_64                                                                                                                                                                                                                           6/13</span><br><span class="line">  Installing : kernel-devel-3.10.0-957.21.3.el7.x86_64                                                                                                                                                                                                                    7/13</span><br><span class="line">  Cleanup    : glibc-devel-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                        8/13</span><br><span class="line">  Cleanup    : glibc-headers-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                      9/13</span><br><span class="line">  Cleanup    : binutils-2.23.52.0.1-30.el7.x86_64                                                                                                                                                                                                                        10/13</span><br><span class="line">  Cleanup    : kernel-headers-3.10.0-514.10.2.el7.x86_64                                                                                                                                                                                                                 11/13</span><br><span class="line">  Cleanup    : glibc-common-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                      12/13</span><br><span class="line">  Cleanup    : glibc-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                             13/13</span><br><span class="line">  Verifying  : kernel-devel-3.10.0-957.21.3.el7.x86_64                                                                                                                                                                                                                    1/13</span><br><span class="line">  Verifying  : binutils-2.27-34.base.el7.x86_64                                                                                                                                                                                                                           2/13</span><br><span class="line">  Verifying  : glibc-headers-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                      3/13</span><br><span class="line">  Verifying  : glibc-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                              4/13</span><br><span class="line">  Verifying  : glibc-common-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                       5/13</span><br><span class="line">  Verifying  : glibc-devel-2.17-260.el7_6.5.x86_64                                                                                                                                                                                                                        6/13</span><br><span class="line">  Verifying  : kernel-headers-3.10.0-957.21.3.el7.x86_64                                                                                                                                                                                                                  7/13</span><br><span class="line">  Verifying  : glibc-headers-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                      8/13</span><br><span class="line">  Verifying  : glibc-common-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                       9/13</span><br><span class="line">  Verifying  : glibc-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                             10/13</span><br><span class="line">  Verifying  : kernel-headers-3.10.0-514.10.2.el7.x86_64                                                                                                                                                                                                                 11/13</span><br><span class="line">  Verifying  : binutils-2.23.52.0.1-30.el7.x86_64                                                                                                                                                                                                                        12/13</span><br><span class="line">  Verifying  : glibc-devel-2.17-157.el7_3.1.x86_64                                                                                                                                                                                                                       13/13</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  kernel-devel.x86_64 0:3.10.0-957.21.3.el7</span><br><span class="line"></span><br><span class="line">Updated:</span><br><span class="line">  binutils.x86_64 0:2.27-34.base.el7                             glibc-devel.x86_64 0:2.17-260.el7_6.5                             glibc-headers.x86_64 0:2.17-260.el7_6.5                             kernel-headers.x86_64 0:3.10.0-957.21.3.el7</span><br><span class="line"></span><br><span class="line">Dependency Updated:</span><br><span class="line">  glibc.x86_64 0:2.17-260.el7_6.5                                                                                                    glibc-common.x86_64 0:2.17-260.el7_6.5</span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
+<h4 id="Add-Repository"><a href="#Add-Repository" class="headerlink" title="Add Repository"></a>Add Repository</h4><p>virtual box를 인스톨하기 위한 yum repository를 등록 한다.</p>
+<p><code>wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost devops]<span class="comment"># cd /etc/yum.repos.d/</span></span><br><span class="line">[root@localhost yum.repos.d]<span class="comment"># ls</span></span><br><span class="line">CentOS-Base.repo  CentOS-CR.repo  CentOS-Debuginfo.repo  CentOS-Sources.repo  CentOS-Vault.repo  CentOS-fasttrack.repo  docker-ce.repo  epel-testing.repo  epel.repo  mariadb.repo  webtatic-archive.repo  webtatic-testing.repo  webtatic.repo</span><br><span class="line">[root@localhost yum.repos.d]<span class="comment"># ll</span></span><br><span class="line">합계 52</span><br><span class="line">-rw-r--r--. 1 root root 1664  4월  1  2015 CentOS-Base.repo</span><br><span class="line">-rw-r--r--. 1 root root 1309  4월  1  2015 CentOS-CR.repo</span><br><span class="line">-rw-r--r--. 1 root root  649  4월  1  2015 CentOS-Debuginfo.repo</span><br><span class="line">-rw-r--r--. 1 root root 1331  4월  1  2015 CentOS-Sources.repo</span><br><span class="line">-rw-r--r--. 1 root root 1002  4월  1  2015 CentOS-Vault.repo</span><br><span class="line">-rw-r--r--. 1 root root  290  4월  1  2015 CentOS-fasttrack.repo</span><br><span class="line">-rw-r--r--. 1 root root 2424 10월 25  2018 docker-ce.repo</span><br><span class="line">-rw-r--r--. 1 root root 1056 11월  5  2012 epel-testing.repo</span><br><span class="line">-rw-r--r--. 1 root root  960  6월 20 12:28 epel.repo</span><br><span class="line">-rw-r--r--. 1 root root  139  2월 24  2017 mariadb.repo</span><br><span class="line">-rw-r--r--. 1 root root  963 11월 13  2016 webtatic-archive.repo</span><br><span class="line">-rw-r--r--. 1 root root  963 11월 13  2016 webtatic-testing.repo</span><br><span class="line">-rw-r--r--. 1 root root  865 11월 13  2016 webtatic.repo</span><br><span class="line">[root@localhost yum.repos.d]<span class="comment"># wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo</span></span><br><span class="line">--2019-06-21 11:04:18--  http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo</span><br><span class="line">Resolving download.virtualbox.org (download.virtualbox.org)... 23.35.220.157</span><br><span class="line">Connecting to download.virtualbox.org (download.virtualbox.org)|23.35.220.157|:80... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 259 [text/plain]</span><br><span class="line">Saving to: ‘virtualbox.repo’</span><br><span class="line"></span><br><span class="line">100%[=====================================================================================================================================================================================================================================&gt;] 259         --.-K/s   <span class="keyword">in</span> 0s</span><br><span class="line"></span><br><span class="line">2019-06-21 11:04:19 (40.2 MB/s) - ‘virtualbox.repo’ saved [259/259]</span><br></pre></td></tr></table></figure>
+<h4 id="install-virtualbox"><a href="#install-virtualbox" class="headerlink" title="install virtualbox"></a>install virtualbox</h4><p>virtual box를 install 한다.</p>
+<p>6.0이 현재 기준 최신이다.</p>
+<p><code>yum install -y VirtualBox-6.0</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost yum.repos.d]<span class="comment"># yum install -y VirtualBox-6.0</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">virtualbox/7/x86_64/signature                                                                                                                                                                                                                           |  181 B  00:00:00</span><br><span class="line">Retrieving key from https://www.virtualbox.org/download/oracle_vbox.asc</span><br><span class="line">Importing GPG key 0x98AB5139:</span><br><span class="line"> Userid     : <span class="string">"Oracle Corporation (VirtualBox archive signing key) &lt;info@virtualbox.org&gt;"</span></span><br><span class="line"> Fingerprint: 7b0f ab3a 13b9 0743 5925 d9c9 5442 2a4b 98ab 5139</span><br><span class="line"> From       : https://www.virtualbox.org/download/oracle_vbox.asc</span><br><span class="line">virtualbox/7/x86_64/signature                                                                                                                                                                                                                           | 2.9 kB  00:00:01 !!!</span><br><span class="line">virtualbox/7/x86_64/primary_db                                                                                                                                                                                                                          | 130 kB  00:00:00</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: data.aonenetworks.kr</span><br><span class="line"> * updates: mirror.kakao.com</span><br><span class="line"> * webtatic: us-east.repo.webtatic.com</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package VirtualBox-6.0.x86_64 0:6.0.8_130520_el7-1 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line"> Package                                                             Arch                                                        Version                                                                 Repository                                                       Size</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> VirtualBox-6.0                                                      x86_64                                                      6.0.8_130520_el7-1                                                      virtualbox                                                      116 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Install  1 Package</span><br><span class="line"></span><br><span class="line">Total download size: 116 M</span><br><span class="line">Installed size: 238 M</span><br><span class="line">Downloading packages:</span><br><span class="line">경고: /var/cache/yum/x86_64/7/virtualbox/packages/VirtualBox-6.0-6.0.8_130520_el7-1.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID 98ab5139: NOKEY========================================================================================-] 8.1 MB/s | 116 MB  00:00:00 ETA</span><br><span class="line">Public key <span class="keyword">for</span> VirtualBox-6.0-6.0.8_130520_el7-1.x86_64.rpm is not installed</span><br><span class="line">VirtualBox-6.0-6.0.8_130520_el7-1.x86_64.rpm                                                                                                                                                                                                            | 116 MB  00:00:14</span><br><span class="line">Retrieving key from https://www.virtualbox.org/download/oracle_vbox.asc</span><br><span class="line">Importing GPG key 0x98AB5139:</span><br><span class="line"> Userid     : <span class="string">"Oracle Corporation (VirtualBox archive signing key) &lt;info@virtualbox.org&gt;"</span></span><br><span class="line"> Fingerprint: 7b0f ab3a 13b9 0743 5925 d9c9 5442 2a4b 98ab 5139</span><br><span class="line"> From       : https://www.virtualbox.org/download/oracle_vbox.asc</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : VirtualBox-6.0-6.0.8_130520_el7-1.x86_64                                                                                                                                                                                                                    1/1</span><br><span class="line"></span><br><span class="line">Creating group <span class="string">'vboxusers'</span>. VM users must be member of that group!</span><br><span class="line"></span><br><span class="line">This system is currently not <span class="built_in">set</span> up to build kernel modules.</span><br><span class="line">Please install the Linux kernel <span class="string">"header"</span> files matching the current kernel</span><br><span class="line"><span class="keyword">for</span> adding new hardware support to the system.</span><br><span class="line">The distribution packages containing the headers are probably:</span><br><span class="line">    kernel-devel kernel-devel-3.10.0-229.el7.x86_64</span><br><span class="line">This system is currently not <span class="built_in">set</span> up to build kernel modules.</span><br><span class="line">Please install the Linux kernel <span class="string">"header"</span> files matching the current kernel</span><br><span class="line"><span class="keyword">for</span> adding new hardware support to the system.</span><br><span class="line">The distribution packages containing the headers are probably:</span><br><span class="line">    kernel-devel kernel-devel-3.10.0-229.el7.x86_64</span><br><span class="line"></span><br><span class="line">There were problems setting up VirtualBox.  To re-start the <span class="built_in">set</span>-up process, run</span><br><span class="line">  /sbin/vboxconfig</span><br><span class="line">as root.  If your system is using EFI Secure Boot you may need to sign the</span><br><span class="line">kernel modules (vboxdrv, vboxnetflt, vboxnetadp, vboxpci) before you can load</span><br><span class="line">them. Please see your Linux system<span class="string">'s documentation for more information.</span></span><br><span class="line"><span class="string">  Verifying  : VirtualBox-6.0-6.0.8_130520_el7-1.x86_64                                                                                                                                                                                                                    1/1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Installed:</span></span><br><span class="line"><span class="string">  VirtualBox-6.0.x86_64 0:6.0.8_130520_el7-1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Complete!</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost yum.repos.d]<span class="comment"># rcvboxdrv setup</span></span><br><span class="line">vboxdrv.sh: Stopping VirtualBox services.</span><br><span class="line">vboxdrv.sh: Starting VirtualBox services.</span><br><span class="line">vboxdrv.sh: Building VirtualBox kernel modules.</span><br><span class="line">This system is currently not <span class="built_in">set</span> up to build kernel modules.</span><br><span class="line">Please install the Linux kernel <span class="string">"header"</span> files matching the current kernel</span><br><span class="line"><span class="keyword">for</span> adding new hardware support to the system.</span><br><span class="line">The distribution packages containing the headers are probably:</span><br><span class="line">    kernel-devel kernel-devel-3.10.0-957.el7.x86_64</span><br></pre></td></tr></table></figure>
+<p>상위와 같이 virtual box를 셋업 했을 경우 </p>
+<p><code>Please install the Linux kernel &quot;header&quot; files matching the current kernel</code></p>
+<p>와 같은 글이 나오면 정상적인 셋업이 되지 않았다는 의미이다.</p>
+<p>virtual box에서 요청하는 커널 header는 </p>
+<p><code>sudo yum install &quot;kernel-devel-uname-r == $(uname -r)&quot;</code></p>
+<p>를 사용해서 install이 가능한데, 어떤 경우는 devel header kernel이 없는 경우가 있다. (직접 빌드 했다던지...)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost yum.repos.d]# sudo yum install &quot;kernel-devel-uname-r == $(uname -r)&quot;</span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: centos.mirror.moack.net</span><br><span class="line"> * updates: centos.mirror.moack.net</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package kernel-devel.x86_64 0:3.10.0-957.el7 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">==================================================================================================================================================================================================================</span><br><span class="line"> Package                                              Arch                                           Version                                                   Repository                                    Size</span><br><span class="line">==================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> kernel-devel                                         x86_64                                         3.10.0-957.el7                                            base                                          17 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">==================================================================================================================================================================================================================</span><br><span class="line">Install  1 Package</span><br><span class="line"></span><br><span class="line">Total download size: 17 M</span><br><span class="line">Installed size: 37 M</span><br><span class="line">Is this ok [y/d/N]: y</span><br><span class="line">Downloading packages:</span><br><span class="line">No Presto metadata available for base</span><br><span class="line">kernel-devel-3.10.0-957.el7.x86_64.rpm                                                                                                                                                     |  17 MB  00:00:01</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction test</span><br><span class="line">Transaction test succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : kernel-devel-3.10.0-957.el7.x86_64                                                                                                                                                             1/1</span><br><span class="line">  Verifying  : kernel-devel-3.10.0-957.el7.x86_64                                                                                                                                                             1/1</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  kernel-devel.x86_64 0:3.10.0-957.el7</span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost yum.repos.d]# rcvboxdrv setup</span><br><span class="line">vboxdrv.sh: Stopping VirtualBox services.</span><br><span class="line">vboxdrv.sh: Starting VirtualBox services.</span><br><span class="line">vboxdrv.sh: Building VirtualBox kernel modules.</span><br></pre></td></tr></table></figure>
+<p>상위와 같이 작동 안되면 cent0S 새로 까는게 정신 건강에 좋다.</p>
+<h4 id="Vagrant-install"><a href="#Vagrant-install" class="headerlink" title="Vagrant install"></a>Vagrant install</h4><p>virtual box가 정상적으로 인스톨 완료 되었다면, vagrant를 install한다.</p>
+<p><code>yum -y install https://releases.hashicorp.com/vagrant/1.9.6/vagrant_1.9.6_x86_64.rpm</code></p>
+<p>1.9.6버전은 virtual box 5.1버전까지만 호환 가능하고 6.0부터는 2.0 이상의 vagrant를 install 해야 한다.</p>
+<p>하기는 1.x vagrant를 까는 것을 보여준다. (앞서 virtual box 6.x를 깔았음으로 실패 한다.)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum -y install https://releases.hashicorp.com/vagrant/1.9.6/vagrant_1.9.6_x86_64.rpm</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">vagrant_1.9.6_x86_64.rpm                                                                                                                                                                                                                                |  75 MB  00:00:11</span><br><span class="line">Examining /var/tmp/yum-root-4ytLB4/vagrant_1.9.6_x86_64.rpm: 1:vagrant-1.9.6-1.x86_64</span><br><span class="line">Marking /var/tmp/yum-root-4ytLB4/vagrant_1.9.6_x86_64.rpm to be installed</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package vagrant.x86_64 1:1.9.6-1 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line"> Package                                                       Arch                                                         Version                                                          Repository                                                                   Size</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> vagrant                                                       x86_64                                                       1:1.9.6-1                                                        /vagrant_1.9.6_x86_64                                                       190 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Install  1 Package</span><br><span class="line"></span><br><span class="line">Total size: 190 M</span><br><span class="line">Installed size: 190 M</span><br><span class="line">Downloading packages:</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : 1:vagrant-1.9.6-1.x86_64                                                                                                                                                                                                                                    1/1</span><br><span class="line">  Verifying  : 1:vagrant-1.9.6-1.x86_64                                                                                                                                                                                                                                    1/1</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  vagrant.x86_64 1:1.9.6-1</span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
+<h4 id="Vagrant-Start"><a href="#Vagrant-Start" class="headerlink" title="Vagrant Start"></a>Vagrant Start</h4><p><code>vagrant init</code></p>
+<p><code>vagrant up</code></p>
+<p>으로 최초 vagrant가 잘 install 되었는지 확인 가능하지만</p>
+<p>Provider를 설정해달라는 요청이 나오게 되는데</p>
+<p><code>vagrant up --provider=virtualbox</code></p>
+<p>와 같이 provider를 설정 해주면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost yum.repos.d]<span class="comment"># cd ~</span></span><br><span class="line">[root@localhost ~]<span class="comment"># ls</span></span><br><span class="line">anaconda-ks.cfg</span><br><span class="line">[root@localhost ~]<span class="comment"># mkdir vagrant</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cd vagrant/</span></span><br><span class="line">[root@localhost vagrant]<span class="comment"># ls</span></span><br><span class="line">[root@localhost vagrant]<span class="comment"># vagrant init</span></span><br><span class="line">A `Vagrantfile` has been placed <span class="keyword">in</span> this directory. You are now</span><br><span class="line">ready to `vagrant up` your first virtual environment! Please <span class="built_in">read</span></span><br><span class="line">the comments <span class="keyword">in</span> the Vagrantfile as well as documentation on</span><br><span class="line">`vagrantup.com` <span class="keyword">for</span> more information on using Vagrant.</span><br><span class="line">[root@localhost vagrant]<span class="comment"># vagrant up</span></span><br><span class="line">No usable default provider could be found <span class="keyword">for</span> your system.</span><br><span class="line"></span><br><span class="line">Vagrant relies on interactions with 3rd party systems, known as</span><br><span class="line"><span class="string">"providers"</span>, to provide Vagrant with resources to run development</span><br><span class="line">environments. Examples are VirtualBox, VMware, Hyper-V.</span><br><span class="line"></span><br><span class="line">The easiest solution to this message is to install VirtualBox, <span class="built_in">which</span></span><br><span class="line">is available <span class="keyword">for</span> free on all major platforms.</span><br><span class="line"></span><br><span class="line">If you believe you already have a provider available, make sure it</span><br><span class="line">is properly installed and configured. You can see more details about</span><br><span class="line">why a particular provider isn<span class="string">'t working by forcing usage with</span></span><br><span class="line"><span class="string">`vagrant up --provider=PROVIDER`, which should give you a more specific</span></span><br><span class="line"><span class="string">error message for that particular provider.</span></span><br></pre></td></tr></table></figure>
+<p>centos/7이라는 box를 vagrant에 등록 해준다.</p>
+<p>이때 default Provider를 선택하면 앞서 <code>--provider=</code> 옵션을 사용하지 않아도 된다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost vagrant]<span class="comment"># vagrant box add centos/7</span></span><br><span class="line">==&gt; box: Loading metadata <span class="keyword">for</span> box <span class="string">'centos/7'</span></span><br><span class="line">    box: URL: https://vagrantcloud.com/centos/7</span><br><span class="line">This box can work with multiple providers! The providers that it</span><br><span class="line">can work with are listed below. Please review the list and choose</span><br><span class="line">the provider you will be working with.</span><br><span class="line"></span><br><span class="line">1) hyperv</span><br><span class="line">2) libvirt</span><br><span class="line">3) virtualbox</span><br><span class="line">4) vmware_desktop</span><br><span class="line"></span><br><span class="line">Enter your choice: 3</span><br><span class="line">==&gt; box: Adding box <span class="string">'centos/7'</span> (v1902.01) <span class="keyword">for</span> provider: virtualbox</span><br><span class="line">    box: Downloading: https://vagrantcloud.com/centos/boxes/7/versions/1902.01/providers/virtualbox.box</span><br><span class="line">==&gt; box: Successfully added box <span class="string">'centos/7'</span> (v1902.01) <span class="keyword">for</span> <span class="string">'virtualbox'</span>!</span><br></pre></td></tr></table></figure>
+<p><code>vagrant init</code></p>
+<p>명령어를 사용할 경우</p>
+<p>해당 명령어를 실행한 디렉토리에</p>
+<p><code>Vagrantfile</code>이 생성되는데, VM에 대한 설정을 할 수있다. </p>
+<p>여기에서는</p>
+<p><code>config.vm.box = &quot;centos/7&quot;</code> 이 부분만 수정 함으로써 기본 OS가 centos 7 버전이라는 것을 알려주었다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- mode: ruby -*-</span></span><br><span class="line"><span class="comment"># vi: set ft=ruby :</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># All Vagrant configuration is done below. The "2" in Vagrant.configure</span></span><br><span class="line"><span class="comment"># configures the configuration version (we support older styles for</span></span><br><span class="line"><span class="comment"># backwards compatibility). Please don't change it unless you know what</span></span><br><span class="line"><span class="comment"># you're doing.</span></span><br><span class="line">Vagrant.configure(<span class="string">"2"</span>) <span class="keyword">do</span> |config|</span><br><span class="line">  <span class="comment"># The most common configuration options are documented and commented below.</span></span><br><span class="line">  <span class="comment"># For a complete reference, please see the online documentation at</span></span><br><span class="line">  <span class="comment"># https://docs.vagrantup.com.</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Every Vagrant development environment requires a box. You can search for</span></span><br><span class="line">  <span class="comment"># boxes at https://vagrantcloud.com/search.</span></span><br><span class="line">  config.vm.box = <span class="string">"centos/7"</span></span><br></pre></td></tr></table></figure>
+<p>앞서서 vagrant를 1.x로 깔았음으로 </p>
+<p>아래와 같이 오류가 나온다.</p>
+<p><code>4.0, 4.1, 4.2, 4.3, 5.0, 5.1</code></p>
+<p>Virtual Box 5.1까지만 호환 한다는 의미이다.</p>
+<p>Vagrant를 1.x에서 2.x로 새로 install 하자.</p>
+<p>vagrant 삭제</p>
+<p><code>[root@localhost vagrant]# rm -rf /opt/vagrant/</code><br><code>[root@localhost vagrant]# rm -f /usr/bin/vagrant</code></p>
+<p>vagrant install </p>
+<p><code>[root@localhost vagrant]# sudo wget https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.rp</code></p>
+<p><code>[root@localhost vagrant]# sudo yum localinstall vagrant_2.2.4_x86_64.rpm</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost vagrant]<span class="comment"># vagrant up --provider=virtualbox</span></span><br><span class="line">The provider <span class="string">'virtualbox'</span> that was requested to back the machine</span><br><span class="line"><span class="string">'default'</span> is reporting that it isn<span class="string">'t usable on this system. The</span></span><br><span class="line"><span class="string">reason is shown below:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Vagrant has detected that you have a version of VirtualBox installed</span></span><br><span class="line"><span class="string">that is not supported by this version of Vagrant. Please install one of</span></span><br><span class="line"><span class="string">the supported versions listed below to use Vagrant:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">4.0, 4.1, 4.2, 4.3, 5.0, 5.1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">A Vagrant update may also be available that adds support for the version</span></span><br><span class="line"><span class="string">you specified. Please check www.vagrantup.com/downloads.html to download</span></span><br><span class="line"><span class="string">the latest version.</span></span><br><span class="line"><span class="string">[root@localhost vagrant]# yum update vagrant</span></span><br><span class="line"><span class="string">Loaded plugins: fastestmirror, langpacks</span></span><br><span class="line"><span class="string">Loading mirror speeds from cached hostfile</span></span><br><span class="line"><span class="string"> * base: centos.mirror.moack.net</span></span><br><span class="line"><span class="string"> * extras: centos.mirror.moack.net</span></span><br><span class="line"><span class="string"> * updates: centos.mirror.moack.net</span></span><br><span class="line"><span class="string">No packages marked for update</span></span><br><span class="line"><span class="string">[root@localhost vagrant]# yum uninstall vagrant</span></span><br><span class="line"><span class="string">Loaded plugins: fastestmirror, langpacks</span></span><br><span class="line"><span class="string">No such command: uninstall. Please use /usr/bin/yum --help</span></span><br><span class="line"><span class="string">[root@localhost vagrant]# rm -rf /opt/vagrant/</span></span><br><span class="line"><span class="string">[root@localhost vagrant]# rm -f /usr/bin/vagrant</span></span><br><span class="line"><span class="string">[root@localhost vagrant]# sudo wget https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.rpm</span></span><br><span class="line"><span class="string">--2019-06-21 19:40:06--  https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.rpm</span></span><br><span class="line"><span class="string">Resolving releases.hashicorp.com (releases.hashicorp.com)... 151.101.229.183, 2a04:4e42:36::439</span></span><br><span class="line"><span class="string">Connecting to releases.hashicorp.com (releases.hashicorp.com)|151.101.229.183|:443... connected.</span></span><br><span class="line"><span class="string">HTTP request sent, awaiting response... 200 OK</span></span><br><span class="line"><span class="string">Length: 40824607 (39M) [application/x-redhat-package-manager]</span></span><br><span class="line"><span class="string">Saving to: ‘vagrant_2.2.4_x86_64.rpm’</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">100%[========================================================================================================================================================================&gt;] 40,824,607  9.96MB/s   in 4.7s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2019-06-21 19:40:12 (8.20 MB/s) - ‘vagrant_2.2.4_x86_64.rpm’ saved [40824607/40824607]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[root@localhost vagrant]# vagrant --version</span></span><br><span class="line"><span class="string">bash: /usr/bin/vagrant: 그런 파일이나 디렉터리가 없습니다</span></span><br><span class="line"><span class="string">[root@localhost vagrant]# vagrnat</span></span><br><span class="line"><span class="string">bash: vagrnat: 명령을 찾을 수 없습니다...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[root@localhost vagrant]# ls</span></span><br><span class="line"><span class="string">Vagrantfile  vagrant_2.2.4_x86_64.rpm</span></span><br><span class="line"><span class="string">[root@localhost vagrant]# sudo yum localinstall vagrant_2.2.4_x86_64.rpm</span></span><br><span class="line"><span class="string">Loaded plugins: fastestmirror, langpacks</span></span><br><span class="line"><span class="string">Examining vagrant_2.2.4_x86_64.rpm: 1:vagrant-2.2.4-1.x86_64</span></span><br><span class="line"><span class="string">Marking vagrant_2.2.4_x86_64.rpm as an update to 1:vagrant-1.9.6-1.x86_64</span></span><br><span class="line"><span class="string">Resolving Dependencies</span></span><br><span class="line"><span class="string">--&gt; Running transaction check</span></span><br><span class="line"><span class="string">---&gt; Package vagrant.x86_64 1:1.9.6-1 will be updated</span></span><br><span class="line"><span class="string">---&gt; Package vagrant.x86_64 1:2.2.4-1 will be an update</span></span><br><span class="line"><span class="string">--&gt; Finished Dependency Resolution</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Dependencies Resolved</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">==================================================================================================================================================================================================================</span></span><br><span class="line"><span class="string"> Package                                        Arch                                          Version                                          Repository                                                    Size</span></span><br><span class="line"><span class="string">==================================================================================================================================================================================================================</span></span><br><span class="line"><span class="string">Updating:</span></span><br><span class="line"><span class="string"> vagrant                                        x86_64                                        1:2.2.4-1                                        /vagrant_2.2.4_x86_64                                        110 M</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Transaction Summary</span></span><br><span class="line"><span class="string">==================================================================================================================================================================================================================</span></span><br><span class="line"><span class="string">Upgrade  1 Package</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Total size: 110 M</span></span><br><span class="line"><span class="string">Is this ok [y/d/N]: y</span></span><br><span class="line"><span class="string">Downloading packages:</span></span><br><span class="line"><span class="string">Running transaction check</span></span><br><span class="line"><span class="string">Running transaction test</span></span><br><span class="line"><span class="string">Transaction test succeeded</span></span><br><span class="line"><span class="string">Running transaction</span></span><br><span class="line"><span class="string">  Updating   : 1:vagrant-2.2.4-1.x86_64                                                                                                                                                                       1/2</span></span><br><span class="line"><span class="string">  Cleanup    : 1:vagrant-1.9.6-1.x86_64                                                                                                                                                                       2/2</span></span><br><span class="line"><span class="string">경고: file /opt/vagrant/embedded/share/info/rluserman.info: remove failed: 그런 파일이나 디렉터리가 없습니다</span></span><br><span class="line"><span class="string">경고: file /opt/vagrant/embedded/share/info/readline.info: remove failed: 그런 파일이나 디렉터리가 없습니다</span></span><br><span class="line"><span class="string">경고: file /opt/vagrant/embedded/share/info/libffi.info: remove failed: 그런 파일이나 디렉터리가 없습니다</span></span><br></pre></td></tr></table></figure>
+<p>앞서 vagrant를 새롭게 install 하였고, 아래와 같이 centos/7을 init 해보자.</p>
+<p><code>vagrant init centos/7</code></p>
+<p><code>vagrant up</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost vagrant-centos-7]<span class="comment"># vagrant init centos/7</span></span><br><span class="line">A `Vagrantfile` has been placed <span class="keyword">in</span> this directory. You are now</span><br><span class="line">ready to `vagrant up` your first virtual environment! Please <span class="built_in">read</span></span><br><span class="line">the comments <span class="keyword">in</span> the Vagrantfile as well as documentation on</span><br><span class="line">`vagrantup.com` <span class="keyword">for</span> more information on using Vagrant.</span><br><span class="line">[root@localhost vagrant-centos-7]<span class="comment"># vagrant up</span></span><br><span class="line"></span><br><span class="line">Bringing machine <span class="string">'default'</span> up with <span class="string">'virtualbox'</span> provider...</span><br><span class="line">==&gt; default: Importing base box <span class="string">'centos/7'</span>...</span><br><span class="line">==&gt; default: Matching MAC address <span class="keyword">for</span> NAT networking...</span><br><span class="line">==&gt; default: Checking <span class="keyword">if</span> box <span class="string">'centos/7'</span> version <span class="string">'1902.01'</span> is up to date...</span><br><span class="line">==&gt; default: Setting the name of the VM: vagrant-centos-7_default_1561113935045_2937</span><br><span class="line">==&gt; default: Clearing any previously <span class="built_in">set</span> network interfaces...</span><br><span class="line">==&gt; default: Preparing network interfaces based on configuration...</span><br><span class="line">    default: Adapter 1: nat</span><br><span class="line">==&gt; default: Forwarding ports...</span><br><span class="line">    default: 22 (guest) =&gt; 2222 (host) (adapter 1)</span><br><span class="line">==&gt; default: Booting VM...</span><br><span class="line">==&gt; default: Waiting <span class="keyword">for</span> machine to boot. This may take a few minutes...</span><br><span class="line">    default: SSH address: 127.0.0.1:2222</span><br><span class="line">    default: SSH username: vagrant</span><br><span class="line">    default: SSH auth method: private key</span><br><span class="line">    default:</span><br><span class="line">    default: Vagrant insecure key detected. Vagrant will automatically replace</span><br><span class="line">    default: this with a newly generated keypair <span class="keyword">for</span> better security.</span><br><span class="line">    default:</span><br><span class="line">    default: Inserting generated public key within guest...</span><br><span class="line">    default: Removing insecure key from the guest <span class="keyword">if</span> it<span class="string">'s present...</span></span><br><span class="line"><span class="string">    default: Key inserted! Disconnecting and reconnecting using new SSH key...</span></span><br><span class="line"><span class="string">==&gt; default: Machine booted and ready!</span></span><br><span class="line"><span class="string">==&gt; default: Checking for guest additions in VM...</span></span><br><span class="line"><span class="string">    default: No guest additions were detected on the base box for this VM! Guest</span></span><br><span class="line"><span class="string">    default: additions are required for forwarded ports, shared folders, host only</span></span><br><span class="line"><span class="string">    default: networking, and more. If SSH fails on this machine, please install</span></span><br><span class="line"><span class="string">    default: the guest additions and repackage the box to continue.</span></span><br><span class="line"><span class="string">    default:</span></span><br><span class="line"><span class="string">    default: This is not an error message; everything may continue to work properly,</span></span><br><span class="line"><span class="string">    default: in which case you may ignore this message.</span></span><br><span class="line"><span class="string">==&gt; default: Rsyncing folder: /root/vagrant-centos-7/ =&gt; /vagrant</span></span><br></pre></td></tr></table></figure>
+<p>상위와 같이 로그가 나왔다면, 성공적으로 virtual box, vagrant가 install 된것이다.</p>
+<p>vagrant ssh로 접속까지 된다면 완료 이다.</p>
+<p><code>vagrant ssh</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ vagrant ssh</span><br><span class="line">[vagrant@localhost ~]$ ls</span><br><span class="line">[vagrant@localhost ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/vagrant</span><br><span class="line">[vagrant@localhost ~]$</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/virtual-box/" rel="tag"># virtual box</a>
+          
+            <a href="/tags/vagrant/" rel="tag"># vagrant</a>
+          
+            <a href="/tags/centos/" rel="tag"># centos</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Network-setup-CentOS7-on-Virtual Box/" rel="next" title="Network setup CentOS7 on Virtual Box">
+                <i class="fa fa-chevron-left"></i> Network setup CentOS7 on Virtual Box
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/jenkins-on-centos7/" rel="prev" title="Jenkins on centos7">
+                Jenkins on centos7 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon-next.png" alt="whoami">
+            
+              <p class="site-author-name" itemprop="name">whoami</p>
+              <div class="site-description motion-element" itemprop="description">my note</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZXlvdW5nL3RoZXlvdW5nLmdpdGh1Yi5pbw==" title="GitHub &rarr; https://github.com/theyoung/theyoung.github.io"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnN1cHBvcnRAdGhleW91bmcyMDAyQG5hdmVyLmNvbQ==" title="E-Mail &rarr; mailto:support@theyoung2002@naver.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#yum-install"><span class="nav-number">1.</span> <span class="nav-text">yum install</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dependency-Install"><span class="nav-number">1.1.</span> <span class="nav-text">Dependency Install</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Repository"><span class="nav-number">2.</span> <span class="nav-text">Add Repository</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#install-virtualbox"><span class="nav-number">3.</span> <span class="nav-text">install virtualbox</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vagrant-install"><span class="nav-number">4.</span> <span class="nav-text">Vagrant install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vagrant-Start"><span class="nav-number">5.</span> <span class="nav-text">Vagrant Start</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.0.1</div>
+
+
+
+  <div class="footer-custom">Theme source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">here</span><br>Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC5vcmc=">here</span></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.1"></script>
+
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://https-theyoung-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theyoung.github.io/virtualbox-on-centos7/";
+    this.page.identifier = "virtualbox-on-centos7/";
+    this.page.title = 'Virtual Box And Vagrant Install on Centos';
+    this.language = 'en';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-theyoung-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
