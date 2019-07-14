@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
 
   </li>
 
@@ -307,6 +307,622 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/mattermost-docker-composer-onCentos7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/mattermost-docker-composer-onCentos7/" class="post-title-link" itemprop="url">Mattermost install with docker-composer on Centos7</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-01 21:00:33" itemprop="dateCreated datePublished" datetime="2019-07-01T21:00:33Z">2019-07-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/mattermost-docker-composer-onCentos7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="mattermost-docker-composer-onCentos7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Docker와 Docker-Compose가 Centos에 이미 설치 되어있다는 전제임</p>
+<h4 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h4><p>관련 자료</p>
+<p>docker-compose github 위치</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hdHRlcm1vc3QvbWF0dGVybW9zdC1kb2NrZXI=" title="https://github.com/mattermost/mattermost-docker">https://github.com/mattermost/mattermost-docker<i class="fa fa-external-link"></i></span></p>
+<p>docker-compose를 이용한 deployment 설명</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1hdHRlcm1vc3QuY29tL2luc3RhbGwvcHJvZC1kb2NrZXIuaHRtbA==" title="https://docs.mattermost.com/install/prod-docker.html">https://docs.mattermost.com/install/prod-docker.html<i class="fa fa-external-link"></i></span></p>
+<h4 id="로컬-Download-및-환경-설정"><a href="#로컬-Download-및-환경-설정" class="headerlink" title="로컬 Download 및 환경 설정"></a>로컬 Download 및 환경 설정</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/mattermost/mattermost-docker.git</span><br><span class="line">cd mattermost-docker</span><br><span class="line">docker-compose build</span><br><span class="line">mkdir -pv ./volumes/app/mattermost/&#123;data,logs,config,plugins,client-plugins&#125;</span><br><span class="line">chown -R 2000:2000 ./volumes/app/mattermost/</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>상위와 같은 순서데로 하면 대부분 잘 작동 하는 것으로 보임</p>
+<p>그러나 나 같은 경우는 상위 처럼 해서 정상 작동을 하지 않아 다음과 같이 수정하였음</p>
+<h4 id="Permission-Error를-피하기-위한-수정-사항"><a href="#Permission-Error를-피하기-위한-수정-사항" class="headerlink" title="Permission Error를 피하기 위한 수정 사항"></a>Permission Error를 피하기 위한 수정 사항</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># ls</span></span><br><span class="line">LICENSE  MAINTENANCE.md  README.md  app  contrib  db  docker-compose.yml  volumes  web</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost app]<span class="comment"># ll</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x. 7 2000 2000 81  6월 28 19:43 mattermost</span><br><span class="line">[root@localhost app]<span class="comment"># pwd</span></span><br><span class="line">/root/mattermost/mattermost-docker/volumes/app</span><br><span class="line">[root@localhost app]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>상위와 같은 내용은 로컬 Download 및 환경 설정이 되었다면 동일 할 것이다.</p>
+<p>그러나 Postgres와 app이 directory prmission denied 나게 된다면 다음과 같이 수정 해줄 필요가 있다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># ls</span></span><br><span class="line">LICENSE  MAINTENANCE.md  README.md  app  contrib  db  docker-compose.yml  volumes  web</span><br><span class="line">[root@localhost mattermost-docker]<span class="comment"># vi docker-compose.yml</span></span><br><span class="line">[root@localhost mattermost-docker]<span class="comment"># pwd</span></span><br><span class="line">/root/mattermost/mattermost-docker</span><br><span class="line">[root@localhost mattermost-docker]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>여기에서 docker-compose.yml을 아래와 같이 수정 필요하다.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">version: "2"</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  db:</span><br><span class="line">    build: db</span><br><span class="line">    read_only: true</span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    volumes:</span><br><span class="line"><span class="deletion">-     - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data</span></span><br><span class="line"><span class="addition">+     - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data:z</span></span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br><span class="line">    environment:</span><br><span class="line">      - POSTGRES_USER=mmuser</span><br><span class="line">      - POSTGRES_PASSWORD=mmuser_password</span><br><span class="line">      - POSTGRES_DB=mattermost</span><br><span class="line">    # uncomment the following to enable backup</span><br><span class="line">    #  - AWS_ACCESS_KEY_ID=XXXX</span><br><span class="line">    #  - AWS_SECRET_ACCESS_KEY=XXXX</span><br><span class="line">    #  - WALE_S3_PREFIX=s3://BUCKET_NAME/PATH</span><br><span class="line">    #  - AWS_REGION=us-east-1</span><br><span class="line"></span><br><span class="line">  app:</span><br><span class="line">    build:</span><br><span class="line">      context: app</span><br><span class="line">      # uncomment following lines for team edition or change UID/GID</span><br><span class="line">      args:</span><br><span class="line"><span class="deletion">-      # - edition=team</span></span><br><span class="line"><span class="deletion">-      # - PUID=2000</span></span><br><span class="line"><span class="deletion">-      # - PGID=2000</span></span><br><span class="line"><span class="addition">+       - edition=team</span></span><br><span class="line"><span class="addition">+       - PUID=2000</span></span><br><span class="line"><span class="addition">+       - PGID=2000</span></span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    volumes:</span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/config:/mattermost/config:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/data:/mattermost/data:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/logs:/mattermost/logs:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/plugins:/mattermost/plugins:rw</span></span><br><span class="line"><span class="deletion">-     - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/config:/mattermost/config:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/data:/mattermost/data:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/logs:/mattermost/logs:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/plugins:/mattermost/plugins:z</span></span><br><span class="line"><span class="addition">+     - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:z</span></span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br><span class="line">    environment:</span><br><span class="line">      # set same as db credentials and dbname</span><br><span class="line">      - MM_USERNAME=mmuser</span><br><span class="line">      - MM_PASSWORD=mmuser_password</span><br><span class="line">      - MM_DBNAME=mattermost</span><br><span class="line">      # in case your config is not in default location</span><br><span class="line">      #- MM_CONFIG=/mattermost/config/config.json</span><br><span class="line"></span><br><span class="line">  web:</span><br><span class="line">    build: web</span><br><span class="line">    ports:</span><br><span class="line">      - "80:80"</span><br><span class="line">      - "443:443"</span><br><span class="line">    read_only: true</span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    volumes:</span><br><span class="line">      # This directory must have cert files if you want to enable SSL</span><br><span class="line">      - ./volumes/web/cert:/cert:ro</span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br></pre></td></tr></table></figure>
+<h4 id="수정을-하는-사유"><a href="#수정을-하는-사유" class="headerlink" title="수정을 하는 사유"></a>수정을 하는 사유</h4><p>솔직히 정확히는 모르겠다.</p>
+<p>그냥 짐작을 하자면 다음과 같다. </p>
+<h5 id="SELinux-동작-모드"><a href="#SELinux-동작-모드" class="headerlink" title="SELinux 동작 모드"></a>SELinux 동작 모드</h5><p>centos 공식 사이트에서 다운로드 받은 DVD iso 파일을 default로 install 하면 SELinux가 작동 하게 된다.</p>
+<p>SELinux는 Security Enhanced Linux의 의미로 Linux의 보안을 강화 하기 위한 모드이다.</p>
+<p>zero day 공격 및 buffer overflow 등 어플리케이션 취약점 방어를 위한 kernel 이라고 한다.</p>
+<p><code>sestatus</code> 명령어를 사용해서 SELinux 모드가 작동 중인지 확인 할 수있다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># sestatus</span></span><br><span class="line">SELinux status:                 enabled</span><br><span class="line">SELinuxfs mount:                /sys/fs/selinux</span><br><span class="line">SELinux root directory:         /etc/selinux</span><br><span class="line">Loaded policy name:             targeted</span><br><span class="line">Current mode:                   enforcing</span><br><span class="line">Mode from config file:          enforcing</span><br><span class="line">Policy MLS status:              enabled</span><br><span class="line">Policy deny_unknown status:     allowed</span><br><span class="line">Max kernel policy version:      31</span><br></pre></td></tr></table></figure>
+<h5 id="Docker와-selinux"><a href="#Docker와-selinux" class="headerlink" title="Docker와 selinux"></a>Docker와 selinux</h5><p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmRvY2tlci5jb20vdjE3LjA5L2VuZ2luZS9hZG1pbi92b2x1bWVzL2JpbmQtbW91bnRzLyNjb25maWd1cmUtdGhlLXNlbGludXgtbGFiZWw=" title="https://docs.docker.com/v17.09/engine/admin/volumes/bind-mounts/#configure-the-selinux-label">https://docs.docker.com/v17.09/engine/admin/volumes/bind-mounts/#configure-the-selinux-label<i class="fa fa-external-link"></i></span></p>
+<p>Docker에서는 share를 위한 파일 label을 제공 하는데 그것은 SELinux에서 관리 하는 영역이다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mattermost-docker]<span class="comment"># ls -Z</span></span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 LICENSE</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 MAINTENANCE.md</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 README.md</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 app</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 contrib</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 db</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 docker-compose.yml</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 volumes</span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 web</span><br></pre></td></tr></table></figure>
+<ul>
+<li>unconfined_u : user</li>
+<li>object_r :  role</li>
+<li>admin_home_t : type</li>
+<li>s0 : level</li>
+</ul>
+<p>상위와 같이 파일별 라벨링을 통해서 DAC 컨트롤을 처리 한다.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hY2Nlc3MucmVkaGF0LmNvbS9kb2N1bWVudGF0aW9uL2VuLXVzL3JlZF9oYXRfZW50ZXJwcmlzZV9saW51eC83L2h0bWwvc2VsaW51eF91c2Vyc19hbmRfYWRtaW5pc3RyYXRvcnNfZ3VpZGUvc2VjdC1zZWN1cml0eS1lbmhhbmNlZF9saW51eC13b3JraW5nX3dpdGhfc2VsaW51eC1zZWxpbnV4X2NvbnRleHRzX2xhYmVsaW5nX2ZpbGVz" title="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-working_with_selinux-selinux_contexts_labeling_files">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-working_with_selinux-selinux_contexts_labeling_files<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>라지만 역시 아직도 이해는 안간다...</p>
+</blockquote>
+<p>아무튼 상위와 같은 사유로 z 옵션을 통해서 컨테이너가 mount한 파일 시스템의 영역을 share 할 수있는지 여부를 설정해준다.</p>
+<ul>
+<li>z : 여러 컨테이너가 마운트한 contents를 share 할 수있다.</li>
+<li>Z : share 하지 않고 컨텐츠를 마운트한다.</li>
+</ul>
+<blockquote>
+<p>여기서 Z의 의미가 하나의 컨테이너로 마은트 하면 된다는 의미인지는 잘 모르겠다. 일단 mattermost는 z로 처리 하면 정상 작동한다.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/jenkins-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/jenkins-basic/" class="post-title-link" itemprop="url">Jenkins Basic</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-01 20:32:33" itemprop="dateCreated datePublished" datetime="2019-07-01T20:32:33Z">2019-07-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-14 02:10:05" itemprop="dateModified" datetime="2019-07-14T02:10:05Z">2019-07-14</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/jenkins-basic/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jenkins-basic/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Jenkins User hand book 및 기타 사이트 참고해서 간단하게 필요한 내용만 서머리함 (<span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL3VzZXItaGFuZGJvb2sucGRm" title="https://jenkins.io/user-handbook.pdf">https://jenkins.io/user-handbook.pdf<i class="fa fa-external-link"></i></span>)</p>
+<h4 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h4><p>개발, 통합 운영 배포 등이 가능한 플러그인 들을 하나의 Suit로 만드는 것을 파이프 라인이라고 한다.</p>
+<p>자동 화된 파이프라인 설정 기능이 있으나, 보다 복잡한 사용이 필요 할 경우 두가지 DSL(Domain Specific Language)를 제공한다.</p>
+<ul>
+<li>Declarative</li>
+<li>Script : Groovy</li>
+</ul>
+<blockquote>
+<p>groovy syntax는 다음에서 확인 가능하다.</p>
+<p><span class="exturl" data-url="aHR0cDovL2dyb292eS1sYW5nLm9yZy9zeW50YXguaHRtbA==" title="http://groovy-lang.org/syntax.html">http://groovy-lang.org/syntax.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h4 id="Pipeline-Flow"><a href="#Pipeline-Flow" class="headerlink" title="Pipeline Flow"></a>Pipeline Flow</h4><p>Development -&gt; Stage1 -&gt; Stage2 -&gt; Production</p>
+<p>의 flow를 말함</p>
+<h4 id="DSL-define"><a href="#DSL-define" class="headerlink" title="DSL define"></a>DSL define</h4><p>jenkins에서 활용 가능한 global variable은 다음에서 확인 가능하다</p>
+<p><span class="exturl" data-url="aHR0cDovL2plbmtpbnMubWluYS5ibHVlL3BpcGVsaW5lLXN5bnRheC9nbG9iYWxz" title="http://jenkins.mina.blue/pipeline-syntax/globals">http://jenkins.mina.blue/pipeline-syntax/globals<i class="fa fa-external-link"></i></span></p>
+<p><code>docker</code>, <code>pipeline</code>, <code>env</code>, <code>params</code>,<code>currentBuild</code>, <code>scm</code> 을 볼 수 있다.</p>
+<ul>
+<li><p>agent : 파이프라인의 workspace, executor 할당요청을 Jenkins에게 한다</p>
+</li>
+<li><p>stage : stage &quot;Build&quot; &quot;Test&quot; &quot;Deploy&quot; 등과 같이 step group</p>
+</li>
+<li><p>steps : stage 안에서 일어날 task</p>
+<blockquote>
+<p>Jenkins에서는 <span class="exturl" data-url="aHR0cDovL2plbmtpbnN1cmwvcGlwZWxpbmUtc3ludGF4Lw==" title="http://jenkinsurl/pipeline-syntax/">http://jenkinsurl/pipeline-syntax/<i class="fa fa-external-link"></i></span> 를 통해서 step define 가능함</p>
+</blockquote>
+</li>
+<li><p>sh : shell command starter</p>
+</li>
+<li><p>junit : plugin:junit 에서 제공하는 기능 (리포트 등을 통합)</p>
+</li>
+<li><p>node : 파이프라인에서 일어나는 행위(steps)는 대상이 되는 node에서 일어남 (여러 노드를 설정할 수있음)</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">stage(<span class="string">'Test'</span>) &#123;</span><br><span class="line">    node(<span class="string">'linux'</span>) &#123;</span><br><span class="line">        checkout scm</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            unstash <span class="string">'app'</span></span><br><span class="line">            sh <span class="string">'make check'</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">        	junit <span class="string">'**/target/*.xml'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    node(<span class="string">'windows'</span>) &#123;</span><br><span class="line">        checkout scm</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            unstash <span class="string">'app'</span></span><br><span class="line">            bat <span class="string">'make check'</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">        	junit <span class="string">'**/target/*.xml'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>echo : string 값 출력 (echo &quot;hello&quot;)</p>
+</li>
+<li><p>env : script 파이프 라인에서 접근 가능한 환경 값 (env.PATH, env,BUILD_ID)</p>
+</li>
+<li><p>params : 파이프라인 내에서 정의된 parameters (MAP) (params.MY_PARAM_NAME)</p>
+</li>
+<li><p>currentBuild : 현재 파이프라인의 정보를 확인 가능 (currentBuild.result, currentBuild.displayName)</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cDovL2plbmtpbnN1cmwvcGlwZWxpbmUtc3ludGF4L2dsb2JhbHMjY3VycmVudEJ1aWxk" title="http://jenkinsurl/pipeline-syntax/globals#currentBuild">http://jenkinsurl/pipeline-syntax/globals#currentBuild<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+<li><p>checkout : source control (사이트?)에서 부터 코드를 다운로드 받는다. 주로 scm을 사용한다. (checkout scm)</p>
+</li>
+<li><p>archiveArtifacts : 앞서 빌드된 파일들을 저장해 놓는 역할을 한다. (archiveArtifacts artifacts: &#39;<em>*/arget/</em>tar&#39;, fingerprint: true)</p>
+</li>
+<li><p>withEnv : global 또는 특정 영역에 variable을 define하는 행동을 한다. 아래 처럼 사용 가능하다.</p>
+</li>
+<li><p>properties : 해당 파이프라인에서 사용 사능한 일시적 properties를 설정한다. 해당 내용은 jenkins 파이프 라인 &quot;설정&quot; 화면에서 &quot;General&quot; 탭의 &quot;이 빌드는 매개 변수가 있습니다. (Build with Parameters)&quot;를 사용하면 되는데, 해당 설정을 하고 나면 파이프라인 실행 이름이 기존 &quot;Build&quot;에서 &quot;Build with Parameters&quot;로 변경되고 해당 value 값을 사용자가 빌드 요청시마다 수정 할 수 있게 된다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">properties([parameters([string(<span class="string">defaultValue:</span> <span class="string">'Hello'</span>, <span class="string">description:</span> <span class="string">'How should I greetthe world?'</span>, <span class="string">name:</span> <span class="string">'Greeting3'</span>),string(<span class="string">defaultValue:</span> <span class="string">'Hello2'</span>, <span class="string">description:</span> <span class="string">'How should I greetthe world22?'</span>, <span class="string">name:</span> <span class="string">'Greeting2'</span>)])])</span><br><span class="line"></span><br><span class="line">node &#123;</span><br><span class="line">    <span class="keyword">def</span> singlyQuoted = <span class="string">'Hello'</span></span><br><span class="line">    </span><br><span class="line">    withEnv([<span class="string">"global='value"</span>])&#123;</span><br><span class="line">    </span><br><span class="line">        stage(<span class="string">'Build'</span>)&#123;</span><br><span class="line">            withEnv([<span class="string">"test='one"</span>])&#123;</span><br><span class="line">                echo <span class="string">"Heloo $&#123;global&#125;, $&#123;test&#125;, $&#123;singlyQuoted&#125;, $&#123;env.BUILD_ID&#125; on $&#123;env.JENKINS_URL&#125;"</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            withEnv([<span class="string">"test='one"</span>,<span class="string">"test2='two"</span>])&#123;</span><br><span class="line">                echo <span class="string">"Heloo $&#123;global&#125;, $&#123;test&#125;, $&#123;test2&#125;, $&#123;singlyQuoted&#125;, $&#123;env.BUILD_ID&#125; on $&#123;env.JENKINS_URL&#125;"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    stage(<span class="string">'Props'</span>)&#123;</span><br><span class="line">        echo <span class="string">"$&#123;params.Greeting2&#125; World"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>parallel : 일반적인 pipeline은 순차적인 순서로 진행이 된다. 그러나 동시 처리를 원한다면 다음과 같이 parallel 명령을 사용 할 수 있다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">stage(<span class="string">'Test'</span>) &#123;</span><br><span class="line">    parallel <span class="string">linux:</span> &#123;</span><br><span class="line">        node(<span class="string">'linux'</span>) &#123;</span><br><span class="line">            checkout scm</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                unstash <span class="string">'app'</span></span><br><span class="line">                sh <span class="string">'make check'</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">finally</span> &#123;</span><br><span class="line">                junit <span class="string">'**/target/*.xml'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="symbol">    windows:</span> &#123;</span><br><span class="line">        node(<span class="string">'windows'</span>) &#123;</span><br><span class="line">        	<span class="comment">/* .. snip .. */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="기타-참고"><a href="#기타-참고" class="headerlink" title="기타 참고"></a>기타 참고</h5><ul>
+<li>plugin definition : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy9waXBlbGluZS9zdGVwcy8=" title="https://jenkins.io/doc/pipeline/steps/">https://jenkins.io/doc/pipeline/steps/<i class="fa fa-external-link"></i></span></li>
+<li>pipeline examples : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy9waXBlbGluZS9leGFtcGxlcy8=" title="https://jenkins.io/doc/pipeline/examples/">https://jenkins.io/doc/pipeline/examples/<i class="fa fa-external-link"></i></span></li>
+</ul>
+<h4 id="Test-or-Report"><a href="#Test-or-Report" class="headerlink" title="Test or Report"></a>Test or Report</h4><p>TEST는 빌드가 완료 된 이후 junit등과 같이 테스트 후 리포트를 내놓는 부분을 말한다</p>
+<blockquote>
+<p>테스트 된 결과를 Visualization 하게 보여 주거나 test에 대한 reportingm redording 하는 많은 플러그인을 제공 하고 있다.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9wbHVnaW5zLmplbmtpbnMuaW8vP2xhYmVscz1yZXBvcnQ=" title="https://plugins.jenkins.io/?labels=report">https://plugins.jenkins.io/?labels=report<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<ul>
+<li>sh &#39;make check || true&#39;<br>0 exit code가 항상 나오게 하는 코드로써, 특별한 행위를 하지는 않는다. 전체 적으로 환경에 대한 clear를 하는 역할로 보인다.(linux kernel 개발할때 중간 중간 넣어 주는 용도로 넣는 다는 이야기가 있다.)</li>
+<li>junit &#39;<em>*/target/</em>.xml&#39;<br>target 이하 떨어진 xml 파일들을 캡쳐 하는 역할이다.</li>
+</ul>
+<h4 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h4><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Script //</span></span><br><span class="line">node &#123;</span><br><span class="line">    <span class="comment">/* .. snip .. */</span></span><br><span class="line">    stage(<span class="string">'Deploy'</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (currentBuild.result == <span class="literal">null</span> || currentBuild.result == <span class="string">'SUCCESS'</span>) &#123; ①</span><br><span class="line">            sh <span class="string">'make publish'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* .. snip .. */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>currentBuild.result</code>가 null 이란 의미는 앞서 아무런 이상 결과 값이 없다는 뜻이다.</p>
+<h4 id="Multibranch-Pipeline"><a href="#Multibranch-Pipeline" class="headerlink" title="Multibranch Pipeline"></a>Multibranch Pipeline</h4><p>scm(여기서는 git)에서 여러개의 파이프라인을 처리하는 방법이다.</p>
+<p>New Item &gt; Multibranch Pipeline &gt; Branch Source &gt; Project Repository &gt; Url 입력</p>
+<p>해당 git url 에서 Jenkins 파일이 있는 branch 대상으로 자동으로 파이프라인이 생성된다.</p>
+<ul>
+<li>Scan Multibranch Pipeline Triggers<br>Periodically if not otherwise run : 일정 기간별로 scan 처리 한다. </li>
+</ul>
+<p>global variable 이 추가 된다.</p>
+<ul>
+<li>BRANCH_NAME : 특정 branch name 등</li>
+<li>CHANGE_ID : full request number 등 수정 id</li>
+</ul>
+<h4 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h4><p>jenkins 파이프라인 2.5 이상은 docker를 사용 가능하다.</p>
+<blockquote>
+<p>상위에서 소개한 ebook은 최신화 되어 있지 않다. 다음 url을 참고 하는게 좋을거 같다.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy9ib29rL3BpcGVsaW5lL2RvY2tlci8=" title="https://jenkins.io/doc/book/pipeline/docker/">https://jenkins.io/doc/book/pipeline/docker/<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h5 id="Docker-test"><a href="#Docker-test" class="headerlink" title="Docker test"></a>Docker test</h5><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    <span class="comment">/* Requires the Docker Pipeline plugin to be installed */</span></span><br><span class="line">    docker.image(<span class="string">'node:7-alpine'</span>).inside &#123;</span><br><span class="line">    	stage(<span class="string">'Test'</span>) &#123;</span><br><span class="line">        	sh <span class="string">'node --version'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jenkins user 설정을 root로 안하는 이상 permission denied 가 날 확률이 높다.</p>
+<p>docker user group을 만들고 해당 docker group에 사용자를 add 하여 처리 하는 것이 좋다</p>
+<p><code>sudo groupadd docker</code></p>
+<p><code>sudo usermod -aG docker $USER</code></p>
+<p><code>sudo usermod -aG docker jenkins</code></p>
+<p><code>sudo systemctl restart jenkins</code></p>
+<p>처리 후 log out, log in을 하면 처리 완료 된다고 하지만, 나는 서버 재기동 시키고 나서야 적용 되었다.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Started by user devops</span><br><span class="line">Running <span class="keyword">in</span> Durability level: MAX_SURVIVABILITY</span><br><span class="line">[Pipeline] Start of Pipeline (hide)</span><br><span class="line">[Pipeline] node</span><br><span class="line">Running on Jenkins <span class="keyword">in</span> /var/lib/jenkins/workspace/example</span><br><span class="line">[Pipeline] &#123;</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker inspect -f . node:7-alpine</span><br><span class="line"></span><br><span class="line">Error: No such object: node:7-alpine</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker pull node:7-alpine</span><br><span class="line">Trying to pull repository docker.io/library/node ... </span><br><span class="line">7-alpine: Pulling from docker.io/library/node</span><br><span class="line">90f4dba627d6: Pulling fs layer</span><br><span class="line">1e674d353187: Pulling fs layer</span><br><span class="line">d3a64c0f885a: Pulling fs layer</span><br><span class="line">d3a64c0f885a: Verifying Checksum</span><br><span class="line">d3a64c0f885a: Download complete</span><br><span class="line">90f4dba627d6: Verifying Checksum</span><br><span class="line">90f4dba627d6: Download complete</span><br><span class="line">90f4dba627d6: Pull complete</span><br><span class="line">1e674d353187: Verifying Checksum</span><br><span class="line">1e674d353187: Download complete</span><br><span class="line">1e674d353187: Pull complete</span><br><span class="line">d3a64c0f885a: Pull complete</span><br><span class="line">Digest: sha256:4954ce53247180e207772f936223b11d52a7e4ee712dfe73fe2a75e39f785067</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.io/node:7-alpine</span><br><span class="line">[Pipeline] withDockerContainer</span><br><span class="line">Jenkins does not seem to be running inside a container</span><br><span class="line">$ docker run -t -d -u 986:979 -w /var/lib/jenkins/workspace/example -v /var/lib/jenkins/workspace/example:/var/lib/jenkins/workspace/example:rw,z -v /var/lib/jenkins/workspace/example@tmp:/var/lib/jenkins/workspace/example@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:7-alpine cat</span><br><span class="line">$ docker top 7b70bc2548dc543669df3f71b73ed71e21de2c3090a98b0c5ec5ae89560ad071 -eo pid,comm</span><br><span class="line">[Pipeline] &#123;</span><br><span class="line">[Pipeline] stage</span><br><span class="line">[Pipeline] &#123; (Test)</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ node --version</span><br><span class="line">v7.10.1</span><br><span class="line">[Pipeline] &#125;</span><br><span class="line">[Pipeline] // stage</span><br><span class="line">[Pipeline] &#125;</span><br><span class="line">$ docker stop --time=1 7b70bc2548dc543669df3f71b73ed71e21de2c3090a98b0c5ec5ae89560ad071</span><br><span class="line">$ docker rm -f 7b70bc2548dc543669df3f71b73ed71e21de2c3090a98b0c5ec5ae89560ad071</span><br><span class="line">[Pipeline] // withDockerContainer</span><br><span class="line">[Pipeline] &#125;</span><br><span class="line">[Pipeline] // node</span><br><span class="line">[Pipeline] End of Pipeline</span><br><span class="line">Finished: SUCCESS</span><br></pre></td></tr></table></figure>
+<p>전체 flow는 다음과 같다. </p>
+<ul>
+<li><p>docker pull node:7-alpine : 이미지 다운</p>
+</li>
+<li><p>docker run -t -d -u node:7-alpine :  이미지 컨테이너 실행</p>
+</li>
+<li><p>docker top f9be76653c26 -eo pid,comm : docker 정보 를 바탕으로 다음 명령어 실행</p>
+<p>:<code>docker exec -it f9be76653c26 sh</code></p>
+</li>
+<li><p>node --version : container 내부 sh를 이용해 버전 정보 얻어오기</p>
+</li>
+<li>docker stop &amp; docker rm : 실행한 컨테이너 삭제</li>
+</ul>
+<p>command로 변경 하자면 다음과 같다 (stop &amp; rm은 넣지 않음)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ docker images</span><br><span class="line">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">docker.io/node              7-alpine            4b72b56791f9        24 months ago       58.3 MB</span><br><span class="line">[devops@localhost ~]$ docker run -t -d 4b72b56791f9</span><br><span class="line">f9be76653c2641679c56071749082372c3b07f54bbd0a122d105fc4b0948635a</span><br><span class="line">[devops@localhost ~]$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                       PORTS                                      NAMES</span><br><span class="line">f9be76653c26        4b72b56791f9           <span class="string">"node"</span>                   6 seconds ago       Up 5 seconds                                                            nervous_shaw</span><br><span class="line">[devops@localhost ~]$ docker top f9be76653c26</span><br><span class="line">UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD</span><br><span class="line">root                33882               33862               0                   17:49               pts/3               00:00:00            node</span><br><span class="line"></span><br><span class="line">[devops@localhost ~]$ docker top f9be76653c26 -eo pid,comm</span><br><span class="line">PID                 COMMAND</span><br><span class="line">33882               node</span><br><span class="line"></span><br><span class="line">[devops@localhost ~]$ docker <span class="built_in">exec</span> -it f9be76653c26 sh</span><br><span class="line">/ <span class="comment"># node --version</span></span><br><span class="line">v7.10.1</span><br><span class="line">/ <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h5 id="volume-mount"><a href="#volume-mount" class="headerlink" title="volume mount"></a>volume mount</h5><p>앞서 다운로드한 라이브러리등 캐쉬를 재 활용 하기 위해서 다음과 같이 volume을 mount 할 수 있다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Script //</span></span><br><span class="line">node &#123;</span><br><span class="line">    <span class="comment">/* Requires the Docker Pipeline plugin to be installed */</span></span><br><span class="line">    docker.image(<span class="string">'maven:3-alpine'</span>).inside(<span class="string">'-v $HOME/.m2:/root/.m2'</span>) &#123;</span><br><span class="line">        stage(<span class="string">'Build'</span>) &#123;</span><br><span class="line">        	sh <span class="string">'mvn -B'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="다중-container-처리"><a href="#다중-container-처리" class="headerlink" title="다중  container 처리"></a>다중  container 처리</h5><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    <span class="comment">/* Requires the Docker Pipeline plugin to be installed */</span></span><br><span class="line">    stage(<span class="string">'Back-end'</span>) &#123;</span><br><span class="line">        docker.image(<span class="string">'maven:3-alpine'</span>).inside &#123;</span><br><span class="line">        	sh <span class="string">'mvn --version'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stage(<span class="string">'Front-end'</span>) &#123;</span><br><span class="line">    	docker.image(<span class="string">'node:7-alpine'</span>).inside &#123;</span><br><span class="line">        	sh <span class="string">'node --version'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="sidecar-처리"><a href="#sidecar-처리" class="headerlink" title="sidecar 처리"></a>sidecar 처리</h5><p>특정 서비스 환경을 테스트 하기 위하여 주변 환경을 우선 만들고, 해당 서비스를 테스트 하기 위한 행위를 sidecar 패턴이라고 한다. </p>
+<p>docker에서는 다음과 같이 side car를 docker에 반영 할 수 있다.</p>
+<ul>
+<li>mysql run</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * In order to communicate with the MySQL server, this Pipeline explicitly</span></span><br><span class="line"><span class="comment">     * maps the port (`3306`) to a known port on the host machine.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    docker.image(<span class="string">'mysql:5'</span>).withRun(<span class="string">'-e "MYSQL_ROOT_PASSWORD=my-secret-pw" -p 3306:3306'</span>) &#123; c -&gt;</span><br><span class="line">        docker.image(<span class="string">'mysql:5'</span>).inside(<span class="string">"--link $&#123;c.id&#125;:db"</span>) &#123;</span><br><span class="line">            <span class="comment">/* Wait until mysql service is up */</span></span><br><span class="line">            sh <span class="string">'while ! mysqladmin ping -hdb --silent; do sleep 1; done'</span></span><br><span class="line">            sh <span class="string">'ehco $USER'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Started by user devops</span><br><span class="line">Running <span class="keyword">in</span> Durability level: MAX_SURVIVABILITY</span><br><span class="line">[Pipeline] Start of Pipeline</span><br><span class="line">[Pipeline] node</span><br><span class="line">Running on Jenkins <span class="keyword">in</span> /var/lib/jenkins/workspace/example</span><br><span class="line">[Pipeline] &#123;</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker run -d -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 mysql:5</span><br><span class="line">[Pipeline] dockerFingerprintRun</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker inspect -f . mysql:5</span><br><span class="line">.</span><br><span class="line">[Pipeline] withDockerContainer</span><br><span class="line">Jenkins does not seem to be running inside a container</span><br><span class="line">$ docker run -t -d -u 986:979 --link 541d07bced678662242c3242be0fa406a0c10def3774af6e6b86221a2c6d982f:db -w /var/lib/jenkins/workspace/example -v /var/lib/jenkins/workspace/example:/var/lib/jenkins/workspace/example:rw,z -v /var/lib/jenkins/workspace/example@tmp:/var/lib/jenkins/workspace/example@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** mysql:5 cat</span><br><span class="line">$ docker top cfbe21f96c9a7f16de807e976824c11d9ecd3ace17dd99798936d111ae507739 -eo pid,comm</span><br><span class="line">[Pipeline] &#123;</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">+ sleep 1</span><br><span class="line">+ mysqladmin ping -hdb --silent</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ <span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line">[Pipeline] &#125;</span><br><span class="line">$ docker stop --time=1 cfbe21f96c9a7f16de807e976824c11d9ecd3ace17dd99798936d111ae507739</span><br><span class="line">$ docker rm -f cfbe21f96c9a7f16de807e976824c11d9ecd3ace17dd99798936d111ae507739</span><br><span class="line">[Pipeline] // withDockerContainer</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker stop 541d07bced678662242c3242be0fa406a0c10def3774af6e6b86221a2c6d982f</span><br><span class="line">541d07bced678662242c3242be0fa406a0c10def3774af6e6b86221a2c6d982f</span><br><span class="line">+ docker rm -f 541d07bced678662242c3242be0fa406a0c10def3774af6e6b86221a2c6d982f</span><br><span class="line">541d07bced678662242c3242be0fa406a0c10def3774af6e6b86221a2c6d982f</span><br><span class="line">[Pipeline] &#125;</span><br><span class="line">[Pipeline] // node</span><br><span class="line">[Pipeline] End of Pipeline</span><br></pre></td></tr></table></figure>
+<p>상위 프로세스가 진행 하는 동안은 아래와 같이 mysql container가 2개 동시에 실행 되는 것을 확인 할 수있다. 하나는 사용할 mysql 서버 이고, 다른 하나는 mysqladmin이 정상적으로 작동 하는지 확인 하는 용도의 컨테이터라고 생각하면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                  PORTS                                      NAMES</span><br><span class="line">cfbe21f96c9a        mysql:5                <span class="string">"docker-entrypoint..."</span>   23 seconds ago      Up 21 seconds           3306/tcp, 33060/tcp                        hopeful_goldwasser</span><br><span class="line">541d07bced67        mysql:5                <span class="string">"docker-entrypoint..."</span>   29 seconds ago</span><br></pre></td></tr></table></figure>
+<p>만약에 jenkins가 동작하고 있는 서버에 mysqladmin이 사용 가능하다면 상위처럼 mysqladmin 테스트용 도커를 따로 만들 필요는 없다.</p>
+<blockquote>
+<p>상위 script를 보다보면 설명이 없는 부분이 있는데,</p>
+<p><code>c -&gt;</code></p>
+<p>이 부분에 대한 설명이 없다. </p>
+<p>groovy의 closure를 사용한 부분으로 <span class="exturl" data-url="aHR0cDovL2dyb292eS1sYW5nLm9yZy9jbG9zdXJlcy5odG1s" title="http://groovy-lang.org/closures.html">http://groovy-lang.org/closures.html<i class="fa fa-external-link"></i></span> 이 url 내용을 확인 하면 된다.</p>
+<p>결론적으로는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2plbmtpbnNjaS9kb2NrZXItd29ya2Zsb3ctcGx1Z2luL2Jsb2IvbWFzdGVyL3NyYy9tYWluL3Jlc291cmNlcy9vcmcvamVua2luc2NpL3BsdWdpbnMvZG9ja2VyL3dvcmtmbG93L0RvY2tlci5ncm9vdnk=" title="https://github.com/jenkinsci/docker-workflow-plugin/blob/master/src/main/resources/org/jenkinsci/plugins/docker/workflow/Docker.groovy">https://github.com/jenkinsci/docker-workflow-plugin/blob/master/src/main/resources/org/jenkinsci/plugins/docker/workflow/Docker.groovy<i class="fa fa-external-link"></i></span> 이 파일의 Container 객체를 인스턴스한 객체를 뜻하는 것으로, 테스트 해본 바로는 c.id를 제외하고는 다른 정보를 얻어 올 수 없는 것으로 보인다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">&gt;         <span class="keyword">public</span> &lt;V&gt; V withRun(String args = <span class="string">''</span>, String command = <span class="string">""</span>, Closure&lt;V&gt; body) &#123;</span><br><span class="line">&gt;             docker.node &#123;</span><br><span class="line">&gt;                 Container c = run(args, command)</span><br><span class="line">&gt;                 <span class="keyword">try</span> &#123;</span><br><span class="line">&gt;                     body.call(c)</span><br><span class="line">&gt;                 &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">&gt;                     c.stop()</span><br><span class="line">&gt;                 &#125;</span><br><span class="line">&gt;             &#125;</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p><code>withRun</code>의 결과 값은 Container이다.</p>
+<p>그외 inside의 코드는 다음과 같다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt;         <span class="keyword">public</span> &lt;V&gt; <span class="function">V <span class="title">inside</span><span class="params">(String args = <span class="string">''</span>, Closure&lt;V&gt; body)</span> </span>&#123;</span><br><span class="line">&gt;             docker.node &#123;</span><br><span class="line">&gt;                 def toRun = imageName()</span><br><span class="line">&gt;                 <span class="keyword">if</span> (toRun != id &amp;&amp; docker.script.sh(script: <span class="string">"docker inspect -f . $&#123;id&#125;"</span>, returnStatus: <span class="keyword">true</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">&gt;                     <span class="comment">// Can run it without registry prefix, because it was locally built.</span></span><br><span class="line">&gt;                     toRun = id</span><br><span class="line">&gt;                 &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">&gt;                     <span class="keyword">if</span> (docker.script.sh(script: <span class="string">"docker inspect -f . $&#123;toRun&#125;"</span>, returnStatus: <span class="keyword">true</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">&gt;                         <span class="comment">// Not yet present locally.</span></span><br><span class="line">&gt;                         <span class="comment">// withDockerContainer requires the image to be available locally, since its start phase is not a durable task.</span></span><br><span class="line">&gt;                         pull()</span><br><span class="line">&gt;                     &#125;</span><br><span class="line">&gt;                 &#125;</span><br><span class="line">&gt;                 docker.script.withDockerContainer(image: toRun, args: args, toolName: docker.script.env.DOCKER_TOOL_NAME) &#123;</span><br><span class="line">&gt;                     body()</span><br><span class="line">&gt;                 &#125;</span><br><span class="line">&gt;             &#125;</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>내용을 보자면 args는 <code>&quot;--link ${c.id}:db&quot;</code> 과 대응 되며 body 이후는 </p>
+<p> <code>{
+            /* Wait until mysql service is up */
+            sh &#39;while ! mysqladmin ping -hdb --silent; do sleep 1; done&#39;
+            sh &#39;ehco $USER&#39;
+        }</code> </p>
+<p>이 영역으로 치환 되게 된다. 즉 body, 또는 클로저라고 불리는 영역은 해당 container 내부에서 실행 되는 영역으로 생각 하면 된다.</p>
+</blockquote>
+<h5 id="Dockerfile을-이용한-빌드"><a href="#Dockerfile을-이용한-빌드" class="headerlink" title="Dockerfile을 이용한 빌드"></a>Dockerfile을 이용한 빌드</h5><p>github에서 dockerfile을 pull 한 이후 해당 파일을 바탕으로 image를 만들고 실행을 시켜 보는 코드이다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line"></span><br><span class="line">    git credentialsId: &apos;theyoung&apos;, url: &apos;https://github.com/theyoung/nginx.git&apos;</span><br><span class="line">    def customImage = docker.build(&quot;nodejs&quot;)</span><br><span class="line">    /*</span><br><span class="line">     * In order to communicate with the MySQL server, this Pipeline explicitly</span><br><span class="line">     * maps the port (`3306`) to a known port on the host machine.</span><br><span class="line">     */</span><br><span class="line">    customImage.withRun() &#123; c -&gt;</span><br><span class="line">        stage(&apos;containerTest&apos;)&#123;</span><br><span class="line">            sh &quot;echo $&#123;c.id&#125;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과는 다음과 같다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Started by user devops</span><br><span class="line">Running <span class="keyword">in</span> Durability level: MAX_SURVIVABILITY</span><br><span class="line">[Pipeline] Start of Pipeline</span><br><span class="line">[Pipeline] node</span><br><span class="line">Running on Jenkins <span class="keyword">in</span> /var/lib/jenkins/workspace/example</span><br><span class="line">[Pipeline] &#123;</span><br><span class="line">[Pipeline] git</span><br><span class="line">using credential theyoung</span><br><span class="line"> &gt; git rev-parse --is-inside-work-tree <span class="comment"># timeout=10</span></span><br><span class="line">Fetching changes from the remote Git repository</span><br><span class="line"> &gt; git config remote.origin.url https://github.com/theyoung/nginx.git <span class="comment"># timeout=10</span></span><br><span class="line">Fetching upstream changes from https://github.com/theyoung/nginx.git</span><br><span class="line"> &gt; git --version <span class="comment"># timeout=10</span></span><br><span class="line">using GIT_ASKPASS to <span class="built_in">set</span> credentials github</span><br><span class="line"> &gt; git fetch --tags --progress https://github.com/theyoung/nginx.git +refs/heads/*:refs/remotes/origin/*</span><br><span class="line"> &gt; git rev-parse refs/remotes/origin/master^&#123;commit&#125; <span class="comment"># timeout=10</span></span><br><span class="line"> &gt; git rev-parse refs/remotes/origin/origin/master^&#123;commit&#125; <span class="comment"># timeout=10</span></span><br><span class="line">Checking out Revision d3d0ab61b78fcf93a63fd3fe37ec07eef2b1df5d (refs/remotes/origin/master)</span><br><span class="line"> &gt; git config core.sparsecheckout <span class="comment"># timeout=10</span></span><br><span class="line"> &gt; git checkout -f d3d0ab61b78fcf93a63fd3fe37ec07eef2b1df5d</span><br><span class="line"> &gt; git branch -a -v --no-abbrev <span class="comment"># timeout=10</span></span><br><span class="line"> &gt; git branch -D master <span class="comment"># timeout=10</span></span><br><span class="line"> &gt; git checkout -b master d3d0ab61b78fcf93a63fd3fe37ec07eef2b1df5d</span><br><span class="line">Commit message: <span class="string">"Update Dockerfile"</span></span><br><span class="line"> &gt; git rev-list --no-walk 0faa7924ddcc35bc2e83ca15d454e2240824d33b <span class="comment"># timeout=10</span></span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker build -t nodejs .</span><br><span class="line">Sending build context to Docker daemon 192.5 kB</span><br><span class="line"></span><br><span class="line">Step 1/9 : FROM node:6.2.2</span><br><span class="line">Trying to pull repository docker.io/library/node ... </span><br><span class="line">6.2.2: Pulling from docker.io/library/node</span><br><span class="line">5c90d4a2d1a8: Pulling fs layer</span><br><span class="line">ab30c63719b1: Pulling fs layer</span><br><span class="line">c6072700a242: Pulling fs layer</span><br><span class="line">abb742d515b4: Pulling fs layer</span><br><span class="line">22efa86cdb65: Pulling fs layer</span><br><span class="line">a379ffacc05f: Pulling fs layer</span><br><span class="line">abb742d515b4: Waiting</span><br><span class="line">22efa86cdb65: Waiting</span><br><span class="line">a379ffacc05f: Waiting</span><br><span class="line">c6072700a242: Verifying Checksum</span><br><span class="line">c6072700a242: Download complete</span><br><span class="line">ab30c63719b1: Download complete</span><br><span class="line">22efa86cdb65: Download complete</span><br><span class="line">a379ffacc05f: Verifying Checksum</span><br><span class="line">a379ffacc05f: Download complete</span><br><span class="line">5c90d4a2d1a8: Verifying Checksum</span><br><span class="line">5c90d4a2d1a8: Download complete</span><br><span class="line">abb742d515b4: Verifying Checksum</span><br><span class="line">abb742d515b4: Download complete</span><br><span class="line">5c90d4a2d1a8: Pull complete</span><br><span class="line">ab30c63719b1: Pull complete</span><br><span class="line">c6072700a242: Pull complete</span><br><span class="line">abb742d515b4: Pull complete</span><br><span class="line">22efa86cdb65: Pull complete</span><br><span class="line">a379ffacc05f: Pull complete</span><br><span class="line">Digest: sha256:67123dcbed68c55296aa04bdbe85440a27c74481e2668aafd66e2a11934bb15d</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.io/node:6.2.2</span><br><span class="line"> ---&gt; 9121f2a78909</span><br><span class="line">Step 2/9 : MAINTAINER Jaeha Ahn &lt;eu81273@gmail.com&gt;</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 0ecf8f4050a4</span><br><span class="line"> ---&gt; d6a693621aec</span><br><span class="line">Removing intermediate container 0ecf8f4050a4</span><br><span class="line">Step 3/9 : RUN mkdir -p /app</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> dd257c30d12a</span><br><span class="line"></span><br><span class="line">[91m[0m ---&gt; b812157a06e8</span><br><span class="line">Removing intermediate container dd257c30d12a</span><br><span class="line">Step 4/9 : WORKDIR /app</span><br><span class="line"> ---&gt; ec1c4a7a3f98</span><br><span class="line">Removing intermediate container 5ff496892285</span><br><span class="line">Step 5/9 : ADD . /app</span><br><span class="line"> ---&gt; 727a7dd31fe8</span><br><span class="line">Removing intermediate container e96e6be5e5e3</span><br><span class="line">Step 6/9 : RUN npm install</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 810192e8ef7c</span><br><span class="line"></span><br><span class="line">[91m[0m[91mnpm[0m[91m [0m[91minfo [0m[91mit worked <span class="keyword">if</span> it ends with[0m[91m ok</span><br><span class="line">[0m[91mnpm[0m[91m [0m[91minfo using[0m[91m npm@3.9.5</span><br><span class="line">[0m[91mnpm[0m[91m info[0m[91m [0m[91musing[0m[91m node@v6.2.2</span><br><span class="line">[0m[91mnpm info lifecycle[0m[91m undefined~preinstall: undefined</span><br><span class="line">[0m[91mnpm info[0m[91m linkStuff[0m[91m !invalid<span class="comment">#1</span></span><br><span class="line">[0m[91mnpm info lifecycle[0m[91m undefined~install: undefined</span><br><span class="line">[0m[91mnpm info [0m[91mlifecycle undefined~postinstall: undefined</span><br><span class="line">[0m[91mnpm info [0m[91mlifecycle[0m[91m undefined~prepublish: undefined</span><br><span class="line">[0m[91mnpm [0m[91mWARN enoent ENOENT: no such file or directory, open <span class="string">'/app/package.json'</span></span><br><span class="line">[0m[91mnpm WARN app No description</span><br><span class="line">npm WARN app No repository field.</span><br><span class="line">[0m[91mnpm WARN app No README data</span><br><span class="line">[0m[91mnpm WARN[0m[91m app No license field.</span><br><span class="line">[0m[91mnpm [0m[91minfo ok[0m[91m </span><br><span class="line">[0m ---&gt; 0b0f52f79418</span><br><span class="line">Removing intermediate container 810192e8ef7c</span><br><span class="line">Step 7/9 : ENV NODE_ENV development</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> f0e5d7e23c62</span><br><span class="line"> ---&gt; 60c03bd48ed4</span><br><span class="line">Removing intermediate container f0e5d7e23c62</span><br><span class="line">Step 8/9 : EXPOSE 3000 80</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 1cdf07531235</span><br><span class="line"> ---&gt; 21a51bb1f571</span><br><span class="line">Removing intermediate container 1cdf07531235</span><br><span class="line">Step 9/9 : CMD npm start</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> a562aa95e2fc</span><br><span class="line"> ---&gt; a52d30b585ab</span><br><span class="line">Removing intermediate container a562aa95e2fc</span><br><span class="line">Successfully built a52d30b585ab</span><br><span class="line">[Pipeline] dockerFingerprintFrom</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker run -d nodejs</span><br><span class="line">[Pipeline] dockerFingerprintRun</span><br><span class="line">[Pipeline] stage</span><br><span class="line">[Pipeline] &#123; (containerTest)</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ <span class="built_in">echo</span> fc6a252de706267691f3f822116fb5048df8110abfc70e587ad5e19b19dd970f</span><br><span class="line">fc6a252de706267691f3f822116fb5048df8110abfc70e587ad5e19b19dd970f</span><br><span class="line">[Pipeline] &#125;</span><br><span class="line">[Pipeline] // stage</span><br><span class="line">[Pipeline] sh</span><br><span class="line">+ docker stop fc6a252de706267691f3f822116fb5048df8110abfc70e587ad5e19b19dd970f</span><br><span class="line">fc6a252de706267691f3f822116fb5048df8110abfc70e587ad5e19b19dd970f</span><br><span class="line">+ docker rm -f fc6a252de706267691f3f822116fb5048df8110abfc70e587ad5e19b19dd970f</span><br><span class="line">fc6a252de706267691f3f822116fb5048df8110abfc70e587ad5e19b19dd970f</span><br><span class="line">[Pipeline] &#125;</span><br><span class="line">[Pipeline] // node</span><br><span class="line">[Pipeline] End of Pipeline</span><br><span class="line">Finished: SUCCESS</span><br></pre></td></tr></table></figure>
+<h5 id="Docker-server-사용"><a href="#Docker-server-사용" class="headerlink" title="Docker server 사용"></a>Docker server 사용</h5><ul>
+<li>기본 서버 : /var/run/docker.sock</li>
+</ul>
+<p>별도 서버 사용 하고자 할경우 (Docker Swarm 같은거)</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    checkout scm</span><br><span class="line">    docker.withServer(<span class="string">'tcp://swarm.example.com:2376'</span>, <span class="string">'swarm-certs'</span>) &#123;</span><br><span class="line">        docker.image(<span class="string">'mysql:5'</span>).withRun(<span class="string">'-p 3306:3306'</span>) &#123;</span><br><span class="line">        <span class="comment">/* do things */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Docker-Registry"><a href="#Docker-Registry" class="headerlink" title="Docker Registry"></a>Docker Registry</h5><p>Docker hub를 기본으로 Registry 서버가 설정 되어있으나, 다음과 같이 변경 가능하다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    checkout scm</span><br><span class="line">    docker.withRegistry(<span class="string">'https://registry.example.com'</span>) &#123;</span><br><span class="line">        docker.image(<span class="string">'my-custom-image'</span>).inside &#123;</span><br><span class="line">        	sh <span class="string">'make test'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    checkout scm</span><br><span class="line">    docker.withRegistry(<span class="string">'https://registry.example.com'</span>, <span class="string">'credentials-id'</span>) &#123;</span><br><span class="line">    	<span class="keyword">def</span> customImage = docker.build(<span class="string">"my-image:$&#123;env.BUILD_ID&#125;"</span>)</span><br><span class="line">    	<span class="comment">/* Push the container to the custom Registry */</span></span><br><span class="line">    	customImage.push()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Docker-Agent-사용하기"><a href="#Docker-Agent-사용하기" class="headerlink" title="Docker Agent 사용하기"></a>Docker Agent 사용하기</h5><p>Docker를 상위 처럼 사용 하지 않고 Agent로 사용이 가능하다.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2plbmtpbnMtZG9jcy9zaW1wbGUtbm9kZS1qcy1yZWFjdC1ucG0tYXBw" title="https://github.com/jenkins-docs/simple-node-js-react-npm-app">https://github.com/jenkins-docs/simple-node-js-react-npm-app<i class="fa fa-external-link"></i></span></p>
+<p>이 프로젝트의 파이프 라인을 보면 다음과 같다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">'node:6-alpine'</span></span><br><span class="line">            args <span class="string">'-p 3000:3000'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    environment &#123;</span><br><span class="line">        CI = <span class="string">'true'</span></span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">'Build'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">'npm install'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(<span class="string">'Test'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">'./jenkins/scripts/test.sh'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(<span class="string">'Deliver'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">'./jenkins/scripts/deliver.sh'</span></span><br><span class="line">                input <span class="string">message:</span> <span class="string">'Finished using the web site? (Click "Proceed" to continue)'</span></span><br><span class="line">                sh <span class="string">'./jenkins/scripts/kill.sh'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Agent를 docker의 이미지로 선택 함으로써, 파이프라인 하단에 보이는 stages는 모두 docker 이미지 내에서 동작 하게 된다.</p>
+<h4 id="Replay"><a href="#Replay" class="headerlink" title="Replay"></a>Replay</h4><p>Jenkins &gt; 파이프라인 프로젝트 선택 &gt; Replay 선택</p>
+<p>MainScript 수정</p>
+<p>Run</p>
+<blockquote>
+<p>매번 Config를 수정하기 어렵기 때문에 Replay를 사용해서 script를 Test 하는데 사용된다.</p>
+</blockquote>
+<h4 id="Pipeline-Syntax"><a href="#Pipeline-Syntax" class="headerlink" title="Pipeline Syntax"></a>Pipeline Syntax</h4><p>앞서서 DSL define에서 다루었던 내용과 비슷한 부분이 많다.</p>
+<p>if else</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    stage(<span class="string">'Example'</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (env.BRANCH_NAME == <span class="string">'master'</span>) &#123;</span><br><span class="line">        	echo <span class="string">'I only execute on the master branch'</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        	echo <span class="string">'I execute elsewhere'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>try catch</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    stage(<span class="string">'Example'</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        	sh <span class="string">'exit 1'</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (exc) &#123;</span><br><span class="line">            echo <span class="string">'Something failed, I should sound the klaxons!'</span></span><br><span class="line">            <span class="keyword">throw</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Gitlab-연동"><a href="#Gitlab-연동" class="headerlink" title="Gitlab 연동"></a>Gitlab 연동</h4><h5 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h5><p>genkins 관리 &gt; 플러그인관리 &gt; 설치가능</p>
+<ul>
+<li>gitlab or gitlab plugin install </li>
+</ul>
+<p><span class="exturl" data-url="aHR0cHM6Ly93aWtpLmplbmtpbnMuaW8vZGlzcGxheS9KRU5LSU5TL0dpdExhYitQbHVnaW4=" title="https://wiki.jenkins.io/display/JENKINS/GitLab+Plugin">https://wiki.jenkins.io/display/JENKINS/GitLab+Plugin<i class="fa fa-external-link"></i></span></p>
+<h5 id="인증정보"><a href="#인증정보" class="headerlink" title="인증정보"></a>인증정보</h5><h6 id="gitlab-Personal-Token-발행"><a href="#gitlab-Personal-Token-발행" class="headerlink" title="gitlab Personal Token 발행"></a>gitlab Personal Token 발행</h6><p>우상단 profile &gt; settings &gt; Access Token&gt; Personal Access Token 발행</p>
+<h6 id="gitlab-token-jenkins-등록"><a href="#gitlab-token-jenkins-등록" class="headerlink" title="gitlab token jenkins 등록"></a>gitlab token jenkins 등록</h6><p>Dashboard &gt; Credentials &gt; System &gt; Global Credentials &gt; Add Credentials</p>
+<ul>
+<li>kind : gitlab api token (안보이면 플러그인을 재설치)</li>
+<li>Token : gitlab access token</li>
+<li>그외 : 아무거나</li>
+</ul>
+<p>Dashboard &gt; jenkins 관리 &gt; 시스템 설정 &gt; gitlab tab (없으면 플러그인 확인)</p>
+<ul>
+<li>Connection name : 아무거나</li>
+<li>Gitlab host url : http:// 부터 .com &lt;-여기까지 (예, <span class="exturl" data-url="aHR0cDovL2dpdGxhYi50ZXN0LmNvbQ==" title="http://gitlab.test.com">http://gitlab.test.com<i class="fa fa-external-link"></i></span>)</li>
+<li>Credential : 상위 만든 gitlab token 선택</li>
+</ul>
+<p>Test Connection 시 Success 나면 됨.</p>
+<h6 id="Jenkins-등록"><a href="#Jenkins-등록" class="headerlink" title="Jenkins 등록"></a>Jenkins 등록</h6><p>Dashboard &gt; Credentials &gt; System &gt; Global Credentials &gt; Add Credentials</p>
+<p>gitlab 접근용도 (아래 두개중 사용 가능한것 하나)</p>
+<ul>
+<li>kind : Username with password</li>
+<li>id&amp;pw 입력</li>
+<li>그외 : 아무거나</li>
+</ul>
+<blockquote>
+<p>ssh-keygen을 사용해야 하는 부분인데 테스트를 안해봐서 일단 pass</p>
+</blockquote>
+<ul>
+<li>kind : SSH Username with private key</li>
+</ul>
+<h5 id="jenkins-프로젝트"><a href="#jenkins-프로젝트" class="headerlink" title="jenkins 프로젝트"></a>jenkins 프로젝트</h5><ul>
+<li>프리스타일 선택</li>
+<li>General : Gitlab Connection 선택 (token이 정상적으로 등록 된경우 선택 가능)</li>
+<li>소스코드관리 : Git 선택 &gt; Credential &gt; username 등록한 credential 선택</li>
+<li>빌드유발 : Build when a change is pushed to GitLab. GitLab webhook URL: <span class="exturl" data-url="aHR0cDovL2plbmtpbnMudGVzdC5jb20vcHJvamVjdC9wcm9qZWN0bmFtZQ==" title="http://jenkins.test.com/project/projectname">http://jenkins.test.com/project/projectname<i class="fa fa-external-link"></i></span></li>
+<li>Secret token : Build when a change is pushed to GitLab. 이 설정에 속한 우하단 <code>고급</code>을 선택 하면, 숨겨있는 옵션을 선택 할 수있는데, 그 중에서 <code>Secret token</code> 을 생성하고 저장해 놓는다. (gitlab webhook에 사용된다.)</li>
+<li>그외 : 아무거나 (gitlab web hook 만 작동 하는지 테스트 할 예정임으로 build 처리만 되면 된다.)</li>
+</ul>
+<h5 id="Gitlab-설정"><a href="#Gitlab-설정" class="headerlink" title="Gitlab 설정"></a>Gitlab 설정</h5><p>gitlab &gt; webhook 처리할 프로젝트로 이동 &gt; setting &gt; intergration &gt; </p>
+<ul>
+<li>Url : 상위 빌드 유발 url 입력 (<span class="exturl" data-url="aHR0cDovL2plbmtpbnMudGVzdC5jb20vcHJvamVjdC9wcm9qZWN0bmFtZQ==" title="http://jenkins.test.com/project/projectname">http://jenkins.test.com/project/projectname<i class="fa fa-external-link"></i></span>)</li>
+<li>Secret Token : jenkins에서 얻어온 <code>Secret Token</code> 을 넣어준다.</li>
+<li>Enable SSL verification : 위에서 사용을 안했음으로 uncheck</li>
+<li>add webhook : click</li>
+</ul>
+<p>해당 페이지의 중간 쯤에 <code>Webhooks (1)</code> 라는 내용이 생기고, <code>test</code> 버튼을 확인 할 수있다. 이 버튼을 click 하면 jenkins가 실행 되어야 한다.</p>
+<blockquote>
+<p>jenkins와 gitlab이 동일 서버(localhost) 라고 하면서 오류가 나면, 다음과 같이 설정을 수정해 줘야한다.</p>
+<p>gitlab &gt; admin area &gt; settings &gt; Network &gt; Outbound request &gt; </p>
+<ul>
+<li>Allow requests to the local network from hooks and services : check</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -652,516 +1268,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/jenkins-with-tomcat/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/jenkins-with-tomcat/" class="post-title-link" itemprop="url">Jenkins with tomcat</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-25 17:00:33" itemprop="dateCreated datePublished" datetime="2019-06-25T17:00:33Z">2019-06-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-05 00:10:34" itemprop="dateModified" datetime="2019-07-05T00:10:34Z">2019-07-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/jenkins-with-tomcat/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jenkins-with-tomcat/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="목적"><a href="#목적" class="headerlink" title="목적"></a>목적</h4><p>git에서 web소스를 수신 후, tomcat 하단 webapp으로 디플로이 자동화</p>
-<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><p>tomcat installation</p>
-<h4 id="Jenkins-설정"><a href="#Jenkins-설정" class="headerlink" title="Jenkins 설정"></a>Jenkins 설정</h4><h5 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h5><p>jenkins관리 &gt; global tool configuration&gt;maven &gt; </p>
-<ul>
-<li>name : m3</li>
-<li>install automatically : check</li>
-<li>version : 3.6</li>
-</ul>
-<h5 id="새로운-아이템"><a href="#새로운-아이템" class="headerlink" title="새로운 아이템"></a>새로운 아이템</h5><p>Freestyle project</p>
-<ul>
-<li>소스코드관리 : git repository url </li>
-</ul>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZhbGF4eVRlY2gvaGVsbG8td29ybGQ=" title="https://github.com/ValaxyTech/hello-world">https://github.com/ValaxyTech/hello-world<i class="fa fa-external-link"></i></span></p>
-<p>를 개인 GitHub repository에 fork해서 사용하는 것을 추천 함 </p>
-</blockquote>
-<p>Build</p>
-<ul>
-<li><p>Maven version : M3</p>
-</li>
-<li><p>Goals : clean install package</p>
-</li>
-</ul>
-<p>빌드 후 조치</p>
-<ul>
-<li>WAR/EAR files : </li>
-</ul>
-<p><span class="exturl" data-url="aHR0cDovLzIxOC4xNDUuMjE4LjMxOjgwODAvd2ViYXBwLw==" title="http://218.145.218.31:8080/webapp/">http://218.145.218.31:8080/webapp/<i class="fa fa-external-link"></i></span></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/jenkins-on-centos7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/jenkins-on-centos7/" class="post-title-link" itemprop="url">Jenkins on centos7</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-25 17:00:33" itemprop="dateCreated datePublished" datetime="2019-06-25T17:00:33Z">2019-06-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/jenkins-on-centos7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jenkins-on-centos7/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="jenkins-install"><a href="#jenkins-install" class="headerlink" title="jenkins install"></a>jenkins install</h4><p>install을 위해서 jenkins repository를 추가한다.</p>
-<p><code>sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo</code></p>
-<p>rpm에 키 등록 후 jekins 인스톨</p>
-<p><code>sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key</code></p>
-<p><code>sudo yum install jenkins</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost devops]<span class="comment"># sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo</span></span><br><span class="line">--2019-06-24 16:07:47--  http://pkg.jenkins-ci.org/redhat/jenkins.repo</span><br><span class="line">Resolving pkg.jenkins-ci.org (pkg.jenkins-ci.org)... 52.202.51.185</span><br><span class="line">Connecting to pkg.jenkins-ci.org (pkg.jenkins-ci.org)|52.202.51.185|:80... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 71</span><br><span class="line">Saving to: ‘/etc/yum.repos.d/jenkins.repo’</span><br><span class="line"></span><br><span class="line">100%[=====================================================================================================================================================================================================================================&gt;] 71          --.-K/s   <span class="keyword">in</span> 0s</span><br><span class="line"></span><br><span class="line">2019-06-24 16:07:48 (9.43 MB/s) - ‘/etc/yum.repos.d/jenkins.repo’ saved [71/71]</span><br><span class="line"></span><br><span class="line">[root@localhost devops]<span class="comment"># sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key</span></span><br><span class="line">[root@localhost devops]<span class="comment"># sudo yum install jenkins</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: centos.mirror.moack.net</span><br><span class="line"> * updates: centos.mirror.moack.net</span><br><span class="line">jenkins                                                                                                                                                                                                                                                 | 2.9 kB  00:00:00</span><br><span class="line">jenkins/primary_db                                                                                                                                                                                                                                      | 129 kB  00:00:01</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package jenkins.noarch 0:2.182-1.1 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line"> Package                                                          Arch                                                            Version                                                               Repository                                                        Size</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> jenkins                                                          noarch                                                          2.182-1.1                                                             jenkins                                                           74 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Install  1 Package</span><br><span class="line"></span><br><span class="line">Total download size: 74 M</span><br><span class="line">Installed size: 74 M</span><br><span class="line">Is this ok [y/d/N]: y</span><br><span class="line">Downloading packages:</span><br><span class="line">jenkins-2.182-1.1.noarch.rpm                                                                                                                                                                                                                            |  74 MB  00:05:37</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : jenkins-2.182-1.1.noarch                                                                                                                                                                                                                                    1/1</span><br><span class="line">  Verifying  : jenkins-2.182-1.1.noarch                                                                                                                                                                                                                                    1/1</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  jenkins.noarch 0:2.182-1.1</span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
-<h4 id="web-port-amp-firewall"><a href="#web-port-amp-firewall" class="headerlink" title="web port &amp; firewall"></a>web port &amp; firewall</h4><p>jenkins의 서비스 port를 설정 하고 열어준다.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost devops]<span class="comment"># cd /etc/sysconfig/</span></span><br><span class="line">[root@localhost sysconfig]<span class="comment"># vi jenkins</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Type:        integer(0:65535)</span></span><br><span class="line"><span class="comment">## Default:     8080</span></span><br><span class="line"><span class="comment">## ServiceRestart: jenkins</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Port Jenkins is listening on.</span></span><br><span class="line"><span class="comment"># Set to -1 to disable</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">JENKINS_PORT=<span class="string">"9090"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost sysconfig]<span class="comment"># sudo firewall-cmd --permanent --zone=public --add-port=9090/tcp</span></span><br><span class="line">success</span><br><span class="line">[root@localhost sysconfig]<span class="comment"># sudo firewall-cmd --reload</span></span><br><span class="line">success</span><br><span class="line">[root@localhost sysconfig]<span class="comment"># service jenkins start</span></span><br></pre></td></tr></table></figure>
-<p><code>service jenkins start</code> 명령어로 jenkins를 실행한다.</p>
-<p><span class="exturl" data-url="aHR0cDovL3VybDpwb3J0" title="http://url:port">http://url:port<i class="fa fa-external-link"></i></span></p>
-<p>를 브라우저에 넣으면 jenkins 화면이 뜨면 정상적으로 서비스가 실행 된 것이다.</p>
-<h4 id="Check-Jenkins-init-key"><a href="#Check-Jenkins-init-key" class="headerlink" title="Check Jenkins init key"></a>Check Jenkins init key</h4><p>jenkins  최초 실행키는</p>
-<p><code>/var/lib/jenkins/secrets/</code>에 위치 한다.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost sysconfig]<span class="comment"># cd /var/lib/jenkins/secrets/</span></span><br><span class="line">[root@localhost secrets]<span class="comment"># ls</span></span><br><span class="line">filepath-filters.d  initialAdminPassword  jenkins.model.Jenkins.crumbSalt  master.key  org.jenkinsci.main.modules.instance_identity.InstanceIdentity.KEY  slave-to-master-security-kill-switch  whitelisted-callables.d</span><br><span class="line">[root@localhost secrets]<span class="comment"># vi initialAdminPassword</span></span><br></pre></td></tr></table></figure>
-<p>jenkins 실행 중 이상이 발생 한다면 다음 로그를 확인 해서 대응 해 줘야 한다.</p>
-<p><code>/var/log/jenkins/</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost devops]<span class="comment"># cd /var/log/jenkins/</span></span><br><span class="line">[root@localhost jenkins]<span class="comment"># ls</span></span><br><span class="line">jenkins.log</span><br></pre></td></tr></table></figure>
-<h4 id="jdk-설치"><a href="#jdk-설치" class="headerlink" title="jdk 설치"></a>jdk 설치</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost secrets]<span class="comment"># yum list java*jdk-devel</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: centos.mirror.moack.net</span><br><span class="line"> * updates: centos.mirror.moack.net</span><br><span class="line">Available Packages</span><br><span class="line">java-1.6.0-openjdk-devel.x86_64                                                                                                       1:1.6.0.41-1.13.13.1.el7_3                                                                                                        base</span><br><span class="line">java-1.7.0-openjdk-devel.x86_64                                                                                                       1:1.7.0.221-2.6.18.0.el7_6                                                                                                        updates</span><br><span class="line">java-1.8.0-openjdk-devel.i686                                                                                                         1:1.8.0.212.b04-0.el7_6                                                                                                           updates</span><br><span class="line">java-1.8.0-openjdk-devel.x86_64                                                                                                       1:1.8.0.212.b04-0.el7_6                                                                                                           updates</span><br><span class="line">java-11-openjdk-devel.i686                                                                                                            1:11.0.3.7-0.el7_6                                                                                                                updates</span><br><span class="line">java-11-openjdk-devel.x86_64                                                                                                          1:11.0.3.7-0.el7_6                                                                                                                updates</span><br><span class="line">[root@localhost secrets]<span class="comment"># yum install java-1.8.0-openjdk-devel.x86_64</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: centos.mirror.moack.net</span><br><span class="line"> * updates: centos.mirror.moack.net</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package java-1.8.0-openjdk-devel.x86_64 1:1.8.0.212.b04-0.el7_6 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line"> Package                                                                    Arch                                                     Version                                                                   Repository                                                 Size</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> java-1.8.0-openjdk-devel                                                   x86_64                                                   1:1.8.0.212.b04-0.el7_6                                                   updates                                                   9.8 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Install  1 Package</span><br><span class="line"></span><br><span class="line">Total download size: 9.8 M</span><br><span class="line">Installed size: 40 M</span><br><span class="line">Is this ok [y/d/N]: y</span><br><span class="line">Downloading packages:</span><br><span class="line">java-1.8.0-openjdk-devel-1.8.0.212.b04-0.el7_6.x86_64.rpm                                                                                                                                                                                               | 9.8 MB  00:00:01</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : 1:java-1.8.0-openjdk-devel-1.8.0.212.b04-0.el7_6.x86_64                                                                                                                                                                                                     1/1</span><br><span class="line">  Verifying  : 1:java-1.8.0-openjdk-devel-1.8.0.212.b04-0.el7_6.x86_64                                                                                                                                                                                                     1/1</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  java-1.8.0-openjdk-devel.x86_64 1:1.8.0.212.b04-0.el7_6</span><br><span class="line"></span><br><span class="line">Complete!</span><br><span class="line"></span><br><span class="line">[root@localhost secrets]<span class="comment"># javac -version</span></span><br><span class="line">javac 1.8.0_212</span><br></pre></td></tr></table></figure>
-<h4 id="git-install"><a href="#git-install" class="headerlink" title="git install"></a>git install</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost secrets]<span class="comment"># git</span></span><br><span class="line">bash: git: 명령을 찾을 수 없습니다...</span><br><span class="line">[root@localhost secrets]<span class="comment"># yum install git</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: centos.mirror.moack.net</span><br><span class="line"> * updates: centos.mirror.moack.net</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package git.x86_64 0:1.8.3.1-20.el7 will be installed</span><br><span class="line">--&gt; Processing Dependency: perl-Git = 1.8.3.1-20.el7 <span class="keyword">for</span> package: git-1.8.3.1-20.el7.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Term::ReadKey) <span class="keyword">for</span> package: git-1.8.3.1-20.el7.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Git) <span class="keyword">for</span> package: git-1.8.3.1-20.el7.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Error) <span class="keyword">for</span> package: git-1.8.3.1-20.el7.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package perl-Error.noarch 1:0.17020-2.el7 will be installed</span><br><span class="line">---&gt; Package perl-Git.noarch 0:1.8.3.1-20.el7 will be installed</span><br><span class="line">---&gt; Package perl-TermReadKey.x86_64 0:2.30-20.el7 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line"> Package                                                                Arch                                                         Version                                                               Repository                                                     Size</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> git                                                                    x86_64                                                       1.8.3.1-20.el7                                                        updates                                                       4.4 M</span><br><span class="line">Installing <span class="keyword">for</span> dependencies:</span><br><span class="line"> perl-Error                                                             noarch                                                       1:0.17020-2.el7                                                       base                                                           32 k</span><br><span class="line"> perl-Git                                                               noarch                                                       1.8.3.1-20.el7                                                        updates                                                        55 k</span><br><span class="line"> perl-TermReadKey                                                       x86_64                                                       2.30-20.el7                                                           base                                                           31 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================================================================================================================================================================================================</span><br><span class="line">Install  1 Package (+3 Dependent packages)</span><br><span class="line"></span><br><span class="line">Total download size: 4.5 M</span><br><span class="line">Installed size: 22 M</span><br><span class="line">Is this ok [y/d/N]: y</span><br><span class="line">Downloading packages:</span><br><span class="line">(1/4): perl-Error-0.17020-2.el7.noarch.rpm                                                                                                                                                                                                              |  32 kB  00:00:00</span><br><span class="line">(2/4): perl-Git-1.8.3.1-20.el7.noarch.rpm                                                                                                                                                                                                               |  55 kB  00:00:00</span><br><span class="line">(3/4): perl-TermReadKey-2.30-20.el7.x86_64.rpm                                                                                                                                                                                                          |  31 kB  00:00:00</span><br><span class="line">(4/4): git-1.8.3.1-20.el7.x86_64.rpm                                                                                                                                                                                                                    | 4.4 MB  00:00:00</span><br><span class="line">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">Total                                                                                                                                                                                                                                          7.7 MB/s | 4.5 MB  00:00:00</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : 1:perl-Error-0.17020-2.el7.noarch                                                                                                                                                                                                                           1/4</span><br><span class="line">  Installing : perl-TermReadKey-2.30-20.el7.x86_64                                                                                                                                                                                                                         2/4</span><br><span class="line">  Installing : git-1.8.3.1-20.el7.x86_64                                                                                                                                                                                                                                   3/4</span><br><span class="line">  Installing : perl-Git-1.8.3.1-20.el7.noarch                                                                                                                                                                                                                              4/4</span><br><span class="line">  Verifying  : perl-Git-1.8.3.1-20.el7.noarch                                                                                                                                                                                                                              1/4</span><br><span class="line">  Verifying  : 1:perl-Error-0.17020-2.el7.noarch                                                                                                                                                                                                                           2/4</span><br><span class="line">  Verifying  : git-1.8.3.1-20.el7.x86_64                                                                                                                                                                                                                                   3/4</span><br><span class="line">  Verifying  : perl-TermReadKey-2.30-20.el7.x86_64                                                                                                                                                                                                                         4/4</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  git.x86_64 0:1.8.3.1-20.el7</span><br><span class="line"></span><br><span class="line">Dependency Installed:</span><br><span class="line">  perl-Error.noarch 1:0.17020-2.el7                                                        perl-Git.noarch 0:1.8.3.1-20.el7                                                        perl-TermReadKey.x86_64 0:2.30-20.el7</span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
-<h4 id="최초-파이프라인-테스트"><a href="#최초-파이프라인-테스트" class="headerlink" title="최초 파이프라인 테스트"></a>최초 파이프라인 테스트</h4><p>새로운 아이템 &gt;  Enter an item name &quot;아무거나&quot;&gt; pipeline 선택 &gt; ok</p>
-<p>&quot;아무거나&quot; 파이프라인 설정 페이지 &gt; pipeline tab 클릭</p>
-<p>definition : pipeline script &gt; github + maven &gt; 저장</p>
-<p>처음화면으로 이동</p>
-<p>아무거나 파이프라인 &gt; name &gt; 아래화살표 &gt; build now</p>
-<h4 id="파이프라인-스크립트-기초"><a href="#파이프라인-스크립트-기초" class="headerlink" title="파이프라인 스크립트 기초"></a>파이프라인 스크립트 기초</h4><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">   <span class="keyword">def</span> mvnHome</span><br><span class="line">   stage(<span class="string">'Preparation'</span>) &#123; <span class="comment">// for display purposes</span></span><br><span class="line">      <span class="comment">// Get some code from a GitHub repository</span></span><br><span class="line">      git <span class="string">'https://github.com/jglick/simple-maven-project-with-tests.git'</span></span><br><span class="line">      <span class="comment">// Get the Maven tool.</span></span><br><span class="line">      <span class="comment">// ** <span class="doctag">NOTE:</span> This 'M3' Maven tool must be configured</span></span><br><span class="line">      <span class="comment">// **       in the global configuration.           </span></span><br><span class="line">      mvnHome = tool <span class="string">'M3'</span>   </span><br><span class="line">   &#125;</span><br><span class="line">   stage(<span class="string">'Build'</span>) &#123;</span><br><span class="line">      <span class="comment">// Run the maven build</span></span><br><span class="line">      withEnv([<span class="string">"MVN_HOME=$mvnHome"</span>]) &#123;</span><br><span class="line">         <span class="keyword">if</span> (isUnix()) &#123;</span><br><span class="line">            sh <span class="string">'"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'</span></span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            bat(<span class="regexp">/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/</span>)</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   stage(<span class="string">'Results'</span>) &#123;</span><br><span class="line">      junit <span class="string">'**/target/surefire-reports/TEST-*.xml'</span></span><br><span class="line">      archiveArtifacts <span class="string">'target/*.jar'</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="서술적-파이프-라인"><a href="#서술적-파이프-라인" class="headerlink" title="서술적 파이프 라인"></a>서술적 파이프 라인</h5><p>Node 블록 + 스테이지 블록 + 디렉티브 스탭 = 서술적 파이프라인</p>
-<h5 id="node-블록-필수"><a href="#node-블록-필수" class="headerlink" title="node 블록 (필수)"></a>node 블록 (필수)</h5><p><code>node (&lt;parameter&gt;){&lt;constituents&gt;}</code></p>
-<p>노드 블록(젠킨스 에이전트)  = 스테이지 블록 + 디렉티브 + 스탭</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br></pre></td></tr></table></figure>
-<h5 id="스테이지-블록-필수"><a href="#스테이지-블록-필수" class="headerlink" title="스테이지 블록 (필수)"></a>스테이지 블록 (필수)</h5><p><code>stage (&lt;parameter&gt;){&lt;constituents&gt;}</code></p>
-<p>스테이지 블록 = 스텝 + 디렉티브</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">stage(<span class="string">'Preparation'</span>) &#123; <span class="comment">// for display purposes</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">stage(<span class="string">'Build'</span>) &#123;</span><br><span class="line">   <span class="comment">// Run the maven build</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">stage(<span class="string">'Results'</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="디렉티브-옵션"><a href="#디렉티브-옵션" class="headerlink" title="디렉티브 (옵션)"></a>디렉티브 (옵션)</h5><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> mvnHome</span><br><span class="line"></span><br><span class="line">mvnHome = tool <span class="string">'M3'</span></span><br></pre></td></tr></table></figure>
-<p>환경변수, 옵션, 파라미터, 트리거 등을 표현</p>
-<h4 id="github-연결하기"><a href="#github-연결하기" class="headerlink" title="github 연결하기"></a>github 연결하기</h4><h5 id="Credentials-설정"><a href="#Credentials-설정" class="headerlink" title="Credentials 설정"></a>Credentials 설정</h5><p>Jenkins 대쉬보드(최상위 화면)</p>
-<p>Credentials &gt; System &gt; Global credentials &gt; Add Credentials</p>
-<ul>
-<li><p>Kind : Username with password</p>
-</li>
-<li><p>Scope : Global</p>
-</li>
-<li>Username : github id, name 또는 email</li>
-<li>password : github password</li>
-<li>ID : id</li>
-<li>Description : 아무거나 </li>
-</ul>
-<h5 id="Credentials-연결"><a href="#Credentials-연결" class="headerlink" title="Credentials 연결"></a>Credentials 연결</h5><p>Jenkins 대쉬보드(최상위 화면)</p>
-<p>Jenkins관리 &gt;  시스템설정 </p>
-<p>GitHub 영역으로 이동</p>
-<ul>
-<li>Name : 아무거나</li>
-<li>API URL : <span class="exturl" data-url="aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbQ==" title="https://api.github.com">https://api.github.com<i class="fa fa-external-link"></i></span></li>
-<li>Manage hooks : 선택</li>
-</ul>
-<p>2번째 고급 클릭</p>
-<ul>
-<li>Additional actions : Convert login and password to token 선택</li>
-<li>From credentionas &gt; Credentilas &gt; 상위 만든 Credentials 선택</li>
-<li>Create token credentials 클릭</li>
-</ul>
-<p>정상적으로 토큰이 생성 되었다면 &quot;저장&quot; 후 종료</p>
-<ul>
-<li>github 사이트 &gt;  우상단 내 아이콘 클릭 &gt; Setting 클릭</li>
-<li>Developer setting 클릭</li>
-<li>Personal access tokens 선택</li>
-</ul>
-<p>github 사이트에 기 등록된 token이 양쪽다 등록 되었다면 정상 처리 완료 된 것임</p>
-<h4 id="내-github-repository-연동"><a href="#내-github-repository-연동" class="headerlink" title="내 github repository 연동"></a>내 github repository 연동</h4><p> 연동할 내 github repository 로 이동</p>
-<p>Create new file 생성 &gt; <strong>Jenkinsfile</strong> (대소문자 완전히 같아야 함)</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node (<span class="string">'master'</span>)&#123;</span><br><span class="line">  checkout scm</span><br><span class="line">  stage(<span class="string">'Build'</span>)&#123;</span><br><span class="line">    withMaven(<span class="string">maven:</span> <span class="string">'M3'</span>)&#123;</span><br><span class="line">      <span class="keyword">if</span>(isUnix())&#123;</span><br><span class="line">        sh <span class="string">'mvn -Dmaven.test.failure.ignore clean package'</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        bat <span class="string">'mvn -Dmaven.test.failure.ignore clean package'</span></span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  stage(<span class="string">'Results'</span>)&#123;</span><br><span class="line">    junit <span class="string">'**/target/surefire-reports/TEST-*.xml'</span></span><br><span class="line">    archive <span class="string">'target/*.jar'</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>상위 reposibory는 &quot;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pnbGljay9zaW1wbGUtbWF2ZW4tcHJvamVjdC13aXRoLXRlc3RzJnF1b3Q766W8" title="https://github.com/jglick/simple-maven-project-with-tests&quot;를">https://github.com/jglick/simple-maven-project-with-tests&quot;를<i class="fa fa-external-link"></i></span> Clone한 것임</p>
-</blockquote>
-<p>master branch에 상위와 같이 <code>Jenkinsfile</code> 생성</p>
-<h5 id="Multi-Branch"><a href="#Multi-Branch" class="headerlink" title="Multi Branch"></a>Multi Branch</h5><p>대쉬보드 &gt;  새로운 Item &gt; Multibranch Pipeline &gt; Branch Sources</p>
-<ul>
-<li>Credentials : 상위 Credentials 선택</li>
-<li>Owner : id or name 작성 (이걸 해야 Repository 리스트 나옮)</li>
-<li>Repository 선택</li>
-<li>저장</li>
-</ul>
-<h5 id="webhook-연결"><a href="#webhook-연결" class="headerlink" title="webhook 연결"></a>webhook 연결</h5><p>webhook을 연결해야 github에서 수정사항이 있을 때 push를 수신 할 수 있다.</p>
-<p>Jenkins관리 &gt; 시스템설정 &gt; Github &gt; 2번째 고급 클릭 &gt; Re-register hooks for all jobs 클릭</p>
-<p>github 등록 확인</p>
-<p>상위 등록한 github repository 이동(브라우저) &gt; Settings 선택 &gt; Webhooks 클릭</p>
-<ul>
-<li>우측에 내 jenkins와 연결된 내용이 보이면 됨</li>
-</ul>
-<blockquote>
-<p>주의 해야할 점은 jenkins가 public ip 여야만 한다. private의 경우 github가 jenkins를 접근 할 수 없게된다.</p>
-</blockquote>
-<h5 id="new-Branch-생성"><a href="#new-Branch-생성" class="headerlink" title="new Branch 생성"></a>new Branch 생성</h5><p>github에서 master branch 화면에서 좌상단 <code>Branch:master</code> 버튼을 클릭하고, 아무 Branch 명이나 적게 되면 Create Branch가 가능하게 된다. </p>
-<p>이때 Create Branch를 하게 되면 master와 똑같은 내용을 갖는 신규 Branch Repo가 만들어지는데 Webhook을 통해서 jenkins에 변화가 있음을 통지 해주게 된다.</p>
-<p>Jenkins &gt; multiBranch item화면 진입</p>
-<p>하게 되면 앞서 만들었던 신규 브랜치가 빌드된 모습을 확인 할 수 있다.</p>
-<h4 id="Docker-Remote-api-open"><a href="#Docker-Remote-api-open" class="headerlink" title="Docker Remote api open"></a>Docker Remote api open</h4><p>jenkins node를 docker 이용해서 처리 하기 위해서는 docker의 remote api가 open 되어 있어야 한다.</p>
-<p>docker의 인스톨을 여기서 다루지 않는다.</p>
-<p><code>systemctl status docker</code></p>
-<p>를 입력했을 때 아래와 같이 나오면, 정상적으로 docker가 인스톨 되어 있다는 뜻이다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost system]# systemctl status docker</span><br><span class="line">● docker.service - Docker Application Container Engine</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since 월 2019-06-24 13:17:30 KST; 2 days ago</span><br><span class="line">     Docs: http://docs.docker.com</span><br><span class="line"> Main PID: 25542 (dockerd-current)</span><br><span class="line">    Tasks: 52</span><br><span class="line">   Memory: 16.1M</span><br><span class="line">   CGroup: /system.slice/docker.service</span><br><span class="line">           ├─19662 /usr/libexec/docker/docker-proxy-current -proto tcp -host-ip 0.0.0.0 -host-port 8081 -container-ip 172.17.0.2 -container-port 8081</span><br><span class="line">           ├─19670 /usr/bin/docker-containerd-shim-current 67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a /var/run/docker/libcontainerd/67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a /usr/libexec/docker/docker-runc-current</span><br><span class="line">           ├─25542 /usr/bin/dockerd-current --add-runtime docker-runc=/usr/libexec/docker/docker-runc-current --default-runtime=docker-runc --exec-opt native.cgroupdriver=systemd --userland-proxy-path=/usr/libexec/docker/docker-proxy-current --init-path=/usr/libexec/d...</span><br><span class="line">           └─25550 /usr/bin/docker-containerd-current -l unix:///var/run/docker/libcontainerd/docker-containerd.sock --metrics-interval=0 --start-timeout 2m --state-dir /var/run/docker/libcontainerd/containerd --shim docker-containerd-shim --runtime docker-runc --runt...</span><br><span class="line"></span><br><span class="line"> 6월 26 15:45:58 localhost.localdomain dockerd-current[25542]:  https://hub.docker.com/</span><br><span class="line"> 6월 26 15:45:58 localhost.localdomain dockerd-current[25542]:</span><br><span class="line"> 6월 26 15:45:58 localhost.localdomain dockerd-current[25542]: For more examples and ideas, visit:</span><br><span class="line"> 6월 26 15:45:58 localhost.localdomain dockerd-current[25542]:  https://docs.docker.com/get-started/</span><br><span class="line"> 6월 26 15:45:58 localhost.localdomain dockerd-current[25542]:</span><br><span class="line"> 6월 26 15:45:58 localhost.localdomain dockerd-current[25542]: time=&quot;2019-06-26T15:45:58.670141563+09:00&quot; level=warning msg=&quot;f4cca30a56eb3a20bbb7a9943103db28a15c3bd60ddc524adae438ea459c6b2c cleanup: failed to unmount secrets: invalid argument&quot;</span><br><span class="line"> 6월 26 15:50:00 localhost.localdomain dockerd-current[25542]: 2019-06-26 06:50:00,005+0000 INFO  [quartz-3-thread-20] *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task &apos;Storage facet cleanup&apos; [repository.storage-facet-cleanup] s...WAITING -&gt; RUNNING</span><br><span class="line"> 6월 26 15:50:00 localhost.localdomain dockerd-current[25542]: 2019-06-26 06:50:00,010+0000 INFO  [quartz-3-thread-20] *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task &apos;Storage facet cleanup&apos; [repository.storage-facet-cleanup] s...NG -&gt; WAITING (OK)</span><br><span class="line"> 6월 26 16:00:00 localhost.localdomain dockerd-current[25542]: 2019-06-26 07:00:00,005+0000 INFO  [quartz-3-thread-20] *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task &apos;Storage facet cleanup&apos; [repository.storage-facet-cleanup] s...WAITING -&gt; RUNNING</span><br><span class="line"> 6월 26 16:00:00 localhost.localdomain dockerd-current[25542]: 2019-06-26 07:00:00,010+0000 INFO  [quartz-3-thread-20] *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task &apos;Storage facet cleanup&apos; [repository.storage-facet-cleanup] s...NG -&gt; WAITING (OK)</span><br><span class="line">Hint: Some lines were ellipsized, use -l to show in full.</span><br></pre></td></tr></table></figure>
-<p>이유는 알 수없지만 docker상에서 remote api를 open 하는 방법은 여러 가지가 있다.</p>
-<blockquote>
-<p>실제로는 이중에 되는게 있으면 다행인데, 없다면... 다시 처음부터 docker를 install 해야한다.</p>
-</blockquote>
-<h5 id="docker-conf-파일-수정"><a href="#docker-conf-파일-수정" class="headerlink" title="docker.conf 파일 수정"></a>docker.conf 파일 수정</h5><p>vi /etc/.init/docker.conf</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DOCKER_OPS=&apos;-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock&apos;</span><br></pre></td></tr></table></figure>
-<p>도커 서버를 유닉스 도커 엔진과 4243포트로 연결한다.</p>
-<blockquote>
-<p>상위 내용 저는 실패</p>
-</blockquote>
-<h5 id="docker-service-파일-수정"><a href="#docker-service-파일-수정" class="headerlink" title="docker.service 파일 수정"></a>docker.service 파일 수정</h5><p>위치가 다른 경우가 많은 것으로 보인다. </p>
-<p>상위 status를 통해서 얻어오 데이타인</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)</span><br></pre></td></tr></table></figure>
-<p>로 위치를 추측 하였다.</p>
-<p><code>vi /lib/systemd/system/docker.service</code></p>
-<blockquote>
-<p>인터넷이 말하는 path</p>
-</blockquote>
-<p><code>vi /usr/lib/systemd/system/docker.service</code>       </p>
-<blockquote>
-<p>내 path                                                                                                                                                                                                      </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ExecStart=/usr/bin/docker daemon -H fd:// -H tcp://0.0.0.0:4243</span><br></pre></td></tr></table></figure>
-<p>그러나 실제로 상위 파일을 수정 하려고 보면, 기존 내용을 지워야 할지 아니면 ExecStart를 하나더 추가 하라는 건지 모르겠다.</p>
-<p>docker.service</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=http://docs.docker.com</span><br><span class="line">After=network.target</span><br><span class="line">Wants=docker-storage-setup.service</span><br><span class="line">Requires=docker-cleanup.timer</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">NotifyAccess=main</span><br><span class="line">EnvironmentFile=-/run/containers/registries.conf</span><br><span class="line">EnvironmentFile=-/etc/sysconfig/docker</span><br><span class="line">EnvironmentFile=-/etc/sysconfig/docker-storage</span><br><span class="line">EnvironmentFile=-/etc/sysconfig/docker-network</span><br><span class="line">Environment=GOTRACEBACK=crash</span><br><span class="line">Environment=DOCKER_HTTP_HOST_COMPAT=1</span><br><span class="line">Environment=PATH=/usr/libexec/docker:/usr/bin:/usr/sbin</span><br><span class="line">ExecStart=/usr/bin/dockerd-current \</span><br><span class="line">          --add-runtime docker-runc=/usr/libexec/docker/docker-runc-current \</span><br><span class="line">          --default-runtime=docker-runc \</span><br><span class="line">          --<span class="built_in">exec</span>-opt native.cgroupdriver=systemd \</span><br><span class="line">          --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \</span><br><span class="line">          --init-path=/usr/libexec/docker/docker-init-current \</span><br><span class="line">          --seccomp-profile=/etc/docker/seccomp.json \</span><br><span class="line">          <span class="variable">$OPTIONS</span> \</span><br><span class="line">          <span class="variable">$DOCKER_STORAGE_OPTIONS</span> \</span><br><span class="line">          <span class="variable">$DOCKER_NETWORK_OPTIONS</span> \</span><br><span class="line">          <span class="variable">$ADD_REGISTRY</span> \</span><br><span class="line">          <span class="variable">$BLOCK_REGISTRY</span> \</span><br><span class="line">          <span class="variable">$INSECURE_REGISTRY</span> \</span><br><span class="line">          <span class="variable">$REGISTRIES</span></span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -s HUP <span class="variable">$MAINPID</span></span><br><span class="line">LimitNOFILE=1048576</span><br><span class="line">LimitNPROC=1048576</span><br><span class="line">LimitCORE=infinity</span><br><span class="line">TimeoutStartSec=0</span><br><span class="line">Restart=on-abnormal</span><br><span class="line">KillMode=process</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<h5 id="docker-파일-수정"><a href="#docker-파일-수정" class="headerlink" title="docker 파일 수정"></a>docker 파일 수정</h5><p><code>vi /etc/sysconfig/docker</code> </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># /etc/sysconfig/docker</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Modify these options if you want to change the way the docker daemon runs</span></span><br><span class="line">OPTIONS=<span class="string">'--selinux-enabled --log-driver=journald --signature-verification=false'</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$&#123;DOCKER_CERT_PATH&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    DOCKER_CERT_PATH=/etc/docker</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Do not add registries in this file anymore. Use /etc/containers/registries.conf</span></span><br><span class="line"><span class="comment"># instead. For more information reference the registries.conf(5) man page.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Location used for temporary files, such as those created by</span></span><br><span class="line"><span class="comment"># docker load and build operations. Default is /var/lib/docker/tmp</span></span><br><span class="line"><span class="comment"># Can be overriden by setting the following environment variable.</span></span><br><span class="line"><span class="comment"># DOCKER_TMPDIR=/var/tmp</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Controls the /etc/cron.daily/docker-logrotate cron job status.</span></span><br><span class="line"><span class="comment"># To disable, uncomment the line below.</span></span><br><span class="line"><span class="comment"># LOGROTATE=false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker-latest daemon can be used by starting the docker-latest unitfile.</span></span><br><span class="line"><span class="comment"># To use docker-latest client, uncomment below lines</span></span><br><span class="line"><span class="comment">#DOCKERBINARY=/usr/bin/docker-latest</span></span><br><span class="line"><span class="comment">#DOCKERDBINARY=/usr/bin/dockerd-latest</span></span><br><span class="line"><span class="comment">#DOCKER_CONTAINERD_BINARY=/usr/bin/docker-containerd-latest</span></span><br><span class="line"><span class="comment">#DOCKER_CONTAINERD_SHIM_BINARY=/usr/bin/docker-containerd-shim-latest</span></span><br><span class="line"></span><br><span class="line">OPTIONS=<span class="string">'--selinux-enabled --log-driver=journald --signature-verification=false -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock'</span></span><br></pre></td></tr></table></figure>
-<p>상위 파일의 마지막 <code>OPTIONS</code>를 기존 파일에 추가 하였다.</p>
-<blockquote>
-<p>저는 상위 파일 수정으로 성공 하였습니다. 주의 해야하는 것은 tcp 이후 0.0.0.0 이 아니 127.0.0.1로 쓰게 되면 local 접근만 되고 대외 접근은 불가 합니다.</p>
-</blockquote>
-<h5 id="서비스-재-실행-및-TEST"><a href="#서비스-재-실행-및-TEST" class="headerlink" title="서비스 재 실행 및 TEST"></a>서비스 재 실행 및 TEST</h5><ul>
-<li><p>demon 재실행 : systemctl daemon-reload</p>
-</li>
-<li><p>서비스 재실행 : service docker restart</p>
-</li>
-<li>Test : curl -X GET <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo0MjQzL2ltYWdlcy9qc29u" title="http://localhost:4243/images/json">http://localhost:4243/images/json<i class="fa fa-external-link"></i></span></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost system]<span class="comment"># systemctl daemon-reload</span></span><br><span class="line">[root@localhost system]<span class="comment"># service docker restart</span></span><br><span class="line">Redirecting to /bin/systemctl restart docker.service</span><br><span class="line">[root@localhost system]<span class="comment"># curl -X GET http://localhost:4243/images/json</span></span><br><span class="line">[&#123;<span class="string">"Containers"</span>:-1,<span class="string">"Created"</span>:1561408399,<span class="string">"Id"</span>:<span class="string">"sha256:36b0df681a47e5948f2088a446652766132141175dece2d6d47ef6e749385c05"</span>,<span class="string">"Labels"</span>:&#123;<span class="string">"com.sonatype.license"</span>:<span class="string">"Apache License, Version 2.0"</span>,<span class="string">"com.sonatype.name"</span>:<span class="string">"Nexus Repository Manager base image"</span>,<span class="string">"org.label-schema.build-date"</span>:<span class="string">"20190305"</span>,<span class="string">"org.label-schema.license"</span>:<span class="string">"GPLv2"</span>,<span class="string">"org.label-schema.name"</span>:<span class="string">"CentOS Base Image"</span>,<span class="string">"org.label-schema.schema-version"</span>:<span class="string">"1.0"</span>,<span class="string">"org.label-schema.vendor"</span>:<span class="string">"CentOS"</span>,<span class="string">"vendor"</span>:<span class="string">"Sonatype"</span>&#125;,<span class="string">"ParentId"</span>:<span class="string">""</span>,<span class="string">"RepoDigests"</span>:[<span class="string">"docker.io/sonatype/nexus3@sha256:970b09779992bf88d041d074428c54dc153f7b9c8cafe4ff364dd26d69200f7a"</span>],<span class="string">"RepoTags"</span>:[<span class="string">"docker.io/sonatype/nexus3:latest"</span>],<span class="string">"SharedSize"</span>:-1,<span class="string">"Size"</span>:581556647,<span class="string">"VirtualSize"</span>:581556647&#125;,&#123;<span class="string">"Containers"</span>:-1,<span class="string">"Created"</span>:1546306167,<span class="string">"Id"</span>:<span class="string">"sha256:fce289e99eb9bca977dae136fbe2a82b6b7d4c372474c9235adc1741675f587e"</span>,<span class="string">"Labels"</span>:null,<span class="string">"ParentId"</span>:<span class="string">""</span>,<span class="string">"RepoDigests"</span>:[<span class="string">"docker.io/hello-world@sha256:41a65640635299bab090f783209c1e3a3f11934cf7756b09cb2f1e02147c6ed8"</span>],<span class="string">"RepoTags"</span>:[<span class="string">"docker.io/hello-world:latest"</span>],<span class="string">"SharedSize"</span>:-1,<span class="string">"Size"</span>:1840,<span class="string">"VirtualSize"</span>:1840&#125;]</span><br></pre></td></tr></table></figure>
-<h5 id="포트-open"><a href="#포트-open" class="headerlink" title="포트 open"></a>포트 open</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost system]<span class="comment"># firewall-cmd --permanent --zone=public --add-port=4243/tcp</span></span><br><span class="line">success</span><br><span class="line">[root@localhost system]<span class="comment"># firewall-cmd --reload</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1205,7 +1316,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1300,7 +1411,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

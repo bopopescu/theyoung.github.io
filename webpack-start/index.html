@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="Try Again">
 <meta property="og:description" content="webstorm 프로젝트 생성File &amp;gt; New &amp;gt; Project &amp;gt; Empty 프로젝트 생성이후 아래 위치로 들어가서 settings&amp;gt;Language&amp;amp;Frameworks&amp;gt;Node.js and NPM 아래와 같은 node 설정을 해준다 사용 node version 정보 nodejs version : 6.16.0 npm ve">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-20T06:44:24.845Z">
+<meta property="og:updated_time" content="2019-07-04T02:25:46.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack basic with webstorm">
 <meta name="twitter:description" content="webstorm 프로젝트 생성File &amp;gt; New &amp;gt; Project &amp;gt; Empty 프로젝트 생성이후 아래 위치로 들어가서 settings&amp;gt;Language&amp;amp;Frameworks&amp;gt;Node.js and NPM 아래와 같은 node 설정을 해준다 사용 node version 정보 nodejs version : 6.16.0 npm ve">
@@ -245,7 +245,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
 
   </li>
 
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-20 06:44:24" itemprop="dateModified" datetime="2019-03-20T06:44:24Z">2019-03-20</time>
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
               
             
           </span>
@@ -453,7 +453,7 @@
 <h4 id="webpack-project-기본-구조"><a href="#webpack-project-기본-구조" class="headerlink" title="webpack project 기본 구조"></a>webpack project 기본 구조</h4><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">  webpack-demo</span><br><span class="line">  |- package.json</span><br><span class="line"><span class="addition">+ |- /src</span></span><br><span class="line"><span class="addition">+   |- index.js</span></span><br><span class="line"><span class="addition">+ |- /dist</span></span><br><span class="line"><span class="addition">+   |- index.html</span></span><br></pre></td></tr></table></figure>
 <p>해당 파일별 내용은 다음과 같다</p>
 <p><strong>dist/index.html</strong></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Getting Started<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Getting Started<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>src/index.js</strong></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">'lodash'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">component</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> element = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Lodash, currently included via a script, is required for this line to work</span></span><br><span class="line">    element.innerHTML = _.join([<span class="string">'Hello'</span>, <span class="string">'webpack'</span>], <span class="string">' '</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> element;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(component());</span><br></pre></td></tr></table></figure>
 <h3 id="webpack-설정"><a href="#webpack-설정" class="headerlink" title="webpack 설정"></a>webpack 설정</h3><h4 id="webpack-config-js-설정"><a href="#webpack-config-js-설정" class="headerlink" title="webpack.config.js 설정"></a>webpack.config.js 설정</h4><p>webpack을 실행하기 위해서는 기본적으로 config file이 필요하다. 아래와 같이 javascript파일을 생성해 준다</p>
@@ -565,8 +565,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Jedis-java-clinet/" rel="prev" title="Redis & Jedis">
-                Redis & Jedis <i class="fa fa-chevron-right"></i>
+              <a href="/javascript-object-merge/" rel="prev" title="javascript object merge">
+                javascript object merge <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -645,7 +645,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -740,7 +740,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="yandex-verification" content="3ac9ae36ddebb425">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"onmobile":true},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/ 이 예제를 따라 가면서 기록 남기는 용도이다. Github forkhttps://github.com/jenkins-docs/simple-node-js-react-npm-app 이 곳에 가서 우 상단 fork 버튼을 클릭한다.">
+<meta name="keywords" content="nodejs,react,npm,jenkins">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Node.js and React app with npm on jenkins">
+<meta property="og:url" content="https://theyoung.github.io/nodejs-react-on-jenkins/index.html">
+<meta property="og:site_name" content="Try Again">
+<meta property="og:description" content="https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/ 이 예제를 따라 가면서 기록 남기는 용도이다. Github forkhttps://github.com/jenkins-docs/simple-node-js-react-npm-app 이 곳에 가서 우 상단 fork 버튼을 클릭한다.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-14T03:34:04.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Build a Node.js and React app with npm on jenkins">
+<meta name="twitter:description" content="https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/ 이 예제를 따라 가면서 기록 남기는 용도이다. Github forkhttps://github.com/jenkins-docs/simple-node-js-react-npm-app 이 곳에 가서 우 상단 fork 버튼을 클릭한다.">
+
+
+
+
+
+
+  <link rel="canonical" href="https://theyoung.github.io/nodejs-react-on-jenkins/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Build a Node.js and React app with npm on jenkins | Try Again</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+
+  <div class="container page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try Again</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">anything</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-news">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-bullhorn"></i> <br>News</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/nodejs-react-on-jenkins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Build a Node.js and React app with npm on jenkins
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-14 02:50:40 / Modified: 03:34:04" itemprop="dateCreated datePublished" datetime="2019-07-14T02:50:40Z">2019-07-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/nodejs-react-on-jenkins/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="nodejs-react-on-jenkins/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy90dXRvcmlhbHMvYnVpbGQtYS1ub2RlLWpzLWFuZC1yZWFjdC1hcHAtd2l0aC1ucG0v" title="https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/">https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/<i class="fa fa-external-link"></i></span></p>
+<p>이 예제를 따라 가면서 기록 남기는 용도이다.</p>
+<h4 id="Github-fork"><a href="#Github-fork" class="headerlink" title="Github fork"></a>Github fork</h4><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2plbmtpbnMtZG9jcy9zaW1wbGUtbm9kZS1qcy1yZWFjdC1ucG0tYXBw" title="https://github.com/jenkins-docs/simple-node-js-react-npm-app">https://github.com/jenkins-docs/simple-node-js-react-npm-app<i class="fa fa-external-link"></i></span></p>
+<p>이 곳에 가서 우 상단 fork 버튼을 클릭한다.</p>
+<blockquote>
+<p>github가 가입되어있고, 내 레파지토리로 상위가 포크 된다는 전제이다.</p>
+<p>Jenkins File을 레파지토리에 직접 넣어 줘야 해서 필요하다. </p>
+<p>아니면 예제에 나온것처럼 로컬 작업을 해야 하는데 그게 더 힘들 것 같다.</p>
+</blockquote>
+<h4 id="파이프라인만들기"><a href="#파이프라인만들기" class="headerlink" title="파이프라인만들기"></a>파이프라인만들기</h4><p>젠킨스 대쉬보드 &gt; 새로운아이템 &gt; 파이프라인 선택 &gt; 저장(이름 넣고)</p>
+<ul>
+<li>파이프라인 : Pipeline script from SCM 선택</li>
+<li>SCM : git</li>
+<li>Repository url : fork한 내 GitHub url</li>
+<li>Credential : github credentails이 있으면 선택하고 없으면 비게 놔둬도 된다. (단, 프라이빗 레포가 아니라는 전제이다.)</li>
+<li>Script Path : Jenkinsfile</li>
+</ul>
+<h4 id="Jenkins-file-만들기"><a href="#Jenkins-file-만들기" class="headerlink" title="Jenkins file 만들기"></a>Jenkins file 만들기</h4><p>github에 가서 내 레파지토리로 fork가 된 simple-node-js-react-npm-app 레포에 진입한다</p>
+<ul>
+<li>Create new file : 버튼 클릭</li>
+<li>파일명 : Jenkinsfile (Script Path의 이름과 같아야 한다. 대소문자 주의)</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">'node:6-alpine'</span> </span><br><span class="line">            args <span class="string">'-p 3001:3000'</span> </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">'Build'</span>) &#123; </span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">'npm install'</span> </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jenkins가 동작하는 서버에 docker와 nodejs&amp;npm이 깔려 있다는 전제가 있다. </p>
+</blockquote>
+<h5 id="Agent-docker"><a href="#Agent-docker" class="headerlink" title="Agent docker"></a>Agent docker</h5><p>파이프라인이 독커에서 실행 되는데, 해당 이미지는 <code>node:6-alpine</code>이다. args는 docker 실행시 들어가는 파라메터 값으로 <code>-p 3001:3000</code> host 머신(젠킨스 돌아가는 서버) 3001 포트로 대외 서비스 하고, 3000번 포트는 독커 포트이다. 이 둘을 연결하는 파라메터 이다.</p>
+<h5 id="stage"><a href="#stage" class="headerlink" title="stage"></a>stage</h5><p>파이프라인의 순서이자 이름이다. 여기서는 Build만 았고 npm프로젝트를 install 한다.</p>
+<h5 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h5><p>젠킨스대쉬보드 &gt; 파이프라인 &gt; &#39;위에서 만든 프로젝트&#39;파이프라인 선택 &gt; Build Now</p>
+<blockquote>
+<p>만약에 빌드 중 다음과 같은 오류가 나온다면</p>
+<p><code>npm ERR! Error: EACCES: permission denied, mkdir &#39;/.npm&#39;</code></p>
+<p>파이프라인 코드를 다음과 같이 변경 해보자</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">&gt; pipeline &#123;</span><br><span class="line">&gt;     agent &#123;</span><br><span class="line">&gt;         docker &#123;</span><br><span class="line">&gt;             image <span class="string">'node:6-alpine'</span> </span><br><span class="line">&gt;             args <span class="string">'-p 3001:3000'</span> </span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     environment &#123;</span><br><span class="line">&gt;         HOME = <span class="string">'.'</span></span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     stages &#123;</span><br><span class="line">&gt;         stage(<span class="string">'Build'</span>) &#123; </span><br><span class="line">&gt;             steps &#123;</span><br><span class="line">&gt;                 sh <span class="string">'npm install'</span> </span><br><span class="line">&gt;             &#125;</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNDI3NDMyMDEvbnBtLWluc3RhbGwtZmFpbHMtaW4tamVua2lucy1waXBlbGluZS1pbi1kb2NrZXIvNDI5NTcwMzQ/dXRtX21lZGl1bT1vcmdhbmljJmFtcDt1dG1fc291cmNlPWdvb2dsZV9yaWNoX3FhJmFtcDt1dG1fY2FtcGFpZ249Z29vZ2xlX3JpY2hfcWE=" title="https://stackoverflow.com/questions/42743201/npm-install-fails-in-jenkins-pipeline-in-docker/42957034?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa">https://stackoverflow.com/questions/42743201/npm-install-fails-in-jenkins-pipeline-in-docker/42957034?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa<i class="fa fa-external-link"></i></span></p>
+<p>여기 보고 고치긴 했는데 자세한 이유는 잘 모르겠다. 다음 기회에...</p>
+</blockquote>
+<p><code>/var/lib/jenkins/workspace/nodejs</code> 디렉토리를 가보면 nodejs가 인스톨 되어 있는 것을 볼 수 있다.</p>
+<h4 id="nvm-사용-agnet를-사용하지-말고"><a href="#nvm-사용-agnet를-사용하지-말고" class="headerlink" title="nvm 사용 (agnet를 사용하지 말고)"></a>nvm 사용 (agnet를 사용하지 말고)</h4><p>agent를 사용하지 않고 로컬 서버 환경에 있는 node&amp;npm을 사용하면 node 혹은 npm 둘다 command not found가 발생할 수 있다. bin path가 사용자 환경과 다르기 때문이다. </p>
+<h5 id="jenkins-plugin-install"><a href="#jenkins-plugin-install" class="headerlink" title="jenkins plugin install"></a>jenkins plugin install</h5><p><span class="exturl" data-url="aHR0cHM6Ly93aWtpLmplbmtpbnMuaW8vZGlzcGxheS9KRU5LSU5TL052bStXcmFwcGVyK1BsdWdpbg==" title="https://wiki.jenkins.io/display/JENKINS/Nvm+Wrapper+Plugin">https://wiki.jenkins.io/display/JENKINS/Nvm+Wrapper+Plugin<i class="fa fa-external-link"></i></span></p>
+<p>이 플러그인을 젠킨스에 설치 한다.</p>
+<p>대쉬보드 &gt; 젠킨스관리 &gt; 플러그인 매니저</p>
+<h5 id="파이프라인"><a href="#파이프라인" class="headerlink" title="파이프라인"></a>파이프라인</h5><p>프리스타일화면 또는 스크립트를 통해서 nvm을 적용 가능하다.</p>
+<p>스크립트는 다음과 같이 처리 하면 된다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    checkout scm</span><br><span class="line">    </span><br><span class="line">    stage(<span class="string">'build'</span>) &#123;</span><br><span class="line">        sh <span class="string">"echo $PATH"</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        nvm(<span class="string">nvmInstallURL:</span> <span class="string">'https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh'</span>, </span><br><span class="line"><span class="symbol">             nvmIoJsOrgMirror:</span> <span class="string">'https://iojs.org/dist'</span>,</span><br><span class="line"><span class="symbol">             nvmNodeJsOrgMirror:</span> <span class="string">'https://nodejs.org/dist'</span>, </span><br><span class="line"><span class="symbol">             version:</span> <span class="string">'10.16.0'</span>) &#123;</span><br><span class="line">                    sh <span class="string">"npm install"</span></span><br><span class="line">                    echo <span class="string">"Build main site distribution"</span></span><br><span class="line">                    sh <span class="string">"npm run build"</span></span><br><span class="line">              &#125;</span><br><span class="line">           </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>신경 써야 할 것은 2개이다.</p>
+<ul>
+<li>nvmInstallURL : nvm 설치 url -&gt; 버전이 바뀌면 url도 바뀌게 된다.</li>
+<li>version : node version 이다.</li>
+</ul>
+<p>nvm 환경내에서 작동할 shell script를 이후에 적용해 주면 된다.</p>
+<h5 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h5><p>agent를 사용한 경우는 상관이 없겠지만, master agent를 사용한 경우는 직접 디플로이 처리 까지 해줘야 한다.</p>
+<p>아래 코드는 build가 완료된 파일을 httpd(아파치) 디렉토리로 copy하는 내용이다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">node &#123;</span><br><span class="line">    checkout scm</span><br><span class="line">    </span><br><span class="line">    stage(<span class="string">'build'</span>) &#123;</span><br><span class="line">        nvm(<span class="string">nvmInstallURL:</span> <span class="string">'https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh'</span>, </span><br><span class="line"><span class="symbol">             nvmIoJsOrgMirror:</span> <span class="string">'https://iojs.org/dist'</span>,</span><br><span class="line"><span class="symbol">             nvmNodeJsOrgMirror:</span> <span class="string">'https://nodejs.org/dist'</span>, </span><br><span class="line"><span class="symbol">             version:</span> <span class="string">'10.16.0'</span>) &#123;</span><br><span class="line">                    sh <span class="string">"npm install"</span></span><br><span class="line">                    echo <span class="string">"Build main site distribution"</span></span><br><span class="line">                    sh <span class="string">"npm run build"</span></span><br><span class="line">              &#125;</span><br><span class="line">           </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    stage(<span class="string">'Deploy'</span>) &#123;</span><br><span class="line">        sh <span class="string">"cp -r dist/* /data/test1/"</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>상위 stage <code>Deploy</code>가 해당 영역인데, 상위 처럼 적용한 경우 permission denied가 날 가능 성이 높다.</p>
+<p>jenkins는 jenkins라고 하는 user 또는 group권한을 바탕으로 마스터 서버에서 작동 하기 때문이다.</p>
+<p>그래서 target이 되는 <code>/data/test1/</code>에 대한 그룹 권한을 다음과 같이 변경한다.</p>
+<p><code>sudo chown -R root:jenkins test1/</code></p>
+<p><code>sudo chmod 775 test1</code></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/npm/" rel="tag"># npm</a>
+          
+            <a href="/tags/jenkins/" rel="tag"># jenkins</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/vuejs-starter/" rel="next" title="views basic with webstorm">
+                <i class="fa fa-chevron-left"></i> views basic with webstorm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon-next.png" alt="whoami">
+            
+              <p class="site-author-name" itemprop="name">whoami</p>
+              <div class="site-description motion-element" itemprop="description">my note</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZXlvdW5nL3RoZXlvdW5nLmdpdGh1Yi5pbw==" title="GitHub &rarr; https://github.com/theyoung/theyoung.github.io"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnN1cHBvcnRAdGhleW91bmcyMDAyQG5hdmVyLmNvbQ==" title="E-Mail &rarr; mailto:support@theyoung2002@naver.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Github-fork"><span class="nav-number">1.</span> <span class="nav-text">Github fork</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#파이프라인만들기"><span class="nav-number">2.</span> <span class="nav-text">파이프라인만들기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Jenkins-file-만들기"><span class="nav-number">3.</span> <span class="nav-text">Jenkins file 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Agent-docker"><span class="nav-number">3.1.</span> <span class="nav-text">Agent docker</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#stage"><span class="nav-number">3.2.</span> <span class="nav-text">stage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Build"><span class="nav-number">3.3.</span> <span class="nav-text">Build</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nvm-사용-agnet를-사용하지-말고"><span class="nav-number">4.</span> <span class="nav-text">nvm 사용 (agnet를 사용하지 말고)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jenkins-plugin-install"><span class="nav-number">4.1.</span> <span class="nav-text">jenkins plugin install</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#파이프라인"><span class="nav-number">4.2.</span> <span class="nav-text">파이프라인</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Deploy"><span class="nav-number">4.3.</span> <span class="nav-text">Deploy</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.0.1</div>
+
+
+
+  <div class="footer-custom">Theme source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">here</span><br>Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC5vcmc=">here</span></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.1"></script>
+
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://https-theyoung-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theyoung.github.io/nodejs-react-on-jenkins/";
+    this.page.identifier = "nodejs-react-on-jenkins/";
+    this.page.title = 'Build a Node.js and React app with npm on jenkins';
+    this.language = 'en';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-theyoung-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
 
   </li>
 
@@ -307,6 +307,515 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/redis-config-explain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/redis-config-explain/" class="post-title-link" itemprop="url">Redis Config Explain</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-05 18:50:40" itemprop="dateCreated datePublished" datetime="2019-06-05T18:50:40Z">2019-06-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/redis-config-explain/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="redis-config-explain/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Redis-Config-Section"><a href="#Redis-Config-Section" class="headerlink" title="Redis Config Section"></a>Redis Config Section</h4><p><code>redis-cli</code>를 통해서 redis console에 진입 할 경우 <code>info</code>명령어를 통해서 다음 section에 대한 정보를 획득 할 수있다.</p>
+<p><code>info &lt;&lt;아래 명령어&gt;&gt;</code></p>
+<ul>
+<li>server : 기본 정보</li>
+<li>clients : client의 접속 정보</li>
+<li>memory : 메모리 사용 관련 정보</li>
+<li>persistence : RDB와 AOF(Append Only File) 관련 정보</li>
+</ul>
+<blockquote>
+<p>AOF의 경우는 appendonly.aof 파일에 입력/수정/삭제 실행 명령 실행시 마다 기록 (조회 제외)</p>
+<p>Redis 서버 작동시 <code>FLUSHALL</code>명령을 사용한 경우 해당 파일을 이용해서 DB를 재 구축 할 수 있음</p>
+<p><span class="exturl" data-url="aHR0cDovL3JlZGlzZ2F0ZS5rci9yZWRpcy9jb25maWd1cmF0aW9uL3BlcnNpc3RlbmNlLnBocA==" title="http://redisgate.kr/redis/configuration/persistence.php">http://redisgate.kr/redis/configuration/persistence.php<i class="fa fa-external-link"></i></span></p>
+<p>RDB의 경우에는 현재 메모리에 있는 redis data를 특정 시점을 기준으로 파일로 write 한 일종의 backup 파일 또는 스냅샷으로 생각 하면 된다.</p>
+</blockquote>
+<ul>
+<li>stats : 일반 통계 정보</li>
+<li>replication : Master, Slave간에 데이터 복사에 대한 설정</li>
+<li>cpu : cpu 사용 통계</li>
+<li>commandstats : redis에 command를 처리한 통계</li>
+<li>cluster : redis cluster에 대한 설정 (master, slave 등)</li>
+<li>keyspace : database 관련 통계</li>
+</ul>
+<h4 id="server"><a href="#server" class="headerlink" title="server"></a>server</h4><h5 id="redis-version-redis-서버-버전"><a href="#redis-version-redis-서버-버전" class="headerlink" title="redis_version : redis 서버 버전"></a>redis_version : redis 서버 버전</h5><h5 id="redis-git-sha1-git-sha1"><a href="#redis-git-sha1-git-sha1" class="headerlink" title="redis_git_sha1 : git sha1 (?)"></a>redis_git_sha1 : git sha1 (?)</h5><h5 id="redis-git-dirty-git-dirty-flag"><a href="#redis-git-dirty-git-dirty-flag" class="headerlink" title="redis_git_dirty : git dirty flag (?)"></a>redis_git_dirty : git dirty flag (?)</h5><h5 id="redis-build-id"><a href="#redis-build-id" class="headerlink" title="redis_build_id"></a>redis_build_id</h5><p>소스로 부터 redis를 빌드한 id</p>
+<h5 id="redis-mode"><a href="#redis-mode" class="headerlink" title="redis_mode"></a>redis_mode</h5><p>standalone : 독립적으로 동작</p>
+<p>sentinel : sentinel에 의해 모니터링 되고 관리됨</p>
+<p>cluster : redis간 clustering 처리</p>
+<h5 id="os"><a href="#os" class="headerlink" title="os"></a>os</h5><h5 id="arch-bits"><a href="#arch-bits" class="headerlink" title="arch_bits"></a>arch_bits</h5><p>32bits or 64bits</p>
+<h5 id="multiplexing-api"><a href="#multiplexing-api" class="headerlink" title="multiplexing_api (?)"></a>multiplexing_api (?)</h5><p>evnet loop 메카니즘</p>
+<h5 id="process-id"><a href="#process-id" class="headerlink" title="process_id"></a>process_id</h5><p>서버 PID</p>
+<h5 id="tcp-port"><a href="#tcp-port" class="headerlink" title="tcp_port"></a>tcp_port</h5><p>TCP/IP 리슨포트 (6379 기본 포트)</p>
+<h5 id="uptime-in-seconds"><a href="#uptime-in-seconds" class="headerlink" title="uptime_in_seconds"></a>uptime_in_seconds</h5><p>redis server 작동 후 시간</p>
+<h5 id="uptime-in-days"><a href="#uptime-in-days" class="headerlink" title="uptime_in_days"></a>uptime_in_days</h5><p>redis server 작동 후 일자</p>
+<h5 id="lru-clock"><a href="#lru-clock" class="headerlink" title="lru_clock"></a>lru_clock</h5><p>LRU 알고리즘을 위한 시간 (매분 마다 증가함)</p>
+<p>Least Recently Used 가장 오랫동안 접근 되지 않은 키의 데이터를 삭제한다는 의미</p>
+<h5 id="excutable"><a href="#excutable" class="headerlink" title="excutable"></a>excutable</h5><p>실행 파일 위치</p>
+<h5 id="config-file"><a href="#config-file" class="headerlink" title="config_file"></a>config_file</h5><p>환경 설정 파일 위치</p>
+<h4 id="clients"><a href="#clients" class="headerlink" title="clients"></a>clients</h4><h5 id="connected-clients"><a href="#connected-clients" class="headerlink" title="connected_clients"></a>connected_clients</h5><p>현재 접속 되어 있는 clients 개수 (replicas를 통한 접근 제외)</p>
+<h5 id="client-longest-output-list"><a href="#client-longest-output-list" class="headerlink" title="client_longest_output_list"></a>client_longest_output_list</h5><p>현재 접속되어 있는 clients 중에 가장 오래 output(? 가장 오래 접속 하고 있는 의미로 보임)하고 있는 list</p>
+<h5 id="client-biggest-input-buf"><a href="#client-biggest-input-buf" class="headerlink" title="client_biggest_input_buf"></a>client_biggest_input_buf</h5><p>현재 접속되어있는 clients 중에 가장 큰 input buffer를 넣고 있는 connection</p>
+<h5 id="blocked-clients"><a href="#blocked-clients" class="headerlink" title="blocked_clients"></a>blocked_clients</h5><p>blocking call(BLPOP, BRPOP, BRPOPLPUSH)에 의해 blocked 되어있는 client 개수</p>
+<blockquote>
+<p>BLPOP(리스트의 처음), BRPOP(리스트의 마지막),BRPOPLPUSH (원본 마지막으로 대상 리스트의 첫번째로 입력) 명령어의 경우 기본적으로 blocking 모드 작동을 한다. 즉, 해당 command가 작동 중에는 다음 command는 blocking 되게 된다.</p>
+</blockquote>
+<h4 id="memory"><a href="#memory" class="headerlink" title="memory"></a>memory</h4><h5 id="used-memory"><a href="#used-memory" class="headerlink" title="used_memory"></a>used_memory</h5><p>redis가 사용중인 총 메모리양</p>
+<h5 id="used-memory-human"><a href="#used-memory-human" class="headerlink" title="used_memory_human"></a>used_memory_human</h5><p>사람이 읽을 수있는 메모리양 표시 (G로 표시한다)</p>
+<h5 id="used-memory-rss"><a href="#used-memory-rss" class="headerlink" title="used_memory_rss"></a>used_memory_rss</h5><p>OS상에서 사용중인 메모리양</p>
+<blockquote>
+<p>일반적으로 해당 솔루션에서 사용된 메모리양 + shared 메모리양의 총합으로</p>
+<p>used memory 보다 크다</p>
+</blockquote>
+<h5 id="used-memory-rss-human"><a href="#used-memory-rss-human" class="headerlink" title="used_memory_rss_human"></a>used_memory_rss_human</h5><p>사람이 읽을 수 있는 메모리양 표시 (G로 표시한다)</p>
+<h5 id="used-memory-peak"><a href="#used-memory-peak" class="headerlink" title="used_memory_peak"></a>used_memory_peak</h5><p>바이트 단위로 메모리가 peak에 있을 때 사용량</p>
+<h5 id="used-memory-peak-perc"><a href="#used-memory-peak-perc" class="headerlink" title="used_memory_peak_perc"></a>used_memory_peak_perc</h5><p>used_memory 대비 used_memory의 퍼센트 (peak이 더 높다)</p>
+<h5 id="used-memory-overhead"><a href="#used-memory-overhead" class="headerlink" title="used_memory_overhead"></a>used_memory_overhead</h5><p>모든 overheads에 대한 바이트 합</p>
+<h5 id="used-memory-startup"><a href="#used-memory-startup" class="headerlink" title="used_memory_startup"></a>used_memory_startup</h5><p>redis가 start하는 시점에 사용된 전체 메모리양</p>
+<h5 id="used-memory-dataset"><a href="#used-memory-dataset" class="headerlink" title="used_memory_dataset"></a>used_memory_dataset</h5><p>dataset의 바이트 단위 사이즈</p>
+<h5 id="maxmemory"><a href="#maxmemory" class="headerlink" title="maxmemory"></a>maxmemory</h5><p>설정된 최대 메모리</p>
+<p>32bit의 경우는 3G</p>
+<p>64bit의 경우는 0 (unlimit로 처리 되는 것으로 보임)</p>
+<h5 id="maxmemory-policy"><a href="#maxmemory-policy" class="headerlink" title="maxmemory_policy"></a>maxmemory_policy</h5><ul>
+<li>noeviction : memory의 limit에 접근하면 에러를 낸다</li>
+<li>allkeys-lru : 신규 데이터 입력시 key를 기반으로 LRU 알고리즘 적용</li>
+<li>volatile-lru : allkeys-lru와 같은 조건이나, expire set이 있는 경우만 대상으로 함</li>
+</ul>
+<blockquote>
+<p>EXPIRE (<span class="exturl" data-url="aHR0cHM6Ly9yZWRpcy5pby9jb21tYW5kcy9leHBpcmU=" title="https://redis.io/commands/expire">https://redis.io/commands/expire<i class="fa fa-external-link"></i></span>) 명령어로 지정된 key를 대상으로만 하는 것으로 보임</p>
+</blockquote>
+<ul>
+<li>allkeys-random : random으로 삭제(진짜?)</li>
+<li>volatile-random : expire set이 있는 경우만 random으로 삭제</li>
+<li>volatile-ttl : expire set의 ttl을 확인 후 최우선으로 삭제</li>
+</ul>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9yZWRpcy5pby90b3BpY3MvbHJ1LWNhY2hl" title="https://redis.io/topics/lru-cache">https://redis.io/topics/lru-cache<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h4 id="persistence"><a href="#persistence" class="headerlink" title="persistence"></a>persistence</h4><h5 id="loading"><a href="#loading" class="headerlink" title="loading"></a>loading</h5><p>dump 파일이 로딩 중인지 표시 한다 (평소에는 0이다가 로딩하게 되면 1로 변화하는 것으로 보인다)</p>
+<h5 id="rdb-changes-since-last-save"><a href="#rdb-changes-since-last-save" class="headerlink" title="rdb_changes_since_last_save"></a>rdb_changes_since_last_save</h5><p>마지막 dump 후 변경된 횟수</p>
+<h5 id="rdb-last-save-time"><a href="#rdb-last-save-time" class="headerlink" title="rdb_last_save_time"></a>rdb_last_save_time</h5><p>epoch 기준으로 마지막 성공한 저장 시점</p>
+<h5 id="aof-enabled"><a href="#aof-enabled" class="headerlink" title="aof_enabled"></a>aof_enabled</h5><p>aof 설정 여부 (0 false)</p>
+<h4 id="replication"><a href="#replication" class="headerlink" title="replication"></a>replication</h4><h5 id="role"><a href="#role" class="headerlink" title="role"></a>role</h5><p>master or slave</p>
+<h5 id="master-replid"><a href="#master-replid" class="headerlink" title="master_replid"></a>master_replid</h5><p>redis server replication ID</p>
+<h5 id="master-repl-offset"><a href="#master-repl-offset" class="headerlink" title="master_repl_offset"></a>master_repl_offset</h5><p>현재 서버의 replication offset</p>
+<h4 id="Redis-Sentinel-사용시-수시-Disconnect가-발생하는-경우"><a href="#Redis-Sentinel-사용시-수시-Disconnect가-발생하는-경우" class="headerlink" title="Redis Sentinel 사용시 수시 Disconnect가 발생하는 경우"></a>Redis Sentinel 사용시 수시 Disconnect가 발생하는 경우</h4><h5 id="sentinel-down-after-milliseconds-mymaster-3000"><a href="#sentinel-down-after-milliseconds-mymaster-3000" class="headerlink" title="sentinel down-after-milliseconds mymaster 3000"></a>sentinel down-after-milliseconds mymaster 3000</h5><p>설정을 확인한다.</p>
+<p>상위에서 마지막 부분에 있는 3000은 3초를 의미 한다. 이를 매우 작게 사용한다면 Redis간 Sync시 Disconnect를 감지하고 Master Slave 전환을 처리 하게 된다. 일반적으로 3초에서 5초 사이로 설정해 놓고 쓰면된다.</p>
+<blockquote>
+<p>Reids Sync 처리 프로세스를 실행하기 전에 Master에서 BGSAVE처리를 하게 된다. BGSAVE는 메모리 데이터를 파일로 Write하는 행동인데, 이때 Redis 소스 내부적으로 Slave와 Disconnect를 처리 한다. 이 순간의 단절 상황을 Sentinel에서 감지하게 되는 문제이다. </p>
+</blockquote>
+<h5 id="client-output-buffer-limit"><a href="#client-output-buffer-limit" class="headerlink" title="client-output-buffer-limit"></a>client-output-buffer-limit</h5><p>client-output-buffer-limit normal 0 0 0<br>client-output-buffer-limit slave 256mb 64mb 60<br>client-output-buffer-limit pubsub 32mb 8mb 60</p>
+<p>Redis와 Slave 간의 데이터 이동 양을 정하는 부분이다</p>
+<p>client-output-buffer-limit slave 256mb 64mb 60</p>
+<ul>
+<li>hard : 최대 256mb의 데이터를 송수신 할 수 있다.  넘어가면 Disconnect가 발생한다.</li>
+<li>Soft : 64mb 데이터를 60초 동안 이동 시킨다. 넘어가면 Disconnect가 발생한다. </li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/Android-Webview-Keyboard-Process-With-IME/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Android-Webview-Keyboard-Process-With-IME/" class="post-title-link" itemprop="url">android keyboard show on the web</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-24 18:37:40" itemprop="dateCreated datePublished" datetime="2019-05-24T18:37:40Z">2019-05-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/Android-Webview-Keyboard-Process-With-IME/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Android-Webview-Keyboard-Process-With-IME/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Android에서-Keyboard-작동을-위한-요소"><a href="#Android에서-Keyboard-작동을-위한-요소" class="headerlink" title="Android에서 Keyboard 작동을 위한 요소"></a>Android에서 Keyboard 작동을 위한 요소</h4><ul>
+<li>Input Method Manager : 클라이언트 Side의 application context에 위치 하면서 Android 전체 시스템 상 프로세스 간의 통로 역할을 한다</li>
+<li>Input Method (IME &amp; Keyboard) : 쉽게 keyboard라고 생각하면 된다. 사용자의 text를 생성하고 입력할 수있게 하는 역할을 한다. IME는 오직 한번에 하나만 화면에 표시 될 수있다.</li>
+<li>Client Application : IME을 사용하는 대상 application이 되며, 한번에 오직 하나의 입력 화면(소스를 보면 View라고 생각된다)과 Active 상태를 유지 할 수있다.</li>
+</ul>
+<h5 id="InputMethd-Framework-IMF-의-보안적-제한"><a href="#InputMethd-Framework-IMF-의-보안적-제한" class="headerlink" title="InputMethd Framework (IMF) 의 보안적 제한"></a>InputMethd Framework (IMF) 의 보안적 제한</h5><p>Input Method의 경우 사용자의 모든 입력을 확인 할 수있기 때문에, 보안적인 제한이 걸려있다.</p>
+<ul>
+<li>IME interface 접근 : 오직 Manifest.permission.BIND_INPUT_METHOD 권한을 통해서만 접근 가능</li>
+<li>Clinet는 Input method를 사용할때 InputMethodSession 인터페이스에서 주어진 Access를 통해서만 가능하다. 아래 코드는 InputMethodManager의 코드 일부분이다 이때 windowToken을 통해 hide 시킬 권한을 얻어오는 것을 볼 수있다 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hideSoftInputFromWindow</span><span class="params">(IBinder windowToken, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> hideSoftInputFromWindow(windowToken, flags, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Input Method는 화면이 off 되어있는 상태에서 절대로 사용될 수 없다.</li>
+<li>신규 IME를 인스톨 할경우 IME의 변환은 반듯이 사용자의 손에 의해서 만 변경 될 수있다.</li>
+</ul>
+<h4 id="IME의-Lifecycle"><a href="#IME의-Lifecycle" class="headerlink" title="IME의 Lifecycle"></a>IME의 Lifecycle</h4><p>이하 Lifecycle은 InputMethodService : <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYW5kcm9pZC5jb20vcmVmZXJlbmNlL2FuZHJvaWQvaW5wdXRtZXRob2RzZXJ2aWNlL0lucHV0TWV0aG9kU2VydmljZeqwgA==" title="https://developer.android.com/reference/android/inputmethodservice/InputMethodService가">https://developer.android.com/reference/android/inputmethodservice/InputMethodService가<i class="fa fa-external-link"></i></span> 작동하는 순서를 나타내고 있다 </p>
+<p><img src="https://developer.android.com/resources/articles/images/inputmethod_lifecycle_image.png" alt></p>
+<ul>
+<li><p>onCreateInputView() : 사용자 입력을 받기 위해 View를 init한다. (여기서 init되는 화면은 단순히 softkey 뿐만이 아닌 Draw 입력 등도 포함된다) User interface의 생성이라고 생각하면 될 듯 하다. 아래 코드는 IMS를 Override하여 어떻게 UI를 생성하는지 보여주는 예이다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">onCreateInputView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mKeyboardView != <span class="keyword">null</span>) &#123;</span><br><span class="line">        mKeyboardView.closing();</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    updateKeyboardThemeAndContextThemeWrapper(</span><br><span class="line">            mLatinIME, KeyboardTheme.getKeyboardTheme(mLatinIME <span class="comment">/* context */</span>));</span><br><span class="line">    mCurrentInputView = (InputView)LayoutInflater.from(mThemeContext).inflate(</span><br><span class="line">            R.layout.input_view, <span class="keyword">null</span>);</span><br><span class="line">    mMainKeyboardFrame = mCurrentInputView.findViewById(R.id.main_keyboard_frame);</span><br><span class="line">  </span><br><span class="line">    mKeyboardView = (MainKeyboardView) mCurrentInputView.findViewById(R.id.keyboard_view);</span><br><span class="line">    mKeyboardView.setKeyboardActionListener(mLatinIME);</span><br><span class="line">    <span class="keyword">return</span> mCurrentInputView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>onEvaluateInputViewShown() : hard keyboard 등이 달려 있는 단말의 경우 soft keyboard가 보일 필요가 없다. 이와같이 keyboard를 사용자에게 보여줄지를 확인 하는 메서드이다. (물론 softkeyboard가 열려 있다면 return 은 true가 될 것이다)<br>아래는 IMS의 code이다. false가 return 되면 사용자에게 보여주면 된다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onEvaluateInputViewShown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mSettingsObserver == <span class="keyword">null</span>) &#123;</span><br><span class="line">        Log.w(TAG, <span class="string">"onEvaluateInputViewShown: mSettingsObserver must not be null here."</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (mSettingsObserver.shouldShowImeWithHardKeyboard()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Configuration config = getResources().getConfiguration();</span><br><span class="line">    <span class="keyword">return</span> config.keyboard == Configuration.KEYBOARD_NOKEYS</span><br><span class="line">            || config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>onStartInput()  &amp; onStartInputView() : text 입력의 시작을 알리는 부분으로, 해당 메서드의 call 순서는 onStartInput이 일어나고 그다음에 onStartInputView가 Call되게 된다. 해당 Call의 순서처리에 따라서 lifecycle이 다소 달라지는데 해당 내용은 &quot;Webview에서의 Keyboard 처리&quot;에서 상세하게 다룰것이다. IMS에서는 doStartInput이 발생할 경우 onStartInput을 요청하고 이후에 InputView를 call하는 것을 확인 할 수 있다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">doStartInput</span><span class="params">(InputConnection ic, EditorInfo attribute, <span class="keyword">boolean</span> restarting)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!restarting) &#123;</span><br><span class="line">        doFinishInput();</span><br><span class="line">    &#125;</span><br><span class="line">    mInputStarted = <span class="keyword">true</span>;</span><br><span class="line">    mStartedInputConnection = ic;</span><br><span class="line">    mInputEditorInfo = attribute;</span><br><span class="line">    initialize();</span><br><span class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"CALL: onStartInput"</span>);</span><br><span class="line">    onStartInput(attribute, restarting);</span><br><span class="line">    <span class="keyword">if</span> (mWindowVisible) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mShowInputRequested) &#123;</span><br><span class="line">            <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"CALL: onStartInputView"</span>);</span><br><span class="line">            mInputViewStarted = <span class="keyword">true</span>;</span><br><span class="line">            onStartInputView(mInputEditorInfo, restarting);</span><br><span class="line">            startExtractingText(<span class="keyword">true</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mCandidatesVisibility == View.VISIBLE) &#123;</span><br><span class="line">            <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"CALL: onStartCandidatesView"</span>);</span><br><span class="line">            mCandidatesViewStarted = <span class="keyword">true</span>;</span><br><span class="line">            onStartCandidatesView(mInputEditorInfo, restarting);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>onStartInput과 onStartInputView의 차이점을 문서 상으로 확인하기는 쉽지 않다. 코드상으로 보면 onStartInput의 경우는 Local과 같은 설정, onStartInputView는 실제로 보여줄 keyboard에 대한 모든 설정을 처리 하는 것으로 보인다.</p>
+</blockquote>
+<h4 id="Webview에서의-Keyboard-처리"><a href="#Webview에서의-Keyboard-처리" class="headerlink" title="Webview에서의 Keyboard 처리"></a>Webview에서의 Keyboard 처리</h4><p>Webview를 이용한 키보드 처리는 크게 3가지로 나눌 수 있다.</p>
+<ul>
+<li>Webview에서 load된 html의 input 입력시 자동으로 IME Show</li>
+<li>Webview의 <code>public InputConnection onCreateInputConnection(EditorInfo outAttrs) {</code>을 Override 시켜서 특정 키보드 환경을 지정</li>
+<li><code>showSoftInput</code>을 활용 하는 방법</li>
+</ul>
+<h5 id="onCreateInputConnection-Override"><a href="#onCreateInputConnection-Override" class="headerlink" title="onCreateInputConnection() Override"></a>onCreateInputConnection() Override</h5><p>android.webkit.Webview 객체를 override 하면 된다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.app;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseWebView</span> <span class="keyword">extends</span> <span class="title">WebView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> InputConnection <span class="title">onCreateInputConnection</span><span class="params">(EditorInfo outAttrs)</span> </span>&#123;</span><br><span class="line">        InputConnection ic = <span class="keyword">super</span>.onCreateInputConnection(outAttrs);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> original = outAttrs.imeOptions;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> notMask = ~EditorInfo.IME_MASK_ACTION;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maskResult = original &amp; notMask;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>((outAttrs.inputType &amp; EditorInfo.TYPE_MASK_CLASS) == EditorInfo.TYPE_CLASS_NUMBER)&#123;</span><br><span class="line">            Log.d(TAG,<span class="string">"IME Options is Number"</span>);</span><br><span class="line">            outAttrs.privateImeOptions=<span class="string">"defaultInputmode=numeric;"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Log.d(TAG,<span class="string">"IME Options is English"</span>);</span><br><span class="line">            outAttrs.privateImeOptions=<span class="string">"defaultInputmode=english;"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ic;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>InputConnection ic = super.onCreateInputConnection(outAttrs);</code>이 부분은 반듯이 첫번째 code로 와야 한다. 해당 코드가 최초로 오지 않게 되면 load된 html이 어떤 input tag를 focus하고 있는지 알 수가 없게 된다. 이 코드를 통과 하고 나야 비로소 <code>EditorInfo</code>에 의미 있는 값들이 저장되게 된다.</p>
+<p>이때 개발자가 확인 가능한 값은 2가지가 있는데 <code>imeOptions</code>와 <code>inputType</code>인데</p>
+<ul>
+<li>imeOptions는 IME가 어떤 형태로 표현될지 어떤 기능을 제공할지에 대한 표현을 제공한다. 해당 값에 대한 표현 방법은 <code>EditorInfo.IME_MASK_ACTION</code>을 기준으로 Action 처리와 FLAG 처리로 분리 된다.<ul>
+<li>Action : GO, NEXT, NONE, PREVIOUS, SEARCH, SEND 등 엔터 버튼에 대한 기능을 정의하게 된다.</li>
+<li>Flag : ASCII, NAVIGATE,ACCESSORY,NO_ENTER,EXTRACT, FULLSCREEN 등 키보드의 형태를 나타낸다</li>
+</ul>
+</li>
+</ul>
+<p>상위 값들에 대한 정확한 OPTION은 다음 페이지를 참조 해야하나, 실질적으로 해당 Options을 모두 적용한 IME가 많지는 않다.</p>
+<p>일단 해당 값들에 대한 마스킹 방법은 다음과 같이 처리 하면된다.</p>
+<ul>
+<li>FLAG 값을 읽어 올 수있는 방법 (Webview를 이용해서는 해당 옵션을 얻어 올수 없었다.) 비록 html style에 ime-mode가 있다고는 하지만 이와는 관련점이 없었다</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> original = outAttrs.imeOptions;</span><br><span class="line"><span class="keyword">int</span> notMask = ~EditorInfo.IME_MASK_ACTION;</span><br><span class="line"><span class="keyword">int</span> flag = original &amp; notMask;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ime-mode는 크롬등에서 호환되지 않고, deprecated 된 기능이다</p>
+</blockquote>
+<ul>
+<li>Action 값을 읽어 올수 있는 방법 (역시 Webview에서는 의미 있는데이터를 얻어 올 수 없었다)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> action = original &amp; EditorInfo.IME_MASK_ACTION;</span><br></pre></td></tr></table></figure>
+<p>결과적으로 이시점에 개발자가 처리 할 수있는 값은 inputType이다.  해당 값은 다음과 같은 코드로 읽어 올 수있다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> inputType = outAttrs.inputType &amp; EditorInfo.TYPE_MASK_CLASS</span><br></pre></td></tr></table></figure>
+<p>MASK로 얻어올수 있는 값은 text, number, phone, datetime 정도이고 webview에서 의미 있는 값은 text와 number 정도가 될 것이다.</p>
+<p><code>TYPE_CLASS_TEXT</code>, <code>TYPE_CLASS_NUMBER</code>, <code>TYPE_CLASS_PHONE</code>, <code>TYPE_CLASS_DATETIME</code></p>
+<p>아래 코드는 inputType을 바탕으로 어떤 keyboard를 표현 하게 할지 나타내는 코드이다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if((outAttrs.inputType &amp; EditorInfo.TYPE_MASK_CLASS) == EditorInfo.TYPE_CLASS_NUMBER)     &#123;</span><br><span class="line">    Log.d(TAG,&quot;IME Options is Number&quot;);</span><br><span class="line">   ...</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    Log.d(TAG,&quot;IME Options is English&quot;);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>그러나 상위와 같은 코드는 아주 특별한 경우를 제외하고는 사용하지 않는다. 그 이유는 어떤 종류의 keyboard를 보여 줄지를 정의 하는건 IME의 <code>onStartInputView</code>내부에서 처리가 될것이기 때문이다.</p>
+<p>일반적으로 onCreateInputConnection을 사용하는 이유는 IME로 넘어 가기전에 EditorInfo를 수정하기 위해서이다. 예를 들자면 outAttrs.inputType에 EditorInfo.TYPE_CLASS_NUMBER를 주입하게 되면 해당 webview를 사용한 html은 number type의 키보드만 보게 되는 것이다.</p>
+<h5 id="InputMethodManager를-이용한-showSoftInput처리"><a href="#InputMethodManager를-이용한-showSoftInput처리" class="headerlink" title="InputMethodManager를 이용한 showSoftInput처리"></a>InputMethodManager를 이용한 showSoftInput처리</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">imm.showSoftInput(mWebView, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>InputMethodManager를 시스템 서비스에서 직점 instance를 얻어와서 특정 view (여기서는 mWebView)와 IME를 연결시키는 코드이다. 해당 코드는 Webview상 어떤 html element와 access를 해야할지 알기가 어렵기 때문에 어떤 keyboard를 강제로 뛰울 수가 없다.</p>
+<p>비록 Webview를 상속 받아서 <code>onCreateInputConnection()</code>을 재정의 한다고 하더라도 이경우에는 해당 Method를 타지 않는다. 그렇기 때문에 EditorInfo 역시 추출 할 수가 없는 상태가 된다. 이렇다 보니 무조건 default keyboard만 나타나게 되는데, 이 부분을 해결 하는 방법은 webview에 inputType을 추가 해주는 것이다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseWebView</span> <span class="keyword">extends</span> <span class="title">WebView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> inputType = EditorInfo.TYPE_NULL;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInputType</span><span class="params">(<span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">        inputType = type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getInputType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> inputType;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>그리고 해당 내용을 아래와 같이 추가해 준다.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">mWebView.setInputType(InputType.TYPE_CLASS_NUMBER);</span><br><span class="line">imm.showSoftInput(mWebView, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>onStartInputView에서 inputType을 확인 한 후 number keyboard를 보여 주게 될것이다.</p>
+<p>imeOptions나 다른 파라메터들은 상위와 같이 강제 Setting을 해도 keyboard에 별다를 영향을 주지 못했다.</p>
+<h4 id="Keyboard-처리에-대한-IME-Call-Flow"><a href="#Keyboard-처리에-대한-IME-Call-Flow" class="headerlink" title="Keyboard 처리에 대한 IME Call Flow"></a>Keyboard 처리에 대한 IME Call Flow</h4><p>사실 상위 두 가지의 Call Flow가 다를 거라고 크게 생각하지 못했으나 의외로 전혀 다른 process를 타고 있었다. </p>
+<p>아래는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jra3Ivc2ltcGxlLWtleWJvYXJk" title="https://github.com/rkkr/simple-keyboard">https://github.com/rkkr/simple-keyboard<i class="fa fa-external-link"></i></span>의 소스에 Log를 붙여서 어떤 flow를 trace한 표이다.</p>
+<h5 id="html에서-input-tag를-눌러서-keyboard-표시-했을-때"><a href="#html에서-input-tag를-눌러서-keyboard-표시-했을-때" class="headerlink" title="html에서 input tag를 눌러서 keyboard 표시 했을 때"></a>html에서 input tag를 눌러서 keyboard 표시 했을 때</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">//input을 이용한 show</span><br><span class="line">05-24 09:53:41.362 13828 13828 D LatinIME: onStartInput = 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.362 13828 13828 D LatinIME: onStartInput editorInfo.inputyType 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.363 13828 13828 D LatinIME: executePendingImsCallback editorInfo.inputyType 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.363 13828 13828 D LatinIME: onStartInputInternal editorInfo inputType24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: onShowInputRequested: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.364 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.371 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.371 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.375 13828 13828 D LatinIME: onStartInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.376 13828 13828 D LatinIME: executePendingImsCallback editorInfo.inputyType 24578: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 I LatinIME: Starting input. Cursor position = 1,1: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.395 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.396 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.411 13828 13828 D LatinIME: loadSettings: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.422 13828 13828 D LatinIME: getCurrentAutoCapsState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.422 13828 13828 D LatinIME: getCurrentRecapitalizeState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.426 13828 13828 D LatinIME: shouldShowLanguageSwitchKey: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.487 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.487 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.498 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:53:41.498 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//input hide</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: hideWindow: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: isShowingOptionDialog: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: onFinishInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.197 13828 13828 D LatinIME: onFinishInputViewInternal: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.200 13828 13828 D LatinIME: onWindowHidden: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.202 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.202 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.230 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:54:38.230 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br></pre></td></tr></table></figure>
+<h5 id="showSoftInput을-처리-했을-때"><a href="#showSoftInput을-처리-했을-때" class="headerlink" title="showSoftInput을 처리 했을 때"></a>showSoftInput을 처리 했을 때</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">//keyboard show</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: onShowInputRequested: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.369 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.370 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.370 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.371 13828 13828 D LatinIME: onStartInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.372 13828 13828 D LatinIME: executePendingImsCallback editorInfo.inputyType 49313: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.382 13828 13828 I LatinIME: Starting input. Cursor position = 0,0: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.382 13828 13828 D LatinIME: onEvaluateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.382 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.383 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.383 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.383 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.395 13828 13828 D LatinIME: loadSettings: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.402 13828 13828 D LatinIME: getCurrentAutoCapsState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.402 13828 13828 D LatinIME: getCurrentRecapitalizeState: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.404 13828 13828 D LatinIME: shouldShowLanguageSwitchKey: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.440 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.440 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.452 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:48:48.452 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br><span class="line"></span><br><span class="line">//keyboard hide</span><br><span class="line">05-24 09:52:19.722 13828 13828 D LatinIME: hideWindow: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.723 13828 13828 D LatinIME: isShowingOptionDialog: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.723 13828 13828 D LatinIME: onFinishInputView: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.723 13828 13828 D LatinIME: onFinishInputViewInternal: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.725 13828 13828 D LatinIME: onWindowHidden: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.728 13828 13828 D LatinIME: updateFullscreenMode: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.728 13828 13828 D LatinIME: updateSoftInputWindowLayoutParameters: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.748 13828 13828 D LatinIME: onComputeInsets: rkr.simplekeyboard.inputmethod</span><br><span class="line">05-24 09:52:19.748 13828 13828 D LatinIME: isImeSuppressedByHardwareKeyboard: rkr.simplekeyboard.inputmethod</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1097,615 +1606,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/android-memory-leak/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/android-memory-leak/" class="post-title-link" itemprop="url">android memory leak 처리</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-02 19:24:40" itemprop="dateCreated datePublished" datetime="2019-04-02T19:24:40Z">2019-04-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/android-memory-leak/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="android-memory-leak/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Inner-Class-누수"><a href="#Inner-Class-누수" class="headerlink" title="Inner Class 누수"></a>Inner Class 누수</h4><p>Activity 내부에 아래와 같이 Inner Class를 정의 할 경우 잠재적으로 누수의 대상이 된다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Innserclass inner;</span><br><span class="line">    <span class="keyword">private</span> String mStr;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main2);</span><br><span class="line">        inner = <span class="keyword">new</span> Innserclass();</span><br><span class="line">        <span class="keyword">new</span> Thread(inner).start();</span><br><span class="line">        mStr = <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Innserclass</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Innserclass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            mStr+=<span class="string">"nono!!"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			getApplicationContext();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>첫번째 누수 사유는 static이다.</p>
-<p><code>private static Innserclass inner;</code></p>
-<p>일단 static에 memory를 assigne하게 되면 해당 instance는 모 class인 activity와는 별도로 메모리 상에 살아 남게 된다. </p>
-<p>두번째 사유는 thread 처리이다.</p>
-<p>inner class를 thread처리 함으로써 (이경우는 postdelay도 마찬가지다) UI Thread가 죽어도 살아 남을 가능 성이 있다. Destroy 시점에 반듯이 thread를 종료 처리 해줘야 한다. handler도 이 경우에 속하게 된다. </p>
-<p>세번째 사유는 InnerClass 자체에 있다. 첫번째 사유든 두번째 사유든 해당 Instance는 잠재적으로 모 Class의 Context를 접근 할 수 있게 된다. 코드상으론</p>
-<p><code>mStr+=&quot;nono!!&quot;;</code></p>
-<p>이 부분이다.</p>
-<p>해결 방법은 다음고 같다.</p>
-<h5 id="Innser-Class를-절대로-static-처리-하지-말아라"><a href="#Innser-Class를-절대로-static-처리-하지-말아라" class="headerlink" title="Innser Class를 절대로 static 처리 하지 말아라"></a>Innser Class를 절대로 static 처리 하지 말아라</h5><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-    private static Innserclass inner;</span></span><br><span class="line"><span class="addition">+    private Innserclass inner;</span></span><br></pre></td></tr></table></figure>
-<p>Destroy시점에 Activity와 같이 종료할 수있다면 상관이 없을 수는 있다. 그러나 라이프 사이클이 Activity와 같다면 Static을 쓸 이유가 없다.</p>
-<h5 id="Inner-Class는-static으로-정의-하던가-완전히-별도-파일로-제외를-시켜라"><a href="#Inner-Class는-static으로-정의-하던가-완전히-별도-파일로-제외를-시켜라" class="headerlink" title="Inner Class는 static으로 정의 하던가 완전히 별도 파일로 제외를 시켜라"></a>Inner Class는 static으로 정의 하던가 완전히 별도 파일로 제외를 시켜라</h5><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-    public class Innserclass implements Runnable &#123;</span></span><br><span class="line"><span class="addition">+	 public static class Innserclass implements Runnable &#123;</span></span><br></pre></td></tr></table></figure>
-<p>static 처리를 하게 되면 해당 클래스는 모 class와 독립된 메모리 참조 구조를 갖게 되어 독립하게 된다.</p>
-<h5 id="weekRefernece를-사용해라"><a href="#weekRefernece를-사용해라" class="headerlink" title="weekRefernece를 사용해라"></a>weekRefernece를 사용해라</h5><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="addition">+    public static class Innserclass implements Runnable &#123;</span></span><br><span class="line"><span class="addition">+        private final WeakReference&lt;MainActivity&gt; mActivity;</span></span><br><span class="line"></span><br><span class="line">        public Innserclass(MainActivity activity) &#123;</span><br><span class="line"><span class="addition">+           mActivity = new WeakReference&lt;&gt;(activity);</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line"><span class="deletion">-        	getApplicationContext();</span></span><br><span class="line"><span class="addition">+			mActivity.getApplicationContext();</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>직접적인 Reference를 주입해서는 안된다. 반듯이 weekRefernece를 이용해서 context를 공유 해야한다. thread와 같이 Main Thread의 범위 밖에서 작동이 된다면 MainActivity가 명시적으로 종료 되어도 해당 Context가 별도의 Thread에 남아있게 되어서 Memory Leak이 나게 된다.</p>
-<h4 id="Handler-누수"><a href="#Handler-누수" class="headerlink" title="Handler 누수"></a>Handler 누수</h4><p>내용상으로는 Inner class와 동일하다. weekreference를 이용해서 instance를 생성하게 해야한다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MainHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> WeakReference&lt;MainActivity&gt; mActivity;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MainHandler</span><span class="params">(MainActivity activity)</span> </span>&#123;</span><br><span class="line">        mActivity = <span class="keyword">new</span> WeakReference&lt;&gt;(activity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>기본 적인 handler의 constructor는 인수가 없음으로 강제로 넣어야만 한다.</p>
-<p>그리고 종료시에는 반듯이 다음 행위를 처리해줘야 한다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    <span class="keyword">if</span> (MainHandler != <span class="keyword">null</span>) &#123;</span><br><span class="line">        MainHandler.removeCallbacksAndMessages(<span class="keyword">null</span>);</span><br><span class="line">        MainHandler = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>혹시 남아 있을지 모르는 메시지 큐 내용을 clear해줘야 한다.</p>
-<h4 id="Webview-누수"><a href="#Webview-누수" class="headerlink" title="Webview 누수"></a>Webview 누수</h4><p>webview를 사용할때는 해당 view item이 destory가 완전히 되었고, 그에따른 메모리 반납이 이루어 졌는지 확인해야 한다. 그렇지 않다면 Native영역과 Others영역의 메모리가 지속 누적되는 현상이 발생 하게 된다. 이러한 현상은 layout상에 있는 webview를 call하게 되면 굉장히 높은 확률로 Leak이 발생하게 된다.</p>
-<p>아래는 activity_main.xml과 MainActivity 수도 코드이다</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/webviewHell"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span>    </span><br><span class="line">    </span><br><span class="line">	<span class="tag">&lt;<span class="name">WebView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/activity_main_webview"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebView mWebView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        getApplicationContext();</span><br><span class="line">        mWebView = findViewById(R.id.activity_main_webview);</span><br></pre></td></tr></table></figure>
-<p>Destory시 다음과 같은 code를 넣어 보아도 메모리 leak이 나는 것을 확인 할 수있다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.....</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    mWebView.clearHistory();</span><br><span class="line">    mWebView.destroyDrawingCache();</span><br><span class="line">    mWebView.setWebViewClient(<span class="keyword">null</span>);</span><br><span class="line">    mWebView.setWebChromeClient(<span class="keyword">null</span>);</span><br><span class="line">    mWebView.removeAllViews();</span><br><span class="line">    mWebView.clearCache(<span class="keyword">true</span>);</span><br><span class="line">    mWebView.freeMemory();</span><br><span class="line">    mWebView.removeAllViewsInLayout();</span><br><span class="line">    mWebView.setVisibility(View.GONE);</span><br><span class="line">    mWebView.destroy();</span><br><span class="line">    mWebView = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
-<h5 id="webview는-instance-생성을-통해서-처리해라"><a href="#webview는-instance-생성을-통해서-처리해라" class="headerlink" title="webview는 instance 생성을 통해서 처리해라"></a>webview는 instance 생성을 통해서 처리해라</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">    RelativeLayout mWebviewlayout;</span><br><span class="line">	WebView mWebView;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;        </span><br><span class="line">		mWebviewlayout = (RelativeLayout) findViewById(R.id.webviewHell);</span><br><span class="line">        mWebView = <span class="keyword">new</span> WebView(getApplicationContext());</span><br><span class="line">        mWebView.setLayoutParams(<span class="keyword">new</span> LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));</span><br><span class="line">        mWebviewlayout.addView(mWebView);</span><br><span class="line">    </span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
-<h5 id="완전히-연관-리로스를-clear해라"><a href="#완전히-연관-리로스를-clear해라" class="headerlink" title="완전히 연관 리로스를 clear해라"></a>완전히 연관 리로스를 clear해라</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">super</span>.onDestroy();</span><br><span class="line">     mWebView.removeJavascriptInterface(<span class="string">"bridge"</span>);</span><br><span class="line"></span><br><span class="line">     mWebView.loadUrl(<span class="string">"about:blank"</span>);</span><br><span class="line"></span><br><span class="line">     jsInterface = <span class="keyword">null</span>;</span><br><span class="line">     mJSCallback = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">     mWebviewlayout.destroyDrawingCache();</span><br><span class="line">     mWebviewlayout.removeAllViews();</span><br><span class="line">     mWebviewlayout.removeAllViewsInLayout();</span><br><span class="line">     mWebviewlayout.setVisibility(View.GONE);</span><br><span class="line">     mWebviewlayout = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">     mWebView.clearHistory();</span><br><span class="line">     mWebView.destroyDrawingCache();</span><br><span class="line">     mWebView.setWebViewClient(<span class="keyword">null</span>);</span><br><span class="line">     mWebView.setWebChromeClient(<span class="keyword">null</span>);</span><br><span class="line">     mWebView.removeAllViews();</span><br><span class="line">     mWebView.clearCache(<span class="keyword">true</span>);</span><br><span class="line">     mWebView.freeMemory();</span><br><span class="line">     mWebView.removeAllViewsInLayout();</span><br><span class="line">     mWebView.setVisibility(View.GONE);</span><br><span class="line">     mWebView.destroy();</span><br><span class="line">     mWebView = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
-<p>상위 destroy 코드는 다소 과하다 싶을 정도로 remove하고 있다. </p>
-<p>여기서 주의 깊게 봐야할 것은 </p>
-<p><code>mWebView.freeMemory();</code></p>
-<p>이것이다. freeMemory api는 deprecated되었다. 공식 문서에서는 이 기능을 대체 하는 기능으로</p>
-<p><code>mWebView.loadUrl(&quot;about:blank&quot;);</code></p>
-<p>사용을 권장한다.</p>
-<h5 id="최후에는-app-data를-전부-삭제해라"><a href="#최후에는-app-data를-전부-삭제해라" class="headerlink" title="최후에는 app data를 전부 삭제해라"></a>최후에는 app data를 전부 삭제해라</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteCache</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        File dir = context.getCacheDir();</span><br><span class="line">        deleteDir(dir);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">deleteDir</span><span class="params">(File dir)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dir != <span class="keyword">null</span> &amp;&amp; dir.isDirectory()) &#123;</span><br><span class="line">        String[] children = dir.list();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; children.length; i++) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> success = deleteDir(<span class="keyword">new</span> File(dir, children[i]));</span><br><span class="line">            <span class="keyword">if</span> (!success) &#123; <span class="keyword">return</span> <span class="keyword">false</span>; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dir.delete();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(dir!= <span class="keyword">null</span> &amp;&amp; dir.isFile()) &#123;</span><br><span class="line">        <span class="keyword">return</span> dir.delete();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>안드로이드는 apk별로 데이타를 임시 저장할 수 있는 공간이 있다.</p>
-<p>일반적으로 adb shell을 진입했을때</p>
-<p><code>/data/&lt;&lt;app package&gt;&gt;</code></p>
-<p>이하를 가르키게 된다. 해당 폴더 이내에 있는 디렉토리를 모두 다 지우는 행위임으로, 주의 깊게 사용해야 한다.</p>
-<h4 id="ImageView-사용"><a href="#ImageView-사용" class="headerlink" title="ImageView 사용"></a>ImageView 사용</h4><p>Bitmap에 대한 이미지 릭은 매우 유명하다. 허니콤(3.2)을 기준으로 이전에는 Bitmap 정보를 Native Heap영역에 담고 이를 포인팅 처리하도록 되어있었다.</p>
-<blockquote>
-<p>이미지포인터(java heap) -&gt; char[] (native heap)</p>
-</blockquote>
-<p>하지만 이는 포인터를 잊는 순간 Native영역에 해소 되지 않는 메모리 릭을 발생 시켰고 이점을 해결하기 위해 메모리 영역을 Heap 영역으로 옮겼다 . Profiler에서도 보면 비트맵 힙 영역을 별도록 볼수있게 하였다.</p>
-<p>그렇다고 Bitmap에 대한 메모리 릭이 사라지진 않았다. 무조건 Image View는 recycle 처리를 해줘야 한다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">        ImageView image = (ImageView) findViewById(R.id.loadingImage);</span><br><span class="line">        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());</span><br><span class="line">        image.setImageBitmap(myBitmap);</span><br><span class="line">    </span><br><span class="line">...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">super</span>.onDestroy();</span><br><span class="line">        image.recycle();</span><br></pre></td></tr></table></figure>
-<p>그러나 이와 같은 코드 작성을 위해서 Bitmap을 모두 class 변수로 끌어 내는건 좋지 않음으로 다음 코드를 사용해서 recycle처리 할 수 있다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">recycleBitmap</span><span class="params">(ImageView imageView)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (imageView != <span class="keyword">null</span>) &#123;</span><br><span class="line">        Drawable d = imageView.getDrawable();</span><br><span class="line">        <span class="keyword">if</span> (d != <span class="keyword">null</span> &amp;&amp; d <span class="keyword">instanceof</span> BitmapDrawable) &#123;</span><br><span class="line">            Bitmap b = ((BitmapDrawable)d).getBitmap();</span><br><span class="line">            <span class="keyword">if</span> (b != <span class="keyword">null</span>) &#123;</span><br><span class="line">                b.recycle();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        imageView.setImageResource(android.R.color.transparent);</span><br><span class="line">        imageView.setImageBitmap(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>단, 주의해야할 코드가 있다.</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">        ImageView image = (ImageView) findViewById(R.id.loadingImage);</span><br><span class="line">        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());</span><br><span class="line"><span class="deletion">-        image.setImageBitmap(myBitmap);</span></span><br><span class="line"><span class="addition">+        image.setBackgroundResource(myBitmap);</span></span><br></pre></td></tr></table></figure>
-<p>setBackgroundResource의 경우는 recycle 처리가 어렵다. 해당 메서드는 ImageView가 아닌 View자체의 메서드를 사용함으로써 Drawable 객체를 반환하지 않는다.</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/android-ART-GC-Log/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/android-ART-GC-Log/" class="post-title-link" itemprop="url">android_ART_GC_Log</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-29 14:37:40" itemprop="dateCreated datePublished" datetime="2019-03-29T14:37:40Z">2019-03-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-02 00:55:25" itemprop="dateModified" datetime="2019-04-02T00:55:25Z">2019-04-02</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/android-ART-GC-Log/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="android-ART-GC-Log/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Android-Memory-ART"><a href="#Android-Memory-ART" class="headerlink" title="Android Memory ART"></a>Android Memory ART</h4><h5 id="ART의-목적"><a href="#ART의-목적" class="headerlink" title="ART의 목적"></a>ART의 목적</h5><p>안드로이드 상 시스템이나 어플리케이션에 의해 관리 되는 Android Runtime을 대표 하는 말로써, 오직 안드로이드 프로젝트를 위해서만 만들어졌다. ART나 달빅의 경우는 Dex bytecode 러닝에 적합하게 만들어 졌다.</p>
-<h6 id="Ahead-of-tiem-AOT-compilation"><a href="#Ahead-of-tiem-AOT-compilation" class="headerlink" title="Ahead-of-tiem (AOT) compilation"></a>Ahead-of-tiem (AOT) compilation</h6><p>인스톨 및 작동 시간을 빠르게 하기 위해 있는 것으로 최초 apk를 install하게 되면 dex2oat라는 device 내부에 있는 tool을 이용해서 작동가능한 상태로 만들어 준다. </p>
-<h6 id="Improved-garbage-collection"><a href="#Improved-garbage-collection" class="headerlink" title="Improved garbage collection"></a>Improved garbage collection</h6><ul>
-<li>GC를 한번에 처리하게 만든다</li>
-<li>GC pause동안 병행 프로세스 처리를 한다</li>
-<li>작은 객체(만들어진지 얼마 안된 객체, short live 객체)들을 수집한다</li>
-<li>GC 처리를 적절하게 병행 처리 함으로써 <code>GC_FOR_ALLOC</code>이 최대한 발생 하지 않게 한다</li>
-<li>백그라운드 메모리 사용이나, 메모리 파편화를 줄여 준다 (Compacting GC) </li>
-</ul>
-<h6 id="Development-and-debugging-improvements"><a href="#Development-and-debugging-improvements" class="headerlink" title="Development and debugging improvements"></a>Development and debugging improvements</h6><p>아래와 같은 오류 정보들을 ART가 제공하게 된다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java.lang.NullPointerException: Attempt to write to field &apos;int</span><br><span class="line">android.accessibilityservice.AccessibilityServiceInfo.flags&apos; on a null object</span><br><span class="line">reference</span><br></pre></td></tr></table></figure>
-<h5 id="ART-로그-설명"><a href="#ART-로그-설명" class="headerlink" title="ART 로그 설명"></a>ART 로그 설명</h5><p>Art(Android Runtime)는 명시적으로 요청된 Garbage Collection에 대해서만 결과를 출력함</p>
-<p>출력 형태는 다음과 같음</p>
-<p> <code>I/art: &lt;GC_Reason&gt; &lt;GC_Name&gt; &lt;Objects_freed&gt;(&lt;Size_freed&gt;) AllocSpace Objects, &lt;Large_objects_freed&gt;(&lt;Large_object_size_freed&gt;) &lt;Heap_stats&gt; LOS objects, &lt;Pause_time(s)&gt;</code></p>
-<p>실제 사용은 다음과 같이 출력됨</p>
-<p><code>I art     : Explicit concurrent mark sweep GC freed 64(14KB) AllocSpace objects, 2(72KB) LOS objects, 24% free, 4MB/5MB, paused 448us total 20.082ms:</code></p>
-<p>조금더 자세하게 나누어 보면 다음과 같음</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>대상</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GC_Reason</td>
-<td>Explicit</td>
-<td>- Concurrent : 앱스레드 중단 않는 GC (백그라운드 실행)<br>- Alloc : 힙이 이미 가득 차서 더 이상 요청받은 메모리 할당을 할 수없어서, GC를 우선 실행 시킴<br>-Explicit : 앱이 명시적인 GC를 요청함. gc() 호출<br>- NativeAlloc : Bitmap또는 Renderscript 할당과 같은 <strong><u>Native 메모리</u></strong> 할당을 위해서 실행 되는 GC (허니비를 기점으로 Bitmap은 힙으로 위치를 변경하였다)<br>- CollectorTransition : RAM 사양이 낮은 기기에서 앱의 프로세스 상태 일시 중지 및 인식 할 수없는 상태로 변경 할때 변환이 발생함(메모리 공간을 범프 포인터 공간으로 복사하는 작업임)(Eden 영역에서 -&gt; Survivor 영역으로의 전환 과정으로 보임)<br>- HomogeneousSpaceCompact : 사용가능한 공간(메모리로 보임)의 압축 기법으로 백그라운드 상태에서 RAM사용량 감소와 힙 조각 모음을 위해 처리 하는 것으로 보임<br>- HeapTrim : 힙트림을 마주칠 때까지 수집이 차단 <br>- DisableMovingGc : 힙압축이 이루어지는 동안 GetPrimitiveArrayCritical이 사용 됨으로써 힙의 수집기 이동을 제한 시킴</td>
-</tr>
-<tr>
-<td>GC_Name</td>
-<td>concurrent mark sweep</td>
-<td>- Concurrent mark sweep (CMS) : 이미지 공간 이외의 모든 공간을 회수하고 수집하는 완전한 힙 수집기<br>- Concurrent partial mark sweep : 이미지 및 zygote (app_process, 요청을 리스닝하고 요청 받은 클래스를 포크한다.)공간 이외의 공간을 전부 수집하는 수집기<br>- Concurrent sticky mark sweep : 마지막 GC이후로 할당된 객체만 회수 하는 세대별 수집기. 수집이 빠르고 일시 중지도 잘 안일어 남으로 자주 사용됨<br>-Marksweep + semispace : 공간 압축이나 힙전환시 사용되는 복사 GC</td>
-</tr>
-<tr>
-<td>Objects_freed</td>
-<td>freed 64</td>
-<td>회수한 객체의 수(작은규모)</td>
-</tr>
-<tr>
-<td>Size_freed</td>
-<td>(14KB) AllocSpace objects, 2</td>
-<td>GC를 통해서 회수한 바이트의 수</td>
-</tr>
-<tr>
-<td>Large_objects_freed</td>
-<td>2</td>
-<td>회수한 객체의 수(큰 규모)</td>
-</tr>
-<tr>
-<td>Large_object_size_freed</td>
-<td>(72KB)</td>
-<td>회수한 객체의 크기</td>
-</tr>
-<tr>
-<td>Heap_stats</td>
-<td>24% free, 4MB/5MB,</td>
-<td>회수한 비율로 (라이브 객체수)/(총 힙 크기), 예를 들자면 4MB가 살아있는 개체이고 5MB가 전체 힙의 크기이다. 약 24% 1MB 정도가 비어 있는 상황이라고 보면 된다. 이 값으 전체 적으로 증가만 하고 있다면 메모리 릭이라고 생각해 봐야한다</td>
-</tr>
-<tr>
-<td>Pause Times</td>
-<td>paused 448us total 20.082ms</td>
-<td>공식 문서상에는 일시 중지 횟수로 나와있으나 단위를 보면 일시 중지 시간이 맞는거 같다. 객체 수집시 나타나는 일시 중지 시간 평균 및 sum이 이 pause times으로 생각된다.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="Android-Memory-Kill-순서"><a href="#Android-Memory-Kill-순서" class="headerlink" title="Android Memory Kill 순서"></a>Android Memory Kill 순서</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>시스템</th>
-<th>관련 서비스</th>
-<th>memory status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Cached</td>
-<td>현재 작동 되고 있지 않고 Background에 캐쉬 되어 있는 서비스들</td>
-<td>lmk(Low memory killer) threshold</td>
-</tr>
-<tr>
-<td>Previous</td>
-<td>현재 작동 중인 서비스 직전에 사용된 서비스</td>
-<td>critical</td>
-</tr>
-<tr>
-<td>Home</td>
-<td>Home 기능이라고 하는데 내용상 바탕화면의 Wall paper 정도로 보임</td>
-<td>critical</td>
-</tr>
-<tr>
-<td>Service</td>
-<td>클라우드 서비스, 싱크 서비스 등 백그라운드 서비스</td>
-<td>critical</td>
-</tr>
-<tr>
-<td>Perceptible</td>
-<td>조회기능, 오디오, 키보드 등 듣고 입력하는 기능 들로 보임</td>
-<td>critical</td>
-</tr>
-<tr>
-<td>Foreground</td>
-<td>현재 떠있는 서비스</td>
-<td>critical</td>
-</tr>
-<tr>
-<td>Persistent</td>
-<td>전화 본연의 기능 및 통신 프로톨(와이파이, 블루투스 등)</td>
-<td>Crash ()</td>
-</tr>
-<tr>
-<td>System</td>
-<td>system_server</td>
-<td>Crash (reboot)</td>
-</tr>
-<tr>
-<td>Native</td>
-<td>init, kswapd,netd, logd, adbd 등 native bin(exec) 프로세스</td>
-<td>Crash (reboot)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<blockquote>
-<p>맨 위에서 부터 순차적으로 프로세스가 kill되기 시작함</p>
-<p>lmk : low memory killer</p>
-<p>kswapd : kernel swap daemon</p>
-</blockquote>
-<h4 id="Android-Memory-Debug-Tool"><a href="#Android-Memory-Debug-Tool" class="headerlink" title="Android Memory Debug Tool"></a>Android Memory Debug Tool</h4><ul>
-<li>Android Studio Profiler</li>
-<li>showmap (사용방법?): <span class="exturl" data-url="aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vc3lzdGVtL2V4dHJhcy8rL2FuZHJvaWQtNi4wLjFfcjI4L3Nob3dtYXAvc2hvd21hcC5j" title="https://android.googlesource.com/platform/system/extras/+/android-6.0.1_r28/showmap/showmap.c">https://android.googlesource.com/platform/system/extras/+/android-6.0.1_r28/showmap/showmap.c<i class="fa fa-external-link"></i></span> </li>
-<li>ahat : <span class="exturl" data-url="aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vYXJ0LysvbWFzdGVyL3Rvb2xzL2FoYXQvUkVBRE1FLnR4dA==" title="https://android.googlesource.com/platform/art/+/master/tools/ahat/README.txt">https://android.googlesource.com/platform/art/+/master/tools/ahat/README.txt<i class="fa fa-external-link"></i></span></li>
-<li>debug malloc : adb logcat -d | grep &quot;malloc debug&quot;  <span class="exturl" data-url="aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vYmlvbmljLysvbWFzdGVyL2xpYmMvbWFsbG9jX2RlYnVnL1JFQURNRS5tZA==" title="https://android.googlesource.com/platform/bionic/+/master/libc/malloc_debug/README.md">https://android.googlesource.com/platform/bionic/+/master/libc/malloc_debug/README.md<i class="fa fa-external-link"></i></span></li>
-</ul>
-<blockquote>
-<p>Profiler 만 사용하면 다른 툴을 쓸 필요가 없는 것으로 보인다. 단, malloc 같은 경우는 native 영역에 대한 내용을 볼 수 있는 유일한 방법으로 현재까지는 보임으로 native leak이 발생하면 쓸수 밖에 없지 않나 한다.</p>
-</blockquote>
-<h4 id="Android-RAM의-종류"><a href="#Android-RAM의-종류" class="headerlink" title="Android RAM의 종류"></a>Android RAM의 종류</h4><h5 id="RAM-사용량-Command"><a href="#RAM-사용량-Command" class="headerlink" title="RAM 사용량 Command"></a>RAM 사용량 Command</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb shell dumpsys meminfo &lt;package_name|pid&gt; [-d]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>해당 명령어는 adb connect 가 되어있다는 전제이다</p>
-</blockquote>
-<ul>
-<li>-d 옵션 의미 : Dalvick 및 ART 메모리 사용량에 대한 정보가 상세히 출력된다</li>
-<li>기본적을 KB단위로 나열된다.  </li>
-</ul>
-<h5 id="개인-클림-및-더티-RAM"><a href="#개인-클림-및-더티-RAM" class="headerlink" title="개인(클림 및 더티) RAM"></a>개인(클림 및 더티) RAM</h5><p>RAM은 특정 APP에서만 사용중인 메모리로써, 해당 메모리의 양은 특정 APP의 서비스가 프로세스 킬되었을 때 온전히 Free RAM으로 되돌려 받을 수 있는 양이다. 이중에 개인 더티 RAM은 Android 스왑을 사용하지 않기 때문에 가장 중요한 대상이 된다. 메모리 Leak을 해결 해야 하는 이유도 이부분에 있다. 개발자가 지정하는 모든 Dalvik 및 Native 힙 메모리는 더티 RAM으로 처리된다. Zygote를 사용하는 공유 RAM도 있게 되는데 이부분은 공유 더티 Ram으로 불린다.</p>
-<h5 id="PSS-Propotional-Set-Size"><a href="#PSS-Propotional-Set-Size" class="headerlink" title="PSS(Propotional Set Size)"></a>PSS(Propotional Set Size)</h5><p>PSS는 하나의 프로세스만을 바라보는 사이징 방식이 아니라, 공유되는 모든 페이지에 대한 RAM까지 포함한 계산 방식이다. 예를 들자면 프로세스 2개가 2메가를 공유하는 프로세스를 접근 하고 있다면, 1MB씩 PSS 사이즈를 분배 받게 된다. 그외 개인 더티 RAM 사이즈는 직접적으로 PSS에 추가 된다.</p>
-<p>정리하자면 다음과 같다.</p>
-<ul>
-<li>PSS Size = 프로세스1 개인 더티 RAM + 프로세스 2 개인 더티 RAM + 프로세스 3 공유 RAM 절반 </li>
-</ul>
-<blockquote>
-<p>PSS외에 2가지 종류가 더 있다</p>
-<p>RSS : Resident Set Size = Private 더티 RAM + Shared RAM 전체</p>
-<p>USS : Unique Set Size = RSS - shared RAM 전체  = Private Dirty RAM만 대상으로 함</p>
-</blockquote>
-<p>아래는 com.example.app의 메모리 사용량을 나타낸다.</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Applications Memory Usage (kB):</span><br><span class="line">Uptime: 2452592 Realtime: 2452592</span><br><span class="line"></span><br><span class="line">** MEMINFO in pid 4739 [com.example.app] **</span><br><span class="line">                   Pss  Private  Private  Swapped     Heap     Heap     Heap</span><br><span class="line">                 Total    Dirty    Clean    Dirty     Size    Alloc     Free</span><br><span class="line">                ------   ------   ------   ------   ------   ------   ------</span><br><span class="line">  Native Heap     6691     6648        0        0    16384     8945     7438</span><br><span class="line">  Dalvik Heap     1664     1512        0        0     7045     5418     1627</span><br><span class="line"> Dalvik Other      304      304        0        0</span><br><span class="line">        Stack      392      392        0        0</span><br><span class="line">       Ashmem      128      128        0        0</span><br><span class="line">    Other dev        4        0        4        0</span><br><span class="line">     .so mmap     8218      260     1640        0</span><br><span class="line">    .apk mmap      305        0       24        0</span><br><span class="line">    .ttf mmap       93        0        0        0</span><br><span class="line">    .dex mmap     2124        0     1776        0</span><br><span class="line">    .oat mmap     2144        0       64        0</span><br><span class="line">    .art mmap     2214     1988        4        0</span><br><span class="line">   Other mmap      296        4        0        0</span><br><span class="line">      Unknown     2072     2072        0        0</span><br><span class="line">        TOTAL    26649    13308     3512        0    23429    14363     9065</span><br><span class="line"></span><br><span class="line"> Dalvik Details</span><br><span class="line">        .Heap      964      964        0        0</span><br><span class="line">          .GC      188      188        0        0</span><br><span class="line">      .Zygote      424      272        0        0</span><br><span class="line">   .NonMoving      276      276        0        0</span><br><span class="line"> .IndirectRef      116      116        0        0</span><br><span class="line"></span><br><span class="line"> Objects</span><br><span class="line">               Views:        9         ViewRootImpl:        0</span><br><span class="line">         AppContexts:        3           Activities:        1</span><br><span class="line">              Assets:        3        AssetManagers:        3</span><br><span class="line">       Local Binders:       13        Proxy Binders:       15</span><br><span class="line">       Parcel memory:        5         Parcel count:       20</span><br><span class="line">    Death Recipients:        0      OpenSSL Sockets:        0</span><br><span class="line"></span><br><span class="line"> SQL</span><br><span class="line">         MEMORY_USED:        0</span><br><span class="line">  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0</span><br></pre></td></tr></table></figure>
-<h6 id="Dalvik-Heap"><a href="#Dalvik-Heap" class="headerlink" title="Dalvik Heap"></a>Dalvik Heap</h6><p>자바 머신인 달빅의 heap 모델은 External과 Dalvik heap으로 나뉘게 되는데 이중에 Dalvik Heap은</p>
-<ul>
-<li>Java객체 인스턴스 메모리 할당</li>
-<li>Zygote 할당 영역 포함</li>
-</ul>
-<p>을 하게 된다.</p>
-<p>그러나 java의 메모리 범위 밖을 보게 된다면 Native Heap이 나타나게 되는데, 이부분은 OS 영역의 메모리를 사용하는 범위로 주로 NDK로 개발된 경우 C++, C로 개발된 로우레벨 라이브러리를 사용하는 경우가 된다.</p>
-<ul>
-<li>Bitmap의 경우 가장 대표적인 Native Heap 저장 대상이다.</li>
-</ul>
-<p>Java는 Bitmap data를 Native Heap 부분으로 Pointing하는 역할만 한다.</p>
-<h6 id="Dalvik-Other"><a href="#Dalvik-Other" class="headerlink" title="Dalvik Other"></a>Dalvik Other</h6><p>문서상으로는 정확히 명시 되어 있지는 않는데 참고 문항으로 추리 해보면 다음과 같이 생각하면 될것 같다</p>
-<ul>
-<li>Just in time 컴파일 기록</li>
-<li>GC 기록</li>
-</ul>
-<p>등 Dalvik Overhead</p>
-<blockquote>
-<p>추측이긴 한데 ART에서 생성되는 각종 정보가 이쪽 메모리 사이즈로 쌓이는 것으로 생각된다.</p>
-</blockquote>
-<h6 id="Heap-Alloc"><a href="#Heap-Alloc" class="headerlink" title="Heap Alloc"></a>Heap Alloc</h6><p>해당 앱에 할당된 메모리 크기 인다. 이게 PSS Total보다 큰 이유는 공유 자원에 대한 값까지 같이 포함 하고 있기 때문이라고 한다.</p>
-<h6 id="Private-Dirty"><a href="#Private-Dirty" class="headerlink" title="Private Dirty"></a>Private Dirty</h6><p>해당 앱 프로세스 내부에서만 사용되는 메모리로 타 앱 및 프로세스와 공유 되지 않는다. 프로세스가 종료 되면 이 메모리는 100% 반환 되어야 한다.</p>
-<h6 id="Private-Cean"><a href="#Private-Cean" class="headerlink" title="Private Cean"></a>Private Cean</h6><p>개발자 앱의 자체 코드임, 개발자가 만든 code자체에 대한 글이 이곳에 적제 되는 것으로 보임</p>
-<p>so,dex mmap과 관련이 있음</p>
-<p>.so에는 private 더티 RAM이 크게 할당 되어있는데 이는 네이티브 코드를 최종 주소 로드 할때 수정했기 때문이다.</p>
-<blockquote>
-<p>실행 중인 코드에 대한 정보를 담는 부분으로 보임</p>
-</blockquote>
-<h6 id="so-dex-mmap"><a href="#so-dex-mmap" class="headerlink" title=".so .dex mmap"></a>.so .dex mmap</h6><p>.so 네이티브 및 .dex 달빅 또는 ART를 위한 코드용으로 사용하는 RAM</p>
-<h6 id="oat-mmap"><a href="#oat-mmap" class="headerlink" title=".oat mmap"></a>.oat mmap</h6><p>여러 앱이 공통적으로 사용하는 앱의 메모리 공간으로 특정 앱에 영향을 받지 않음</p>
-<h6 id="Unknow"><a href="#Unknow" class="headerlink" title=".Unknow"></a>.Unknow</h6><p>도구가 식별하기 힘든 RAM 페이지로, 주로 네이티브 할당이 주를 이룬다. </p>
-<h6 id="Dalvik-Detail"><a href="#Dalvik-Detail" class="headerlink" title="Dalvik Detail"></a>Dalvik Detail</h6><p>.Heap : 앱의 힙의 메모리 크기 (zygote 공간 과 private 공간 포함)</p>
-<p>.LOS : ART 대형 객체 공간 메모리</p>
-<p>.GC : GC 계정 오버헤드 크기로 수정할 수없음</p>
-<p>.JITCache : 실행되는 시점으로 o이 될것임</p>
-<p>.Zygote : 공통 메모리 크기</p>
-<p>.NonMoving : ART 비이동 공간 사용 RAM, 앱에서 사용하는 필드와 메서드 수를 줄이면 이부분이 줄어듬</p>
-<p>.IndirectRef : ART 간접 참조 테이블, 로컬 및 전역 JNI 참조 수를 줄이면 줄일 수 있음</p>
-<h6 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h6><p>Views : 모든 View 객체의 수이다. 만약에 layout에 버튼 3개가 있고 views가 9인 상태라면, 하나의 버튼을 삭제 하면 8이 된다.</p>
-<p>ViewRootImpl : 현재 작동중인 View의 갯수. 보이지 않는 창이라던가 연관되어있는 view와의 갯수를 확인해서 메모리 누수를 확인 할 수있다.</p>
-<blockquote>
-<p>화면이 안떠있다면 0, 한개 View가 떠있다면 1이런식이다.</p>
-</blockquote>
-<p>Activities</p>
-<p>Activity의 갯수로써 현재 떠있는 Activity의 갯수가 된다. 한개의 큰 화면만 떠있다면 Activity는 1개이다</p>
-<p>AppContexts</p>
-<blockquote>
-<p>만약에 Activity A가 죽고 Activity B가 살아나는 시점에, A의 context가 살아있다면(Leak) 이때 AppContexts는 지속적으로 증가하는 것으로 보임</p>
-</blockquote>
-<p>ProxyBinders/Parcel count/Local Binders</p>
-<blockquote>
-<p>lyaout 상 객체를 Bind 하면서 카운트가 올라 가는 것으로 보임</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1749,7 +1654,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1844,7 +1749,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
