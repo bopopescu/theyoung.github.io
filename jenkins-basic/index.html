@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="Try Again">
 <meta property="og:description" content="Jenkins User hand book 및 기타 사이트 참고해서 간단하게 필요한 내용만 서머리함 (https://jenkins.io/user-handbook.pdf) Pipeline개발, 통합 운영 배포 등이 가능한 플러그인 들을 하나의 Suit로 만드는 것을 파이프 라인이라고 한다. 자동 화된 파이프라인 설정 기능이 있으나, 보다 복잡한 사용이 필요 할">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-14T02:10:05.030Z">
+<meta property="og:updated_time" content="2019-07-16T06:16:57.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins Basic">
 <meta name="twitter:description" content="Jenkins User hand book 및 기타 사이트 참고해서 간단하게 필요한 내용만 서머리함 (https://jenkins.io/user-handbook.pdf) Pipeline개발, 통합 운영 배포 등이 가능한 플러그인 들을 하나의 Suit로 만드는 것을 파이프 라인이라고 한다. 자동 화된 파이프라인 설정 기능이 있으나, 보다 복잡한 사용이 필요 할">
@@ -245,7 +245,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">22</span></a>
 
   </li>
 
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-14 02:10:05" itemprop="dateModified" datetime="2019-07-14T02:10:05Z">2019-07-14</time>
+                <time title="Modified: 2019-07-16 06:16:57" itemprop="dateModified" datetime="2019-07-16T06:16:57Z">2019-07-16</time>
               
             
           </span>
@@ -495,6 +495,7 @@
 <h5 id="기타-참고"><a href="#기타-참고" class="headerlink" title="기타 참고"></a>기타 참고</h5><ul>
 <li>plugin definition : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy9waXBlbGluZS9zdGVwcy8=" title="https://jenkins.io/doc/pipeline/steps/">https://jenkins.io/doc/pipeline/steps/<i class="fa fa-external-link"></i></span></li>
 <li>pipeline examples : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy9waXBlbGluZS9leGFtcGxlcy8=" title="https://jenkins.io/doc/pipeline/examples/">https://jenkins.io/doc/pipeline/examples/<i class="fa fa-external-link"></i></span></li>
+<li>DSL SDK : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zY2kuZ2l0aHViLmlvL2pvYi1kc2wtcGx1Z2luLyM=" title="https://jenkinsci.github.io/job-dsl-plugin/#">https://jenkinsci.github.io/job-dsl-plugin/#<i class="fa fa-external-link"></i></span></li>
 </ul>
 <h4 id="Test-or-Report"><a href="#Test-or-Report" class="headerlink" title="Test or Report"></a>Test or Report</h4><p>TEST는 빌드가 완료 된 이후 junit등과 같이 테스트 후 리포트를 내놓는 부분을 말한다</p>
 <blockquote>
@@ -796,7 +797,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -901,7 +902,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">45</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -1155,7 +1160,25 @@
     (d.head || d.body).appendChild(s);
   }
   
-    loadComments();
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
   
 </script>
 

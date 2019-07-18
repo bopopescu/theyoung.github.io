@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">22</span></a>
 
   </li>
 
@@ -307,6 +307,236 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/javascript-object-merge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/javascript-object-merge/" class="post-title-link" itemprop="url">javascript object merge</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-20 15:32:33" itemprop="dateCreated datePublished" datetime="2019-03-20T15:32:33Z">2019-03-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/javascript-object-merge/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript-object-merge/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign"></a>Object.assign</h4><p>Javascript의 Object를 Merge 하는 방법 중에 가장 많이 사용되는 것은 <code>Object.assign</code>을 사용하는 것이다. </p>
+<p>기본 사용법은 다음과 같다.</p>
+<blockquote>
+<p>Object.assign(target, ...sources)</p>
+</blockquote>
+<ul>
+<li>target : Merge 당할 대상 객체</li>
+<li>source : Merge의 대상 객체에게 주입을 할 오브젝트</li>
+</ul>
+<h5 id="기본-사용법"><a href="#기본-사용법" class="headerlink" title="기본 사용법"></a>기본 사용법</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="attr">name</span> : <span class="string">'hi'</span>, <span class="attr">val</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="attr">name</span> : <span class="string">'hello'</span>, <span class="attr">val</span>: <span class="number">2</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newObj = <span class="built_in">Object</span>.assign(obj1, obj2);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(newObj);</span><br><span class="line"></span><br><span class="line">obj1.name = <span class="string">'modified'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (obj1 === newObj)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'same object!!'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>실행 결과</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123; name: 'hello', val: 2 &#125;</span><br><span class="line">&#123; name: 'hello', val: 2 &#125;</span><br><span class="line">&#123; name: 'modified', val: 2 &#125;</span><br><span class="line">same object!!</span><br></pre></td></tr></table></figure>
+<p>여기서 주목해야할 점은 target의 object는 assign 이후 자기 자신의 original 영역을 지속적으로 참조 하고 있다는 것이다.</p>
+<ul>
+<li><strong>즉, obj1과 newobj는 완전히 동일한 object라는 것이다.</strong></li>
+</ul>
+<p>target이었던 obj1의 값은 </p>
+<p><code>var newObj = Object.assign(obj1, obj2);</code></p>
+<p>이후 obj2의 값으로 덮어 쒸워 지는 것을 볼 수 있다. </p>
+<ul>
+<li><strong>target의 object는 source object와 동일한 properties가 있다면 overwrite 되게 된다.</strong></li>
+</ul>
+<p>코드를 아래와 같이 살짝 변경해 보겠다.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="attr">pre</span>:<span class="string">'King'</span>, <span class="attr">name</span> : <span class="string">'hi'</span>, <span class="attr">val</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="attr">name</span> : <span class="string">'hello'</span>, <span class="attr">val</span>: <span class="number">2</span>, <span class="attr">nextVal</span> :<span class="number">3</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newObj = <span class="built_in">Object</span>.assign(obj1, obj2);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(newObj);</span><br><span class="line"></span><br><span class="line">obj1.name = <span class="string">'modified'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (obj1 === newObj)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'same object!!'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>변경 점은 source에 <code>pre</code> property가 생겼고, <code>obj2</code>에는 nextVal을 생성 했다. 해당 코드를 실행해 보면 아래와 같은 결과 값을 확인 할 수 있다.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123; pre: 'King', name: 'hello', val: 2, nextVal: 3 &#125;</span><br><span class="line">&#123; pre: 'King', name: 'hello', val: 2, nextVal: 3 &#125;</span><br><span class="line">&#123; pre: 'King', name: 'modified', val: 2, nextVal: 3 &#125;</span><br><span class="line">same object!!</span><br></pre></td></tr></table></figure>
+<p>상위 결과에서 볼 수 있듯이 </p>
+<ul>
+<li><strong>해당 메서드는 서로에게 갖지 않는 값에 대해서는 target으로 값이 주입된다.</strong></li>
+</ul>
+<h5 id="Cloning"><a href="#Cloning" class="headerlink" title="Cloning"></a>Cloning</h5><p>이러한 방법을 이용해서 객체에 대한 내부 properties Cloning이 가능하다.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="attr">pre</span>:<span class="string">'King'</span>, <span class="attr">name</span> : <span class="string">'hi'</span>, <span class="attr">val</span>: <span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonedObj = <span class="built_in">Object</span>.assign(&#123;&#125;, obj1);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(clonedObj);</span><br><span class="line"></span><br><span class="line">obj1.name = <span class="string">'modified'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (obj1 === clonedObj)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'same object!!'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'different object!!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과 값은 다음과 같다.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123; pre: 'King', name: 'hi', val: 1 &#125;</span><br><span class="line">&#123; pre: 'King', name: 'hi', val: 1 &#125;</span><br><span class="line">&#123; pre: 'King', name: 'modified', val: 1 &#125;</span><br><span class="line">different object!!</span><br></pre></td></tr></table></figure>
+<p>객체에 대한 정보를 동일하게 copy 하였으나,</p>
+<ul>
+<li><strong>기존 object와는 다른 object를 생성한 것을 확인 가능하다.</strong></li>
+</ul>
+<h4 id="ES6-Spread-Operator"><a href="#ES6-Spread-Operator" class="headerlink" title="ES6 Spread Operator"></a>ES6 Spread Operator</h4><p>ES6 문법에서 사용되는 spread operator를 이용해서 merge가 가능하다.</p>
+<h5 id="기본-사용법-1"><a href="#기본-사용법-1" class="headerlink" title="기본 사용법"></a>기본 사용법</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> obj2 = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> length = obj1.push(...obj2);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(length);</span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line">obj1.push(<span class="number">7</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj2);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (obj1 === obj2)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'same object!!'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'different object!!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과값은 다음과 같다.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">6</span><br><span class="line">[ 1, 2, 3, 4, 5, 6 ]</span><br><span class="line">[ 4, 5, 6 ]</span><br><span class="line">different object!!</span><br></pre></td></tr></table></figure>
+<p>본 사용법은 사실 object간의 결합을 대상으로 하지 않는다. spread operator 자체가 array와 같은 Iterator성 객체를 대상으로한 문법이기 때문이다.</p>
+<ul>
+<li><strong>결과적으로 Array의 결합으로 볼수 있으나 object의 merge용도로 사용되지는 않는다.</strong></li>
+</ul>
+<blockquote>
+<p>이런식의 코드도 많이 사용할 수 있다.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> obj1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">&gt; <span class="keyword">var</span> obj2 = [...obj1, <span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="built_in">console</span>.log(obj2);</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> [ 1, 2, 3, 4, 5, 6 ]</span></span><br></pre></td></tr></table></figure>
+<p>ECMAScript 2018 기준으로는 다음 코드도 사용이 가능하다.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> obj1 = &#123;<span class="attr">test</span>:<span class="number">1</span>&#125;;</span><br><span class="line">&gt; <span class="keyword">var</span> obj2 = &#123;<span class="attr">test</span>:<span class="number">2</span>,<span class="attr">after</span>:<span class="number">3</span>&#125;;</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="keyword">var</span> merged = &#123;...obj1, ...obj2&#125;;</span><br><span class="line">&gt; <span class="built_in">console</span>.log(obj1);</span><br></pre></td></tr></table></figure>
+<p>그러나 아직 널리 사용 되지 않음으로 더 다루지 않는다.</p>
+</blockquote>
+<h4 id="Undersocre-Extend"><a href="#Undersocre-Extend" class="headerlink" title="Undersocre Extend"></a>Undersocre Extend</h4><p>언더스코어 라이브러리를 사용해서 객체 머지가 가능하다.</p>
+<h5 id="기본-사용법-2"><a href="#기본-사용법-2" class="headerlink" title="기본 사용법"></a><strong>기본 사용법</strong></h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> _ = <span class="built_in">require</span>(<span class="string">'underscore'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="attr">c</span>:<span class="number">3</span>,<span class="attr">d</span>:<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj3 = &#123;<span class="attr">c</span>:<span class="number">3</span>,<span class="attr">d</span>:<span class="number">5</span>,<span class="attr">e</span>:<span class="number">6</span>&#125;;</span><br><span class="line"></span><br><span class="line">_.extend(obj1, obj2, obj3);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (obj1 === obj2) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'same Object'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'different Object'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과는 다음과 같다.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123; a: 1, b: 2, c: 3, d: 5, e: 6 &#125;</span><br><span class="line">different Object</span><br></pre></td></tr></table></figure>
+<p>Object.assign과 같이 target만을 수정하고, 이후 들어오는 source 객체들은 변화가 없다.</p>
+<h4 id="lodash-merge"><a href="#lodash-merge" class="headerlink" title="lodash merge"></a>lodash merge</h4><p>로데쉬 라이브러리의 merge기능을 사용하는것도 가능하다.</p>
+<h5 id="기본-사용법-3"><a href="#기본-사용법-3" class="headerlink" title="기본 사용법"></a>기본 사용법</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> _ = <span class="built_in">require</span>(<span class="string">'lodash'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="attr">c</span>:<span class="number">3</span>,<span class="attr">d</span>:<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj3 = &#123;<span class="attr">c</span>:<span class="number">3</span>,<span class="attr">d</span>:<span class="number">5</span>,<span class="attr">e</span>:<span class="number">6</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newObj = _.merge(obj1,obj2,obj3);</span><br><span class="line"></span><br><span class="line">obj1.a = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(newObj);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (obj1 === newObj) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'same Object'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'different Object'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과값은 다음과 같다.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123; a: 3, b: 2, c: 3, d: 5, e: 6 &#125;</span><br><span class="line">&#123; a: 3, b: 2, c: 3, d: 5, e: 6 &#125;</span><br><span class="line">same Object</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -609,7 +839,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -714,7 +944,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">45</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -1272,6 +1506,8 @@
 
   
   
+    
+      
     
       
     

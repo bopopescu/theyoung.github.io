@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">22</span></a>
 
   </li>
 
@@ -323,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/jenkins-with-tomcat/">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/Nexus-install-on-centos7-with-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="whoami">
@@ -343,7 +343,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/jenkins-with-tomcat/" class="post-title-link" itemprop="url">Jenkins with tomcat</a>
+                <a href="/Nexus-install-on-centos7-with-docker/" class="post-title-link" itemprop="url">Nexus install on Centos7 with docker</a>
               
             
           </h2>
@@ -368,7 +368,7 @@
                 
               
 
-              <time title="Created: 2019-06-25 17:00:33" itemprop="dateCreated datePublished" datetime="2019-06-25T17:00:33Z">2019-06-25</time>
+              <time title="Created: 2019-06-26 19:44:15" itemprop="dateCreated datePublished" datetime="2019-06-26T19:44:15Z">2019-06-26</time>
             
 
             
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-05 00:10:34" itemprop="dateModified" datetime="2019-07-05T00:10:34Z">2019-07-05</time>
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
               
             
           </span>
@@ -403,8 +403,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/jenkins-with-tomcat/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jenkins-with-tomcat/" itemprop="commentCount"></span>
+                <a href="/Nexus-install-on-centos7-with-docker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Nexus-install-on-centos7-with-docker/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -434,34 +434,10 @@
       
         
           
-            <h4 id="목적"><a href="#목적" class="headerlink" title="목적"></a>목적</h4><p>git에서 web소스를 수신 후, tomcat 하단 webapp으로 디플로이 자동화</p>
-<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><p>tomcat installation</p>
-<h4 id="Jenkins-설정"><a href="#Jenkins-설정" class="headerlink" title="Jenkins 설정"></a>Jenkins 설정</h4><h5 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h5><p>jenkins관리 &gt; global tool configuration&gt;maven &gt; </p>
-<ul>
-<li>name : m3</li>
-<li>install automatically : check</li>
-<li>version : 3.6</li>
-</ul>
-<h5 id="새로운-아이템"><a href="#새로운-아이템" class="headerlink" title="새로운 아이템"></a>새로운 아이템</h5><p>Freestyle project</p>
-<ul>
-<li>소스코드관리 : git repository url </li>
-</ul>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZhbGF4eVRlY2gvaGVsbG8td29ybGQ=" title="https://github.com/ValaxyTech/hello-world">https://github.com/ValaxyTech/hello-world<i class="fa fa-external-link"></i></span></p>
-<p>를 개인 GitHub repository에 fork해서 사용하는 것을 추천 함 </p>
-</blockquote>
-<p>Build</p>
-<ul>
-<li><p>Maven version : M3</p>
-</li>
-<li><p>Goals : clean install package</p>
-</li>
-</ul>
-<p>빌드 후 조치</p>
-<ul>
-<li>WAR/EAR files : </li>
-</ul>
-<p><span class="exturl" data-url="aHR0cDovLzIxOC4xNDUuMjE4LjMxOjgwODAvd2ViYXBwLw==" title="http://218.145.218.31:8080/webapp/">http://218.145.218.31:8080/webapp/<i class="fa fa-external-link"></i></span></p>
+            <h4 id="Nexus-설치"><a href="#Nexus-설치" class="headerlink" title="Nexus 설치"></a>Nexus 설치</h4><p>큰 어려움이 없어서 log만 남김</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost docker]$ docker search sonatype/nexus3</span><br><span class="line">Got permission denied <span class="keyword">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.26/images/search?<span class="built_in">limit</span>=25&amp;term=sonatype%2Fnexus3: dial unix /var/run/docker.sock: connect: permission denied</span><br><span class="line">[devops@localhost docker]$ su</span><br><span class="line">암호:</span><br><span class="line">[root@localhost docker]<span class="comment"># docker search sonatype/nexus3</span></span><br><span class="line">INDEX     NAME      DESCRIPTION   STARS     OFFICIAL   AUTOMATED</span><br><span class="line">[root@localhost docker]<span class="comment"># docker search nexus3</span></span><br><span class="line">INDEX       NAME                                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">docker.io   docker.io/sonatype/nexus3                       Sonatype Nexus Repository Manager 3             620</span><br><span class="line">docker.io   docker.io/shifudao/nexus3                       <span class="built_in">clone</span> from nexus3 image but based from ope...   4                    [OK]</span><br><span class="line">docker.io   docker.io/cloudsc/nexus3-blobstore-s3           nexus3 with nexus-blobstore-s3 integrated       2</span><br><span class="line">docker.io   docker.io/home1oss/nexus3                       An auto configured nexus3                       2                    [OK]</span><br><span class="line">docker.io   docker.io/madmuffin/nexus3                      Sonatype Nexus3 Milestone7 docker image         2                    [OK]</span><br><span class="line">docker.io   docker.io/alvindaiyan/nexus3-azure-appservice                                                   1</span><br><span class="line">docker.io   docker.io/cirepo/nexus3                         An auto configured nexus3                       1                    [OK]</span><br><span class="line">docker.io   docker.io/flavioaiello/nexus3                   Production ready lightweight Nexus3 with A...   1                    [OK]</span><br><span class="line">docker.io   docker.io/fxinnovation/nexus3                   Sonatype Nexus 3 <span class="keyword">in</span> a container                 1                    [OK]</span><br><span class="line">docker.io   docker.io/azaa1/nexus3                          Sonyatype Nexus Repository Manager 3            0</span><br><span class="line">docker.io   docker.io/bigseasre/nexus3                      mirror of the original nexus3 dockerfile        0</span><br><span class="line">docker.io   docker.io/binsix/nexus3                         docker images of nexus3 base on openjdk         0                    [OK]</span><br><span class="line">docker.io   docker.io/clivesaha/nexus3                      nexus3                                          0</span><br><span class="line">docker.io   docker.io/darthhater/nexus3                     A series of example Dockerfiles and images...   0                    [OK]</span><br><span class="line">docker.io   docker.io/desiato/nexus3-ssl                    Sonatype Nexus 3 with SSL/TLS support.          0                    [OK]</span><br><span class="line">docker.io   docker.io/devopsmakers/nexus3                   A Nexus3 container with the apt plugin          0</span><br><span class="line">docker.io   docker.io/dwolla/nexus3-crowd                   Nexus3 with nexus3-crowd-plugin installed       0                    [OK]</span><br><span class="line">docker.io   docker.io/enieuw/nexus3-oss                     nexus3-oss                                      0                    [OK]</span><br><span class="line">docker.io   docker.io/freckleiot/nexus3-oss                 A Sonatype Nexus3 OSS image <span class="built_in">which</span> makes it...   0                    [OK]</span><br><span class="line">docker.io   docker.io/joshdvir/nexus3                       nexus3                                          0                    [OK]</span><br><span class="line">docker.io   docker.io/lokkju/nexus3-github-auth             Sonatype Nexus 3 with Github authenticatio...   0                    [OK]</span><br><span class="line">docker.io   docker.io/mritd/nexus3                          nexus3                                          0                    [OK]</span><br><span class="line">docker.io   docker.io/salte/nexus3                          Extends the Sonatype nexus3 Docker image b...   0                    [OK]</span><br><span class="line">docker.io   docker.io/sdase/nexus3-base-image               An opinionated nexus3 docker image, based ...   0                    [OK]</span><br><span class="line">docker.io   docker.io/stocksoftware/nexus3                  A nexus3 docker instance                        0                    [OK]</span><br><span class="line">[root@localhost docker]<span class="comment"># docker pull docker.io/sonatype/nexus3</span></span><br><span class="line">Using default tag: latest</span><br><span class="line">Trying to pull repository docker.io/sonatype/nexus3 ...</span><br><span class="line">latest: Pulling from docker.io/sonatype/nexus3</span><br><span class="line">8ba884070f61: Pull complete</span><br><span class="line">9d732789dc29: Pull complete</span><br><span class="line">b56d6d0d4fc5: Pull complete</span><br><span class="line">Digest: sha256:970b09779992bf88d041d074428c54dc153f7b9c8cafe4ff364dd26d69200f7a</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.io/sonatype/nexus3:latest</span><br><span class="line">[root@localhost docker]<span class="comment"># ls</span></span><br><span class="line">[root@localhost docker]<span class="comment"># mkdir nexus-data</span></span><br><span class="line">[root@localhost docker]<span class="comment"># ls</span></span><br><span class="line">nexus-data</span><br><span class="line">[root@localhost docker]<span class="comment"># ll</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x. 2 root root 6  6월 26 11:21 nexus-data</span><br><span class="line">[root@localhost docker]<span class="comment"># chown -R 200 nexus-data/</span></span><br><span class="line">[root@localhost docker]<span class="comment"># ll</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x. 2 200 root 6  6월 26 11:21 nexus-data</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost docker]<span class="comment"># firewall-cmd --permanent --zone=public --add-port=8081/tcp</span></span><br><span class="line">success</span><br><span class="line">[root@localhost docker]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br><span class="line">[root@localhost docker]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost docker]<span class="comment"># docker run -d -p 8081:8081 --privileged --name nexus -v /nexus-data:/nexus-data sonatype/nexus3</span></span><br><span class="line">67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a</span><br><span class="line">[root@localhost docker]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">67826ba9e017        sonatype/nexus3     <span class="string">"sh -c $&#123;SONATYPE_..."</span>   3 seconds ago       Up 3 seconds        0.0.0.0:8081-&gt;8081/tcp   nexus</span><br><span class="line">[root@localhost docker]<span class="comment"># docker logs -f</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -828,6 +804,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/jenkins-with-tomcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/jenkins-with-tomcat/" class="post-title-link" itemprop="url">Jenkins with tomcat</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-25 17:00:33" itemprop="dateCreated datePublished" datetime="2019-06-25T17:00:33Z">2019-06-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-05 00:10:34" itemprop="dateModified" datetime="2019-07-05T00:10:34Z">2019-07-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/jenkins-with-tomcat/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jenkins-with-tomcat/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="목적"><a href="#목적" class="headerlink" title="목적"></a>목적</h4><p>git에서 web소스를 수신 후, tomcat 하단 webapp으로 디플로이 자동화</p>
+<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><p>tomcat installation</p>
+<h4 id="Jenkins-설정"><a href="#Jenkins-설정" class="headerlink" title="Jenkins 설정"></a>Jenkins 설정</h4><h5 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h5><p>jenkins관리 &gt; global tool configuration&gt;maven &gt; </p>
+<ul>
+<li>name : m3</li>
+<li>install automatically : check</li>
+<li>version : 3.6</li>
+</ul>
+<h5 id="새로운-아이템"><a href="#새로운-아이템" class="headerlink" title="새로운 아이템"></a>새로운 아이템</h5><p>Freestyle project</p>
+<ul>
+<li>소스코드관리 : git repository url </li>
+</ul>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZhbGF4eVRlY2gvaGVsbG8td29ybGQ=" title="https://github.com/ValaxyTech/hello-world">https://github.com/ValaxyTech/hello-world<i class="fa fa-external-link"></i></span></p>
+<p>를 개인 GitHub repository에 fork해서 사용하는 것을 추천 함 </p>
+</blockquote>
+<p>Build</p>
+<ul>
+<li><p>Maven version : M3</p>
+</li>
+<li><p>Goals : clean install package</p>
+</li>
+</ul>
+<p>빌드 후 조치</p>
+<ul>
+<li>WAR/EAR files : </li>
+</ul>
+<p><span class="exturl" data-url="aHR0cDovLzIxOC4xNDUuMjE4LjMxOjgwODAvd2ViYXBwLw==" title="http://218.145.218.31:8080/webapp/">http://218.145.218.31:8080/webapp/<i class="fa fa-external-link"></i></span></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/virtualbox-on-centos7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1043,195 +1214,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/Network-setup-CentOS7-on-Virtual Box/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Network-setup-CentOS7-on-Virtual Box/" class="post-title-link" itemprop="url">Network setup CentOS7 on Virtual Box</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-13 17:50:00" itemprop="dateCreated datePublished" datetime="2019-06-13T17:50:00Z">2019-06-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/Network-setup-CentOS7-on-Virtual Box/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Network-setup-CentOS7-on-Virtual Box/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h4><p>linux network 설정을 확인 할 수 있는 명령어이나 centos7에서 삭제 되었다.</p>
-<p><code>ip addr</code></p>
-<p>로 변경되었다.</p>
-<h4 id="ip-addr"><a href="#ip-addr" class="headerlink" title="ip addr"></a>ip addr</h4><p>ip addr을 실행 하면 다음과 같이 NIC 정보를 확인 할 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 08:00:27:6f:d9:08 brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure>
-<p>여기서 <code>enpOs3</code>이 해당 NIC 이름이다. 해당 NIC에 대한 설정을 확인 하기 위해서 다음 path로 이동한다.</p>
-<p><code>/etc/sysconfig/network-scripts</code></p>
-<p>해당 디렉토리를 보면 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost network-scripts]<span class="comment"># ls</span></span><br><span class="line">ifcfg-enp0s3  ifdown-bnep  ifdown-ipv6  ifdown-ppp     ifdown-Team      ifup          ifup-eth   ifup-isdn   ifup-post    ifup-sit       ifup-tunnel       network-functions</span><br><span class="line">ifcfg-lo      ifdown-eth   ifdown-isdn  ifdown-routes  ifdown-TeamPort  ifup-aliases  ifup-ippp  ifup-plip   ifup-ppp     ifup-Team      ifup-wireless     network-functions-ipv6</span><br><span class="line">ifdown        ifdown-ippp  ifdown-post  ifdown-sit     ifdown-tunnel    ifup-bnep     ifup-ipv6  ifup-plusb  ifup-routes  ifup-TeamPort  init.ipv6-global</span><br></pre></td></tr></table></figure>
-<p>ifcfg-enp0s3과 같이 NIC 명으로 된 config 파일을 확인 할 수 있다. </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=enp0s3</span><br><span class="line">UUID=a0377aa0-2efa-48a1-91eb-5a547c6d3b43</span><br><span class="line">DEVICE=enp0s3</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
-<p>해당 파일 마지막 부분을 <code>ONBOOT=yes</code>로 변경 한후 다음 명령어를 실행하면 ip를 얻어 올 수 있다.</p>
-<p><code>[root@localhost network-scripts]# dhclient</code></p>
-<p>아래와 같이 ip를 얻어 오면 된다. </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost network-scripts]<span class="comment"># ip addr</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 08:00:27:6f:d9:08 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.0.14/24 brd 192.168.0.255 scope global dynamic enp0s3</span><br><span class="line">       valid_lft 4486sec preferred_lft 4486sec</span><br><span class="line">    inet6 fe80::6940:5b2a:23b9:cafd/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
-<p>dhcp의 경우 본체 컴퓨터 ip와는 독립적인 ip를 새롭게 발행 하게 된다.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">192.168.0.12	A4-70-C8-99-8A-12	DESKTOP	무선:자동할당	// 본체 컴퓨터</span><br><span class="line">192.168.0.14	A4-70-C8-99-8A-12		무선:자동할당 // virtual box centos</span><br></pre></td></tr></table></figure>
-<h4 id="Virtual-Box-Network-어댑터-설정"><a href="#Virtual-Box-Network-어댑터-설정" class="headerlink" title="Virtual Box Network 어댑터 설정"></a>Virtual Box Network 어댑터 설정</h4><p>네트워크 어댑터 사용하기 : check</p>
-<p>다음에 연결됨 : 어댑터에 브리지</p>
-<p>이름 : 사용하고자 하는 실 컴퓨터 NIC (wifi device라던가 이더넷 등)</p>
-<h4 id="yum-update"><a href="#yum-update" class="headerlink" title="yum update"></a>yum update</h4><p>네트워크가 정상적으로 설정되었다면, 상위 명령어를 실행 했을 시 정상적으로 update가 진행 되거나 또는 update할 것이 없다는 내용을 확인 할 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost network-scripts]<span class="comment"># yum update</span></span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: data.aonenetworks.kr</span><br><span class="line"> * extras: data.aonenetworks.kr</span><br><span class="line"> * updates: data.aonenetworks.kr</span><br><span class="line">No packages marked <span class="keyword">for</span> update</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1280,7 +1262,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1385,7 +1367,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">45</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

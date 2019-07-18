@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">21</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">22</span></a>
 
   </li>
 
@@ -307,6 +307,208 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/docker/" class="post-title-link" itemprop="url">Docker</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-02 21:40:17" itemprop="dateCreated datePublished" datetime="2019-07-02T21:40:17Z">2019-07-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-13 18:04:23" itemprop="dateModified" datetime="2019-07-13T18:04:23Z">2019-07-13</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/docker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="docker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="docker-container-설정-수정하기"><a href="#docker-container-설정-수정하기" class="headerlink" title="docker container 설정 수정하기"></a>docker container 설정 수정하기</h4><p>docker run 이후 policy의 수정을 위해서는 다음 2가지 방법이 있음</p>
+<ul>
+<li>docker update</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker update --restart=always &lt;container&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>/var/lib/docker/containers/CONTAINER_ID/hostconfig.json 파일 edit</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"Binds"</span>:[<span class="string">"/nexus-data:/nexus-data"</span>],<span class="attr">"ContainerIDFile"</span>:<span class="string">""</span>,<span class="attr">"LogConfig"</span>:&#123;<span class="attr">"Type"</span>:<span class="string">"journald"</span>,<span class="attr">"Config"</span>:&#123;&#125;&#125;,<span class="attr">"NetworkMode"</span>:<span class="string">"default"</span>,<span class="attr">"PortBindings"</span>:&#123;<span class="attr">"8081/tcp"</span>:[&#123;<span class="attr">"HostIp"</span>:<span class="string">""</span>,<span class="attr">"HostPort"</span>:<span class="string">"8081"</span>&#125;]&#125;,<span class="attr">"RestartPolicy"</span>:&#123;<span class="attr">"Name"</span>:<span class="string">"always"</span>,<span class="attr">"MaximumRetryCount"</span>:<span class="number">0</span>&#125;,<span class="attr">"AutoRemove"</span>:<span class="literal">false</span>,<span class="attr">"VolumeDriver"</span>:<span class="string">""</span>,<span class="attr">"VolumesFrom"</span>:<span class="literal">null</span>,<span class="attr">"CapAdd"</span>:<span class="literal">null</span>,<span class="attr">"CapDrop"</span>:<span class="literal">null</span>,<span class="attr">"Dns"</span>:[],<span class="attr">"DnsOptions"</span>:[],<span class="attr">"DnsSearch"</span>:[],<span class="attr">"ExtraHosts"</span>:<span class="literal">null</span>,<span class="attr">"GroupAdd"</span>:<span class="literal">null</span>,<span class="attr">"IpcMode"</span>:<span class="string">""</span>,<span class="attr">"Cgroup"</span>:<span class="string">""</span>,<span class="attr">"Links"</span>:[],<span class="attr">"OomScoreAdj"</span>:<span class="number">0</span>,<span class="attr">"PidMode"</span>:<span class="string">""</span>,<span class="attr">"Privileged"</span>:<span class="literal">true</span>,<span class="attr">"PublishAllPorts"</span>:<span class="literal">false</span>,<span class="attr">"ReadonlyRootfs"</span>:<span class="literal">false</span>,<span class="attr">"SecurityOpt"</span>:[<span class="string">"label=disable"</span>],<span class="attr">"UTSMode"</span>:<span class="string">""</span>,<span class="attr">"UsernsMode"</span>:<span class="string">""</span>,<span class="attr">"ShmSize"</span>:<span class="number">67108864</span>,<span class="attr">"Runtime"</span>:<span class="string">"docker-runc"</span>,<span class="attr">"ConsoleSize"</span>:[<span class="number">0</span>,<span class="number">0</span>],<span class="attr">"Isolation"</span>:<span class="string">""</span>,<span class="attr">"CpuShares"</span>:<span class="number">0</span>,<span class="attr">"Memory"</span>:<span class="number">0</span>,<span class="attr">"NanoCpus"</span>:<span class="number">0</span>,<span class="attr">"CgroupParent"</span>:<span class="string">""</span>,<span class="attr">"BlkioWeight"</span>:<span class="number">0</span>,<span class="attr">"BlkioWeightDevice"</span>:<span class="literal">null</span>,<span class="attr">"BlkioDeviceReadBps"</span>:<span class="literal">null</span>,<span class="attr">"BlkioDeviceWriteBps"</span>:<span class="literal">null</span>,<span class="attr">"BlkioDeviceReadIOps"</span>:<span class="literal">null</span>,<span class="attr">"BlkioDeviceWriteIOps"</span>:<span class="literal">null</span>,<span class="attr">"CpuPeriod"</span>:<span class="number">0</span>,<span class="attr">"CpuQuota"</span>:<span class="number">0</span>,<span class="attr">"CpuRealtimePeriod"</span>:<span class="number">0</span>,<span class="attr">"CpuRealtimeRuntime"</span>:<span class="number">0</span>,<span class="attr">"CpusetCpus"</span>:<span class="string">""</span>,<span class="attr">"CpusetMems"</span>:<span class="string">""</span>,<span class="attr">"Devices"</span>:[],<span class="attr">"DiskQuota"</span>:<span class="number">0</span>,<span class="attr">"KernelMemory"</span>:<span class="number">0</span>,<span class="attr">"MemoryReservation"</span>:<span class="number">0</span>,<span class="attr">"MemorySwap"</span>:<span class="number">0</span>,<span class="attr">"MemorySwappiness"</span>:<span class="number">-1</span>,<span class="attr">"OomKillDisable"</span>:<span class="literal">false</span>,<span class="attr">"PidsLimit"</span>:<span class="number">0</span>,<span class="attr">"Ulimits"</span>:<span class="literal">null</span>,<span class="attr">"CpuCount"</span>:<span class="number">0</span>,<span class="attr">"CpuPercent"</span>:<span class="number">0</span>,<span class="attr">"IOMaximumIOps"</span>:<span class="number">0</span>,<span class="attr">"IOMaximumBandwidth"</span>:<span class="number">0</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="docker-log-보기"><a href="#docker-log-보기" class="headerlink" title="docker log 보기"></a>docker log 보기</h4><ul>
+<li>docker logs -f &lt;<container id>&gt; :  실행중인 로그 확인 할 경우</container></li>
+<li>docker events&amp; : event 발생 로그 확인 (터미널을 2개 여는게 좋음)</li>
+<li>docker start -a &lt;<container id>&gt; : 실행시 일어나는 오류 확인 가능</container></li>
+</ul>
+<h4 id="docker-inspect"><a href="#docker-inspect" class="headerlink" title="docker inspect"></a>docker inspect</h4><p>container의 상세 정보를 확인하는 명령어 이다.</p>
+<p><code>docker inspect &lt;&lt;containerid&gt;&gt;</code></p>
+<p>해당 명령어를 실행 하면 아래와 같이 모든 container low level 정보를 return 한다.</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ docker inspect nexus</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"Id"</span>: <span class="string">"67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a"</span>,</span><br><span class="line">        <span class="attr">"Created"</span>: <span class="string">"2019-06-26T03:19:12.069213873Z"</span>,</span><br><span class="line">        <span class="attr">"Path"</span>: <span class="string">"sh"</span>,</span><br><span class="line">        <span class="attr">"Args"</span>: [</span><br><span class="line">            <span class="string">"-c"</span>,</span><br><span class="line">            <span class="string">"$&#123;SONATYPE_DIR&#125;/start-nexus-repository-manager.sh"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"State"</span>: &#123;</span><br><span class="line">            <span class="attr">"Status"</span>: <span class="string">"running"</span>,</span><br><span class="line">            <span class="attr">"Running"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">"Paused"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"Restarting"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"OOMKilled"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"Dead"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"Pid"</span>: <span class="number">19383</span>,</span><br><span class="line">            <span class="attr">"ExitCode"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"Error"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"StartedAt"</span>: <span class="string">"2019-07-02T07:49:00.930407162Z"</span>,</span><br><span class="line">            <span class="attr">"FinishedAt"</span>: <span class="string">"2019-07-02T07:48:08.216626691Z"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"Image"</span>: <span class="string">"sha256:36b0df681a47e5948f2088a446652766132141175dece2d6d47ef6e749385c05"</span>,</span><br><span class="line">        <span class="attr">"ResolvConfPath"</span>: <span class="string">"/var/lib/docker/containers/67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a/resolv.conf"</span>,</span><br><span class="line">        <span class="attr">"HostnamePath"</span>: <span class="string">"/var/lib/docker/containers/67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a/hostname"</span>,</span><br><span class="line">        <span class="attr">"HostsPath"</span>: <span class="string">"/var/lib/docker/containers/67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a/hosts"</span>,</span><br><span class="line">        <span class="attr">"LogPath"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"Name"</span>: <span class="string">"/nexus"</span>,</span><br><span class="line">        <span class="attr">"RestartCount"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"Driver"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">        <span class="attr">"MountLabel"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"ProcessLabel"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"AppArmorProfile"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"ExecIDs"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"HostConfig"</span>: &#123;</span><br><span class="line">            <span class="attr">"Binds"</span>: [</span><br><span class="line">                <span class="string">"/nexus-data:/nexus-data"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"ContainerIDFile"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"LogConfig"</span>: &#123;</span><br><span class="line">                <span class="attr">"Type"</span>: <span class="string">"journald"</span>,</span><br><span class="line">                <span class="attr">"Config"</span>: &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"NetworkMode"</span>: <span class="string">"default"</span>,</span><br><span class="line">            <span class="attr">"PortBindings"</span>: &#123;</span><br><span class="line">                <span class="attr">"8081/tcp"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"HostIp"</span>: <span class="string">""</span>,</span><br><span class="line">                        <span class="attr">"HostPort"</span>: <span class="string">"8081"</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"RestartPolicy"</span>: &#123;</span><br><span class="line">                <span class="attr">"Name"</span>: <span class="string">"always"</span>,</span><br><span class="line">                <span class="attr">"MaximumRetryCount"</span>: <span class="number">0</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"AutoRemove"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"VolumeDriver"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"VolumesFrom"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"CapAdd"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"CapDrop"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"Dns"</span>: [],</span><br><span class="line">            <span class="attr">"DnsOptions"</span>: [],</span><br><span class="line">            <span class="attr">"DnsSearch"</span>: [],</span><br><span class="line">            <span class="attr">"ExtraHosts"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"GroupAdd"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"IpcMode"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"Cgroup"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"Links"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"OomScoreAdj"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"PidMode"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"Privileged"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">"PublishAllPorts"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"ReadonlyRootfs"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"SecurityOpt"</span>: [</span><br><span class="line">                <span class="string">"label=disable"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"UTSMode"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"UsernsMode"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"ShmSize"</span>: <span class="number">67108864</span>,</span><br><span class="line">            <span class="attr">"Runtime"</span>: <span class="string">"docker-runc"</span>,</span><br><span class="line">            <span class="attr">"ConsoleSize"</span>: [</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                <span class="number">0</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"Isolation"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"CpuShares"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"Memory"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"NanoCpus"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"CgroupParent"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"BlkioWeight"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"BlkioWeightDevice"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"BlkioDeviceReadBps"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"BlkioDeviceWriteBps"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"BlkioDeviceReadIOps"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"BlkioDeviceWriteIOps"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"CpuPeriod"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"CpuQuota"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"CpuRealtimePeriod"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"CpuRealtimeRuntime"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"CpusetCpus"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"CpusetMems"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"Devices"</span>: [],</span><br><span class="line">            <span class="attr">"DiskQuota"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"KernelMemory"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"MemoryReservation"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"MemorySwap"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"MemorySwappiness"</span>: <span class="number">-1</span>,</span><br><span class="line">            <span class="attr">"OomKillDisable"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"PidsLimit"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"Ulimits"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"CpuCount"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"CpuPercent"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"IOMaximumIOps"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"IOMaximumBandwidth"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"GraphDriver"</span>: &#123;</span><br><span class="line">            <span class="attr">"Name"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">            <span class="attr">"Data"</span>: &#123;</span><br><span class="line">                <span class="attr">"LowerDir"</span>: <span class="string">"/var/lib/docker/overlay2/bdeae8fe832211ba5059562162cb4eb7098de60657f622a31f0115653c324301-init/diff:/var/lib/docker/overlay2/e3c7b24292cf5ea41f2d3ab9c3b91a3c3b22f09a1cb26cf6048b36802c30b036/diff:/var/lib/docker/overlay2/3f075ffc65dfb1a311d63c70842d0ba2c467ca9bf1289c5a2a45a21e77a8314c/diff:/var/lib/docker/overlay2/32e8540578f9058f575a9051bc28df2f0308da53a20469a3a91c1a6b60f9cb0e/diff"</span>,</span><br><span class="line">                <span class="attr">"MergedDir"</span>: <span class="string">"/var/lib/docker/overlay2/bdeae8fe832211ba5059562162cb4eb7098de60657f622a31f0115653c324301/merged"</span>,</span><br><span class="line">                <span class="attr">"UpperDir"</span>: <span class="string">"/var/lib/docker/overlay2/bdeae8fe832211ba5059562162cb4eb7098de60657f622a31f0115653c324301/diff"</span>,</span><br><span class="line">                <span class="attr">"WorkDir"</span>: <span class="string">"/var/lib/docker/overlay2/bdeae8fe832211ba5059562162cb4eb7098de60657f622a31f0115653c324301/work"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"Mounts"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"Type"</span>: <span class="string">"bind"</span>,</span><br><span class="line">                <span class="attr">"Source"</span>: <span class="string">"/nexus-data"</span>,</span><br><span class="line">                <span class="attr">"Destination"</span>: <span class="string">"/nexus-data"</span>,</span><br><span class="line">                <span class="attr">"Mode"</span>: <span class="string">""</span>,</span><br><span class="line">                <span class="attr">"RW"</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">"Propagation"</span>: <span class="string">"rprivate"</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"Config"</span>: &#123;</span><br><span class="line">            <span class="attr">"Hostname"</span>: <span class="string">"67826ba9e017"</span>,</span><br><span class="line">            <span class="attr">"Domainname"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"User"</span>: <span class="string">"nexus"</span>,</span><br><span class="line">            <span class="attr">"AttachStdin"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"AttachStdout"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"AttachStderr"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"ExposedPorts"</span>: &#123;</span><br><span class="line">                <span class="attr">"8081/tcp"</span>: &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"Tty"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"OpenStdin"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"StdinOnce"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"Env"</span>: [</span><br><span class="line">                <span class="string">"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>,</span><br><span class="line">                <span class="string">"SONATYPE_DIR=/opt/sonatype"</span>,</span><br><span class="line">                <span class="string">"NEXUS_HOME=/opt/sonatype/nexus"</span>,</span><br><span class="line">                <span class="string">"NEXUS_DATA=/nexus-data"</span>,</span><br><span class="line">                <span class="string">"NEXUS_CONTEXT="</span>,</span><br><span class="line">                <span class="string">"SONATYPE_WORK=/opt/sonatype/sonatype-work"</span>,</span><br><span class="line">                <span class="string">"DOCKER_TYPE=docker"</span>,</span><br><span class="line">                <span class="string">"INSTALL4J_ADD_VM_PARAMS=-Xms1200m -Xmx1200m -XX:MaxDirectMemorySize=2g -Djava.util.prefs.userRoot=/nexus-data/javaprefs"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"Cmd"</span>: [</span><br><span class="line">                <span class="string">"sh"</span>,</span><br><span class="line">                <span class="string">"-c"</span>,</span><br><span class="line">                <span class="string">"$&#123;SONATYPE_DIR&#125;/start-nexus-repository-manager.sh"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"ArgsEscaped"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">"Image"</span>: <span class="string">"sonatype/nexus3"</span>,</span><br><span class="line">            <span class="attr">"Volumes"</span>: &#123;</span><br><span class="line">                <span class="attr">"/nexus-data"</span>: &#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"WorkingDir"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"Entrypoint"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"OnBuild"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"Labels"</span>: &#123;</span><br><span class="line">                <span class="attr">"com.sonatype.license"</span>: <span class="string">"Apache License, Version 2.0"</span>,</span><br><span class="line">                <span class="attr">"com.sonatype.name"</span>: <span class="string">"Nexus Repository Manager base image"</span>,</span><br><span class="line">                <span class="attr">"org.label-schema.build-date"</span>: <span class="string">"20190305"</span>,</span><br><span class="line">                <span class="attr">"org.label-schema.license"</span>: <span class="string">"GPLv2"</span>,</span><br><span class="line">                <span class="attr">"org.label-schema.name"</span>: <span class="string">"CentOS Base Image"</span>,</span><br><span class="line">                <span class="attr">"org.label-schema.schema-version"</span>: <span class="string">"1.0"</span>,</span><br><span class="line">                <span class="attr">"org.label-schema.vendor"</span>: <span class="string">"CentOS"</span>,</span><br><span class="line">                <span class="attr">"vendor"</span>: <span class="string">"Sonatype"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"NetworkSettings"</span>: &#123;</span><br><span class="line">            <span class="attr">"Bridge"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"SandboxID"</span>: <span class="string">"50b3a078a453332680ca6dd09d2cd10fc641fddc49c5b3b34db178c516f8475d"</span>,</span><br><span class="line">            <span class="attr">"HairpinMode"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"LinkLocalIPv6Address"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"LinkLocalIPv6PrefixLen"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"Ports"</span>: &#123;</span><br><span class="line">                <span class="attr">"8081/tcp"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"HostIp"</span>: <span class="string">"0.0.0.0"</span>,</span><br><span class="line">                        <span class="attr">"HostPort"</span>: <span class="string">"8081"</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"SandboxKey"</span>: <span class="string">"/var/run/docker/netns/50b3a078a453"</span>,</span><br><span class="line">            <span class="attr">"SecondaryIPAddresses"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"SecondaryIPv6Addresses"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"EndpointID"</span>: <span class="string">"b030c131340f1b86c3ce868dae109fee9814310503076f685ff274b42e76eeac"</span>,</span><br><span class="line">            <span class="attr">"Gateway"</span>: <span class="string">"172.17.0.1"</span>,</span><br><span class="line">            <span class="attr">"GlobalIPv6Address"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"GlobalIPv6PrefixLen"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"IPAddress"</span>: <span class="string">"172.17.0.2"</span>,</span><br><span class="line">            <span class="attr">"IPPrefixLen"</span>: <span class="number">16</span>,</span><br><span class="line">            <span class="attr">"IPv6Gateway"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"MacAddress"</span>: <span class="string">"02:42:ac:11:00:02"</span>,</span><br><span class="line">            <span class="attr">"Networks"</span>: &#123;</span><br><span class="line">                <span class="attr">"bridge"</span>: &#123;</span><br><span class="line">                    <span class="attr">"IPAMConfig"</span>: <span class="literal">null</span>,</span><br><span class="line">                    <span class="attr">"Links"</span>: <span class="literal">null</span>,</span><br><span class="line">                    <span class="attr">"Aliases"</span>: <span class="literal">null</span>,</span><br><span class="line">                    <span class="attr">"NetworkID"</span>: <span class="string">"e7bccaaf25cb4ba061b98aab2ef6470301c688b7d99db0f40e7e7bd7b6665379"</span>,</span><br><span class="line">                    <span class="attr">"EndpointID"</span>: <span class="string">"b030c131340f1b86c3ce868dae109fee9814310503076f685ff274b42e76eeac"</span>,</span><br><span class="line">                    <span class="attr">"Gateway"</span>: <span class="string">"172.17.0.1"</span>,</span><br><span class="line">                    <span class="attr">"IPAddress"</span>: <span class="string">"172.17.0.2"</span>,</span><br><span class="line">                    <span class="attr">"IPPrefixLen"</span>: <span class="number">16</span>,</span><br><span class="line">                    <span class="attr">"IPv6Gateway"</span>: <span class="string">""</span>,</span><br><span class="line">                    <span class="attr">"GlobalIPv6Address"</span>: <span class="string">""</span>,</span><br><span class="line">                    <span class="attr">"GlobalIPv6PrefixLen"</span>: <span class="number">0</span>,</span><br><span class="line">                    <span class="attr">"MacAddress"</span>: <span class="string">"02:42:ac:11:00:02"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>여기서 특정 영역에 대한 정보만을 얻고 싶다면 다음과 같이 format 설정을 해주면 된다.</p>
+<p><code>docker inspect --format</code> 또는</p>
+<p><code>docker inspect -f</code></p>
+<p>를 사용하면 된다. 사용 법은 다음과 같다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ docker inspect --format=<span class="string">'&#123;&#123;.NetworkSettings.Networks&#125;&#125;'</span> nexus</span><br><span class="line">map[bridge:0xc420130300]</span><br></pre></td></tr></table></figure>
+<p>inspect 해서 나온 모든 정보 중에서 필요로 하는 정보의 Name을 <code>.Name.Name</code> 식으로 표현 하면 특정 값을 얻어 낼 수가 있다. 가령 <code>IPAddress</code>를 얻어 오고자 하면 다음과 같이 하면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ docker inspect --format=<span class="string">'&#123;&#123;.NetworkSettings.Networks.bridge.IPAddress&#125;&#125;'</span> nexus</span><br><span class="line">172.17.0.2</span><br></pre></td></tr></table></figure>
+<p>만약 해당 결과 값을 json 형태의 템플릿으로 받고자 하면 다음과 같이 하면 된다. </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ docker inspect --format=<span class="string">'&#123;&#123;json .NetworkSettings.Networks.bridge.IPAddress&#125;&#125;'</span> nexus                   <span class="string">"172.17.0.2"</span></span><br></pre></td></tr></table></figure>
+<p><code>&quot;&quot;</code> 앞뒤로 이와 같은게 붙은거 빼고는 차이가 없어 보이지만,</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost ~]$ docker inspect --format=<span class="string">'&#123;&#123;json .NetworkSettings.Networks&#125;&#125;'</span> nexus</span><br><span class="line">&#123;<span class="string">"bridge"</span>:&#123;<span class="string">"IPAMConfig"</span>:null,<span class="string">"Links"</span>:null,<span class="string">"Aliases"</span>:null,<span class="string">"NetworkID"</span>:<span class="string">"e7bccaaf25cb4ba061b98aab2ef6470301c688b7d99db0f40e7e7bd7b6665379"</span>,<span class="string">"EndpointID"</span>:<span class="string">"b030c131340f1b86c3ce868dae109fee9814310503076f685ff274b42e76eeac"</span>,<span class="string">"Gateway"</span>:<span class="string">"172.17.0.1"</span>,<span class="string">"IPAddress"</span>:<span class="string">"172.17.0.2"</span>,<span class="string">"IPPrefixLen"</span>:16,<span class="string">"IPv6Gateway"</span>:<span class="string">""</span>,<span class="string">"GlobalIPv6Address"</span>:<span class="string">""</span>,<span class="string">"GlobalIPv6PrefixLen"</span>:0,<span class="string">"MacAddress"</span>:<span class="string">"02:42:ac:11:00:02"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>Networks만을 출력하면 다른걸 확인 할 수있다. 앞서 <code>json</code>없이 출력은 메모리 번지를 출력 했다면, <code>json</code>과 함께 출력 하면 이하 모든 값이 string으로 출력 되는걸 확인 할 수 있다.</p>
+<blockquote>
+<p>이외에 <code>index</code>, <code>range</code>,<code>$variableParm 정의</code>, <code>:=</code>Assignment 등이 추가로 잇는듯 한데 어떻게 사용하는지는 잘 모르겠다. </p>
+</blockquote>
+<h4 id="docker-shell-로-바로-진입하기"><a href="#docker-shell-로-바로-진입하기" class="headerlink" title="docker shell 로 바로 진입하기"></a>docker shell 로 바로 진입하기</h4><p><code>docker run -it --rm &lt;&lt;이미지id&gt;&gt; /bin/sh</code> or </p>
+<p><code>docker run -it --rm &lt;&lt;이미지id&gt;&gt; /bin/bash</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -597,7 +799,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-14 02:10:05" itemprop="dateModified" datetime="2019-07-14T02:10:05Z">2019-07-14</time>
+                <time title="Modified: 2019-07-16 06:16:57" itemprop="dateModified" datetime="2019-07-16T06:16:57Z">2019-07-16</time>
               
             
           </span>
@@ -708,6 +910,7 @@
 <h5 id="기타-참고"><a href="#기타-참고" class="headerlink" title="기타 참고"></a>기타 참고</h5><ul>
 <li>plugin definition : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy9waXBlbGluZS9zdGVwcy8=" title="https://jenkins.io/doc/pipeline/steps/">https://jenkins.io/doc/pipeline/steps/<i class="fa fa-external-link"></i></span></li>
 <li>pipeline examples : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy9waXBlbGluZS9leGFtcGxlcy8=" title="https://jenkins.io/doc/pipeline/examples/">https://jenkins.io/doc/pipeline/examples/<i class="fa fa-external-link"></i></span></li>
+<li>DSL SDK : <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zY2kuZ2l0aHViLmlvL2pvYi1kc2wtcGx1Z2luLyM=" title="https://jenkinsci.github.io/job-dsl-plugin/#">https://jenkinsci.github.io/job-dsl-plugin/#<i class="fa fa-external-link"></i></span></li>
 </ul>
 <h4 id="Test-or-Report"><a href="#Test-or-Report" class="headerlink" title="Test or Report"></a>Test or Report</h4><p>TEST는 빌드가 완료 된 이후 junit등과 같이 테스트 후 리포트를 내놓는 부분을 말한다</p>
 <blockquote>
@@ -1097,177 +1300,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/Nexus-install-on-centos7-with-docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Nexus-install-on-centos7-with-docker/" class="post-title-link" itemprop="url">Nexus install on Centos7 with docker</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-26 19:44:15" itemprop="dateCreated datePublished" datetime="2019-06-26T19:44:15Z">2019-06-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/Nexus-install-on-centos7-with-docker/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Nexus-install-on-centos7-with-docker/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Nexus-설치"><a href="#Nexus-설치" class="headerlink" title="Nexus 설치"></a>Nexus 설치</h4><p>큰 어려움이 없어서 log만 남김</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[devops@localhost docker]$ docker search sonatype/nexus3</span><br><span class="line">Got permission denied <span class="keyword">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.26/images/search?<span class="built_in">limit</span>=25&amp;term=sonatype%2Fnexus3: dial unix /var/run/docker.sock: connect: permission denied</span><br><span class="line">[devops@localhost docker]$ su</span><br><span class="line">암호:</span><br><span class="line">[root@localhost docker]<span class="comment"># docker search sonatype/nexus3</span></span><br><span class="line">INDEX     NAME      DESCRIPTION   STARS     OFFICIAL   AUTOMATED</span><br><span class="line">[root@localhost docker]<span class="comment"># docker search nexus3</span></span><br><span class="line">INDEX       NAME                                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">docker.io   docker.io/sonatype/nexus3                       Sonatype Nexus Repository Manager 3             620</span><br><span class="line">docker.io   docker.io/shifudao/nexus3                       <span class="built_in">clone</span> from nexus3 image but based from ope...   4                    [OK]</span><br><span class="line">docker.io   docker.io/cloudsc/nexus3-blobstore-s3           nexus3 with nexus-blobstore-s3 integrated       2</span><br><span class="line">docker.io   docker.io/home1oss/nexus3                       An auto configured nexus3                       2                    [OK]</span><br><span class="line">docker.io   docker.io/madmuffin/nexus3                      Sonatype Nexus3 Milestone7 docker image         2                    [OK]</span><br><span class="line">docker.io   docker.io/alvindaiyan/nexus3-azure-appservice                                                   1</span><br><span class="line">docker.io   docker.io/cirepo/nexus3                         An auto configured nexus3                       1                    [OK]</span><br><span class="line">docker.io   docker.io/flavioaiello/nexus3                   Production ready lightweight Nexus3 with A...   1                    [OK]</span><br><span class="line">docker.io   docker.io/fxinnovation/nexus3                   Sonatype Nexus 3 <span class="keyword">in</span> a container                 1                    [OK]</span><br><span class="line">docker.io   docker.io/azaa1/nexus3                          Sonyatype Nexus Repository Manager 3            0</span><br><span class="line">docker.io   docker.io/bigseasre/nexus3                      mirror of the original nexus3 dockerfile        0</span><br><span class="line">docker.io   docker.io/binsix/nexus3                         docker images of nexus3 base on openjdk         0                    [OK]</span><br><span class="line">docker.io   docker.io/clivesaha/nexus3                      nexus3                                          0</span><br><span class="line">docker.io   docker.io/darthhater/nexus3                     A series of example Dockerfiles and images...   0                    [OK]</span><br><span class="line">docker.io   docker.io/desiato/nexus3-ssl                    Sonatype Nexus 3 with SSL/TLS support.          0                    [OK]</span><br><span class="line">docker.io   docker.io/devopsmakers/nexus3                   A Nexus3 container with the apt plugin          0</span><br><span class="line">docker.io   docker.io/dwolla/nexus3-crowd                   Nexus3 with nexus3-crowd-plugin installed       0                    [OK]</span><br><span class="line">docker.io   docker.io/enieuw/nexus3-oss                     nexus3-oss                                      0                    [OK]</span><br><span class="line">docker.io   docker.io/freckleiot/nexus3-oss                 A Sonatype Nexus3 OSS image <span class="built_in">which</span> makes it...   0                    [OK]</span><br><span class="line">docker.io   docker.io/joshdvir/nexus3                       nexus3                                          0                    [OK]</span><br><span class="line">docker.io   docker.io/lokkju/nexus3-github-auth             Sonatype Nexus 3 with Github authenticatio...   0                    [OK]</span><br><span class="line">docker.io   docker.io/mritd/nexus3                          nexus3                                          0                    [OK]</span><br><span class="line">docker.io   docker.io/salte/nexus3                          Extends the Sonatype nexus3 Docker image b...   0                    [OK]</span><br><span class="line">docker.io   docker.io/sdase/nexus3-base-image               An opinionated nexus3 docker image, based ...   0                    [OK]</span><br><span class="line">docker.io   docker.io/stocksoftware/nexus3                  A nexus3 docker instance                        0                    [OK]</span><br><span class="line">[root@localhost docker]<span class="comment"># docker pull docker.io/sonatype/nexus3</span></span><br><span class="line">Using default tag: latest</span><br><span class="line">Trying to pull repository docker.io/sonatype/nexus3 ...</span><br><span class="line">latest: Pulling from docker.io/sonatype/nexus3</span><br><span class="line">8ba884070f61: Pull complete</span><br><span class="line">9d732789dc29: Pull complete</span><br><span class="line">b56d6d0d4fc5: Pull complete</span><br><span class="line">Digest: sha256:970b09779992bf88d041d074428c54dc153f7b9c8cafe4ff364dd26d69200f7a</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.io/sonatype/nexus3:latest</span><br><span class="line">[root@localhost docker]<span class="comment"># ls</span></span><br><span class="line">[root@localhost docker]<span class="comment"># mkdir nexus-data</span></span><br><span class="line">[root@localhost docker]<span class="comment"># ls</span></span><br><span class="line">nexus-data</span><br><span class="line">[root@localhost docker]<span class="comment"># ll</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x. 2 root root 6  6월 26 11:21 nexus-data</span><br><span class="line">[root@localhost docker]<span class="comment"># chown -R 200 nexus-data/</span></span><br><span class="line">[root@localhost docker]<span class="comment"># ll</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x. 2 200 root 6  6월 26 11:21 nexus-data</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost docker]<span class="comment"># firewall-cmd --permanent --zone=public --add-port=8081/tcp</span></span><br><span class="line">success</span><br><span class="line">[root@localhost docker]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br><span class="line">[root@localhost docker]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost docker]<span class="comment"># docker run -d -p 8081:8081 --privileged --name nexus -v /nexus-data:/nexus-data sonatype/nexus3</span></span><br><span class="line">67826ba9e0179b6009c9c7a177fe1815fd320cdac65ea91d479413f7c4e5e81a</span><br><span class="line">[root@localhost docker]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">67826ba9e017        sonatype/nexus3     <span class="string">"sh -c $&#123;SONATYPE_..."</span>   3 seconds ago       Up 3 seconds        0.0.0.0:8081-&gt;8081/tcp   nexus</span><br><span class="line">[root@localhost docker]<span class="comment"># docker logs -f</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1316,7 +1348,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1421,7 +1453,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">45</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
