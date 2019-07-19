@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="Try Again">
 <meta property="og:description" content="Jenkins User hand book 및 기타 사이트 참고해서 간단하게 필요한 내용만 서머리함 (https://jenkins.io/user-handbook.pdf) Pipeline개발, 통합 운영 배포 등이 가능한 플러그인 들을 하나의 Suit로 만드는 것을 파이프 라인이라고 한다. 자동 화된 파이프라인 설정 기능이 있으나, 보다 복잡한 사용이 필요 할">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-16T06:16:57.672Z">
+<meta property="og:updated_time" content="2019-07-18T07:12:46.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins Basic">
 <meta name="twitter:description" content="Jenkins User hand book 및 기타 사이트 참고해서 간단하게 필요한 내용만 서머리함 (https://jenkins.io/user-handbook.pdf) Pipeline개발, 통합 운영 배포 등이 가능한 플러그인 들을 하나의 Suit로 만드는 것을 파이프 라인이라고 한다. 자동 화된 파이프라인 설정 기능이 있으나, 보다 복잡한 사용이 필요 할">
@@ -245,7 +245,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">22</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">23</span></a>
 
   </li>
 
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-16 06:16:57" itemprop="dateModified" datetime="2019-07-16T06:16:57Z">2019-07-16</time>
+                <time title="Modified: 2019-07-18 07:12:46" itemprop="dateModified" datetime="2019-07-18T07:12:46Z">2019-07-18</time>
               
             
           </span>
@@ -472,6 +472,16 @@
 </li>
 <li><p>env : script 파이프 라인에서 접근 가능한 환경 값 (env.PATH, env,BUILD_ID)</p>
 </li>
+</ul>
+<blockquote>
+<p>env의 경우 nodejs에서 사용하는 <code>process.env</code> 객체를 지칭하게 된다. 해당 값은 jenkins에서 다음과 같이 setting해서 사용 할 수있다.</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">&gt; node &#123;</span><br><span class="line">&gt;     checkout scm</span><br><span class="line">&gt;     env.VUE_PUBLIC_PATH = <span class="string">'/'</span></span><br><span class="line">&gt;     env.ENV_TEST = <span class="string">'real data'</span></span><br><span class="line">&gt; ...</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>만약에 node 프로젝트에 <code>.env</code> 파일이 있다고 해도, jenkins에서 정의한 env 값이 우선하게 된다.</p>
+</blockquote>
+<ul>
 <li><p>params : 파이프라인 내에서 정의된 parameters (MAP) (params.MY_PARAM_NAME)</p>
 </li>
 <li><p>currentBuild : 현재 파이프라인의 정보를 확인 가능 (currentBuild.result, currentBuild.displayName)</p>
@@ -671,6 +681,9 @@
 <li>Allow requests to the local network from hooks and services : check</li>
 </ul>
 </blockquote>
+<h4 id="Mattermost-연동"><a href="#Mattermost-연동" class="headerlink" title="Mattermost 연동"></a>Mattermost 연동</h4><ul>
+<li>plugin : Mattermost Notification Plugin</li>
+</ul>
 
       
     </div>
@@ -797,7 +810,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -906,7 +919,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">47</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -976,7 +995,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pipeline"><span class="nav-number">1.</span> <span class="nav-text">Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pipeline-Flow"><span class="nav-number">2.</span> <span class="nav-text">Pipeline Flow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DSL-define"><span class="nav-number">3.</span> <span class="nav-text">DSL define</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#기타-참고"><span class="nav-number">3.1.</span> <span class="nav-text">기타 참고</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-or-Report"><span class="nav-number">4.</span> <span class="nav-text">Test or Report</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deploy"><span class="nav-number">5.</span> <span class="nav-text">Deploy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multibranch-Pipeline"><span class="nav-number">6.</span> <span class="nav-text">Multibranch Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker"><span class="nav-number">7.</span> <span class="nav-text">Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-test"><span class="nav-number">7.1.</span> <span class="nav-text">Docker test</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#volume-mount"><span class="nav-number">7.2.</span> <span class="nav-text">volume mount</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#다중-container-처리"><span class="nav-number">7.3.</span> <span class="nav-text">다중  container 처리</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sidecar-처리"><span class="nav-number">7.4.</span> <span class="nav-text">sidecar 처리</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dockerfile을-이용한-빌드"><span class="nav-number">7.5.</span> <span class="nav-text">Dockerfile을 이용한 빌드</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-server-사용"><span class="nav-number">7.6.</span> <span class="nav-text">Docker server 사용</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-Registry"><span class="nav-number">7.7.</span> <span class="nav-text">Docker Registry</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-Agent-사용하기"><span class="nav-number">7.8.</span> <span class="nav-text">Docker Agent 사용하기</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Replay"><span class="nav-number">8.</span> <span class="nav-text">Replay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pipeline-Syntax"><span class="nav-number">9.</span> <span class="nav-text">Pipeline Syntax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gitlab-연동"><span class="nav-number">10.</span> <span class="nav-text">Gitlab 연동</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#plugin"><span class="nav-number">10.1.</span> <span class="nav-text">plugin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#인증정보"><span class="nav-number">10.2.</span> <span class="nav-text">인증정보</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#gitlab-Personal-Token-발행"><span class="nav-number">10.2.1.</span> <span class="nav-text">gitlab Personal Token 발행</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#gitlab-token-jenkins-등록"><span class="nav-number">10.2.2.</span> <span class="nav-text">gitlab token jenkins 등록</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Jenkins-등록"><span class="nav-number">10.2.3.</span> <span class="nav-text">Jenkins 등록</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jenkins-프로젝트"><span class="nav-number">10.3.</span> <span class="nav-text">jenkins 프로젝트</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Gitlab-설정"><span class="nav-number">10.4.</span> <span class="nav-text">Gitlab 설정</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pipeline"><span class="nav-number">1.</span> <span class="nav-text">Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pipeline-Flow"><span class="nav-number">2.</span> <span class="nav-text">Pipeline Flow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DSL-define"><span class="nav-number">3.</span> <span class="nav-text">DSL define</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#기타-참고"><span class="nav-number">3.1.</span> <span class="nav-text">기타 참고</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-or-Report"><span class="nav-number">4.</span> <span class="nav-text">Test or Report</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deploy"><span class="nav-number">5.</span> <span class="nav-text">Deploy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multibranch-Pipeline"><span class="nav-number">6.</span> <span class="nav-text">Multibranch Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker"><span class="nav-number">7.</span> <span class="nav-text">Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-test"><span class="nav-number">7.1.</span> <span class="nav-text">Docker test</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#volume-mount"><span class="nav-number">7.2.</span> <span class="nav-text">volume mount</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#다중-container-처리"><span class="nav-number">7.3.</span> <span class="nav-text">다중  container 처리</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sidecar-처리"><span class="nav-number">7.4.</span> <span class="nav-text">sidecar 처리</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dockerfile을-이용한-빌드"><span class="nav-number">7.5.</span> <span class="nav-text">Dockerfile을 이용한 빌드</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-server-사용"><span class="nav-number">7.6.</span> <span class="nav-text">Docker server 사용</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-Registry"><span class="nav-number">7.7.</span> <span class="nav-text">Docker Registry</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Docker-Agent-사용하기"><span class="nav-number">7.8.</span> <span class="nav-text">Docker Agent 사용하기</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Replay"><span class="nav-number">8.</span> <span class="nav-text">Replay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pipeline-Syntax"><span class="nav-number">9.</span> <span class="nav-text">Pipeline Syntax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gitlab-연동"><span class="nav-number">10.</span> <span class="nav-text">Gitlab 연동</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#plugin"><span class="nav-number">10.1.</span> <span class="nav-text">plugin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#인증정보"><span class="nav-number">10.2.</span> <span class="nav-text">인증정보</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#gitlab-Personal-Token-발행"><span class="nav-number">10.2.1.</span> <span class="nav-text">gitlab Personal Token 발행</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#gitlab-token-jenkins-등록"><span class="nav-number">10.2.2.</span> <span class="nav-text">gitlab token jenkins 등록</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Jenkins-등록"><span class="nav-number">10.2.3.</span> <span class="nav-text">Jenkins 등록</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jenkins-프로젝트"><span class="nav-number">10.3.</span> <span class="nav-text">jenkins 프로젝트</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Gitlab-설정"><span class="nav-number">10.4.</span> <span class="nav-text">Gitlab 설정</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mattermost-연동"><span class="nav-number">11.</span> <span class="nav-text">Mattermost 연동</span></a></li></ol></div>
             
 
           </div>
