@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://theyoung.github.io/double-wildfly-with-intellij/</loc>
+    
+    <lastmod>2019-07-25T02:33:26.084Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://theyoung.github.io/jboss-install-on-mac/</loc>
     
     <lastmod>2019-07-19T08:09:06.465Z</lastmod>
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/webpack-start/</loc>
+    <loc>https://theyoung.github.io/mattermost-docker-composer-onCentos7/</loc>
     
     <lastmod>2019-07-04T02:25:46.210Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/mattermost-docker-composer-onCentos7/</loc>
+    <loc>https://theyoung.github.io/webpack-start/</loc>
     
     <lastmod>2019-07-04T02:25:46.210Z</lastmod>
     
@@ -107,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/grafika/</loc>
+    <loc>https://theyoung.github.io/javascript-object-merge/</loc>
     
     <lastmod>2019-07-04T02:25:46.209Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/javascript-object-merge/</loc>
+    <loc>https://theyoung.github.io/grafika/</loc>
     
     <lastmod>2019-07-04T02:25:46.209Z</lastmod>
     
@@ -128,7 +135,7 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/Nexus-install-on-centos7-with-docker/</loc>
+    <loc>https://theyoung.github.io/android-graphic-architecture/</loc>
     
     <lastmod>2019-07-04T02:25:46.208Z</lastmod>
     
@@ -142,7 +149,7 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/android-graphic-architecture/</loc>
+    <loc>https://theyoung.github.io/Nexus-install-on-centos7-with-docker/</loc>
     
     <lastmod>2019-07-04T02:25:46.208Z</lastmod>
     

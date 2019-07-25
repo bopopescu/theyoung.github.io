@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">23</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">24</span></a>
 
   </li>
 
@@ -307,6 +307,241 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/double-wildfly-with-intellij/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/double-wildfly-with-intellij/" class="post-title-link" itemprop="url">Double Wildfly launching with Intellij to release wars duplicately</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-02 21:40:17" itemprop="dateCreated datePublished" datetime="2019-07-02T21:40:17Z">2019-07-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-25 02:33:26" itemprop="dateModified" datetime="2019-07-25T02:33:26Z">2019-07-25</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/double-wildfly-with-intellij/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="double-wildfly-with-intellij/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>서로 다른 서비스를 갖는 프로젝트 2개가 있고 두개의 프로젝트가 intellij에서 동시에 wildfly(jboss) 상에서 실행 되어야 할때, 어떻게 로컬 세팅을 하는지에 대한 기록 임</p>
+<h4 id="전제"><a href="#전제" class="headerlink" title="전제"></a>전제</h4><p>각 프로젝트는 독립 적으로 이미 작동 시킬 수 있는 상태이다.</p>
+<p>wildfly standalone 버전으로 서비스를 start할 거다</p>
+<p>port는 서로 달라도 된다</p>
+<p>Wildfly가 특정 폴더에 인스톨 되어있다.</p>
+<h4 id="wildfly-설정"><a href="#wildfly-설정" class="headerlink" title="wildfly 설정"></a>wildfly 설정</h4><ul>
+<li><p>wildfly 디렉토리 이하 standalone 폴더를 하나더 copy한다.</p>
+<ul>
+<li>standalone2 라는 이름으로 standalone폴더와 같은 위치에 만든다</li>
+</ul>
+</li>
+<li><p>Wildfly &gt; bin 디렉토리 이하 standalone.sh 또는 standalone.bat을 하나더 copy한다.</p>
+<ul>
+<li>standalone2.sh 라는 이름으로 같은 위치에 만든다</li>
+</ul>
+</li>
+<li><p>standalone2.sh 를 수정한다</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"># determine the default base dir, if not set</span><br><span class="line">if [ "x$JBOSS_BASE_DIR" = "x" ]; then</span><br><span class="line"><span class="deletion">-   JBOSS_BASE_DIR="$JBOSS_HOME/standalone"</span></span><br><span class="line"><span class="addition">+	  JBOSS_BASE_DIR="$JBOSS_HOME/standalone2"</span></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="intellij-설정"><a href="#intellij-설정" class="headerlink" title="intellij 설정"></a>intellij 설정</h4><ul>
+<li>A프로젝트와 B프로젝트를 intellij에서 연다</li>
+</ul>
+<ul>
+<li>A프로젝트는 다음과 같이 기본 설정한다. (Run &gt; Run/Debug Configuration)<ul>
+<li>&#39;+&#39; &gt; JBoss Server &gt; wildfly &gt; local &gt; Application Server &gt; 로컬 Jboss선택<ul>
+<li>만약에 Jboss 선택에 아무것도 없다면 &quot;Configuration&quot; 버튼 클릭 JbossHome 선택</li>
+</ul>
+</li>
+<li>&#39;url&#39; : <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo4MDgwLw==" title="http://localhost:8080/">http://localhost:8080/<i class="fa fa-external-link"></i></span></li>
+<li>Operating mode &gt; standalone 선택</li>
+<li>Deployment 탭 선택<ul>
+<li>디플로이 하고자 하는 Artifact 선택</li>
+</ul>
+</li>
+<li>Startup/Connection 탭 선택<ul>
+<li>Startup Script : &lt;<jbosshome 디렉토리>&gt;/bin/standalone.sh 선택</jbosshome></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>B프로젝트는 다음과 같이 기본 설정한다. (Run &gt; Run/Debug Configuration)<ul>
+<li>&#39;+&#39; &gt; JBoss Server &gt; wildfly &gt; local &gt; Application Server &gt; 로컬 Jboss선택<ul>
+<li>만약에 Jboss 선택에 아무것도 없다면 &quot;Configuration&quot; 버튼 클릭 JbossHome 선택</li>
+</ul>
+</li>
+<li>&#39;url&#39; : <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo4MDkwLw==" title="http://localhost:8090/">http://localhost:8090/<i class="fa fa-external-link"></i></span></li>
+<li>Operating mode &gt; standalone 선택<ul>
+<li>Port offset : 10 선택</li>
+</ul>
+</li>
+<li>Deployment 탭 선택<ul>
+<li>디플로이 하고자 하는 Artifact 선택</li>
+</ul>
+</li>
+<li>Startup/Connection 탭 선택<ul>
+<li>Startup Script : &lt;<jbosshome 디렉토리>&gt;/bin/standalone2.sh 선택</jbosshome></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>offset 설정을 standalone.xml에서 설정할 경우 해당 설정 값을 intellij가 감지 하지 못한다. 반듯이 intellij에서 제공하는 offset으로 수정해줘야 한다.</p>
+<p>상위와 같이 했음에도 <code>**Caused by: org.jboss.msc.service.DuplicateServiceException: Service jboss.undertow.deployment.default-server.default-host./.session is already registered**</code>이런 오류가 나오는 경우에는 standalone2 디렉토리 이하에 있는 standalone.xml에 앞서 설정한 <code>deployment</code>가 남아 있을 수도 있다. 이경우에는 deployments tag를 아예 삭제하고 intellij에서 실행하자</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1140,179 +1375,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/tomcat-install-with-user-on-centos-for-jenkins/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/tomcat-install-with-user-on-centos-for-jenkins/" class="post-title-link" itemprop="url">tomcat install on centos</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-27 22:32:33" itemprop="dateCreated datePublished" datetime="2019-06-27T22:32:33Z">2019-06-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/tomcat-install-with-user-on-centos-for-jenkins/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="tomcat-install-with-user-on-centos-for-jenkins/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>tomca install 처리 하는 내용이지만 별 내용이 없어서... pass</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost webapp]<span class="comment"># yum list tomcat*</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: centos.mirror.moack.net</span><br><span class="line"> * extras: centos.mirror.moack.net</span><br><span class="line"> * updates: centos.mirror.moack.net</span><br><span class="line">Installed Packages</span><br><span class="line">tomcat.noarch                                                                                                             7.0.76-9.el7_6                                                                                             @updates</span><br><span class="line">tomcat-admin-webapps.noarch                                                                                               7.0.76-9.el7_6                                                                                             @updates</span><br><span class="line">tomcat-el-2.2-api.noarch                                                                                                  7.0.76-9.el7_6                                                                                             @updates</span><br><span class="line">tomcat-jsp-2.2-api.noarch                                                                                                 7.0.76-9.el7_6                                                                                             @updates</span><br><span class="line">tomcat-lib.noarch                                                                                                         7.0.76-9.el7_6                                                                                             @updates</span><br><span class="line">tomcat-servlet-3.0-api.noarch                                                                                             7.0.76-9.el7_6                                                                                             @updates</span><br><span class="line">tomcat-webapps.noarch                                                                                                     7.0.76-9.el7_6                                                                                             @updates</span><br><span class="line">Available Packages</span><br><span class="line">tomcat-docs-webapp.noarch                                                                                                 7.0.76-9.el7_6                                                                                             updates</span><br><span class="line">tomcat-javadoc.noarch                                                                                                     7.0.76-9.el7_6                                                                                             updates</span><br><span class="line">tomcat-jsvc.noarch                                                                                                        7.0.76-9.el7_6                                                                                             updates</span><br><span class="line">tomcatjss.noarch                                                                                                          7.2.1-8.el7_6                                                                                              updates</span><br><span class="line">[root@localhost webapp]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-<p><code>yum install tomcat tomcat-webapp tomcat-admin-webapps</code>                                                                                                                                                             </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost webapp]<span class="comment"># systemctl enable tomcat</span></span><br><span class="line">[root@localhost webapp]<span class="comment"># systemctl stop tomcat</span></span><br><span class="line">[root@localhost webapp]<span class="comment"># systemctl start tomcat</span></span><br><span class="line">[root@localhost webapp]<span class="comment"># whereis tomcat</span></span><br><span class="line">tomcat: /usr/sbin/tomcat /etc/tomcat /usr/libexec/tomcat /usr/share/tomcat</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost webapp]<span class="comment"># cd /usr/share/tomcat/</span></span><br><span class="line">[root@localhost tomcat]<span class="comment"># ll</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x. 2 root root   76  6월 27 22:03 bin</span><br><span class="line">lrwxrwxrwx. 1 root tomcat 11  6월 27 22:03 conf -&gt; /etc/tomcat</span><br><span class="line">lrwxrwxrwx. 1 root tomcat 22  6월 27 22:03 lib -&gt; /usr/share/java/tomcat</span><br><span class="line">lrwxrwxrwx. 1 root tomcat 15  6월 27 22:03 logs -&gt; /var/<span class="built_in">log</span>/tomcat</span><br><span class="line">lrwxrwxrwx. 1 root tomcat 22  6월 27 22:03 temp -&gt; /var/cache/tomcat/temp</span><br><span class="line">lrwxrwxrwx. 1 root tomcat 23  6월 27 22:03 webapps -&gt; /var/lib/tomcat/webapps</span><br><span class="line">lrwxrwxrwx. 1 root tomcat 22  6월 27 22:03 work -&gt; /var/cache/tomcat/work</span><br><span class="line">[root@localhost tomcat]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost webapps]<span class="comment"># ll</span></span><br><span class="line">합계 5</span><br><span class="line">drwxr-xr-x. 3 tomcat tomcat 4096  6월 27 22:54 ROOT</span><br><span class="line">drwxr-xr-x. 8 tomcat tomcat  127  6월 27 22:54 examples</span><br><span class="line">drwxr-xr-x. 5 root   tomcat   87  6월 27 22:45 host-manager</span><br><span class="line">drwxr-xr-x. 5 root   tomcat  103  6월 27 22:45 manager</span><br><span class="line">drwxr-xr-x. 5 tomcat tomcat   86  6월 27 22:54 sample</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1361,7 +1423,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1476,7 +1538,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

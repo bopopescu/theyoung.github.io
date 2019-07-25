@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">23</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">24</span></a>
 
   </li>
 
@@ -757,6 +757,247 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/Jedis-java-clinet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Jedis-java-clinet/" class="post-title-link" itemprop="url">Redis & Jedis</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-20 15:32:33" itemprop="dateCreated datePublished" datetime="2019-03-20T15:32:33Z">2019-03-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-04 02:25:46" itemprop="dateModified" datetime="2019-07-04T02:25:46Z">2019-07-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/Jedis-java-clinet/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Jedis-java-clinet/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Redis와-Redis-관련-정보를-다음-url에서-발췌해서-적는다"><a href="#Redis와-Redis-관련-정보를-다음-url에서-발췌해서-적는다" class="headerlink" title="Redis와 Redis 관련 정보를 다음 url에서 발췌해서 적는다"></a>Redis와 Redis 관련 정보를 다음 url에서 발췌해서 적는다</h4><p><span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vSm9uQ29sZS85MjU2MzBkZjcyYmUxMzUxYjIxNDQwNjI1ZmYyNjcxZiNmaWxlLXJlZGlzLWJlc3RwcmFjdGljZXMtamF2YS1qZWRpcy1tZA==" title="https://gist.github.com/JonCole/925630df72be1351b21440625ff2671f#file-redis-bestpractices-java-jedis-md">https://gist.github.com/JonCole/925630df72be1351b21440625ff2671f#file-redis-bestpractices-java-jedis-md<i class="fa fa-external-link"></i></span></p>
+<h4 id="Jedis는-Single-스레드이다"><a href="#Jedis는-Single-스레드이다" class="headerlink" title="Jedis는 Single 스레드이다"></a>Jedis는 Single 스레드이다</h4><ul>
+<li>멀티스레드 환경에서 절대로 동일한 Jedis Connection instance를 같은 시간에 사용하지 말아라</li>
+<li>만약에 동시 접근을 하게 된다면 &quot;expected &#39;$&#39; but got&#39;&quot; 과같은 오류 메시지를 확인 할 것이다.</li>
+</ul>
+<h4 id="JedisPool을-사용해라"><a href="#JedisPool을-사용해라" class="headerlink" title="JedisPool을 사용해라"></a>JedisPool을 사용해라</h4><ul>
+<li>멀티스레드 환경에서 connections을 재활용 할 수 있게 해준다</li>
+<li>JedisPool Object는 thread-safe하게 작성되었다</li>
+<li>Pool은 단 한번만 설정하고 재활용 되어야 한다</li>
+<li>Jedis instance는 사용후 반듯이 pool로 돌아가야 한다. </li>
+<li>컨넥션 에러가 30초 이상 발생할 경우 jedisPool을 새로 생성하는게 좋다.</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>connectTimeout</td>
+<td></td>
+</tr>
+<tr>
+<td>soTimeout</td>
+<td></td>
+</tr>
+<tr>
+<td>port</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="JedisPoolConfig-settings"><a href="#JedisPoolConfig-settings" class="headerlink" title="JedisPoolConfig settings"></a>JedisPoolConfig settings</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maxTotal</td>
+<td></td>
+</tr>
+<tr>
+<td>maxIdle</td>
+<td></td>
+</tr>
+<tr>
+<td>minIdle</td>
+<td></td>
+</tr>
+<tr>
+<td>blockWenExhausted</td>
+<td></td>
+</tr>
+<tr>
+<td>maxWaitMillis</td>
+<td></td>
+</tr>
+<tr>
+<td>TestOnBorrow</td>
+<td></td>
+</tr>
+<tr>
+<td>minEvictableIdleTimeMillis</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/webpack-start/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1043,7 +1284,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1158,7 +1399,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -1716,6 +1961,8 @@
 
   
   
+    
+      
     
       
     
