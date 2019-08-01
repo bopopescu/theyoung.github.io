@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="Try Again">
 <meta property="og:description" content="centos 7.0 상에서 아파치(httpd)를 설치하고 포트 맵핑 하는 내용을 정리 합니다. install아파치 설치[root@localhost conf]# yum install httpd[root@localhost conf]# httpd -vServer version: Apache/2.4.6 (CentOS)Server built:   Apr 24 201">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-10T11:18:10.626Z">
+<meta property="og:updated_time" content="2019-07-26T06:58:10.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="virtual host on centos">
 <meta name="twitter:description" content="centos 7.0 상에서 아파치(httpd)를 설치하고 포트 맵핑 하는 내용을 정리 합니다. install아파치 설치[root@localhost conf]# yum install httpd[root@localhost conf]# httpd -vServer version: Apache/2.4.6 (CentOS)Server built:   Apr 24 201">
@@ -245,7 +245,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">26</span></a>
 
   </li>
 
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-10 11:18:10" itemprop="dateModified" datetime="2019-07-10T11:18:10Z">2019-07-10</time>
+                <time title="Modified: 2019-07-26 06:58:10" itemprop="dateModified" datetime="2019-07-26T06:58:10Z">2019-07-26</time>
               
             
           </span>
@@ -507,6 +507,9 @@
 <p>만약에 8888 포트가 다른 서비스에 이미 맵핑 되어 있다면 다음과 같이 명령어를 사용하면 된다.</p>
 <p>semanage port <code>-m</code> -p tcp -t http_port_t 8888</p>
 </blockquote>
+<p>만약에 포트에 따라서 사용자가 변경 할 수 없는 포트는 아래와 같이 처리 해주면 된다.</p>
+<p><code>semanage port -m -t http_port_t -p tcp 8888</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost logs]<span class="comment"># semanage port -l | grep 8888</span></span><br><span class="line">us_cli_port_t                  tcp      8082, 8888</span><br><span class="line">us_cli_port_t                  udp      8082, 8888</span><br><span class="line">[root@localhost logs]<span class="comment"># semanage port -a -p tcp -t http_port_t 8083</span></span><br><span class="line">ValueError: 포트 tcp/8083가 이미 지정되어 있습니다 </span><br><span class="line">[root@localhost logs]<span class="comment"># semanage port -d -p tcp -t htus_cli_port_t 8083</span></span><br><span class="line">ValueError: 포트 tcp/8083가 정책에 지정되어 있습니다, 삭제할 수 없습니다 </span><br><span class="line">[root@localhost logs]<span class="comment"># semanage port -m -t http_port_t -p tcp 8083</span></span><br><span class="line">[root@localhost logs]<span class="comment"># semanage port -l | grep 8083</span></span><br><span class="line">http_port_t                    tcp      8888, 9888, 9999, 8888, 80, 81, 443</span><br><span class="line">us_cli_port_t                  tcp      8888, 8083</span><br><span class="line">us_cli_port_t                  udp      8888, 8083</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -549,8 +552,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/double-wildfly-with-intellij/" rel="next" title="Double Wildfly launching with Intellij to release wars duplicately">
-                <i class="fa fa-chevron-left"></i> Double Wildfly launching with Intellij to release wars duplicately
+              <a href="/docker/" rel="next" title="Docker">
+                <i class="fa fa-chevron-left"></i> Docker
               </a>
             
           </div>
@@ -639,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -758,7 +761,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">52</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

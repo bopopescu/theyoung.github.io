@@ -242,7 +242,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">26</span></a>
 
   </li>
 
@@ -307,6 +307,594 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/pgmodeler-install-on-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/pgmodeler-install-on-mac/" class="post-title-link" itemprop="url">Pgmodeler install</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-01 19:11:11 / Modified: 10:23:43" itemprop="dateCreated datePublished" datetime="2019-08-01T19:11:11Z">2019-08-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/pgmodeler-install-on-mac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="pgmodeler-install-on-mac/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">stevenui-MacBookPro:pgmodeler steven$ git https://github.com/pgmodeler/pgmodeler.git</span><br><span class="line">git: &apos;https://github.com/pgmodeler/pgmodeler.git&apos; is not a git command. See &apos;git --help&apos;.</span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ git clone https://github.com/pgmodeler/pgmodeler.git</span><br><span class="line">Cloning into &apos;pgmodeler&apos;...</span><br><span class="line">remote: Enumerating objects: 295, done.</span><br><span class="line">remote: Counting objects: 100% (295/295), done.</span><br><span class="line">remote: Compressing objects: 100% (180/180), done.</span><br><span class="line">remote: Total 44360 (delta 154), reused 200 (delta 115), pack-reused 44065</span><br><span class="line">Receiving objects: 100% (44360/44360), 29.30 MiB | 8.08 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (31703/31703), done.</span><br><span class="line"></span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ ls</span><br><span class="line">pgmodeler</span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ cd pgmodeler/</span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ ls</span><br><span class="line">CHANGELOG.md		RELEASENOTES.md		dbm-mime-type.sh	installer		libparsers		libpgmodeler_ui		macdeploy.sh		pgmodeler-intl.pro	pgmodeler.pro		samples			tests</span><br><span class="line">LICENSE			conf			docmainpage.doxy	lang			libpgconnector		libutils		main			pgmodeler.appdata.xml	pgmodeler.vars		schemas			windeploy.sh</span><br><span class="line">README.md		crashhandler		doxygen.conf		libobjrenderer		libpgmodeler		linuxdeploy.sh		main-cli		pgmodeler.pri		plugins			start-pgmodeler.sh	wingetdate.bat</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line">==&gt; This script will install:</span><br><span class="line">/usr/local/bin/brew</span><br><span class="line">/usr/local/share/doc/homebrew</span><br><span class="line">/usr/local/share/man/man1/brew.1</span><br><span class="line">/usr/local/share/zsh/site-functions/_brew</span><br><span class="line">/usr/local/etc/bash_completion.d/brew</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ brew link qt5 --force</span><br><span class="line">Linking /usr/local/Cellar/qt/5.13.0... 432 symlinks created</span><br><span class="line"></span><br><span class="line">If you need to have this software first in your PATH instead consider running:</span><br><span class="line">  echo &apos;export PATH=&quot;/usr/local/opt/qt/bin:$PATH&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ brew install postgresql</span><br><span class="line">==&gt; Installing dependencies for postgresql: icu4c, openssl and readline</span><br><span class="line">==&gt; Installing postgresql dependency: icu4c</span><br><span class="line">==&gt; Downloading https://homebrew.bintray.com/bottles/icu4c-64.2.mojave.bottle.tar.gz</span><br><span class="line">==&gt; Downloading from https://akamai.bintray.com/e8/e858556120acc0c2d52b8fb572b677856724cc28d24a7e1b2762d458a2977c8e?__gda__=exp=1564652424~hmac=3522026e42dc3ea211ca26046ab79b0808f40a2a5dd89b19cd01eb25f612b768&amp;response-content-disposition=attachment%3Bfilename%3D%22icu4c</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">==&gt; Pouring icu4c-64.2.mojave.bottle.tar.gz</span><br><span class="line">==&gt; Caveats</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ vi pgmodeler.pri </span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ export PGMODELER_ROOT=/Applications/pgmodeler.app/</span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ qmake -r pgmodeler.pro</span><br><span class="line">Info: creating stash file /Users/steven/pgmodeler/pgmodeler/.qmake.stash</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/libutils/libutils.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/libparsers/libparsers.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/libpgmodeler/libpgmodeler.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/libpgconnector/libpgconnector.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/libobjrenderer/libobjrenderer.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/libpgmodeler_ui/libpgmodeler_ui.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/crashhandler/crashhandler.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/main-cli/main-cli.pro</span><br><span class="line">Reading /Users/steven/pgmodeler/pgmodeler/main/main.pro</span><br><span class="line"></span><br><span class="line">** pgModeler build details ** </span><br><span class="line"> </span><br><span class="line">  PREFIX        = /Applications/pgmodeler.app/Contents </span><br><span class="line">  BINDIR        = /Applications/pgmodeler.app/Contents/MacOS </span><br><span class="line">  PRIVATEBINDIR = /Applications/pgmodeler.app/Contents/MacOS </span><br><span class="line">  PRIVATELIBDIR = /Applications/pgmodeler.app/Contents/Frameworks </span><br><span class="line">  PLUGINSDIR    = /Applications/pgmodeler.app/Contents/MacOS/plugins </span><br><span class="line">  SHAREDIR      = /Applications/pgmodeler.app/Contents/MacOS </span><br><span class="line">  CONFDIR       = /Applications/pgmodeler.app/Contents/MacOS/conf </span><br><span class="line">  DOCDIR        = /Applications/pgmodeler.app/Contents/MacOS </span><br><span class="line">  LANGDIR       = /Applications/pgmodeler.app/Contents/MacOS/lang </span><br><span class="line">  SAMPLESDIR    = /Applications/pgmodeler.app/Contents/MacOS/samples </span><br><span class="line">  SCHEMASDIR    = /Applications/pgmodeler.app/Contents/MacOS/schemas </span><br><span class="line">....</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ make &amp;&amp; make install</span><br><span class="line">cd libutils/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libutils/libutils.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd libparsers/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libparsers/libparsers.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd libpgmodeler/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libpgmodeler/libpgmodeler.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd libpgconnector/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libpgconnector/libpgconnector.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd libobjrenderer/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libobjrenderer/libobjrenderer.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd libpgmodeler_ui/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libpgmodeler_ui/libpgmodeler_ui.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd crashhandler/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/crashhandler/crashhandler.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd main-cli/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/main-cli/main-cli.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd main/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/main/main.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile </span><br><span class="line">make[1]: Nothing to be done for `first&apos;.</span><br><span class="line">cd libutils/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libutils/libutils.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe libutils.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libutils.1.0.0.dylib</span><br><span class="line">strip -S -x /Applications/pgmodeler.app/Contents/Frameworks/libutils.1.0.0.dylib</span><br><span class="line">ln -f -s libutils.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libutils.dylib</span><br><span class="line">ln -f -s libutils.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libutils.1.dylib</span><br><span class="line">ln -f -s libutils.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libutils.1.0.dylib</span><br><span class="line">cd libparsers/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libparsers/libparsers.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe libparsers.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libparsers.1.0.0.dylib</span><br><span class="line">strip -S -x /Applications/pgmodeler.app/Contents/Frameworks/libparsers.1.0.0.dylib</span><br><span class="line">ln -f -s libparsers.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libparsers.dylib</span><br><span class="line">ln -f -s libparsers.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libparsers.1.dylib</span><br><span class="line">ln -f -s libparsers.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libparsers.1.0.dylib</span><br><span class="line">cd libpgmodeler/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libpgmodeler/libpgmodeler.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe libpgmodeler.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler.1.0.0.dylib</span><br><span class="line">strip -S -x /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler.1.0.0.dylib</span><br><span class="line">ln -f -s libpgmodeler.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler.dylib</span><br><span class="line">ln -f -s libpgmodeler.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler.1.dylib</span><br><span class="line">ln -f -s libpgmodeler.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler.1.0.dylib</span><br><span class="line">cd libpgconnector/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libpgconnector/libpgconnector.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe libpgconnector.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgconnector.1.0.0.dylib</span><br><span class="line">strip -S -x /Applications/pgmodeler.app/Contents/Frameworks/libpgconnector.1.0.0.dylib</span><br><span class="line">ln -f -s libpgconnector.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgconnector.dylib</span><br><span class="line">ln -f -s libpgconnector.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgconnector.1.dylib</span><br><span class="line">ln -f -s libpgconnector.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgconnector.1.0.dylib</span><br><span class="line">cd libobjrenderer/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libobjrenderer/libobjrenderer.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe libobjrenderer.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libobjrenderer.1.0.0.dylib</span><br><span class="line">strip -S -x /Applications/pgmodeler.app/Contents/Frameworks/libobjrenderer.1.0.0.dylib</span><br><span class="line">ln -f -s libobjrenderer.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libobjrenderer.dylib</span><br><span class="line">ln -f -s libobjrenderer.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libobjrenderer.1.dylib</span><br><span class="line">ln -f -s libobjrenderer.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libobjrenderer.1.0.dylib</span><br><span class="line">cd libpgmodeler_ui/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/libpgmodeler_ui/libpgmodeler_ui.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe libpgmodeler_ui.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler_ui.1.0.0.dylib</span><br><span class="line">strip -S -x /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler_ui.1.0.0.dylib</span><br><span class="line">ln -f -s libpgmodeler_ui.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler_ui.dylib</span><br><span class="line">ln -f -s libpgmodeler_ui.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler_ui.1.dylib</span><br><span class="line">ln -f -s libpgmodeler_ui.1.0.0.dylib /Applications/pgmodeler.app/Contents/Frameworks/libpgmodeler_ui.1.0.dylib</span><br><span class="line">cd crashhandler/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/crashhandler/crashhandler.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe pgmodeler-ch /Applications/pgmodeler.app/Contents/MacOS/pgmodeler-ch</span><br><span class="line">strip /Applications/pgmodeler.app/Contents/MacOS/pgmodeler-ch</span><br><span class="line">cd main-cli/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/main-cli/main-cli.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe pgmodeler-cli /Applications/pgmodeler.app/Contents/MacOS/pgmodeler-cli</span><br><span class="line">strip /Applications/pgmodeler.app/Contents/MacOS/pgmodeler-cli</span><br><span class="line">cd main/ &amp;&amp; ( test -e Makefile || /usr/local/bin/qmake -o Makefile /Users/steven/pgmodeler/pgmodeler/main/main.pro CONFIG+=release ) &amp;&amp; /Library/Developer/CommandLineTools/usr/bin/make -f Makefile install</span><br><span class="line">/usr/local/bin/qmake -install qinstall -exe pgmodeler /Applications/pgmodeler.app/Contents/MacOS/pgmodeler</span><br><span class="line">strip /Applications/pgmodeler.app/Contents/MacOS/pgmodeler</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/main/res/Resources /Applications/pgmodeler.app/Contents/Resources</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/main/res/Info.plist /Applications/pgmodeler.app/Contents/Info.plist</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/main/res/PkgInfo /Applications/pgmodeler.app/Contents/PkgInfo</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/samples/3dcitydb.dbm /Applications/pgmodeler.app/Contents/MacOS/samples/3dcitydb.dbm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/samples/demo.dbm /Applications/pgmodeler.app/Contents/MacOS/samples/demo.dbm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/samples/oldsample.dbm /Applications/pgmodeler.app/Contents/MacOS/samples/oldsample.dbm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/samples/pagila.dbm /Applications/pgmodeler.app/Contents/MacOS/samples/pagila.dbm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/samples/usda.dbm /Applications/pgmodeler.app/Contents/MacOS/samples/usda.dbm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/schemas/alter /Applications/pgmodeler.app/Contents/MacOS/schemas/alter</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/schemas/catalog /Applications/pgmodeler.app/Contents/MacOS/schemas/catalog</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/schemas/sql /Applications/pgmodeler.app/Contents/MacOS/schemas/sql</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/schemas/xml /Applications/pgmodeler.app/Contents/MacOS/schemas/xml</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/es_ES.qm /Applications/pgmodeler.app/Contents/MacOS/lang/es_ES.qm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/es_ES.ts /Applications/pgmodeler.app/Contents/MacOS/lang/es_ES.ts</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/fr_FR.qm /Applications/pgmodeler.app/Contents/MacOS/lang/fr_FR.qm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/fr_FR.ts /Applications/pgmodeler.app/Contents/MacOS/lang/fr_FR.ts</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/nl_NL.qm /Applications/pgmodeler.app/Contents/MacOS/lang/nl_NL.qm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/nl_NL.ts /Applications/pgmodeler.app/Contents/MacOS/lang/nl_NL.ts</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/pt_BR.qm /Applications/pgmodeler.app/Contents/MacOS/lang/pt_BR.qm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/pt_BR.ts /Applications/pgmodeler.app/Contents/MacOS/lang/pt_BR.ts</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/zh_CN.qm /Applications/pgmodeler.app/Contents/MacOS/lang/zh_CN.qm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/lang/zh_CN.ts /Applications/pgmodeler.app/Contents/MacOS/lang/zh_CN.ts</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/connections.conf /Applications/pgmodeler.app/Contents/MacOS/conf/connections.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/defaults /Applications/pgmodeler.app/Contents/MacOS/conf/defaults</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/dtd /Applications/pgmodeler.app/Contents/MacOS/conf/dtd</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/example.dbm /Applications/pgmodeler.app/Contents/MacOS/conf/example.dbm</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/objects-style.conf /Applications/pgmodeler.app/Contents/MacOS/conf/objects-style.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/pattern-highlight.conf /Applications/pgmodeler.app/Contents/MacOS/conf/pattern-highlight.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/pgmodeler.conf /Applications/pgmodeler.app/Contents/MacOS/conf/pgmodeler.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/pgmodeler_dbm.png /Applications/pgmodeler.app/Contents/MacOS/conf/pgmodeler_dbm.png</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/pgmodeler_logo.png /Applications/pgmodeler.app/Contents/MacOS/conf/pgmodeler_logo.png</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/relationships.conf /Applications/pgmodeler.app/Contents/MacOS/conf/relationships.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/schemas /Applications/pgmodeler.app/Contents/MacOS/conf/schemas</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/snippets.conf /Applications/pgmodeler.app/Contents/MacOS/conf/snippets.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/sql-highlight.conf /Applications/pgmodeler.app/Contents/MacOS/conf/sql-highlight.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/ui-style.conf /Applications/pgmodeler.app/Contents/MacOS/conf/ui-style.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/conf/xml-highlight.conf /Applications/pgmodeler.app/Contents/MacOS/conf/xml-highlight.conf</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/README.md /Applications/pgmodeler.app/Contents/MacOS/README.md</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/CHANGELOG.md /Applications/pgmodeler.app/Contents/MacOS/CHANGELOG.md</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/LICENSE /Applications/pgmodeler.app/Contents/MacOS/LICENSE</span><br><span class="line">/usr/local/bin/qmake -install qinstall /Users/steven/pgmodeler/pgmodeler/RELEASENOTES.md /Applications/pgmodeler.app/Contents/MacOS/RELEASENOTES.md</span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$ macdeployqt $INSTALLATION_ROOT \</span><br><span class="line">&gt;                             $INSTALLATION_ROOT/Contents/MacOS/pgmodeler-ch \</span><br><span class="line">&gt;                             $INSTALLATION_ROOT/Contents/MacOS/pgmodeler-cli</span><br><span class="line">stevenui-MacBookPro:pgmodeler steven$</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/widfly-install-on-centos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/widfly-install-on-centos/" class="post-title-link" itemprop="url">wildfly install on centos</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-25 22:00:18" itemprop="dateCreated datePublished" datetime="2019-07-25T22:00:18Z">2019-07-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-26 01:57:08" itemprop="dateModified" datetime="2019-07-26T01:57:08Z">2019-07-26</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/widfly-install-on-centos/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="widfly-install-on-centos/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Root-계정-접속"><a href="#Root-계정-접속" class="headerlink" title="Root 계정 접속"></a>Root 계정 접속</h4><h4 id="install-JDK"><a href="#install-JDK" class="headerlink" title="install JDK"></a>install JDK</h4><p>이미 있는 경우는 불필요</p>
+<p><code>yum install java-1.8.0-openjdk-devel</code></p>
+<h4 id="user-생성"><a href="#user-생성" class="headerlink" title="user 생성"></a>user 생성</h4><p>Root로 그냥 처리 할 경우 불필요함</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># groupadd -r wildfly</span></span><br><span class="line">[root@localhost ~]<span class="comment"># useradd -r -g wildfly -d /opt/wildfly -s /sbin/nologin wildfly</span></span><br></pre></td></tr></table></figure>
+<h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h4><p><span class="exturl" data-url="aHR0cHM6Ly93aWxkZmx5Lm9yZy9kb3dubG9hZHMv" title="https://wildfly.org/downloads/">https://wildfly.org/downloads/<i class="fa fa-external-link"></i></span></p>
+<p>에서 가장 최신 파일 <code>Java EE Full &amp; Web Distribution</code> TGZ url copy</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># mkdir wildfly</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cd wildfly/</span></span><br><span class="line">[root@localhost wildfly]<span class="comment"># wget https://download.jboss.org/wildfly/17.0.1.Final/wildfly-17.0.1.Final.tar.gz</span></span><br><span class="line">--2019-07-25 14:14:51--  https://download.jboss.org/wildfly/17.0.1.Final/wildfly-17.0.1.Final.tar.gz</span><br><span class="line">Resolving download.jboss.org (download.jboss.org)... 104.75.2.61</span><br><span class="line">Connecting to download.jboss.org (download.jboss.org)|104.75.2.61|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 183598392 (175M) [application/x-gzip]</span><br><span class="line">Saving to: ‘wildfly-17.0.1.Final.tar.gz’</span><br><span class="line"></span><br><span class="line">100%[=================================================================================================&gt;] 183,598,392 1.50MB/s   <span class="keyword">in</span> 1m 57s </span><br><span class="line"></span><br><span class="line">2019-07-25 14:16:49 (1.50 MB/s) - ‘wildfly-17.0.1.Final.tar.gz’ saved [183598392/183598392]</span><br><span class="line"></span><br><span class="line">[root@localhost wildfly]<span class="comment"># </span></span><br><span class="line">[root@localhost wildfly]<span class="comment"># tar xf wildfly-17.0.1.Final.tar.gz -C /opt/</span></span><br><span class="line">[root@localhost wildfly]<span class="comment"># cd /opt</span></span><br><span class="line">[root@localhost opt]<span class="comment"># ls</span></span><br><span class="line">gitlab  rh  vagrant  wildfly-17.0.1.Final</span><br><span class="line">[root@localhost opt]<span class="comment"># ln -s /opt/wildfly-17.0.1.Final /opt/wildfly</span></span><br><span class="line">[root@localhost opt]<span class="comment"># ls</span></span><br><span class="line">gitlab  rh  vagrant  wildfly  wildfly-17.0.1.Final</span><br><span class="line">[root@localhost opt]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h4 id="권한-설정"><a href="#권한-설정" class="headerlink" title="권한 설정"></a>권한 설정</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost opt]<span class="comment"># chown wildfly:wildfly wildfly</span></span><br><span class="line">[root@localhost opt]<span class="comment"># ls -al</span></span><br><span class="line">합계 0</span><br><span class="line">drwxr-xr-x.  6 root    root     88  7월 25 14:18 .</span><br><span class="line">dr-xr-xr-x. 20 root    root    287  7월 15 17:26 ..</span><br><span class="line">drwxr-xr-x. 10 root    root    212  7월  8 22:34 gitlab</span><br><span class="line">drwxr-xr-x.  2 root    root      6 10월 31  2018 rh</span><br><span class="line">drwxr-xr-x.  4 root    root     33  6월 21 19:42 vagrant</span><br><span class="line">lrwxrwxrwx.  1 root    root     25  7월 25 14:18 wildfly -&gt; /opt/wildfly-17.0.1.Final</span><br><span class="line">drwxr-xr-x. 11 wildfly wildfly 239  7월  3 10:59 wildfly-17.0.1.Final</span><br><span class="line">[root@localhost opt]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h4 id="시스템-등록"><a href="#시스템-등록" class="headerlink" title="시스템 등록"></a>시스템 등록</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost etc]<span class="comment"># mkdir /etc/wildfly</span></span><br><span class="line">[root@localhost systemd]<span class="comment"># pwd</span></span><br><span class="line">/opt/wildfly/docs/contrib/scripts/systemd</span><br><span class="line">[root@localhost systemd]<span class="comment"># cp wildfly.conf /etc/wildfly/</span></span><br><span class="line">[root@localhost scripts]<span class="comment"># pwd</span></span><br><span class="line">/opt/wildfly/docs/contrib/scripts</span><br><span class="line">[root@localhost scripts]<span class="comment"># ls</span></span><br><span class="line">README.md  init.d  service  systemd</span><br><span class="line">[root@localhost scripts]<span class="comment"># cd systemd/</span></span><br><span class="line">[root@localhost systemd]<span class="comment"># ls</span></span><br><span class="line">README  launch.sh  wildfly.conf  wildfly.service</span><br><span class="line">[root@localhost systemd]<span class="comment"># cp launch.sh /opt/wildfly/bin/</span></span><br><span class="line">[root@localhost systemd]<span class="comment"># chmod +x /opt/wildfly/bin/*.sh</span></span><br><span class="line">[root@localhost systemd]<span class="comment"># cp wildfly.service /etc/systemd/system/</span></span><br><span class="line">[root@localhost systemd]<span class="comment"># systemctl daemon-reload</span></span><br><span class="line">[root@localhost systemd]<span class="comment"># systemctl status wildfly</span></span><br><span class="line">● wildfly.service - The WildFly Application Server</span><br><span class="line">   Loaded: loaded (/etc/systemd/system/wildfly.service; disabled; vendor preset: disabled)</span><br><span class="line">   Active: inactive (dead)</span><br></pre></td></tr></table></figure>
+<p>상위 프로세스중 wildfly.conf를 복사 하는 부분이 있는 해당 내용은 systemctl에 서비스를 등록 하기 위하여 필요 한 부분인다.</p>
+<p><code>wildfly.service</code>의 내용을 보면 다음과 같다.</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=The WildFly Application Server</span><br><span class="line">After=syslog.target network.target</span><br><span class="line">Before=httpd.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Environment=LAUNCH_JBOSS_IN_BACKGROUND=1</span><br><span class="line">EnvironmentFile=-/etc/wildfly/wildfly.conf</span><br><span class="line">User=wildfly</span><br><span class="line">LimitNOFILE=102642</span><br><span class="line">PIDFile=/var/run/wildfly/wildfly.pid</span><br><span class="line">ExecStart=/opt/wildfly/bin/launch.sh <span class="variable">$WILDFLY_MODE</span> <span class="variable">$WILDFLY_CONFIG</span> <span class="variable">$WILDFLY_BIND</span></span><br><span class="line">StandardOutput=null</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p><code>EnvironmentFile=-/etc/wildfly/wildfly.conf</code> wildfly에 대한 config 설정 위치를 확인 가능하다.</p>
+<p>해당 내용은 서비스를 시작 시켰을 때 다음과 같이 작동 하게 된다.</p>
+<p><code>/opt/wildfly/bin/launch.sh standalone standalone.xml 0.0.0.0</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost wildfly]<span class="comment"># systemctl status wildfly</span></span><br><span class="line">● wildfly.service - The WildFly Application Server</span><br><span class="line">   Loaded: loaded (/etc/systemd/system/wildfly.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since 목 2019-07-25 15:14:42 KST; 4min 43s ago</span><br><span class="line"> Main PID: 10581 (launch.sh)</span><br><span class="line">    Tasks: 56</span><br><span class="line">   Memory: 348.6M</span><br><span class="line">   CGroup: /system.slice/wildfly.service</span><br><span class="line">           ├─10581 /bin/bash /opt/wildfly/bin/launch.sh standalone standalone.xml 0.0.0.0</span><br><span class="line">           ├─10582 /bin/sh /opt/wildfly/bin/standalone.sh -c standalone.xml -b 0.0.0.0</span><br><span class="line">           └─10639 java -D[Standalone] -server -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Sta...</span><br><span class="line"></span><br><span class="line"> 7월 25 15:14:42 localhost.localdomain systemd[1]: Started The WildFly Application Server.</span><br></pre></td></tr></table></figure>
+<h5 id="정상-작동-여부-확인"><a href="#정상-작동-여부-확인" class="headerlink" title="정상 작동 여부 확인"></a>정상 작동 여부 확인</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost wildfly]<span class="comment"># ps -ef | grep wildfly</span></span><br><span class="line">wildfly  10581     1  0 15:14 ?        00:00:00 /bin/bash /opt/wildfly/bin/launch.sh standalone standalone.xml 0.0.0.0</span><br><span class="line">wildfly  10582 10581  0 15:14 ?        00:00:00 /bin/sh /opt/wildfly/bin/standalone.sh -c standalone.xml -b 0.0.0.0</span><br><span class="line">wildfly  10639 10582  2 15:14 ?        00:00:11 java -D[Standalone] -server -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=<span class="literal">true</span> -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=<span class="literal">true</span> -Dorg.jboss.boot.log.file=/opt/wildfly/standalone/<span class="built_in">log</span>/server.log -Dlogging.configuration=file:/opt/wildfly/standalone/configuration/logging.properties -jar /opt/wildfly/jboss-modules.jar -mp /opt/wildfly/modules org.jboss.as.standalone -Djboss.home.dir=/opt/wildfly -Djboss.server.base.dir=/opt/wildfly/standalone -c standalone.xml -b 0.0.0.0</span><br><span class="line">root     13466 47780  0 15:21 pts/0    00:00:00 grep --color=auto wildfly</span><br><span class="line">[root@localhost wildfly]<span class="comment"># netstat -tnlp --tcp | grep 10639</span></span><br><span class="line">tcp        0      0 127.0.0.1:10090         0.0.0.0:*               LISTEN      10639/java          </span><br><span class="line">tcp        0      0 0.0.0.0:8180            0.0.0.0:*               LISTEN      10639/java          </span><br><span class="line">tcp        0      0 0.0.0.0:8543            0.0.0.0:*               LISTEN      10639/java</span><br></pre></td></tr></table></figure>
+<p>포트 3개가 열려 있는 것을 확인 할 수 있다.</p>
+<ul>
+<li>10090 : original 9990 -&gt; management port</li>
+<li>8180: original 8080 -&gt; http</li>
+<li>8543 : original 8443 -&gt; https</li>
+</ul>
+<p>상위와 같이 포트 수정을 위해서는 standard.xml을 수정해야 한다</p>
+<p><code>/opt/wildfly/standalone/configuration</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">socket-binding-group</span> <span class="attr">name</span>=<span class="string">"standard-sockets"</span> <span class="attr">default-interface</span>=<span class="string">"public"</span> <span class="attr">port-offset</span>=<span class="string">"$&#123;jboss.socket.binding.port-offset:100&#125;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">socket-binding</span> <span class="attr">name</span>=<span class="string">"management-http"</span> <span class="attr">interface</span>=<span class="string">"management"</span> <span class="attr">port</span>=<span class="string">"$&#123;jboss.management.http.port:9990&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">socket-binding</span> <span class="attr">name</span>=<span class="string">"management-https"</span> <span class="attr">interface</span>=<span class="string">"management"</span> <span class="attr">port</span>=<span class="string">"$&#123;jboss.management.https.port:9993&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">socket-binding</span> <span class="attr">name</span>=<span class="string">"ajp"</span> <span class="attr">port</span>=<span class="string">"$&#123;jboss.ajp.port:8009&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">socket-binding</span> <span class="attr">name</span>=<span class="string">"http"</span> <span class="attr">port</span>=<span class="string">"$&#123;jboss.http.port:8080&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">socket-binding</span> <span class="attr">name</span>=<span class="string">"https"</span> <span class="attr">port</span>=<span class="string">"$&#123;jboss.https.port:8443&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">socket-binding</span> <span class="attr">name</span>=<span class="string">"txn-recovery-environment"</span> <span class="attr">port</span>=<span class="string">"4712"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">socket-binding</span> <span class="attr">name</span>=<span class="string">"txn-status-manager"</span> <span class="attr">port</span>=<span class="string">"4713"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">outbound-socket-binding</span> <span class="attr">name</span>=<span class="string">"mail-smtp"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">remote-destination</span> <span class="attr">host</span>=<span class="string">"localhost"</span> <span class="attr">port</span>=<span class="string">"25"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">outbound-socket-binding</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">socket-binding-group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Port-Open"><a href="#Port-Open" class="headerlink" title="Port Open"></a>Port Open</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost configuration]<span class="comment"># sudo firewall-cmd --zone=public --permanent --add-port=8180/tcp</span></span><br><span class="line">success</span><br><span class="line">[root@localhost configuration]<span class="comment"># sudo firewall-cmd --zone=public --permanent --add-port=10090/tcp</span></span><br><span class="line">success</span><br><span class="line">[root@localhost configuration]<span class="comment"># sudo firewall-cmd --reload</span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+<h4 id="remote-use-setting"><a href="#remote-use-setting" class="headerlink" title="remote use setting"></a>remote use setting</h4><p>wildfly administator 또는 remote cli등의 작업을 위해 사용자 등록을 처리한다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># pwd</span></span><br><span class="line">/opt/wildfly/bin</span><br><span class="line"></span><br><span class="line">[root@localhost bin]<span class="comment"># ./add-user.sh </span></span><br><span class="line"></span><br><span class="line">What <span class="built_in">type</span> of user <span class="keyword">do</span> you wish to add? </span><br><span class="line"> a) Management User (mgmt-users.properties) </span><br><span class="line"> b) Application User (application-users.properties)</span><br><span class="line">(a): a</span><br><span class="line"></span><br><span class="line">Enter the details of the new user to add.</span><br><span class="line">Using realm <span class="string">'ManagementRealm'</span> as discovered from the existing property files.</span><br><span class="line">Username : sample</span><br><span class="line">Password recommendations are listed below. To modify these restrictions edit the add-user.properties configuration file.</span><br><span class="line"> - The password should be different from the username</span><br><span class="line"> - The password should not be one of the following restricted values &#123;root, admin, administrator&#125;</span><br><span class="line"> - The password should contain at least 8 characters, 1 alphabetic character(s), 1 digit(s), 1 non-alphanumeric symbol(s)</span><br><span class="line">Password : </span><br><span class="line">WFLYDM0102: Password should have at least 1 non-alphanumeric symbol.</span><br><span class="line">Are you sure you want to use the password entered yes/no? yes</span><br><span class="line">Re-enter Password : </span><br><span class="line">What groups <span class="keyword">do</span> you want this user to belong to? (Please enter a comma separated list, or leave blank <span class="keyword">for</span> none)[  ]: </span><br><span class="line">About to add user <span class="string">'sample'</span> <span class="keyword">for</span> realm <span class="string">'ManagementRealm'</span></span><br><span class="line">Is this correct yes/no? yes</span><br><span class="line">Added user <span class="string">'sample'</span> to file <span class="string">'/opt/wildfly-17.0.1.Final/standalone/configuration/mgmt-users.properties'</span></span><br><span class="line">Added user <span class="string">'sample'</span> to file <span class="string">'/opt/wildfly-17.0.1.Final/domain/configuration/mgmt-users.properties'</span></span><br><span class="line">Added user <span class="string">'sample'</span> with groups  to file <span class="string">'/opt/wildfly-17.0.1.Final/standalone/configuration/mgmt-groups.properties'</span></span><br><span class="line">Added user <span class="string">'sample'</span> with groups  to file <span class="string">'/opt/wildfly-17.0.1.Final/domain/configuration/mgmt-groups.properties'</span></span><br><span class="line">Is this new user going to be used <span class="keyword">for</span> one AS process to connect to another AS process? </span><br><span class="line">e.g. <span class="keyword">for</span> a slave host controller connecting to the master or <span class="keyword">for</span> a Remoting connection <span class="keyword">for</span> server to server EJB calls.</span><br><span class="line">yes/no? yes</span><br><span class="line">To represent the user add the following to the server-identities definition &lt;secret value=<span class="string">"dGhl1gmM3ODk="</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Cli-사용법"><a href="#Cli-사용법" class="headerlink" title="Cli 사용법"></a>Cli 사용법</h4><h5 id="접속-방법"><a href="#접속-방법" class="headerlink" title="접속 방법"></a>접속 방법</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># ./jboss-cli.sh </span></span><br><span class="line">You are disconnected at the moment. Type <span class="string">'connect'</span> to connect to the server or <span class="string">'help'</span> <span class="keyword">for</span> the list of supported commands.</span><br><span class="line">[disconnected /] connect 127.0.0.1:10090</span><br><span class="line">[standalone@127.0.0.1:10090 /] <span class="built_in">exit</span></span><br><span class="line">[root@localhost bin]<span class="comment"># ./jboss-cli.sh --connect --controller=127.0.0.1:10090</span></span><br></pre></td></tr></table></figure>
+<h5 id="제공-가능한-명령어"><a href="#제공-가능한-명령어" class="headerlink" title="제공 가능한 명령어"></a>제공 가능한 명령어</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">[standalone@127.0.0.1:10090 /] <span class="built_in">help</span> --commands</span><br><span class="line">Commands available <span class="keyword">in</span> the current context:</span><br><span class="line">attachment                              deployment-info                         run-batch                               </span><br><span class="line">batch                                   deployment-overlay                      security <span class="built_in">disable</span>-http-auth-http-server  </span><br><span class="line"><span class="built_in">cd</span>                                      <span class="built_in">echo</span>                                    security <span class="built_in">disable</span>-http-auth-management   </span><br><span class="line">clear                                   <span class="built_in">echo</span>-dmr                                security <span class="built_in">disable</span>-sasl-management        </span><br><span class="line"><span class="built_in">command</span>                                 <span class="keyword">for</span>                                     security <span class="built_in">disable</span>-ssl-http-server        </span><br><span class="line"><span class="built_in">command</span>-timeout                         grep                                    security <span class="built_in">disable</span>-ssl-management         </span><br><span class="line">connect                                 <span class="built_in">help</span>                                    security <span class="built_in">enable</span>-http-auth-http-server   </span><br><span class="line">connection-info                         <span class="built_in">history</span>                                 security <span class="built_in">enable</span>-http-auth-management    </span><br><span class="line">data-source                             <span class="keyword">if</span>                                      security <span class="built_in">enable</span>-sasl-management         </span><br><span class="line">deploy                                  jdbc-driver-info                        security <span class="built_in">enable</span>-ssl-http-server         </span><br><span class="line">deployment deploy-cli-archive           ls                                      security <span class="built_in">enable</span>-ssl-management          </span><br><span class="line">deployment deploy-file                  module                                  security reorder-sasl-management        </span><br><span class="line">deployment deploy-url                   patch apply                             <span class="built_in">set</span>                                     </span><br><span class="line">deployment <span class="built_in">disable</span>                      patch <span class="built_in">history</span>                           shutdown                                </span><br><span class="line">deployment <span class="built_in">disable</span>-all                  patch info                              try                                     </span><br><span class="line">deployment <span class="built_in">enable</span>                       patch inspect                           undeploy                                </span><br><span class="line">deployment <span class="built_in">enable</span>-all                   <span class="built_in">pwd</span>                                     <span class="built_in">unset</span>                                   </span><br><span class="line">deployment info                         quit                                    version                                 </span><br><span class="line">deployment list                         <span class="built_in">read</span>-attribute                          xa-data-source                          </span><br><span class="line">deployment undeploy                     <span class="built_in">read</span>-operation                          </span><br><span class="line">deployment undeploy-cli-archive         reload                                  </span><br><span class="line">To <span class="built_in">read</span> a description of a specific <span class="built_in">command</span> execute <span class="string">'help &lt;command name&gt;'</span>.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>자세한 활용 법은 </p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmpib3NzLm9yZy9hdXRob3IvZGlzcGxheS9XRkxZL0NvbW1hbmQrTGluZStJbnRlcmZhY2U=" title="https://docs.jboss.org/author/display/WFLY/Command+Line+Interface">https://docs.jboss.org/author/display/WFLY/Command+Line+Interface<i class="fa fa-external-link"></i></span></p>
+<p>이곳에서 확인 가능</p>
+</blockquote>
+<h4 id="admin-console"><a href="#admin-console" class="headerlink" title="admin console"></a>admin console</h4><p>상위와 같이 작성 하고 테스트 해보면 http 서비스는 잘 접근이 되는데, admin console이 접근이 잘 안될 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    </span><br><span class="line"></span><br><span class="line">tcp        0      0 127.0.0.0:10090            0.0.0.0:*               LISTEN      64558/java          </span><br><span class="line"></span><br><span class="line">tcp        0      0 0.0.0.0:8180            0.0.0.0:*               LISTEN      64558/java</span><br></pre></td></tr></table></figure>
+<p>사유는 <code>127.0.0.0</code> 이 부분 때문에 remote에서 접근이 안되는 것이다.</p>
+<p>로컬에서는 잘 접근이 된다. </p>
+<p>해당 부분을 해결 하기 위해서는 다음과 같이 수정이 필요 하다.</p>
+<p><code>/opt/wildfly/bin/launch.sh</code></p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">if [ "x$WILDFLY_HOME" = "x" ]; then</span><br><span class="line">    WILDFLY_HOME="/opt/wildfly"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ "$1" == "domain" ]]; then</span><br><span class="line">    $WILDFLY_HOME/bin/domain.sh -c $2 -b $3</span><br><span class="line">else</span><br><span class="line"><span class="deletion">-    $WILDFLY_HOME/bin/standalone.sh -c $2 -b $3</span></span><br><span class="line"><span class="addition">+    $WILDFLY_HOME/bin/standalone.sh -c $2 -b $3 -bmanagement $3</span></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/double-wildfly-with-intellij/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whoami">
+      <meta itemprop="description" content="my note">
+      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try Again">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/double-wildfly-with-intellij/" class="post-title-link" itemprop="url">Double Wildfly launching with Intellij to release wars duplicately</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-25 21:40:17 / Modified: 03:46:22" itemprop="dateCreated datePublished" datetime="2019-07-25T21:40:17Z">2019-07-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/double-wildfly-with-intellij/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="double-wildfly-with-intellij/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>서로 다른 서비스를 갖는 프로젝트 2개가 있고 두개의 프로젝트가 intellij에서 동시에 wildfly(jboss) 상에서 실행 되어야 할때, 어떻게 로컬 세팅을 하는지에 대한 기록 임</p>
+<h4 id="전제"><a href="#전제" class="headerlink" title="전제"></a>전제</h4><p>각 프로젝트는 독립 적으로 이미 작동 시킬 수 있는 상태이다.</p>
+<p>wildfly standalone 버전으로 서비스를 start할 거다</p>
+<p>port는 서로 달라도 된다</p>
+<p>Wildfly가 특정 폴더에 인스톨 되어있다.</p>
+<h4 id="wildfly-설정"><a href="#wildfly-설정" class="headerlink" title="wildfly 설정"></a>wildfly 설정</h4><ul>
+<li><p>wildfly 디렉토리 이하 standalone 폴더를 하나더 copy한다.</p>
+<ul>
+<li>standalone2 라는 이름으로 standalone폴더와 같은 위치에 만든다</li>
+</ul>
+</li>
+<li><p>Wildfly &gt; bin 디렉토리 이하 standalone.sh 또는 standalone.bat을 하나더 copy한다.</p>
+<ul>
+<li>standalone2.sh 라는 이름으로 같은 위치에 만든다</li>
+</ul>
+</li>
+<li><p>standalone2.sh 를 수정한다</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"># determine the default base dir, if not set</span><br><span class="line">if [ "x$JBOSS_BASE_DIR" = "x" ]; then</span><br><span class="line"><span class="deletion">-   JBOSS_BASE_DIR="$JBOSS_HOME/standalone"</span></span><br><span class="line"><span class="addition">+	  JBOSS_BASE_DIR="$JBOSS_HOME/standalone2"</span></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="intellij-설정"><a href="#intellij-설정" class="headerlink" title="intellij 설정"></a>intellij 설정</h4><ul>
+<li>A프로젝트와 B프로젝트를 intellij에서 연다</li>
+</ul>
+<ul>
+<li>A프로젝트는 다음과 같이 기본 설정한다. (Run &gt; Run/Debug Configuration)<ul>
+<li>&#39;+&#39; &gt; JBoss Server &gt; wildfly &gt; local &gt; Application Server &gt; 로컬 Jboss선택<ul>
+<li>만약에 Jboss 선택에 아무것도 없다면 &quot;Configuration&quot; 버튼 클릭 JbossHome 선택</li>
+</ul>
+</li>
+<li>&#39;url&#39; : <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo4MDgwLw==" title="http://localhost:8080/">http://localhost:8080/<i class="fa fa-external-link"></i></span></li>
+<li>Operating mode &gt; standalone 선택</li>
+<li>Deployment 탭 선택<ul>
+<li>디플로이 하고자 하는 Artifact 선택</li>
+</ul>
+</li>
+<li>Startup/Connection 탭 선택<ul>
+<li>Startup Script : &lt;<jbosshome 디렉토리>&gt;/bin/standalone.sh 선택</jbosshome></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>B프로젝트는 다음과 같이 기본 설정한다. (Run &gt; Run/Debug Configuration)<ul>
+<li>&#39;+&#39; &gt; JBoss Server &gt; wildfly &gt; local &gt; Application Server &gt; 로컬 Jboss선택<ul>
+<li>만약에 Jboss 선택에 아무것도 없다면 &quot;Configuration&quot; 버튼 클릭 JbossHome 선택</li>
+</ul>
+</li>
+<li>&#39;url&#39; : <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo4MDkwLw==" title="http://localhost:8090/">http://localhost:8090/<i class="fa fa-external-link"></i></span></li>
+<li>Operating mode &gt; standalone 선택<ul>
+<li>Port offset : 10 선택</li>
+</ul>
+</li>
+<li>Deployment 탭 선택<ul>
+<li>디플로이 하고자 하는 Artifact 선택</li>
+</ul>
+</li>
+<li>Startup/Connection 탭 선택<ul>
+<li>Startup Script : &lt;<jbosshome 디렉토리>&gt;/bin/standalone2.sh 선택</jbosshome></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>offset 설정을 standalone.xml에서 설정할 경우 해당 설정 값을 intellij가 감지 하지 못한다. 반듯이 intellij에서 제공하는 offset으로 수정해줘야 한다. (management port 때문에라도 이렇게 해야한다.)</p>
+<p>상위와 같이 했음에도 <code>**Caused by: org.jboss.msc.service.DuplicateServiceException: Service jboss.undertow.deployment.default-server.default-host./.session is already registered**</code>이런 오류가 나오는 경우에는 standalone2 디렉토리 이하에 있는 standalone.xml에 앞서 설정한 <code>deployment</code>가 남아 있을 수도 있다. 이경우에는 deployments tag를 아예 삭제하고 intellij에서 실행하자</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -503,679 +1091,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/nodejs-react-on-jenkins/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/nodejs-react-on-jenkins/" class="post-title-link" itemprop="url">Build a Node.js and React app with npm on jenkins</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-14 02:50:40 / Modified: 03:34:04" itemprop="dateCreated datePublished" datetime="2019-07-14T02:50:40Z">2019-07-14</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/nodejs-react-on-jenkins/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="nodejs-react-on-jenkins/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvL2RvYy90dXRvcmlhbHMvYnVpbGQtYS1ub2RlLWpzLWFuZC1yZWFjdC1hcHAtd2l0aC1ucG0v" title="https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/">https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/<i class="fa fa-external-link"></i></span></p>
-<p>이 예제를 따라 가면서 기록 남기는 용도이다.</p>
-<h4 id="Github-fork"><a href="#Github-fork" class="headerlink" title="Github fork"></a>Github fork</h4><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2plbmtpbnMtZG9jcy9zaW1wbGUtbm9kZS1qcy1yZWFjdC1ucG0tYXBw" title="https://github.com/jenkins-docs/simple-node-js-react-npm-app">https://github.com/jenkins-docs/simple-node-js-react-npm-app<i class="fa fa-external-link"></i></span></p>
-<p>이 곳에 가서 우 상단 fork 버튼을 클릭한다.</p>
-<blockquote>
-<p>github가 가입되어있고, 내 레파지토리로 상위가 포크 된다는 전제이다.</p>
-<p>Jenkins File을 레파지토리에 직접 넣어 줘야 해서 필요하다. </p>
-<p>아니면 예제에 나온것처럼 로컬 작업을 해야 하는데 그게 더 힘들 것 같다.</p>
-</blockquote>
-<h4 id="파이프라인만들기"><a href="#파이프라인만들기" class="headerlink" title="파이프라인만들기"></a>파이프라인만들기</h4><p>젠킨스 대쉬보드 &gt; 새로운아이템 &gt; 파이프라인 선택 &gt; 저장(이름 넣고)</p>
-<ul>
-<li>파이프라인 : Pipeline script from SCM 선택</li>
-<li>SCM : git</li>
-<li>Repository url : fork한 내 GitHub url</li>
-<li>Credential : github credentails이 있으면 선택하고 없으면 비게 놔둬도 된다. (단, 프라이빗 레포가 아니라는 전제이다.)</li>
-<li>Script Path : Jenkinsfile</li>
-</ul>
-<h4 id="Jenkins-file-만들기"><a href="#Jenkins-file-만들기" class="headerlink" title="Jenkins file 만들기"></a>Jenkins file 만들기</h4><p>github에 가서 내 레파지토리로 fork가 된 simple-node-js-react-npm-app 레포에 진입한다</p>
-<ul>
-<li>Create new file : 버튼 클릭</li>
-<li>파일명 : Jenkinsfile (Script Path의 이름과 같아야 한다. 대소문자 주의)</li>
-</ul>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">'node:6-alpine'</span> </span><br><span class="line">            args <span class="string">'-p 3001:3000'</span> </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">'Build'</span>) &#123; </span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">'npm install'</span> </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>jenkins가 동작하는 서버에 docker와 nodejs&amp;npm이 깔려 있다는 전제가 있다. </p>
-</blockquote>
-<h5 id="Agent-docker"><a href="#Agent-docker" class="headerlink" title="Agent docker"></a>Agent docker</h5><p>파이프라인이 독커에서 실행 되는데, 해당 이미지는 <code>node:6-alpine</code>이다. args는 docker 실행시 들어가는 파라메터 값으로 <code>-p 3001:3000</code> host 머신(젠킨스 돌아가는 서버) 3001 포트로 대외 서비스 하고, 3000번 포트는 독커 포트이다. 이 둘을 연결하는 파라메터 이다.</p>
-<h5 id="stage"><a href="#stage" class="headerlink" title="stage"></a>stage</h5><p>파이프라인의 순서이자 이름이다. 여기서는 Build만 았고 npm프로젝트를 install 한다.</p>
-<h5 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h5><p>젠킨스대쉬보드 &gt; 파이프라인 &gt; &#39;위에서 만든 프로젝트&#39;파이프라인 선택 &gt; Build Now</p>
-<blockquote>
-<p>만약에 빌드 중 다음과 같은 오류가 나온다면</p>
-<p><code>npm ERR! Error: EACCES: permission denied, mkdir &#39;/.npm&#39;</code></p>
-<p>파이프라인 코드를 다음과 같이 변경 해보자</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">&gt; pipeline &#123;</span><br><span class="line">&gt;     agent &#123;</span><br><span class="line">&gt;         docker &#123;</span><br><span class="line">&gt;             image <span class="string">'node:6-alpine'</span> </span><br><span class="line">&gt;             args <span class="string">'-p 3001:3000'</span> </span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     environment &#123;</span><br><span class="line">&gt;         HOME = <span class="string">'.'</span></span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     stages &#123;</span><br><span class="line">&gt;         stage(<span class="string">'Build'</span>) &#123; </span><br><span class="line">&gt;             steps &#123;</span><br><span class="line">&gt;                 sh <span class="string">'npm install'</span> </span><br><span class="line">&gt;             &#125;</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNDI3NDMyMDEvbnBtLWluc3RhbGwtZmFpbHMtaW4tamVua2lucy1waXBlbGluZS1pbi1kb2NrZXIvNDI5NTcwMzQ/dXRtX21lZGl1bT1vcmdhbmljJmFtcDt1dG1fc291cmNlPWdvb2dsZV9yaWNoX3FhJmFtcDt1dG1fY2FtcGFpZ249Z29vZ2xlX3JpY2hfcWE=" title="https://stackoverflow.com/questions/42743201/npm-install-fails-in-jenkins-pipeline-in-docker/42957034?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa">https://stackoverflow.com/questions/42743201/npm-install-fails-in-jenkins-pipeline-in-docker/42957034?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa<i class="fa fa-external-link"></i></span></p>
-<p>여기 보고 고치긴 했는데 자세한 이유는 잘 모르겠다. 다음 기회에...</p>
-</blockquote>
-<p><code>/var/lib/jenkins/workspace/nodejs</code> 디렉토리를 가보면 nodejs가 인스톨 되어 있는 것을 볼 수 있다.</p>
-<h4 id="nvm-사용-agnet를-사용하지-말고"><a href="#nvm-사용-agnet를-사용하지-말고" class="headerlink" title="nvm 사용 (agnet를 사용하지 말고)"></a>nvm 사용 (agnet를 사용하지 말고)</h4><p>agent를 사용하지 않고 로컬 서버 환경에 있는 node&amp;npm을 사용하면 node 혹은 npm 둘다 command not found가 발생할 수 있다. bin path가 사용자 환경과 다르기 때문이다. </p>
-<h5 id="jenkins-plugin-install"><a href="#jenkins-plugin-install" class="headerlink" title="jenkins plugin install"></a>jenkins plugin install</h5><p><span class="exturl" data-url="aHR0cHM6Ly93aWtpLmplbmtpbnMuaW8vZGlzcGxheS9KRU5LSU5TL052bStXcmFwcGVyK1BsdWdpbg==" title="https://wiki.jenkins.io/display/JENKINS/Nvm+Wrapper+Plugin">https://wiki.jenkins.io/display/JENKINS/Nvm+Wrapper+Plugin<i class="fa fa-external-link"></i></span></p>
-<p>이 플러그인을 젠킨스에 설치 한다.</p>
-<p>대쉬보드 &gt; 젠킨스관리 &gt; 플러그인 매니저</p>
-<h5 id="파이프라인"><a href="#파이프라인" class="headerlink" title="파이프라인"></a>파이프라인</h5><p>프리스타일화면 또는 스크립트를 통해서 nvm을 적용 가능하다.</p>
-<p>스크립트는 다음과 같이 처리 하면 된다.</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    checkout scm</span><br><span class="line">    </span><br><span class="line">    stage(<span class="string">'build'</span>) &#123;</span><br><span class="line">        sh <span class="string">"echo $PATH"</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        nvm(<span class="string">nvmInstallURL:</span> <span class="string">'https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh'</span>, </span><br><span class="line"><span class="symbol">             nvmIoJsOrgMirror:</span> <span class="string">'https://iojs.org/dist'</span>,</span><br><span class="line"><span class="symbol">             nvmNodeJsOrgMirror:</span> <span class="string">'https://nodejs.org/dist'</span>, </span><br><span class="line"><span class="symbol">             version:</span> <span class="string">'10.16.0'</span>) &#123;</span><br><span class="line">                    sh <span class="string">"npm install"</span></span><br><span class="line">                    echo <span class="string">"Build main site distribution"</span></span><br><span class="line">                    sh <span class="string">"npm run build"</span></span><br><span class="line">              &#125;</span><br><span class="line">           </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>신경 써야 할 것은 2개이다.</p>
-<ul>
-<li>nvmInstallURL : nvm 설치 url -&gt; 버전이 바뀌면 url도 바뀌게 된다.</li>
-<li>version : node version 이다.</li>
-</ul>
-<p>nvm 환경내에서 작동할 shell script를 이후에 적용해 주면 된다.</p>
-<h5 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h5><p>agent를 사용한 경우는 상관이 없겠지만, master agent를 사용한 경우는 직접 디플로이 처리 까지 해줘야 한다.</p>
-<p>아래 코드는 build가 완료된 파일을 httpd(아파치) 디렉토리로 copy하는 내용이다.</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">node &#123;</span><br><span class="line">    checkout scm</span><br><span class="line">    </span><br><span class="line">    stage(<span class="string">'build'</span>) &#123;</span><br><span class="line">        nvm(<span class="string">nvmInstallURL:</span> <span class="string">'https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh'</span>, </span><br><span class="line"><span class="symbol">             nvmIoJsOrgMirror:</span> <span class="string">'https://iojs.org/dist'</span>,</span><br><span class="line"><span class="symbol">             nvmNodeJsOrgMirror:</span> <span class="string">'https://nodejs.org/dist'</span>, </span><br><span class="line"><span class="symbol">             version:</span> <span class="string">'10.16.0'</span>) &#123;</span><br><span class="line">                    sh <span class="string">"npm install"</span></span><br><span class="line">                    echo <span class="string">"Build main site distribution"</span></span><br><span class="line">                    sh <span class="string">"npm run build"</span></span><br><span class="line">              &#125;</span><br><span class="line">           </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    stage(<span class="string">'Deploy'</span>) &#123;</span><br><span class="line">        sh <span class="string">"cp -r dist/* /data/test1/"</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>상위 stage <code>Deploy</code>가 해당 영역인데, 상위 처럼 적용한 경우 permission denied가 날 가능 성이 높다.</p>
-<p>jenkins는 jenkins라고 하는 user 또는 group권한을 바탕으로 마스터 서버에서 작동 하기 때문이다.</p>
-<p>그래서 target이 되는 <code>/data/test1/</code>에 대한 그룹 권한을 다음과 같이 변경한다.</p>
-<p><code>sudo chown -R root:jenkins test1/</code></p>
-<p><code>sudo chmod 775 test1</code></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/vuejs-starter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/vuejs-starter/" class="post-title-link" itemprop="url">Vue basic with webstorm</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-11 11:23:11" itemprop="dateCreated datePublished" datetime="2019-07-11T11:23:11Z">2019-07-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-14 03:37:51" itemprop="dateModified" datetime="2019-07-14T03:37:51Z">2019-07-14</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/vuejs-starter/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vuejs-starter/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="전제"><a href="#전제" class="headerlink" title="전제"></a>전제</h4><ul>
-<li>nodejs 설치 완료</li>
-<li>npm 설치 완료</li>
-</ul>
-<h4 id="Npm-module"><a href="#Npm-module" class="headerlink" title="Npm module"></a>Npm module</h4><ul>
-<li>Vue-lib : <code>sudo npm install -g @vue/cli</code></li>
-</ul>
-<h4 id="Nvm-install"><a href="#Nvm-install" class="headerlink" title="Nvm install"></a>Nvm install</h4><p>vue를 써야하는데 nodejs 버전 때문에 문제가 된다면 아래 nvm을 사용 하는게 좋다(?). </p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL252bS1zaC9udm0=" title="https://github.com/nvm-sh/nvm">https://github.com/nvm-sh/nvm<i class="fa fa-external-link"></i></span></p>
-<p>아래는 mac을 기준으로 처리한 내용인데,</p>
-<p>주의 할 것은 .bash_profile이 존재하는 곳에서 아래 행위를 해야한다.</p>
-<p>시작하기전에 <code>cd ~</code> 로 홈으로 오자.</p>
-<p>만약에 .bash_profile이 없다면 <code>touch .bash_profile</code>로 만들어 주기만 해도 된다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">stevenucBookPro:~ steven$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100 13226  100 13226    0     0  37442      0 --:--:-- --:--:-- --:--:-- 37361</span><br><span class="line">=&gt; nvm is already installed in /Users/steven/.nvm, trying to update using git</span><br><span class="line">=&gt; =&gt; Compressing and cleaning up git repository</span><br><span class="line"></span><br><span class="line">=&gt; nvm source string already in /Users/steven/.bash_profile</span><br><span class="line">=&gt; bash_completion source string already in /Users/steven/.bash_profile</span><br><span class="line">=&gt; Close and reopen your terminal to start using nvm or run the following to use it now:</span><br><span class="line"></span><br><span class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</span><br><span class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm</span><br><span class="line">[ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion</span><br><span class="line">stevenucBookPro:~ steven$ nvm</span><br><span class="line">-bash: nvm: command not found</span><br></pre></td></tr></table></figure>
-<h5 id="nvm-사용법"><a href="#nvm-사용법" class="headerlink" title="nvm 사용법"></a>nvm 사용법</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">stevenucBookPro:~ steven$ nvm install 6.14.4</span><br><span class="line">Downloading and installing node v6.14.4...</span><br><span class="line">Downloading https://nodejs.org/dist/v6.14.4/node-v6.14.4-darwin-x64.tar.gz...</span><br><span class="line"><span class="comment">######################################################################## 100.0%</span></span><br><span class="line">Computing checksum with shasum -a 256</span><br><span class="line">Checksums matched!</span><br><span class="line">Now using node v6.14.4 (npm v3.10.10)</span><br><span class="line">Creating default <span class="built_in">alias</span>: default -&gt; 6.14.4 (-&gt; v6.14.4)</span><br><span class="line">stevenucBookPro:~ steven$ node -v</span><br><span class="line">v6.14.4</span><br><span class="line">stevenucBookPro:~ steven$ nvm install 10.10.0</span><br><span class="line">Downloading and installing node v10.10.0...</span><br><span class="line">Downloading https://nodejs.org/dist/v10.10.0/node-v10.10.0-darwin-x64.tar.gz...</span><br><span class="line"><span class="comment">######################################################################## 100.0%</span></span><br><span class="line">Computing checksum with shasum -a 256</span><br><span class="line">Checksums matched!</span><br><span class="line">Now using node v10.10.0 (npm v6.4.1)</span><br><span class="line">stevenucBookPro:~ steven$ node -v</span><br><span class="line">v10.10.0</span><br><span class="line">stevenucBookPro:~ steven$ nvm use 6</span><br><span class="line">Now using node v6.14.4 (npm v3.10.10)</span><br><span class="line">stevenucBookPro:~ steven$ nvm <span class="built_in">which</span> 10</span><br><span class="line">/Users/steven/.nvm/versions/node/v10.10.0/bin/node</span><br></pre></td></tr></table></figure>
-<h4 id="webstorm"><a href="#webstorm" class="headerlink" title="webstorm"></a>webstorm</h4><h5 id="Create-project"><a href="#Create-project" class="headerlink" title="Create project"></a>Create project</h5><ul>
-<li>webstorm 실행</li>
-<li>왼쪽 vue.js 프로젝트 선택</li>
-<li>오른쪽 프로젝트 위치, nodejs 버전, vue cli 선택 : 이중에 하나라도 안나오면 node나 vue가 잘못 인스톨 되어있는 거니까 node 다 삭제하고 처음부터 다시 하는게 편할 수 있습니다.</li>
-<li>wepack project 선택</li>
-<li>preset default 선택<ul>
-<li>babel : ecma6script를 ecma5script로 변형 시키는 목적</li>
-<li>eslint : code quality</li>
-</ul>
-</li>
-</ul>
-<h5 id="프로젝트-init"><a href="#프로젝트-init" class="headerlink" title="프로젝트 init"></a>프로젝트 init</h5><ul>
-<li><p>webstrom project open 됨</p>
-</li>
-<li><p>npm install</p>
-</li>
-<li><p>npm run serve</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">stevenui-MacBookPro:vuetutorial steven$ nvm use 10</span><br><span class="line">Now using node v10.10.0 (npm v6.4.1)</span><br><span class="line">stevenui-MacBookPro:vuetutorial steven$ node --version</span><br><span class="line">v10.10.0</span><br><span class="line">stevenui-MacBookPro:vuetutorial steven$ npm run serve</span><br><span class="line"></span><br><span class="line">&gt; vuetutorial@0.1.0 serve /Users/steven/WebstormProjects/vuetutorial</span><br><span class="line">&gt; vue-cli-service serve</span><br><span class="line"></span><br><span class="line"> INFO  Starting development server...</span><br><span class="line"> 98% after emitting CopyPlugin                                                   </span><br><span class="line"></span><br><span class="line"> DONE  Compiled successfully <span class="keyword">in</span> 3051ms                                                                                                                                                                                          9:18:16 PM</span><br><span class="line">                                                                                                                                                                                                                                          </span><br><span class="line">  App running at:</span><br><span class="line">  - Local:   http://localhost:8080/ </span><br><span class="line">  - Network: http://192.168.0.114:8080/</span><br><span class="line"></span><br><span class="line">  Note that the development build is not optimized.</span><br><span class="line">  To create a production build, run npm run build.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>브라우저에서 <code>http://localhost:8080/</code> 입력 시 정상적으로 뷰 화면이 표시 되면 기본 셋팅은 완료 된것임</p>
-</li>
-</ul>
-<h4 id="Vue-구조"><a href="#Vue-구조" class="headerlink" title="Vue 구조"></a>Vue 구조</h4><p>vue에 대해서 잘나온 문서는 많으니까, 그냥 내부 보면서 이런저런 내용을 남기는 걸 목적으로 한다.</p>
-<p>(이글을 쓸때는 잘나온 문서를 아직 보기 전이다. 공식 문서와 다르면 이해 부탁...)</p>
-<ul>
-<li>vue는 typescript로 작성 되어 있다.</li>
-</ul>
-<h5 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h5><h5 id="Vue-기본-구조"><a href="#Vue-기본-구조" class="headerlink" title="Vue 기본 구조"></a>Vue 기본 구조</h5><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> Vue &#123;</span><br><span class="line">  readonly $el: Element;</span><br><span class="line">  readonly $options: ComponentOptions&lt;Vue&gt;;</span><br><span class="line">  readonly $parent: Vue;</span><br><span class="line">  readonly $root: Vue;</span><br><span class="line">  readonly $children: Vue[];</span><br><span class="line">  readonly $refs: &#123; [key: <span class="built_in">string</span>]: Vue | Element | Vue[] | Element[] &#125;;</span><br><span class="line">  readonly $slots: &#123; [key: <span class="built_in">string</span>]: VNode[] | <span class="literal">undefined</span> &#125;;</span><br><span class="line">  readonly $scopedSlots: &#123; [key: <span class="built_in">string</span>]: NormalizedScopedSlot | <span class="literal">undefined</span> &#125;;</span><br><span class="line">  readonly $isServer: <span class="built_in">boolean</span>;</span><br><span class="line">  readonly $data: Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;;</span><br><span class="line">  readonly $props: Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;;</span><br><span class="line">  readonly $ssrContext: <span class="built_in">any</span>;</span><br><span class="line">  readonly $vnode: VNode;</span><br><span class="line">  readonly $attrs: Record&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;;</span><br><span class="line">  readonly $listeners: Record&lt;<span class="built_in">string</span>, <span class="built_in">Function</span> | <span class="built_in">Function</span>[]&gt;;</span><br><span class="line"></span><br><span class="line">  $mount(elementOrSelector?: Element | <span class="built_in">string</span>, hydrating?: <span class="built_in">boolean</span>): <span class="keyword">this</span>;</span><br><span class="line">  $forceUpdate(): <span class="built_in">void</span>;</span><br><span class="line">  $destroy(): <span class="built_in">void</span>;</span><br><span class="line">  $<span class="keyword">set</span>: <span class="keyword">typeof</span> Vue.set;</span><br><span class="line">  $<span class="keyword">delete</span>: <span class="keyword">typeof</span> Vue.delete;</span><br><span class="line">  $watch(</span><br><span class="line">    expOrFn: <span class="built_in">string</span>,</span><br><span class="line">    callback: <span class="function">(<span class="params"><span class="keyword">this</span>: <span class="keyword">this</span>, n: <span class="built_in">any</span>, o: <span class="built_in">any</span></span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">    options?: WatchOptions</span><br><span class="line">  ): <span class="function">(<span class="params">(<span class="params"></span>) =&gt; <span class="built_in">void</span></span>);</span></span><br><span class="line"><span class="function">  $<span class="params">watch</span>&lt;<span class="params">T</span>&gt;(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">    expOrFn: (<span class="params"><span class="keyword">this</span>: <span class="keyword">this</span></span>) =&gt; T,</span></span></span><br><span class="line"><span class="function"><span class="params">    callback: (<span class="params"><span class="keyword">this</span>: <span class="keyword">this</span>, n: T, o: T</span>) =&gt; <span class="built_in">void</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    options?: WatchOptions</span></span></span><br><span class="line"><span class="function"><span class="params">  </span>): (<span class="params">(<span class="params"></span>) =&gt; <span class="built_in">void</span></span>);</span></span><br><span class="line"><span class="function">  $<span class="params">on</span>(<span class="params">event: <span class="built_in">string</span> | <span class="built_in">string</span>[], callback: <span class="built_in">Function</span></span>): <span class="params">this</span>;</span></span><br><span class="line"><span class="function">  $<span class="params">once</span>(<span class="params">event: <span class="built_in">string</span> | <span class="built_in">string</span>[], callback: <span class="built_in">Function</span></span>): <span class="params">this</span>;</span></span><br><span class="line"><span class="function">  $<span class="params">off</span>(<span class="params">event?: <span class="built_in">string</span> | <span class="built_in">string</span>[], callback?: <span class="built_in">Function</span></span>): <span class="params">this</span>;</span></span><br><span class="line"><span class="function">  $<span class="params">emit</span>(<span class="params">event: <span class="built_in">string</span>, ...args: <span class="built_in">any</span>[]</span>): <span class="params">this</span>;</span></span><br><span class="line"><span class="function">  $<span class="params">nextTick</span>(<span class="params">callback: (<span class="params"><span class="keyword">this</span>: <span class="keyword">this</span></span>) =&gt; <span class="built_in">void</span></span>): <span class="params">void</span>;</span></span><br><span class="line"><span class="function">  $<span class="params">nextTick</span><span class="params">()</span>: <span class="params">Promise</span>&lt;<span class="params">void</span>&gt;;</span></span><br><span class="line"><span class="function">  $<span class="params">createElement</span>: <span class="params">CreateElement</span>;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
-<h5 id="options"><a href="#options" class="headerlink" title="options"></a>options</h5><h5 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h5><h5 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h5>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://theyoung.github.io/virtualhost-on-centos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whoami">
-      <meta itemprop="description" content="my note">
-      <meta itemprop="image" content="/images/apple-touch-icon-next.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Try Again">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/virtualhost-on-centos/" class="post-title-link" itemprop="url">virtual host on centos</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-09 22:35:29" itemprop="dateCreated datePublished" datetime="2019-07-09T22:35:29Z">2019-07-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-10 11:18:10" itemprop="dateModified" datetime="2019-07-10T11:18:10Z">2019-07-10</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/virtualhost-on-centos/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="virtualhost-on-centos/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>centos 7.0 상에서 아파치(httpd)를 설치하고 포트 맵핑 하는 내용을 정리 합니다.</p>
-<h4 id="install"><a href="#install" class="headerlink" title="install"></a>install</h4><h5 id="아파치-설치"><a href="#아파치-설치" class="headerlink" title="아파치 설치"></a>아파치 설치</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost conf]<span class="comment"># yum install httpd</span></span><br><span class="line"></span><br><span class="line">[root@localhost conf]<span class="comment"># httpd -v</span></span><br><span class="line">Server version: Apache/2.4.6 (CentOS)</span><br><span class="line">Server built:   Apr 24 2019 13:45:48</span><br></pre></td></tr></table></figure>
-<h5 id="방화벽-오픈"><a href="#방화벽-오픈" class="headerlink" title="방화벽 오픈"></a>방화벽 오픈</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost conf]<span class="comment"># firewall-cmd --permanent --add-service=http </span></span><br><span class="line">[root@localhost conf]<span class="comment"># firewall-cmd --permanent --add-service=https </span></span><br><span class="line">[root@localhost conf]<span class="comment"># firewall-cmd --reload</span></span><br></pre></td></tr></table></figure>
-<h5 id="상시-서비스-등록"><a href="#상시-서비스-등록" class="headerlink" title="상시 서비스 등록"></a>상시 서비스 등록</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost conf]<span class="comment"># systemctl enable httpd</span></span><br><span class="line">[root@localhost conf]<span class="comment"># systemctl start httpd</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>서비스 restart<br><code>systemctl restart httpd</code></p>
-</blockquote>
-<h5 id="servier-정상-확인"><a href="#servier-정상-확인" class="headerlink" title="servier 정상 확인"></a>servier 정상 확인</h5><p>브라우저</p>
-<p>http://&lt;<url or ip>&gt;</url></p>
-<h4 id="path-구조"><a href="#path-구조" class="headerlink" title="path 구조"></a>path 구조</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost httpd]<span class="comment"># ls -al</span></span><br><span class="line">합계 16</span><br><span class="line">drwxr-xr-x.   5 root root    92  7월  8 23:03 .</span><br><span class="line">drwxr-xr-x. 151 root root 12288  7월  9 09:26 ..</span><br><span class="line">drwxr-xr-x.   2 root root    55  7월  9 17:18 conf</span><br><span class="line">drwxr-xr-x.   2 root root   100  7월  9 11:16 conf.d</span><br><span class="line">drwxr-xr-x.   2 root root   146  7월  9 10:21 conf.modules.d</span><br><span class="line">lrwxrwxrwx.   1 root root    19  7월  8 23:03 logs -&gt; ../../var/<span class="built_in">log</span>/httpd</span><br><span class="line">lrwxrwxrwx.   1 root root    29  7월  8 23:03 modules -&gt; ../../usr/lib64/httpd/modules</span><br><span class="line">lrwxrwxrwx.   1 root root    10  7월  8 23:03 run -&gt; /run/httpd</span><br></pre></td></tr></table></figure>
-<ul>
-<li>conf : 기본 설정파일</li>
-<li>conf.d : conf에 추가 설정 정보 (Include로 추가 설정을 이곳에서 처리한다)</li>
-<li>conf.modules.d : module에 대한 로드 정보가 이곳에 있다</li>
-<li>logs : 아파치 로그를 확인 가능하다</li>
-</ul>
-<h4 id="https-conf-구조"><a href="#https-conf-구조" class="headerlink" title="https.conf 구조"></a>https.conf 구조</h4><p>급하게 필요 한것만 보고 처리 해서 사실 잘 알지는 못한다 일단 이해 된것 같은것만  대략적으로 쓴다.</p>
-<p>httpd 관련 설정 정보 및 로그가 있는 루트 디렉토리</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ServerRoot &quot;/etc/httpd&quot;</span><br></pre></td></tr></table></figure>
-<p>80포트를 상시 모니터링 하겠음</p>
-<p>(8080 포트 모니터링 하겠음은</p>
-<p><code>Listen 8080</code>)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Listen 80</span><br></pre></td></tr></table></figure>
-<p>conf.moules.d 이하의 설정 파일을 읽어서 모듈을 로드해라(모듈을 로드해라는 해당 .conf에 있음)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Include conf.modules.d/*.conf</span><br></pre></td></tr></table></figure>
-<p>본 아파치 서버가 작동하는 디렉토리에 대한 접근 권한을 설정한다</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;Directory /&gt;</span><br><span class="line">    AllowOverride none</span><br><span class="line">    Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
-<p>예를 들자면 로컬 서버의 디렉토리 중 <code>/var/www</code> 디렉토리는 httpd가 접근 가능하게 모든 권한을 준다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;Directory &quot;/var/www&quot;&gt;</span><br><span class="line">    AllowOverride None</span><br><span class="line">    # Allow open access:</span><br><span class="line">    Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
-<p>모듈 로드를 확인한다. 만약에 dir_module이 있으면 디렉토리상 인덱스는 index.html 이다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;IfModule dir_module&gt;</span><br><span class="line">    DirectoryIndex index.html</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="2개의-url에-서로-다른-index-html-나타나게-하기"><a href="#2개의-url에-서로-다른-index-html-나타나게-하기" class="headerlink" title="2개의 url에 서로 다른 index.html 나타나게 하기"></a>2개의 url에 서로 다른 index.html 나타나게 하기</h4><h5 id="http-conf-수정"><a href="#http-conf-수정" class="headerlink" title="http.conf 수정"></a>http.conf 수정</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">####파일 마지막에 넣음######</span></span><br><span class="line">&lt;Directory <span class="string">"/data/"</span>&gt;</span><br><span class="line">        AllowOverride None</span><br><span class="line">        Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line"></span><br><span class="line">Include /etc/httpd/conf/vhost.conf</span><br></pre></td></tr></table></figure>
-<p><code>/data/</code> 디렉토리 이하를 접근 하겠음</p>
-<p><code>vhost.conf</code> 컨피그를 포함 하겠음 ( 해당 파일 만들지 않고 파일내에 있는 내용을 이곳에 직접 타이핑 해도 동일 작동함 )</p>
-<h5 id="vhost-conf-생성-및-수정"><a href="#vhost-conf-생성-및-수정" class="headerlink" title="vhost.conf 생성 및 수정"></a>vhost.conf 생성 및 수정</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost conf]<span class="comment"># vi vhost.conf </span></span><br><span class="line">[root@localhost conf]<span class="comment"># pwd</span></span><br><span class="line">/root/httpd/conf</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NameVirtualHost *:80</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line"></span><br><span class="line">    DocumentRoot <span class="string">"/data/test1"</span></span><br><span class="line"></span><br><span class="line">    ServerName test.com</span><br><span class="line"></span><br><span class="line">    ServerAlias www.test.com</span><br><span class="line"></span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    </span><br><span class="line">    DocumentRoot <span class="string">"/data/test2"</span></span><br><span class="line"></span><br><span class="line">    ServerName sub.test.com</span><br><span class="line"></span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>NameVirtualHost *:80</code> : 80 포트 대상으로 이름 별 분리를 처리할 것임</li>
-<li><code>&lt;VirtualHost *:80&gt;</code> : 80으로 들어오는 내용을 본다</li>
-<li><code>ServerName test.com</code> : 요청들어온 url이 test.com이거나 www.test.com 이면,</li>
-<li><code>DocumentRoot &quot;/data/test1&quot;</code> : 의 index.html을 보여라</li>
-</ul>
-<blockquote>
-<p>상위는 test.com이라는 DNS를 사용자가 취득 했고 DNS를 통해서 해당 서버에 접근 가능하다는 것이 전제 사항이다. 해당 관련 내용은 DNS Server관련 영역임으로 다루지 않으려고 한다.</p>
-<p>해당 내용과 상관없이 hosts를 수정해서 테스트를 많이 하던데… 저는 pass</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost conf]# cd /</span><br><span class="line">[root@localhost /]# mkdir data</span><br><span class="line">[root@localhost data]# mkdir test1 test2</span><br><span class="line">[root@localhost data]# ls</span><br><span class="line">test1  test2</span><br></pre></td></tr></table></figure>
-<p>test1과 test2디렉토리로 들어가서 다음과 같은 index.html을 만들어 준다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost test1]#vi index.html </span><br><span class="line">test1</span><br><span class="line">[root@localhost test2]#vi index.html </span><br><span class="line">test2</span><br></pre></td></tr></table></figure>
-<h5 id="permission-denied"><a href="#permission-denied" class="headerlink" title="permission denied"></a>permission denied</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[core:error] [pid 24938] (13)Permission denied: [client 222.222.222.222:53283] AH00035: access to /index.html denied (filesystem path <span class="string">'/data/test1/index.html'</span>) because search permissions are missing on a component of the path</span><br></pre></td></tr></table></figure>
-<p>상위와 같은 오류가 난다면 다음과 같은 명령어를 사용해서 data디렉토리 이하에 아파치에서 접근이 가능하도록 해줘야 한다.</p>
-<blockquote>
-<p>SELinus의 접근 권한 처리 때문에 생기는 문제이다.</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chcon -R -t httpd_sys_content_t data/</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost /]<span class="comment"># ls -alZ | grep data</span></span><br><span class="line">drwxr-xr-x. root root unconfined_u:object_r:httpd_sys_content_t:s0 data</span><br></pre></td></tr></table></figure>
-<p>상위와 같이 권한이 처리 되면 된다.</p>
-<h4 id="subdomain을-활용한-타-web서비스-실행"><a href="#subdomain을-활용한-타-web서비스-실행" class="headerlink" title="subdomain을 활용한 타 web서비스 실행"></a>subdomain을 활용한 타 web서비스 실행</h4><p><code>sub.test.com</code>으로 들어오면 내부적으로 <code>test.com:8888</code>번 서비스로 자동 포워딩 되는 내용이다.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NameVirtualHost *:80</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line"></span><br><span class="line">    DocumentRoot <span class="string">"/data/test1"</span></span><br><span class="line"></span><br><span class="line">    ServerName test.com</span><br><span class="line"></span><br><span class="line">    ServerAlias www.test.com</span><br><span class="line"></span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line"></span><br><span class="line">    ServerName sub.test.com</span><br><span class="line"></span><br><span class="line">    proxyPass / http://test.com:8888/</span><br><span class="line">    proxyPassReverse / http://test.com:8888/</span><br><span class="line"></span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-<p>일반적으로 상위처럼 수정후 <code>sub.test.com</code>을 실행하면 8888포트의 서비스가 브라우저에 표시 되게 된다.</p>
-<p>그러나 SELinus로 인해 다음과 같은 오류가 날 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[proxy:error] [pid 17800] (13)Permission denied: AH00957: HTTP: attempt to connect to 222.222.222.222:8888 (test.com) failed</span><br></pre></td></tr></table></figure>
-<p>아파치는 <code>http_port_t</code>에 등록된 포트만 프록시 패스가 가능하다. 해서 해당 포트를 등록 해줘야 한다</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost logs]<span class="comment"># semanage port -l | grep http_port_t</span></span><br><span class="line">http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443, 9000</span><br></pre></td></tr></table></figure>
-<p><code>semanage port -a -p tcp -t http_port_t 8888</code> 명령어를 실행 후 다시 확인 해보자.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost logs]<span class="comment"># semanage port -l | grep http_port_t</span></span><br><span class="line">http_port_t                    tcp      8888, 80, 81, 443, 488, 8008, 8009, 8443, 9000</span><br></pre></td></tr></table></figure>
-<p>상위와 같이 나오면 된다.</p>
-<blockquote>
-<p>오류를 잡다보면 퍼미션 관련 로그가 나오는 경우가 많은데, 아파치 오류만으로는 분석 하기 어려운 경우가 많다</p>
-<p>이 경우는 다음 파일을 확인 하면 된다.</p>
-<p><code>/var/log/audit</code></p>
-<p>만약에 8888 포트가 다른 서비스에 이미 맵핑 되어 있다면 다음과 같이 명령어를 사용하면 된다.</p>
-<p>semanage port <code>-m</code> -p tcp -t http_port_t 8888</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1219,7 +1139,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1338,7 +1258,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">52</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

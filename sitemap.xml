@@ -2,23 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://theyoung.github.io/double-wildfly-with-intellij/</loc>
+    <loc>https://theyoung.github.io/pgmodeler-install-on-mac/</loc>
     
-    <lastmod>2019-07-25T02:33:26.084Z</lastmod>
+    <lastmod>2019-08-01T10:23:43.004Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/jboss-install-on-mac/</loc>
+    <loc>https://theyoung.github.io/virtualhost-on-centos/</loc>
     
-    <lastmod>2019-07-19T08:09:06.465Z</lastmod>
+    <lastmod>2019-07-26T06:58:10.422Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://theyoung.github.io/jenkins-basic/</loc>
     
-    <lastmod>2019-07-18T07:12:46.365Z</lastmod>
+    <lastmod>2019-07-26T05:05:55.145Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://theyoung.github.io/widfly-install-on-centos/</loc>
+    
+    <lastmod>2019-07-26T01:57:08.915Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://theyoung.github.io/jboss-install-on-mac/</loc>
+    
+    <lastmod>2019-07-25T09:11:59.357Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://theyoung.github.io/double-wildfly-with-intellij/</loc>
+    
+    <lastmod>2019-07-25T03:46:22.485Z</lastmod>
     
   </url>
   
@@ -58,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/virtualhost-on-centos/</loc>
-    
-    <lastmod>2019-07-10T11:18:10.626Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://theyoung.github.io/jenkins-with-tomcat/</loc>
     
     <lastmod>2019-07-05T00:10:34.176Z</lastmod>
@@ -72,28 +86,7 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/virtualbox-on-centos7/</loc>
-    
-    <lastmod>2019-07-04T02:25:46.210Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://theyoung.github.io/mattermost-docker-composer-onCentos7/</loc>
-    
-    <lastmod>2019-07-04T02:25:46.210Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://theyoung.github.io/webpack-start/</loc>
-    
-    <lastmod>2019-07-04T02:25:46.210Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://theyoung.github.io/redis-config-explain/</loc>
     
     <lastmod>2019-07-04T02:25:46.210Z</lastmod>
     
@@ -107,14 +100,28 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/android-memory-leak/</loc>
+    <loc>https://theyoung.github.io/mattermost-docker-composer-onCentos7/</loc>
     
-    <lastmod>2019-07-04T02:25:46.209Z</lastmod>
+    <lastmod>2019-07-04T02:25:46.210Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/javascript-object-merge/</loc>
+    <loc>https://theyoung.github.io/virtualbox-on-centos7/</loc>
+    
+    <lastmod>2019-07-04T02:25:46.210Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://theyoung.github.io/redis-config-explain/</loc>
+    
+    <lastmod>2019-07-04T02:25:46.210Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://theyoung.github.io/jenkins-on-centos7/</loc>
     
     <lastmod>2019-07-04T02:25:46.209Z</lastmod>
     
@@ -128,21 +135,28 @@
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/jenkins-on-centos7/</loc>
+    <loc>https://theyoung.github.io/javascript-object-merge/</loc>
     
     <lastmod>2019-07-04T02:25:46.209Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/android-graphic-architecture/</loc>
+    <loc>https://theyoung.github.io/android-memory-leak/</loc>
+    
+    <lastmod>2019-07-04T02:25:46.209Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://theyoung.github.io/Jedis-java-clinet/</loc>
     
     <lastmod>2019-07-04T02:25:46.208Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://theyoung.github.io/Jedis-java-clinet/</loc>
+    <loc>https://theyoung.github.io/android-graphic-architecture/</loc>
     
     <lastmod>2019-07-04T02:25:46.208Z</lastmod>
     
